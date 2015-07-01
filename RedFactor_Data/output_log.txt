@@ -1,0 +1,60 @@
+Initialize engine version: 4.6.1f1 (d1db7a1b5196)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: Intel(R) HD Graphics 4000 (ID=0x166)
+    Vendor:   Intel
+    VRAM:     1039 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\Sam\Documents\Unity\RedFactor\RedFactor_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\Sam\Documents\Unity\RedFactor\RedFactor_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\Sam\Documents\Unity\RedFactor\RedFactor_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading C:\Users\Sam\Documents\Unity\RedFactor\RedFactor_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\Sam\Documents\Unity\RedFactor\RedFactor_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\Sam\Documents\Unity\RedFactor\RedFactor_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\Sam\Documents\Unity\RedFactor\RedFactor_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\Sam\Documents\Unity\RedFactor\RedFactor_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\Sam\Documents\Unity\RedFactor\RedFactor_Data\Managed\Photon3Unity3D.dll (this message is harmless)
+Loading C:\Users\Sam\Documents\Unity\RedFactor\RedFactor_Data\Managed\Photon3Unity3D.dll into Unity Child Domain
+- Completed reload, in  0.054 seconds
+desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+Platform assembly: C:\Users\Sam\Documents\Unity\RedFactor\RedFactor_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\Sam\Documents\Unity\RedFactor\RedFactor_Data\Managed\System.dll (this message is harmless)
+1
+UnityEngine.Debug:Internal_Log(Int32, String, Object)
+UnityEngine.Debug:Log(Object)
+Menu_NetworkController:OnReceivedRoomListUpdate() (at C:\Users\Sam\Documents\Unity\RedFactor\Assets\_Scripts\Menu_NetworkController.cs:34)
+UnityEngine.GameObject:SendMessage(String, Object, SendMessageOptions)
+NetworkingPeer:SendMonoMessage(PhotonNetworkingMessage, Object[]) (at C:\Users\Sam\Documents\Unity\RedFactor\Assets\Photon Unity Networking\Plugins\PhotonNetwork\NetworkingPeer.cs:1955)
+NetworkingPeer:OnEvent(EventData) (at C:\Users\Sam\Documents\Unity\RedFactor\Assets\Photon Unity Networking\Plugins\PhotonNetwork\NetworkingPeer.cs:1727)
+ExitGames.Client.Photon.PeerBase:DeserializeMessageAndCallback(Byte[])
+ExitGames.Client.Photon.EnetPeer:DispatchIncomingCommands()
+ExitGames.Client.Photon.PhotonPeer:DispatchIncomingCommands()
+PhotonHandler:Update() (at C:\Users\Sam\Documents\Unity\RedFactor\Assets\Photon Unity Networking\Plugins\PhotonNetwork\PhotonHandler.cs:83)
+ 
+(Filename: C Line: 0)
+
+UnloadTime: 3.413464 ms
+System memory in use before: 11.0 MB.
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+System memory in use after: 10.8 MB.
+
+Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 269.
+Total: 0.827124 ms (FindLiveObjects: 0.018193 ms CreateObjectMapping: 0.011196 ms MarkObjects: 0.252382 ms  DeleteObjects: 0.006531 ms)
+
+Connected to Room
+UnityEngine.Debug:Internal_Log(Int32, String, Object)
+UnityEngine.Debug:Log(Object)
+Level_NetworkController:OnJoinedRoom() (at C:\Users\Sam\Documents\Unity\RedFactor\Assets\_Scripts\Level_NetworkController.cs:22)
+UnityEngine.GameObject:SendMessage(String, Object, SendMessageOptions)
+NetworkingPeer:SendMonoMessage(PhotonNetworkingMessage, Object[]) (at C:\Users\Sam\Documents\Unity\RedFactor\Assets\Photon Unity Networking\Plugins\PhotonNetwork\NetworkingPeer.cs:1955)
+NetworkingPeer:OnEvent(EventData) (at C:\Users\Sam\Documents\Unity\RedFactor\Assets\Photon Unity Networking\Plugins\PhotonNetwork\NetworkingPeer.cs:1791)
+ExitGames.Client.Photon.PeerBase:DeserializeMessageAndCallback(Byte[])
+ExitGames.Client.Photon.EnetPeer:DispatchIncomingCommands()
+ExitGames.Client.Photon.PhotonPeer:DispatchIncomingCommands()
+PhotonHandler:Update() (at C:\Users\Sam\Documents\Unity\RedFactor\Assets\Photon Unity Networking\Plugins\PhotonNetwork\PhotonHandler.cs:83)
+ 
+(Filename: C Line: 0)
+
