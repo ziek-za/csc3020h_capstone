@@ -65,6 +65,7 @@ GameObject:
   - 114: {fileID: 11488332}
   - 114: {fileID: 11488330}
   - 136: {fileID: 13686634}
+  - 114: {fileID: 11429530}
   m_Layer: 0
   m_Name: PlayerCapsule
   m_TagString: Untagged
@@ -192,6 +193,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &11429530
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 188330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aa42152f4900a44684d8bae136faf5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11444614
 MonoBehaviour:
   m_ObjectHideFlags: 1
