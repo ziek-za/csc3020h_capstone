@@ -18,7 +18,7 @@ public class Level_NetworkController : MonoBehaviour {
 	void OnJoinedRoom()
 	{
 		// Spawn player
-		PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(1,3f,0), Quaternion.identity, 0);
+		PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(1,10f,0), Quaternion.identity, 0);
 		//GameObject.Find ("SamplePlayer");
 		//Debug.Log (playerPrefab.transform);
 

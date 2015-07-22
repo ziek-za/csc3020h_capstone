@@ -18,9 +18,10 @@
 # Unity3D generated meta files
 *.pidb.meta
 
-# Unity3D Generated File On Crash Reports
+# Unity3D Generated File On Crash ReportsW
 sysinfo.txt
 
 # Ignore builds 
 *_data/
 Assets/Photon\Unity\Networking/Resources
+
