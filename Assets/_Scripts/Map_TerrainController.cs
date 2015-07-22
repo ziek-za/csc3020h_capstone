@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Map_TerrainController : Photon.MonoBehaviour {
-	public Terrain	terrain;
+	public Terrain terrain;
 	// ** PRIVATE VARIABLES ** //
 	private float			WIDTH, LENGTH, MAX_HEIGHT;
 	private float[,]		height_buffer_1,
@@ -13,6 +13,12 @@ public class Map_TerrainController : Photon.MonoBehaviour {
 	flatten_buf; 	// used to flatten terrain
 	
 	void Start () {
+
+		//Initialises terrain to the host's terrain
+		//GameObject go = GameObject.Find("TerrainObject")
+		//terrain = go.GetComponent<Terrain>();;
+		terrain = Terrain.activeTerrain;
+
 		//Setting up local dimensions
 		WIDTH = terrain.terrainData.size.x;
 		MAX_HEIGHT = terrain.terrainData.size.y;
@@ -61,23 +67,19 @@ public class Map_TerrainController : Photon.MonoBehaviour {
 
 		 // TEST PURPOSES
 		//select
-
-					if (Input.GetKeyDown(KeyCode.G)) {
-				Debug.Log("Local Debug");
-							RaycastHit hit;
-							Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+		//if (photonView.isMine) {
+			if (Input.GetKeyDown(KeyCode.G)) {
+			Debug.Log("Local Debug");
+			RaycastHit hit;
+			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 		
-		
-							if (Physics.Raycast (ray, out hit)) {
-			
-									//ManipulateTerrain(hit.point, 5f, "pull");
-
-				if (photonView.isMine) {			//SyncTerrain (hit.point);
-					SyncTerrain (hit.point);
+			if (Physics.Raycast (ray, out hit)) {
+				//ManipulateTerrain(hit.point, 5f, "pull");
+				SyncTerrain (hit.point);
+				//Debug.Log(hit.collider.transform.position);
 				}
-									//Debug.Log(hit.collider.transform.position);
-							}
-					}
+			}
+		//}
 				
 		
 	}
