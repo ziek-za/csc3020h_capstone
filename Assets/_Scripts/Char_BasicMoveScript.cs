@@ -6,7 +6,7 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 	
 	public float moveSpeed = 10.0f;
 	public float mouseSpeed = 3.0f;
-	public float jumpSpeed=8f;
+	public float jumpSpeed=5.0f;
 	public Transform FPSCameraPos;
 	
 	float mouseSensitivity=2f;
@@ -56,15 +56,19 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 	}
 
 	void InputMovement()
-	{	float h = Input.GetAxis ("Horizontal");
+	{	
+
+		float h = Input.GetAxis ("Horizontal");
 		float v = Input.GetAxis ("Vertical");
 		if (h != 0f || v != 0){
-			transform.Translate(Vector3.forward*moveSpeed*Time.deltaTime * v);
-			transform.Translate(Vector3.right*moveSpeed*Time.deltaTime * h);
+				transform.Translate(Vector3.forward*moveSpeed*Time.deltaTime * v);
+				transform.Translate(Vector3.right*moveSpeed*Time.deltaTime * h);
 		}
-		if(Input.GetKeyDown(KeyCode.Space) && isJumping==false){
+		if(Input.GetButtonDown("Jump") && isJumping==false){
 			isJumping=true;
-//			rigidbody.velocity.y=jumpSpeed;
+			Vector3 v3 = rigidbody.velocity;
+			v3.y=jumpSpeed;
+			rigidbody.velocity=v3;
 		}
 	}
 
@@ -79,8 +83,7 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 
 	void OnCollisionEnter(Collision c){
 				if (photonView.isMine) {
-						if (c.gameObject.name == "Plane")
-								isJumping = false;
+						isJumping = false;
 				}
 		}
 }

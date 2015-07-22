@@ -217,7 +217,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 10
   mouseSpeed: 2
-  jumpSpeed: 200
+  jumpSpeed: 5
   FPSCameraPos: {fileID: 488328}
   clampYAxis: 60
 --- !u!136 &13686634
