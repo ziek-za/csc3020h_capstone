@@ -43,9 +43,10 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 	void InputMovement()
 	{
 		//if (photonView.isMine) {
-						if (Input.GetKey (KeyCode.W))
+						if (Input.GetKey (KeyCode.W)){
 			//transform.position += transform.forward * speed;		
-								rigidbody.MovePosition (rigidbody.position + transform.forward * speed * Time.deltaTime);
+			Debug.Log(rigidbody.position + transform.forward * speed * Time.deltaTime);
+			rigidbody.MovePosition (rigidbody.position + transform.forward * speed * Time.deltaTime);}
 		
 						if (Input.GetKey (KeyCode.S))
 			//transform.position += -transform.forward * speed;		
