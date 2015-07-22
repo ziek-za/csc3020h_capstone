@@ -1,0 +1,158 @@
+Sending message header failed
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/Runtime/Network/PlayerCommunicator/GeneralConnection.cpp Line: 355)
+
+Initialize engine version: 4.6.1f1 (d1db7a1b5196)
+Sending message header failed
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/Runtime/Network/PlayerCommunicator/GeneralConnection.cpp Line: 355)
+
+GfxDevice: creating device client; threaded=1
+Sending message header failed
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/Runtime/Network/PlayerCommunicator/GeneralConnection.cpp Line: 355)
+
+Direct3D:
+Sending message header failed
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/Runtime/Network/PlayerCommunicator/GeneralConnection.cpp Line: 355)
+
+    Version:  Direct3D 11.0 [level 10.1]
+Sending message header failed
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/Runtime/Network/PlayerCommunicator/GeneralConnection.cpp Line: 355)
+
+    Renderer: NVIDIA GeForce 610M        (ID=0x105a)
+Sending message header failed
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/Runtime/Network/PlayerCommunicator/GeneralConnection.cpp Line: 355)
+
+    Vendor:   NVIDIA
+Sending message header failed
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/Runtime/Network/PlayerCommunicator/GeneralConnection.cpp Line: 355)
+
+    VRAM:     979 MB
+Sending message header failed
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/Runtime/Network/PlayerCommunicator/GeneralConnection.cpp Line: 355)
+
+Begin MonoManager ReloadAssembly
+Sending message header failed
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/Runtime/Network/PlayerCommunicator/GeneralConnection.cpp Line: 355)
+
+Platform assembly: C:\Users\Nic\Desktop\csc3020h_capstone\RedFactorTest_Data\Managed\UnityEngine.dll (this message is harmless)
+Sending message header failed
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/Runtime/Network/PlayerCommunicator/GeneralConnection.cpp Line: 355)
+
+Loading C:\Users\Nic\Desktop\csc3020h_capstone\RedFactorTest_Data\Managed\UnityEngine.dll into Unity Child Domain
+Sending message header failed
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/Runtime/Network/PlayerCommunicator/GeneralConnection.cpp Line: 355)
+
+Platform assembly: C:\Users\Nic\Desktop\csc3020h_capstone\RedFactorTest_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Sending message header failed
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/Runtime/Network/PlayerCommunicator/GeneralConnection.cpp Line: 355)
+
+Loading C:\Users\Nic\Desktop\csc3020h_capstone\RedFactorTest_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Sending message header failed
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/Runtime/Network/PlayerCommunicator/GeneralConnection.cpp Line: 355)
+
+Platform assembly: C:\Users\Nic\Desktop\csc3020h_capstone\RedFactorTest_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Sending message header failed
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/Runtime/Network/PlayerCommunicator/GeneralConnection.cpp Line: 355)
+
+Loading C:\Users\Nic\Desktop\csc3020h_capstone\RedFactorTest_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Sending message header failed
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/Runtime/Network/PlayerCommunicator/GeneralConnection.cpp Line: 355)
+
+Platform assembly: C:\Users\Nic\Desktop\csc3020h_capstone\RedFactorTest_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Sending message header failed
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/Runtime/Network/PlayerCommunicator/GeneralConnection.cpp Line: 355)
+
+Loading C:\Users\Nic\Desktop\csc3020h_capstone\RedFactorTest_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Sending message header failed
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/Runtime/Network/PlayerCommunicator/GeneralConnection.cpp Line: 355)
+
+Platform assembly: C:\Users\Nic\Desktop\csc3020h_capstone\RedFactorTest_Data\Managed\Photon3Unity3D.dll (this message is harmless)
+Sending message header failed
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/Runtime/Network/PlayerCommunicator/GeneralConnection.cpp Line: 355)
+
+Loading C:\Users\Nic\Desktop\csc3020h_capstone\RedFactorTest_Data\Managed\Photon3Unity3D.dll into Unity Child Domain
+Sending message header failed
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/Runtime/Network/PlayerCommunicator/GeneralConnection.cpp Line: 355)
+
+- Completed reload, in  0.184 seconds
+Sending message header failed
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/Runtime/Network/PlayerCommunicator/GeneralConnection.cpp Line: 355)
+
+desktop: 1366x768 60Hz; virtual: 1366x768 at 0,0
+Sending message header failed
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/Runtime/Network/PlayerCommunicator/GeneralConnection.cpp Line: 355)
+
+<RI> Initializing input.
+Sending message header failed
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/Runtime/Network/PlayerCommunicator/GeneralConnection.cpp Line: 355)
+
+<RI> Input initialized.
+Sending message header failed
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/Runtime/Network/PlayerCommunicator/GeneralConnection.cpp Line: 355)
+
+Platform assembly: C:\Users\Nic\Desktop\csc3020h_capstone\RedFactorTest_Data\Managed\System.Core.dll (this message is harmless)
+Sending message header failed
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/Runtime/Network/PlayerCommunicator/GeneralConnection.cpp Line: 355)
+
+Platform assembly: C:\Users\Nic\Desktop\csc3020h_capstone\RedFactorTest_Data\Managed\System.dll (this message is harmless)
+PlayerConnection accepted from [192.168.1.104] handle:0x6a4
+1
+UnityEngine.Debug:Internal_Log(Int32, String, Object)
+UnityEngine.Debug:Log(Object)
+Menu_NetworkController:OnReceivedRoomListUpdate() (at C:\Users\Nic\Desktop\csc3020h_capstone\Assets\_Scripts\Menu_NetworkController.cs:34)
+UnityEngine.GameObject:SendMessage(String, Object, SendMessageOptions)
+NetworkingPeer:SendMonoMessage(PhotonNetworkingMessage, Object[]) (at C:\Users\Nic\Desktop\csc3020h_capstone\Assets\Photon Unity Networking\Plugins\PhotonNetwork\NetworkingPeer.cs:1955)
+NetworkingPeer:OnEvent(EventData) (at C:\Users\Nic\Desktop\csc3020h_capstone\Assets\Photon Unity Networking\Plugins\PhotonNetwork\NetworkingPeer.cs:1727)
+ExitGames.Client.Photon.PeerBase:DeserializeMessageAndCallback(Byte[])
+ExitGames.Client.Photon.EnetPeer:DispatchIncomingCommands()
+ExitGames.Client.Photon.PhotonPeer:DispatchIncomingCommands()
+PhotonHandler:Update() (at C:\Users\Nic\Desktop\csc3020h_capstone\Assets\Photon Unity Networking\Plugins\PhotonNetwork\PhotonHandler.cs:83)
+ 
+(Filename: C Line: 0)
+
+UnloadTime: 9.470570 ms
+System memory in use before: 23.2 MB.
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+System memory in use after: 23.0 MB.
+
+Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 271.
+Total: 3.914702 ms (FindLiveObjects: 0.048880 ms CreateObjectMapping: 0.036564 ms MarkObjects: 0.548081 ms  DeleteObjects: 0.021553 ms)
+
+Connected to Room
+UnityEngine.Debug:Internal_Log(Int32, String, Object)
+UnityEngine.Debug:Log(Object)
+Level_NetworkController:OnJoinedRoom() (at C:\Users\Nic\Desktop\csc3020h_capstone\Assets\_Scripts\Level_NetworkController.cs:31)
+UnityEngine.GameObject:SendMessage(String, Object, SendMessageOptions)
+NetworkingPeer:SendMonoMessage(PhotonNetworkingMessage, Object[]) (at C:\Users\Nic\Desktop\csc3020h_capstone\Assets\Photon Unity Networking\Plugins\PhotonNetwork\NetworkingPeer.cs:1955)
+NetworkingPeer:OnEvent(EventData) (at C:\Users\Nic\Desktop\csc3020h_capstone\Assets\Photon Unity Networking\Plugins\PhotonNetwork\NetworkingPeer.cs:1791)
+ExitGames.Client.Photon.PeerBase:DeserializeMessageAndCallback(Byte[])
+ExitGames.Client.Photon.EnetPeer:DispatchIncomingCommands()
+ExitGames.Client.Photon.PhotonPeer:DispatchIncomingCommands()
+PhotonHandler:Update() (at C:\Users\Nic\Desktop\csc3020h_capstone\Assets\Photon Unity Networking\Plugins\PhotonNetwork\PhotonHandler.cs:83)
+ 
+(Filename: C Line: 0)
+
+Waiting for finish
