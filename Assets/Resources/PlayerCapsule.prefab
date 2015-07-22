@@ -1,5 +1,21 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &144614
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 444614}
+  - 114: {fileID: 11444614}
+  m_Layer: 0
+  m_Name: GunMuzzle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &148752
 GameObject:
   m_ObjectHideFlags: 0
@@ -56,6 +72,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &444614
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 144614}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -.00999999978, y: .930000007, z: -.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 448752}
+  m_RootOrder: 0
 --- !u!4 &448752
 Transform:
   m_ObjectHideFlags: 1
@@ -65,7 +93,8 @@ Transform:
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106829}
   m_LocalPosition: {x: .400000006, y: .200000003, z: .400000006}
   m_LocalScale: {x: .200000003, y: .400000006, z: .200000003}
-  m_Children: []
+  m_Children:
+  - {fileID: 444614}
   m_Father: {fileID: 488330}
   m_RootOrder: 1
 --- !u!4 &488328
@@ -87,7 +116,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 188330}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.78328586, y: -1.55721879, z: -5.07455444}
+  m_LocalPosition: {x: -4.3786602, y: -1.76113772, z: -8.04989815}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 488328}
@@ -163,6 +192,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &11444614
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 144614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98c885136e314544580f8c69057aee38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11488330
 MonoBehaviour:
   m_ObjectHideFlags: 1
