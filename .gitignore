@@ -22,5 +22,5 @@
 sysinfo.txt
 
 # Ignore builds 
-*_data*/
+*_data/
 Assets/Photon\Unity\Networking/Resources
