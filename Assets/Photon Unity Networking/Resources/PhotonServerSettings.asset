@@ -34,4 +34,6 @@ MonoBehaviour:
   - RequestForPickupTimes
   - TaggedPlayer
   - ChangeColorTo
+  - ManipulateTerrain
+  - SyncTerrain
   DisableAutoOpenWizard: 0
