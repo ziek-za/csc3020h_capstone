@@ -9,12 +9,18 @@ public class Map_TerrainController : MonoBehaviour {
 	// ** PRIVATE VARIABLES ** //
 	private int				WIDTH, LENGTH,
 	HM_WIDTH, HM_LENGTH;
+	static private float[,] hm_buf_2;
 	private float[,]		hm_buf_1,
-	hm_buf_2,
 	hm_temp_buf,	// temporary buffer when swapping values
 	hm_buf_orig;	// original height map (HEIGHT_MAP)
 	private Color[]			hm_original;	// pixel values of original height map
+
 	
+	// Manipulates the terrain at a specified location
+	public static void ManipulateAtPoint(Vector3 position) {
+		hm_buf_2 [(int)position.x, (int)position.z] = 1f;
+	}
+
 	void Start () {
 		//Setting up local dimensions
 		HM_WIDTH = HEIGHT_MAP.width;
@@ -35,12 +41,12 @@ public class Map_TerrainController : MonoBehaviour {
 		//TERRAIN.terrainData.SetHeights (0, 0, hm_buf_orig);
 	}
 	
-	/*void Update () {
+	void Update () {
 		//caluculate height map
 		float damping = 0.7f;
 		float n = 0;
 		//select
-		if ( Input.GetMouseButtonDown(1)){
+		/*if ( Input.GetMouseButtonDown(1)){
 			RaycastHit hit;
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 		
@@ -50,7 +56,7 @@ public class Map_TerrainController : MonoBehaviour {
 				Explode(hit.point);
 				//Debug.Log(hit.collider.transform.position);
 			}
-		}
+		}*/
 		for (int ex_x = 1; ex_x < HM_WIDTH - 1; ex_x++) {
 			for (int ex_z = 1; ex_z < HM_LENGTH - 1; ex_z++) {
 				n = (( 	hm_buf_1[(ex_x + 1), ex_z] +
@@ -72,9 +78,4 @@ public class Map_TerrainController : MonoBehaviour {
 
 
 	}
-
-	void Explode(Vector3 explosion_pos) {
-		hm_buf_2 [(int)explosion_pos.z, (int)explosion_pos.x] = 1f;
-
-	}*/
 }
