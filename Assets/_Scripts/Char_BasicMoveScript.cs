@@ -6,9 +6,11 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 	
 	public float moveSpeed = 10.0f;
 	public float mouseSpeed = 3.0f;
+	public float jumpSpeed=8f;
 	public Transform FPSCameraPos;
 	
 	float mouseSensitivity=2f;
+	bool isJumping=false;
 	public float clampYAxis = 60.0f;
 
 	// Use this for initialization
@@ -54,28 +56,20 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 	}
 
 	void InputMovement()
-	{
-		if (Input.GetKey(KeyCode.W)){
-			rigidbody.MovePosition(rigidbody.position+transform.forward*moveSpeed*Time.deltaTime);
+	{	float h = Input.GetAxis ("Horizontal");
+		float v = Input.GetAxis ("Vertical");
+		if (h != 0f || v != 0){
+			transform.Translate(Vector3.forward*moveSpeed*Time.deltaTime * v);
+			transform.Translate(Vector3.right*moveSpeed*Time.deltaTime * h);
 		}
-		else if (Input.GetKey(KeyCode.S)){
-			rigidbody.MovePosition(rigidbody.position-transform.forward*moveSpeed*Time.deltaTime);
-		}
-		if (Input.GetKey(KeyCode.A)){
-			rigidbody.MovePosition(rigidbody.position-transform.right*moveSpeed*Time.deltaTime);
-		}
-		else if (Input.GetKey(KeyCode.D)){
-			rigidbody.MovePosition(rigidbody.position+transform.right*moveSpeed*Time.deltaTime);
+		if(Input.GetKeyDown(KeyCode.Space) && isJumping==false){
+			isJumping=true;
+//			rigidbody.velocity.y=jumpSpeed;
 		}
 	}
 
 	void MouseView(){
 		transform.Rotate (0, Input.GetAxis ("Mouse X") * mouseSpeed, 0);
-		//Camera.main.transform.Rotate (verticalRotation * Input.GetAxis ("Mouse Y"), 0, 0);
-
-		//float rotateX = Input.GetAxis ("Mouse X") * mouseSpeed;
-		//transform.Rotate (0, rotateX, 0);
-
 		mouseSensitivity -= Input.GetAxis ("Mouse Y") * mouseSpeed;
 		mouseSensitivity = Mathf.Clamp (mouseSensitivity, -clampYAxis, clampYAxis);
 
@@ -83,10 +77,10 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 		FPSCameraPos.transform.localRotation = Quaternion.Euler (mouseSensitivity, 0, 0);
 	}
 
-	/*void OnCollisionEnter(Collision c){
+	void OnCollisionEnter(Collision c){
 				if (photonView.isMine) {
 						if (c.gameObject.name == "Plane")
 								isJumping = false;
 				}
-		}*/
+		}
 }

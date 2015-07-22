@@ -161,7 +161,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 122
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &11488330
 MonoBehaviour:
@@ -192,7 +192,7 @@ MonoBehaviour:
     TeleportEnabled: 1
     TeleportIfDistanceGreaterThan: 3
     InterpolateOption: 1
-    InterpolateMoveTowardsSpeed: 5
+    InterpolateMoveTowardsSpeed: 10
     InterpolateLerpSpeed: 1
     InterpolateMoveTowardsAcceleration: 2
     InterpolateMoveTowardsDeceleration: 2
@@ -227,7 +227,7 @@ MonoBehaviour:
     ExtrapolateNumberOfStoredPositions: 1
     DrawErrorGizmo: 1
   m_RotationModel:
-    SynchronizeEnabled: 1
+    SynchronizeEnabled: 0
     InterpolateOption: 1
     InterpolateRotateTowardsSpeed: 180
     InterpolateLerpSpeed: 5
@@ -273,8 +273,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8545d59694de0f4409b66b8e3edcbc6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 10
   mouseSpeed: 2
+  jumpSpeed: 200
   FPSCameraPos: {fileID: 488328}
   clampYAxis: 60
 --- !u!136 &13648752
