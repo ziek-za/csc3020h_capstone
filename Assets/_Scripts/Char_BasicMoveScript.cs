@@ -71,11 +71,6 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 
 	void MouseView(){
 		transform.Rotate (0, Input.GetAxis ("Mouse X") * mouseSpeed, 0);
-		//Camera.main.transform.Rotate (verticalRotation * Input.GetAxis ("Mouse Y"), 0, 0);
-
-		//float rotateX = Input.GetAxis ("Mouse X") * mouseSpeed;
-		//transform.Rotate (0, rotateX, 0);
-
 		mouseSensitivity -= Input.GetAxis ("Mouse Y") * mouseSpeed;
 		mouseSensitivity = Mathf.Clamp (mouseSensitivity, -clampYAxis, clampYAxis);
 
