@@ -43,7 +43,7 @@ public class Map_TerrainController : Photon.MonoBehaviour {
 		if (!hmReset){
 			terrain.terrainData.SetHeights (0, 0, flatten_buf);
 			height_buffer_original = terrain.terrainData.GetHeights(0,0,(int)WIDTH, (int)LENGTH);
-			Debug.Log (height_buffer_original [0, 0]);
+			Debug.Log ("hmn reset");
 			hmReset = true;
 		}
 	}

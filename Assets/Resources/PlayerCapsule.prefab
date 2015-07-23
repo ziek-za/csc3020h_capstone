@@ -66,6 +66,7 @@ GameObject:
   - 114: {fileID: 11488330}
   - 136: {fileID: 13686634}
   - 114: {fileID: 11429530}
+  - 114: {fileID: 11489682}
   m_Layer: 0
   m_Name: PlayerCapsule
   m_TagString: Untagged
@@ -282,7 +283,7 @@ MonoBehaviour:
     ExtrapolateNumberOfStoredPositions: 1
     DrawErrorGizmo: 1
   m_RotationModel:
-    SynchronizeEnabled: 0
+    SynchronizeEnabled: 1
     InterpolateOption: 1
     InterpolateRotateTowardsSpeed: 180
     InterpolateLerpSpeed: 5
@@ -333,6 +334,17 @@ MonoBehaviour:
   jumpSpeed: 5
   FPSCameraPos: {fileID: 488328}
   clampYAxis: 60
+--- !u!114 &11489682
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 188330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e20bab5612f194840a04e7f24def0570, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!136 &13648752
 CapsuleCollider:
   m_ObjectHideFlags: 1
