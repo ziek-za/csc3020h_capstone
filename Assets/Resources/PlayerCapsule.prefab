@@ -204,8 +204,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aa42152f4900a44684d8bae136faf5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teleportDistance: 15
+  maxDistance: 15
   projection: {fileID: 130738, guid: 791e7f3ff3db4014cab368a34896bb0d, type: 2}
+  distanceIndicator: {fileID: 110788, guid: 11ca0607ebe6c474f88d377f60d40e22, type: 2}
 --- !u!114 &11444614
 MonoBehaviour:
   m_ObjectHideFlags: 1
