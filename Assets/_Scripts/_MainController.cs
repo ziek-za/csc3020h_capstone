@@ -13,6 +13,7 @@ public class _MainController{
 		Application.LoadLevel("Level");
 		if (PhotonNetwork.room == null){
 			PhotonNetwork.CreateRoom(System.Guid.NewGuid().ToString("N"), true, true, 5);
+			Map_TerrainController.hmReset = false;
 		}
 	}
 

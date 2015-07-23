@@ -2,6 +2,10 @@
 using System.Collections;
 
 public class Map_TerrainController : Photon.MonoBehaviour {
+
+	//Variable to reset the hm when room first created
+	public static bool hmReset;
+
 	public Terrain terrain;
 	// ** PRIVATE VARIABLES ** //
 	private float			WIDTH, LENGTH, MAX_HEIGHT;
@@ -17,7 +21,7 @@ public class Map_TerrainController : Photon.MonoBehaviour {
 		//Initialises terrain to the host's terrain
 		//GameObject go = GameObject.Find("TerrainObject")
 		//terrain = go.GetComponent<Terrain>();;
-		terrain = Terrain.activeTerrain;
+		//terrain = Terrain.activeTerrain;
 
 		//Setting up local dimensions
 		WIDTH = terrain.terrainData.size.x;
@@ -35,11 +39,15 @@ public class Map_TerrainController : Photon.MonoBehaviour {
 				flatten_buf[i, k] = 0.5f;
 			}
 		}
-		terrain.terrainData.SetHeights (0, 0, flatten_buf);
-		height_buffer_original = terrain.terrainData.GetHeights(0,0,(int)WIDTH, (int)LENGTH);
-		Debug.Log (height_buffer_original [0, 0]);
+
+		if (!hmReset){
+			terrain.terrainData.SetHeights (0, 0, flatten_buf);
+			height_buffer_original = terrain.terrainData.GetHeights(0,0,(int)WIDTH, (int)LENGTH);
+			Debug.Log (height_buffer_original [0, 0]);
+			hmReset = true;
+		}
 	}
-	
+
 	void Update () {
 		//caluculate height map
 		float damping = 0.7f;
@@ -68,7 +76,7 @@ public class Map_TerrainController : Photon.MonoBehaviour {
 		 // TEST PURPOSES
 		//select
 		//if (photonView.isMine) {
-			if (Input.GetKeyDown(KeyCode.G)) {
+		/*	if (Input.GetKeyDown(KeyCode.G)) {
 			Debug.Log("Local Debug");
 			RaycastHit hit;
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
@@ -80,23 +88,19 @@ public class Map_TerrainController : Photon.MonoBehaviour {
 				}
 			}
 		//}
+	*/
 				
 		
 	}
-
-	[RPC] void SyncTerrain(Vector3 explosion_pos){
-		//Debug.Log ("Recieved new hm");
-
+	/*
+	[RPC] public void SyncTerrain(Vector3 explosion_pos){
 		ManipulateTerrain(explosion_pos, 5f, "pull");
-		if (photonView.isMine) {
-			//Debug.Log ("Recieved new hm");
-			//hotonView.RPC("ChangeColorTo", PhotonTargets.OthersBuffered, color);
+		if (photonView.isMine)
 			photonView.RPC("SyncTerrain",PhotonTargets.OthersBuffered, explosion_pos);
-				}
-	}
-
+	}*/
+	
 	//Circular explosion
-	private void ManipulateTerrain(Vector3 explosion_pos_orig, float explosion_radius, string force_type) {
+	public void ManipulateTerrain(Vector3 explosion_pos_orig, float explosion_radius, string force_type) {
 		//Debug.Log (explosion_pos);
 		Vector3 explosion_pos = new Vector3 (Mathf.Floor(explosion_pos_orig.x + 128), 0, Mathf.Floor(explosion_pos_orig.z + 128));
 		float terrain_offset = 30f; //the amount that the terrain has been offseted
