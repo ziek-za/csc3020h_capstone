@@ -19,6 +19,7 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 		if (photonView.isMine) {
 			Screen.lockCursor=true;
 			transform.GetComponent<Renderer>().enabled = false;
+
 		}
 	}
 	
@@ -43,6 +44,7 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 		Camera.main.transform.position = FPSCameraPos.position;
 		Camera.main.transform.rotation = FPSCameraPos.rotation;
 	}
+
 	private void InputColorChange()
 	{
 		if (Input.GetKeyDown(KeyCode.E))
