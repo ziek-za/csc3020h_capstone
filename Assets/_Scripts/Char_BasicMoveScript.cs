@@ -57,7 +57,6 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 
 	void InputMovement()
 	{	
-
 		float h = Input.GetAxis ("Horizontal");
 		float v = Input.GetAxis ("Vertical");
 		if (h != 0f || v != 0){
