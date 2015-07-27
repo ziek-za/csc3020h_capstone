@@ -8,6 +8,7 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 	public float mouseSpeed = 3.0f;
 	public float jumpSpeed=5.0f;
 	public Transform FPSCameraPos;
+	//public Transform currentPlayer;
 	
 	float mouseSensitivity=2f;
 	bool isJumping=false;
@@ -17,6 +18,7 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 	void Start () {
 		if (photonView.isMine) {
 			Screen.lockCursor=true;
+			transform.GetComponent<Renderer>().enabled = false;
 		}
 	}
 	
