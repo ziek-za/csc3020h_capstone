@@ -36,4 +36,5 @@ MonoBehaviour:
   - ChangeColorTo
   - ManipulateTerrain
   - SyncTerrain
+  - DamageTarget
   DisableAutoOpenWizard: 0
