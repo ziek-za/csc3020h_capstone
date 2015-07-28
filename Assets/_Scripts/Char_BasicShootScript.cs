@@ -9,6 +9,7 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 
 	public GameObject bulletHolePrefab;
 	public ParticleSystem muzzleFlash;
+	public ParticleSystem tracerEffect;
 	public float timeBetweenShots = 0.33333f;
 	public float weaponAccuracy = 1f; //Higher values = more accurate
 
@@ -31,6 +32,7 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 		if(Time.time >= shotCooldown && Input.GetButton("Fire1")) {
 			shotCooldown = Time.time + timeBetweenShots;
 			muzzleFlash.Play();
+			tracerEffect.Play();
 
 			//First cast a perfectly accurate ray to get the distance to target
 			Vector2 screenCenterPoint = new Vector2(Screen.width/2, Screen.height/2);
