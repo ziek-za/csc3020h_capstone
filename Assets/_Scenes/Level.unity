@@ -5698,7 +5698,7 @@ MonoBehaviour:
   m_LightmapSize: 1024
   m_DrawTreesAndFoliage: 1
   m_CollectDetailPatches: 1
-  m_MaterialTemplate: {fileID: 0}
+  m_MaterialTemplate: {fileID: 2100000, guid: c62cc0b21693f3d45bec051090d6d0f5, type: 2}
 --- !u!4 &622756793
 Transform:
   m_ObjectHideFlags: 0
@@ -5722,7 +5722,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2ba3484dd9d03541a99866da519aec7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  terrain: {fileID: 622756792}
+  hm_tex: {fileID: 2800000, guid: 1b87569a9440fae438581f34116c18c3, type: 3}
 --- !u!114 &622756795
 MonoBehaviour:
   m_ObjectHideFlags: 0

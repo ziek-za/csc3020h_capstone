@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.IO;
 
 public class Map_TerrainController : Photon.MonoBehaviour {
 
 	//Variable to reset the hm when room first created
 	public static bool hmReset;
+	public Texture2D hm_tex;
 
-	public Terrain terrain;
+	private Terrain terrain;
 	// ** PRIVATE VARIABLES ** //
 	private float			WIDTH, LENGTH, MAX_HEIGHT;
 	private float[,]		height_buffer_1,
@@ -21,7 +23,7 @@ public class Map_TerrainController : Photon.MonoBehaviour {
 		//Initialises terrain to the host's terrain
 		//GameObject go = GameObject.Find("TerrainObject")
 		//terrain = go.GetComponent<Terrain>();;
-		//terrain = Terrain.activeTerrain;
+		terrain = Terrain.activeTerrain;
 
 		//Setting up local dimensions
 		WIDTH = terrain.terrainData.size.x;
@@ -36,18 +38,51 @@ public class Map_TerrainController : Photon.MonoBehaviour {
 			for (int k = 0; k < LENGTH; k++) {
 				height_buffer_1[i, k] = 0;
 				height_buffer_2[i, k] = 0;
-				flatten_buf[i, k] = 0.5f;
+				//flatten_buf[i, k] = 0.5f;
 			}
 		}
-
 		if (!hmReset){
-			terrain.terrainData.SetHeights (0, 0, flatten_buf);
+			//terrain.terrainData.SetHeights (0, 0, flatten_buf);
+			// set level to 1
+			SetTerrainHeightMap ("1");
 			height_buffer_original = terrain.terrainData.GetHeights(0,0,(int)WIDTH, (int)LENGTH);
 			Debug.Log ("hmn reset");
 			hmReset = true;
 		}
 	}
 
+	void SetTerrainHeightMap(string level) {
+		_MainController.ImportMapObject (level);
+		if (_MainController.ImportedMapObjectBool) {
+			// Path to file under resources
+			string path = Application.dataPath + "/Resources/" +
+				_MainController.MapObject["terrainRaw"]["path"] +
+				_MainController.MapObject["terrainRaw"]["name"] + ".raw";
+			try {
+				//Texture2D hm_tex = Resources.Load(path) as Texture2D;
+				System.IO.FileInfo fi = new System.IO.FileInfo(path);
+				System.IO.FileStream fs = fi.OpenRead();
+				int m_heightMapRes = _MainController.MapObject["terrainHM"]["size"].AsInt;
+				int size = m_heightMapRes*m_heightMapRes*2;
+				byte[] data = new byte[size];
+				fs.Read(data, 0, size);
+				fs.Close();
+				float[,] htmap = new float[m_heightMapRes, m_heightMapRes];
+				int i=0;
+				for(int x = 0 ; x < m_heightMapRes; x++) {
+					for(int y = 0; y < m_heightMapRes; y++) {
+						//Extract 16 bit data and normalize.
+						float ht = (data[i++] + data[i++]*256.0f);
+						htmap[m_heightMapRes-1-x,y] = ht / 65535.0f;
+					}
+				}
+				terrain.terrainData.SetHeights(0,0,htmap);
+			} catch (System.Exception e) {
+				Debug.LogException(e);
+			}
+		}
+	}
+		
 	void Update () {
 		//caluculate height map
 		float damping = 0.7f;
