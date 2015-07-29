@@ -10,7 +10,7 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 	public GameObject bulletHolePrefab;
 	public ParticleSystem muzzleFlash;
 	public ParticleSystem tracerEffect;
-	public float timeBetweenShots = 0.33333f;
+	public float timeBetweenShots = 0.333333f;
 	public float weaponAccuracy = 1f; //Higher values = more accurate
 
 	//Weapon accuracy is a public variable that can be changed in Unity

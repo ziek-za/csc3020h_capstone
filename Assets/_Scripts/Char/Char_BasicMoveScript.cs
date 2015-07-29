@@ -2,7 +2,10 @@
 using System.Collections;
 
 public class Char_BasicMoveScript : Photon.MonoBehaviour {
-
+		
+	//float shake = 0f;
+	//float shakeAmount  = 0.05f;
+	//float decreaseFactor = 10.0f;
 	
 	public float moveSpeed = 10.0f;
 	public float mouseSpeed = 3.0f;
@@ -29,6 +32,9 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 		//Debug.Log(PhotonNetwork.networkingPeer.RoundTripTime);
 		if (photonView.isMine)
 		{
+			//if (Input.GetButton("Fire1"))
+			//	shake = 0.5f;
+
 			InputMovement();
 			InputColorChange();
 			MouseView();
@@ -38,6 +44,13 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 	}
 
 	void UpdateCameraPos(){
+		/*if (shake > 0) {
+			Debug.Log (shake);
+			FPSCameraPos.position += Random.insideUnitSphere * shakeAmount;
+			shake -= Time.deltaTime * decreaseFactor;			
+		} else {
+			shake = 0.0f;
+		}*/
 		Camera.main.transform.position = FPSCameraPos.position;
 		Camera.main.transform.rotation = FPSCameraPos.rotation;
 	}

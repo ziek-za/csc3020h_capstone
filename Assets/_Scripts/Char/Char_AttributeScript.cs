@@ -16,7 +16,7 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 	void Update () {
 		if (photonView.isMine)
 			HUD.UpdateHUD(health);
-		if (health <= 0 || Input.GetKeyDown(KeyCode.Escape)){
+		if (health <= 0){
 			KillPlayer(this.gameObject.GetComponent<PhotonView>().viewID);
 		}
 	}
