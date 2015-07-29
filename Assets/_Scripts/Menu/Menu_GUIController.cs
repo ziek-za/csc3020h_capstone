@@ -5,7 +5,8 @@ public class Menu_GUIController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+		// Load string lookup object from MainController
+		_MainController.ImportStringLookup ();
 	}
 	
 	// Update is called once per frame
