@@ -38,4 +38,6 @@ MonoBehaviour:
   - SyncTerrain
   - DamageTarget
   - PlayMuzzleFlash
+  - DamagePlayer
+  - KillPlayer
   DisableAutoOpenWizard: 0
