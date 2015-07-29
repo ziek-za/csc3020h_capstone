@@ -1,0 +1,17 @@
+{
+	"name": "Booty Town",
+	"version": "1",
+	"levelData": {
+		"path": "_LevelData/",
+		"name": "1",
+	},	
+	"terrainHM": {
+		"path": "_LevelData/terrainHM/",
+		"name": "heightmap",
+		"size": 257
+	},
+	"terrainRaw": {
+		"path": "_LevelData/terrainRaw/",
+		"name": "3"
+	}
+}

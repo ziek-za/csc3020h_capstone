@@ -6,6 +6,8 @@ public class _MainController {
 
 	public static bool RoomJoined;
 	public static JSONNode StringLookup;
+	public static JSONNode MapObject;
+	public static bool ImportedMapObjectBool = false;
 	public static bool ImportedStringLookupBool = false;
 
 	public static string ExampleLookupMethod(){
@@ -23,6 +25,23 @@ public class _MainController {
 	public static void JoinServer(string serverName){
 		Application.LoadLevel("Level");
 		PhotonNetwork.JoinRoom(serverName);
+	}
+
+	public static void ImportMapObject(string level) {
+		// Load in the file from resources directory
+		try {
+			string filename = "_LevelData/" + level;
+			TextAsset file = Resources.Load (filename) as TextAsset;
+			MapObject = JSON.Parse (file.text);
+			if (MapObject != null) {
+				// If successfully loaded file
+				ImportedMapObjectBool = true;
+			} else {
+				throw new System.ArgumentException("Unable to load file: " + filename);
+			}
+		} catch (System.Exception e) {
+			Debug.LogException(e);
+		}
 	}
 
 	public static void ImportStringLookup() {
