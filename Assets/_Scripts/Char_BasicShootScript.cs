@@ -47,7 +47,7 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 			if(Physics.Raycast(ray, out hit, Camera.main.farClipPlane)) 
 			{
 				Debug.DrawLine(transform.position, hit.point, Color.red);
-				if (hit.transform.gameObject.GetComponent<Char_BasicHealthScript>()){
+				if (hit.transform.gameObject.GetComponent<Char_AttributeScript>()){
 					DamageTarget(10);
 
 					//Quaternion hitDirection = Quaternion.FromToRotation(Vector3.forward, hit.normal);
@@ -65,7 +65,7 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 	}
 
 	[RPC] void DamageTarget(int damage){
-		Char_BasicHealthScript hs = hit.transform.gameObject.GetComponent<Char_BasicHealthScript>();
+		Char_AttributeScript hs = hit.transform.gameObject.GetComponent<Char_AttributeScript>();
 		hs.health -= damage;
 		if (photonView.isMine)
 			photonView.RPC("DamageTarget",PhotonTargets.OthersBuffered, damage);

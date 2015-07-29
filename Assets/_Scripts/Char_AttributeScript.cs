@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Char_BasicHealthScript : MonoBehaviour {
+public class Char_AttributeScript : MonoBehaviour {
 
 	public int health = 100;
 
