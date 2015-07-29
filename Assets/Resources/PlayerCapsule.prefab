@@ -28,6 +28,7 @@ GameObject:
   - 114: {fileID: 11444614}
   - 198: {fileID: 19850676}
   - 199: {fileID: 19950676}
+  - 114: {fileID: 11439306}
   m_Layer: 0
   m_Name: GunMuzzle
   m_TagString: Untagged
@@ -153,7 +154,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 188330}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.0111537, y: 2.45843792, z: -8.80430031}
+  m_LocalPosition: {x: -.0296773911, y: 3.01432967, z: -8.83741474}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 488328}
@@ -242,6 +243,31 @@ MonoBehaviour:
   maxDistance: 15
   projection: {fileID: 130738, guid: 791e7f3ff3db4014cab368a34896bb0d, type: 2}
   distanceIndicator: {fileID: 110788, guid: 11ca0607ebe6c474f88d377f60d40e22, type: 2}
+--- !u!114 &11439306
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 144614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ownerId: 0
+  group: 0
+  prefixBackup: -1
+  observed: {fileID: 0}
+  synchronization: 0
+  onSerializeTransformOption: 3
+  onSerializeRigidBodyOption: 2
+  ownershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 0}
+  ObservedComponentsFoldoutOpen: 1
+  viewIdField: 0
+  instantiationId: -1
+  isRuntimeInstantiated: 0
 --- !u!114 &11444614
 MonoBehaviour:
   m_ObjectHideFlags: 1

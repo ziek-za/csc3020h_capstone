@@ -29,9 +29,10 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 
 	void Update()
 	{
-		if(Time.time >= shotCooldown && Input.GetButton("Fire1")) {
+		if(photonView.isMine && Time.time >= shotCooldown && Input.GetButton("Fire1")) {
 			shotCooldown = Time.time + timeBetweenShots;
-			muzzleFlash.Play();
+			//muzzleFlash.Play();
+			PlayMuzzleFlash(transform.position,transform.rotation);
 			tracerEffect.Play();
 
 			//First cast a perfectly accurate ray to get the distance to target
@@ -48,10 +49,6 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 			{
 				Debug.DrawLine(transform.position, hit.point, Color.red);
 				if (hit.transform.gameObject.GetComponent<Char_AttributeScript>()){
-					DamageTarget(10);
-
-					//Quaternion hitDirection = Quaternion.FromToRotation(Vector3.forward, hit.normal);
-					//Vector3.Normalize(hitDirection);
 					hit.transform.gameObject.rigidbody.AddForce(Vector3.Normalize(ray.direction)*100f);
 				} else {
 					//Create a bullet hole
@@ -64,10 +61,15 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 		}
 	}
 
-	[RPC] void DamageTarget(int damage){
-		Char_AttributeScript hs = hit.transform.gameObject.GetComponent<Char_AttributeScript>();
-		hs.health -= damage;
+	[RPC] void PlayMuzzleFlash(Vector3 position, Quaternion rotation){
+		Vector3 mfPos = muzzleFlash.transform.position;
+		Quaternion mfRot = muzzleFlash.transform.rotation;
+		muzzleFlash.transform.position = position;
+		muzzleFlash.transform.rotation = rotation;
+		muzzleFlash.Play();
+		muzzleFlash.transform.position = mfPos;
+		muzzleFlash.transform.rotation = mfRot;
 		if (photonView.isMine)
-			photonView.RPC("DamageTarget",PhotonTargets.OthersBuffered, damage);
+			photonView.RPC("PlayMuzzleFlash", PhotonTargets.OthersBuffered, position, rotation);
 	}
 }
