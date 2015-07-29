@@ -37,4 +37,5 @@ MonoBehaviour:
   - ManipulateTerrain
   - SyncTerrain
   - DamageTarget
+  - PlayMuzzleFlash
   DisableAutoOpenWizard: 0

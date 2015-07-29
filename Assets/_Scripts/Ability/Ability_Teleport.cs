@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Ability_Teleport : MonoBehaviour {
+public class Ability_Teleport : Photon.MonoBehaviour {
 	public float maxDistance = 3f;
 	public GameObject projection;
 	public GameObject distanceIndicator;
@@ -25,7 +25,7 @@ public class Ability_Teleport : MonoBehaviour {
 	void Update () {
 
 
-		if (Input.GetButton ("Teleport")) {
+		if (photonView.isMine && Input.GetButton ("Teleport")) {
 			projection.transform.GetComponent<MeshRenderer> ().enabled = true;
 			projection.transform.Find("BasicGun").GetComponent<MeshRenderer> ().enabled = true;
 			teleportDistance=maxDistance;
@@ -65,15 +65,14 @@ public class Ability_Teleport : MonoBehaviour {
 				Invoke ("Teleport", 0.2f); //Delay for teleporting
 			}
 		}
-		if (Input.GetButtonUp ("Teleport")) {
+		if (photonView.isMine && Input.GetButtonUp ("Teleport")) {
 			projection.transform.GetComponent<MeshRenderer> ().enabled = false;
 			projection.transform.Find("BasicGun").GetComponent<MeshRenderer> ().enabled = false;
 			distanceIndicator.transform.GetComponent<MeshRenderer> ().enabled = false;
-				}
+		}
 	}
 
 	void Teleport(){
-
 		transform.Translate (teleportDirection * teleportDistance);
 		Camera.main.transform.Translate(teleportDirection * teleportDistance);
 	}

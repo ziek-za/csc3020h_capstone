@@ -29,9 +29,6 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 		//Debug.Log(PhotonNetwork.networkingPeer.RoundTripTime);
 		if (photonView.isMine)
 		{
-			//Camera.main.transform.parent = rigidbody.transform;
-			//Camera.main.transform.position = new Vector3(rigidbody.position.x, rigidbody.position.y, rigidbody.position.z);
-
 			InputMovement();
 			InputColorChange();
 			MouseView();
