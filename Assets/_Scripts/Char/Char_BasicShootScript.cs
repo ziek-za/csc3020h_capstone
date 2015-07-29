@@ -32,7 +32,7 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 		if(photonView.isMine && Time.time >= shotCooldown && Input.GetButton("Fire1")) {
 			shotCooldown = Time.time + timeBetweenShots;
 			//muzzleFlash.Play();
-			PlayMuzzleFlash(transform.position,transform.rotation);
+			PlayMuzzleFlash(photonView.viewID);
 			tracerEffect.Play();
 
 			//First cast a perfectly accurate ray to get the distance to target
@@ -49,7 +49,9 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 			{
 				Debug.DrawLine(transform.position, hit.point, Color.red);
 				if (hit.transform.gameObject.GetComponent<Char_AttributeScript>()){
-					hit.transform.gameObject.rigidbody.AddForce(Vector3.Normalize(ray.direction)*100f);
+					//hit.transform.gameObject.rigidbody.AddForce(Vector3.Normalize(ray.direction)*100f);
+					//hit.transform.networkView.viewID;
+					DamagePlayer(-10, hit.transform.GetComponent<PhotonView>().viewID);
 				} else {
 					//Create a bullet hole
 					Vector3 bulletHolePosition = hit.point + hit.normal * 0.01f;
@@ -61,15 +63,16 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 		}
 	}
 
-	[RPC] void PlayMuzzleFlash(Vector3 position, Quaternion rotation){
-		Vector3 mfPos = muzzleFlash.transform.position;
-		Quaternion mfRot = muzzleFlash.transform.rotation;
-		muzzleFlash.transform.position = position;
-		muzzleFlash.transform.rotation = rotation;
-		muzzleFlash.Play();
-		muzzleFlash.transform.position = mfPos;
-		muzzleFlash.transform.rotation = mfRot;
+	[RPC] void PlayMuzzleFlash(int vID){
+		PhotonView.Find(vID).transform.GetComponent<ParticleSystem>().Play();
 		if (photonView.isMine)
-			photonView.RPC("PlayMuzzleFlash", PhotonTargets.OthersBuffered, position, rotation);
+			photonView.RPC("PlayMuzzleFlash", PhotonTargets.OthersBuffered, vID);
+	}
+
+	[RPC] void DamagePlayer(int damage, int vID){
+		Char_AttributeScript cas = PhotonView.Find(vID).transform.GetComponent<Char_AttributeScript>();
+		cas.ChangeHP(damage);
+		if (photonView.isMine)
+			photonView.RPC("DamagePlayer", PhotonTargets.OthersBuffered, damage, vID);
 	}
 }
