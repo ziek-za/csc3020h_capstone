@@ -50,17 +50,13 @@ public class Map_Export : MonoBehaviour {
 		jn ["rotation"] ["z"] = curr_go.transform.rotation.z.ToString();
 		if (curr_go.transform.childCount > 0) {
 			JSONArray children = new JSONArray();
-			//jn["children"] = children;
 			for (int i = 0; i < curr_go.transform.childCount; i++) {
-
-				ja.Add (RecurseChildren(curr_go.transform.GetChild (i).gameObject, children));
-				Debug.Log (ja.ToString ());
-				return ja;
+				jn["children"] = RecurseChildren(curr_go.transform.GetChild (i).gameObject, children);
 			}
+			ja["-1"] = jn;
 			return ja;
 		} else {
-			ja.Add (jn);
-
+			ja["-1"] = jn;
 			return ja;
 		}
 	}

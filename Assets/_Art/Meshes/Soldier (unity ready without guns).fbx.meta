@@ -1018,7 +1018,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Idle
       takeName: Take 001
-      firstFrame: 7
+      firstFrame: 2
       lastFrame: 60
       wrapMode: 0
       orientationOffsetY: 0
