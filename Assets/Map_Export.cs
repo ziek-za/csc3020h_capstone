@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using SimpleJSON;
 using System.IO;
@@ -6,18 +6,36 @@ using System.IO;
 public class Map_Export : MonoBehaviour {
 
 	public string LevelID = "";
-	public string RawID = "";
+	public string RawHeightMapID = "";
+	public string RawHeightMapSize = "256";
 	public string LevelName = "";
 
 	private string defaultPath = "_LevelData/";
 	private string defaultJSON = "Base";
 	private string defaultSavePath = "Assets/Resources/";
+	private Terrain terrain;
 
+	// Load level objects
+	public void Load() {
+		// Load level data from relevant JSON file
+		_MainController.ImportMapObject (LevelID);
+		// check to see if it is loaded before progressing
+		if (_MainController.ImportedMapObjectBool) {
+			// Set terrain map
+			terrain = Terrain.activeTerrain;
+			Map_TerrainController tc = terrain.GetComponent<Map_TerrainController> ();
+			tc.SetTerrainHeightMap ();
+			// Load objects
+			GameObject mc = GameObject.Find("Map Controller");
+			Level_MapController mc_script = mc.GetComponent<Level_MapController>();
+			mc_script.SetupLevel(LevelID);
+		}
+	}
 	// Main method to export/save all objects
 	public void Save() {
 		// Load file if possibles
 		try {
-			if (LevelName.Length == 0 || LevelID.Length == 0 || RawID.Length == 0) {
+			if (LevelName.Length == 0 || LevelID.Length == 0 || RawHeightMapID.Length == 0) {
 				throw new System.ArgumentException("LevelID and LevelName required");
 			}
 			TextAsset ta = Resources.Load (defaultPath + defaultJSON) as TextAsset;
@@ -25,7 +43,8 @@ public class Map_Export : MonoBehaviour {
 			jn["name"] = LevelName;
 			jn["version"] = "1";
 			jn["levelData"]["name"] = LevelID;
-			jn["terrainRaw"]["name"] = RawID;
+			jn["terrainRaw"]["name"] = RawHeightMapID;
+			jn["terrainRaw"]["size"] = RawHeightMapSize;
 			// Generate children
 			JSONArray ja = new JSONArray();
 			ja = RecurseChildren(gameObject, ja);

@@ -6,20 +6,32 @@ public class Level_MapController : MonoBehaviour {
 
 	private GameObject Map;
 	private JSONNode level_objects;
+	private Terrain terrain;
 
 	// Use this for initialization
 	void Start () {
+		SetupLevel ("1");
+	}
+
+	public void SetupLevel(string level) {
+		terrain = Terrain.activeTerrain;
 		// Load level data from relevant JSON file
-		_MainController.ImportMapObject ("1");
+		_MainController.ImportMapObject (level);
 		// check to see if it is loaded before progressing
 		if (_MainController.ImportedMapObjectBool) {
+			Map_TerrainController tc = terrain.GetComponent<Map_TerrainController>();
+			tc.SetTerrainHeightMap();
 			Map = GameObject.Find ("Map");
 			// Remove current LevelObjects
-			Destroy (Map.transform.FindChild("LevelObjects").gameObject);
+			GameObject levelObjects = Map.transform.FindChild("LevelObjects").gameObject;
+			levelObjects.SetActive(false);
+			Destroy (levelObjects);
 			// Get level objects
 			//Debug.Log (_MainController.MapObject["level_objects"]);
 			level_objects = _MainController.MapObject["level_objects"][0];
 			RecurseChildren (level_objects, Map);
+		} else {
+			Debug.Log ("Unable to initiate level creation, file could not be loaded");
 		}
 	}
 
@@ -42,22 +54,16 @@ public class Level_MapController : MonoBehaviour {
 		} else {
 			GameObject prefab = Resources.Load ("_Prefabs/" + jn ["prefab"]) as GameObject;
 			spawned_prefab = Instantiate(prefab, pos, rotation) as GameObject;
+			spawned_prefab.name = jn["prefab"];
 		}
-		if (spawned_prefab.rigidbody != null) {
-			spawned_prefab.rigidbody.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
-			StartCoroutine(ResetRigidbody(spawned_prefab));
-		}
-		spawned_prefab.gameObject.transform.SetParent(parent_go.transform);
+
+		spawned_prefab.gameObject.transform.parent = parent_go.transform;//SetParent(parent_go.transform);
 
 		if (jn["children"].Count > 0) {
 			// Contains children
 			for (int i = 0; i < jn["children"].Count; i++) {
 				RecurseChildren (jn["children"][i], spawned_prefab);
 			}
-		}
-
-		if (spawned_prefab.rigidbody != null) {
-			spawned_prefab.rigidbody.constraints = RigidbodyConstraints.None;
 		}
 		
 	}
