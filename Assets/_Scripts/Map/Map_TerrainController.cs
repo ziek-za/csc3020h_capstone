@@ -6,8 +6,6 @@ public class Map_TerrainController : Photon.MonoBehaviour {
 
 	//Variable to reset the hm when room first created
 	public static bool hmReset;
-	public Texture2D hm_tex;
-
 	public Terrain terrain;
 	// ** PRIVATE VARIABLES ** //
 	private float			WIDTH, LENGTH, MAX_HEIGHT;
