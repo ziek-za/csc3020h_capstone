@@ -53,19 +53,21 @@ public class Map_TerrainController : Photon.MonoBehaviour {
 		if (_MainController.ImportedMapObjectBool) {
 			Debug.Log ("[Inside SetTerrainHeightMap]");
 			// Path to file under resources
-			string path = Application.dataPath + "/Resources/" +
-				_MainController.MapObject["terrainRaw"]["path"] +
-				_MainController.MapObject["terrainRaw"]["name"] + ".raw";
+			string path = _MainController.MapObject["terrainRaw"]["path"] +
+				_MainController.MapObject["terrainRaw"]["name"];
 			try {
+				Debug.Log(path);
 				//Texture2D hm_tex = Resources.Load(path) as Texture2D;
-				System.IO.FileInfo fi = new System.IO.FileInfo(path);
-				System.IO.FileStream fs = fi.OpenRead();
+				TextAsset ta = Resources.Load(path) as TextAsset;
+				Debug.Log(ta);
+				Stream s = new MemoryStream(ta.bytes);
+				BinaryReader br = new BinaryReader(s);
 				int m_heightMapRes = _MainController.MapObject["terrainRaw"]["size"].AsInt;
 				int size = m_heightMapRes*m_heightMapRes*2;
 				Debug.Log (m_heightMapRes + " " + size);
 				byte[] data = new byte[size];
-				fs.Read(data, 0, size);
-				fs.Close();
+				br.Read(data, 0, size);
+				br.Close();
 				float[,] htmap = new float[m_heightMapRes, m_heightMapRes];
 				int i=0;
 				for(int x = 0 ; x < m_heightMapRes; x++) {

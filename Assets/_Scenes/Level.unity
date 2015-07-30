@@ -5580,7 +5580,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2ba3484dd9d03541a99866da519aec7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hm_tex: {fileID: 2800000, guid: 1b87569a9440fae438581f34116c18c3, type: 3}
   terrain: {fileID: 622756792}
 --- !u!114 &622756795
 MonoBehaviour:
