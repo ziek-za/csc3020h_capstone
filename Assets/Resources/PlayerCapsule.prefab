@@ -79,7 +79,6 @@ GameObject:
   - 4: {fileID: 488328}
   - 114: {fileID: 11495756}
   - 114: {fileID: 11495754}
-  - 114: {fileID: 11400122}
   m_Layer: 0
   m_Name: CameraPosition
   m_TagString: Untagged
@@ -102,9 +101,10 @@ GameObject:
   - 114: {fileID: 11445350}
   - 114: {fileID: 11488334}
   - 114: {fileID: 11488332}
-  - 114: {fileID: 11488330}
+  - 114: {fileID: 11471658}
   - 136: {fileID: 13686634}
   - 114: {fileID: 11429530}
+  - 114: {fileID: 11463650}
   m_Layer: 0
   m_Name: PlayerCapsule
   m_TagString: Untagged
@@ -258,21 +258,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &11400122
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 188328}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e20bab5612f194840a04e7f24def0570, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  grenadePrefab: {fileID: 400502, guid: 84552cdc966f3964c87ea30a0552c768, type: 2}
-  grenadePosition: {fileID: 417276}
-  fuseTime: 3
-  mode: pull
 --- !u!114 &11429530
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -339,7 +324,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9db869854372664abded43335ffca60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &11488330
+--- !u!114 &11463650
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 188330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e20bab5612f194840a04e7f24def0570, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grenadePrefab: {fileID: 400502, guid: 84552cdc966f3964c87ea30a0552c768, type: 2}
+  grenadePosition: {fileID: 417276}
+  fuseTime: 3
+  initialForwardVelocity: 15
+  initialUpwardsVelocity: 7
+--- !u!114 &11471658
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -367,9 +368,9 @@ MonoBehaviour:
     SynchronizeEnabled: 1
     TeleportEnabled: 1
     TeleportIfDistanceGreaterThan: 3
-    InterpolateOption: 1
+    InterpolateOption: 4
     InterpolateMoveTowardsSpeed: 10
-    InterpolateLerpSpeed: 1
+    InterpolateLerpSpeed: 10
     InterpolateMoveTowardsAcceleration: 2
     InterpolateMoveTowardsDeceleration: 2
     InterpolateSpeedCurve:
@@ -397,8 +398,8 @@ MonoBehaviour:
         tangentMode: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
-    ExtrapolateOption: 1
-    ExtrapolateSpeed: 1
+    ExtrapolateOption: 0
+    ExtrapolateSpeed: 10
     ExtrapolateIncludingRoundTripTime: 1
     ExtrapolateNumberOfStoredPositions: 1
     DrawErrorGizmo: 1
@@ -433,7 +434,7 @@ MonoBehaviour:
   ownershipTransfer: 0
   ObservedComponents:
   - {fileID: 11488332}
-  - {fileID: 11488330}
+  - {fileID: 11471658}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
   instantiationId: -1

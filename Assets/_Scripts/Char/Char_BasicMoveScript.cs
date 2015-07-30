@@ -41,6 +41,7 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 			InputColorChange();
 			MouseView();
 			UpdateCameraPos();
+			//SetSynchronizedValues
 		}
 
 	}
@@ -76,8 +77,11 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 		float h = Input.GetAxis ("Horizontal");
 		float v = Input.GetAxis ("Vertical");
 		if (h != 0f || v != 0){
-				transform.Translate(Vector3.forward*moveSpeed*Time.deltaTime * v);
-				transform.Translate(Vector3.right*moveSpeed*Time.deltaTime * h);
+			Vector3 speed = (Vector3.forward*moveSpeed*Time.deltaTime * v) + (Vector3.right*moveSpeed*Time.deltaTime * h);
+			//transform.Translate(Vector3.forward*moveSpeed*Time.deltaTime * v);
+			//transform.Translate(Vector3.right*moveSpeed*Time.deltaTime * h);
+			transform.Translate(speed);
+			//gameObject.GetComponent<PhotonTransformView>().SetSynchronizedValues(speed,mouseSpeed);
 		}
 
 		/*float yDiff = (transform.position.y - prevPos.y)/Time.deltaTime;
@@ -92,7 +96,11 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 			Vector3 v3 = rigidbody.velocity;
 			v3.y=jumpSpeed;
 			rigidbody.velocity=v3;
+		} else if (transform.rigidbody.velocity.y < -2f){
+			isJumping = true;
 		}
+
+
 
 		//prevPos = transform.position;
 	}
@@ -104,5 +112,11 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 
 		float rotateY = Input.GetAxis ("Mouse Y") * mouseSpeed;
 		FPSCameraPos.transform.localRotation = Quaternion.Euler (mouseSensitivity, 0, 0);
+	}
+
+	void OnCollisionEnter(Collision other){
+		if (Mathf.Abs(transform.rigidbody.velocity.y) < 1f){
+			isJumping = false;
+		}
 	}
 }
