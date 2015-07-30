@@ -44,15 +44,14 @@ public class Map_TerrainController : Photon.MonoBehaviour {
 		if (!hmReset){
 			//terrain.terrainData.SetHeights (0, 0, flatten_buf);
 			// set level to 1
-			SetTerrainHeightMap ("1");
+			SetTerrainHeightMap ();
 			height_buffer_original = terrain.terrainData.GetHeights(0,0,(int)WIDTH, (int)LENGTH);
 			Debug.Log ("hmn reset");
 			hmReset = true;
 		}
 	}
 
-	void SetTerrainHeightMap(string level) {
-		_MainController.ImportMapObject (level);
+	void SetTerrainHeightMap() {
 		if (_MainController.ImportedMapObjectBool) {
 			// Path to file under resources
 			string path = Application.dataPath + "/Resources/" +
