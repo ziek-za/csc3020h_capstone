@@ -6,6 +6,7 @@ public class Weapon_ForceGrenade : Photon.MonoBehaviour {
 
 	public SphereCollider triggerArea;
 	public float explosionPower = 100f;
+	public Transform vortex;
 
 	List<GameObject> alreadyCollided;
 	string mode;
@@ -21,33 +22,28 @@ public class Weapon_ForceGrenade : Photon.MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other){
-		if (!alreadyCollided.Contains(other.gameObject)){
-			if (other.GetComponent<Rigidbody>() != null)
-				alreadyCollided.Add(other.gameObject);
+		if (!alreadyCollided.Contains(other.gameObject) && other.gameObject.GetComponent<Weapon_ForceGrenade>() == null){
+			alreadyCollided.Add(other.gameObject);
 		}
 	}
 
-	public void Explode(string mode){
+	public void Explode(string newMode){
 		triggerArea.enabled = true;
 		Invoke ("TriggerForce",0.05f);
-		mode = this.mode;
+		mode = newMode;
+		//TriggerForce();
 		Destroy(gameObject,0.1f);
 	}
 
 	void TriggerForce(){
 		for (int i = 0; i < alreadyCollided.Count; i++){
-			Debug.Log (alreadyCollided[i].name);
-			Debug.Log (explosionPower);
-			StartCoroutine(ApplyForce(alreadyCollided[i]));
+			if (mode.Equals("push") && alreadyCollided[i].GetComponent<Rigidbody>() != null){
+				Vector3 forceDir = alreadyCollided[i].transform.position - transform.position;
+				alreadyCollided[i].transform.rigidbody.AddForce(forceDir * explosionPower);
+			}
+			else if (mode.Equals("pull")){
+				PhotonNetwork.Instantiate(vortex.name, transform.position, Quaternion.identity, 0);
+			}				//go.transform.rigidbody.AddForce(forceDir * -explosionPower);
 		}
-	}
-
-	IEnumerator ApplyForce(GameObject go){
-		yield return new WaitForSeconds(0.1f);
-		Vector3 forceDir = go.transform.position - transform.position;
-		if (mode.Equals("push"))
-			go.transform.rigidbody.AddForce(forceDir * explosionPower);
-		else if (mode.Equals("pull"))
-			go.transform.rigidbody.AddForce(forceDir * -explosionPower);
-	}
+	}	
 }

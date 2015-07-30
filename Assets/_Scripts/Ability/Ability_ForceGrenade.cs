@@ -32,17 +32,18 @@ public class Ability_ForceGrenade: Photon.MonoBehaviour {
 
 	IEnumerator Explode(GameObject gr){
 		yield return new WaitForSeconds(fuseTime);
-		SyncTerrain(gr.transform.position);
+		if (mode.Equals("push"))
+			PushTerrain(gr.transform.position);
 		gr.GetComponent<Weapon_ForceGrenade>().Explode(mode);
 		//gr.transform.GetComponent<SphereCollider>().isTrigger = true;
 		//Destroy(gr);
 	}
 
 
-	[RPC] void SyncTerrain(Vector3 explosion_pos){		
-		MTC.ManipulateTerrain(explosion_pos, 5f, mode);
+	[RPC] void PushTerrain(Vector3 explosion_pos){		
+		MTC.ManipulateTerrain(explosion_pos, 5f, "push", 30f, 2f, 2f);
 		if (photonView.isMine) {
-			photonView.RPC("SyncTerrain",PhotonTargets.OthersBuffered, explosion_pos);
+			photonView.RPC("PushTerrain",PhotonTargets.OthersBuffered, explosion_pos);
 		}
 	}
 }

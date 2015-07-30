@@ -17,6 +17,8 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 	bool isJumping=false;
 	public float clampYAxis = 60.0f;
 
+	Vector3 prevPos = Vector3.zero;
+
 	// Use this for initialization
 	void Start () {
 		if (photonView.isMine) {
@@ -77,12 +79,22 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 				transform.Translate(Vector3.forward*moveSpeed*Time.deltaTime * v);
 				transform.Translate(Vector3.right*moveSpeed*Time.deltaTime * h);
 		}
+
+		/*float yDiff = (transform.position.y - prevPos.y)/Time.deltaTime;
+		if (Mathf.Abs(yDiff) < 0.1f){
+			isJumping = false;
+		} else {
+			isJumping = true;
+		}*/
+
 		if(Input.GetButtonDown("Jump") && isJumping==false){
 			isJumping=true;
 			Vector3 v3 = rigidbody.velocity;
 			v3.y=jumpSpeed;
 			rigidbody.velocity=v3;
 		}
+
+		//prevPos = transform.position;
 	}
 
 	void MouseView(){
@@ -93,10 +105,4 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 		float rotateY = Input.GetAxis ("Mouse Y") * mouseSpeed;
 		FPSCameraPos.transform.localRotation = Quaternion.Euler (mouseSensitivity, 0, 0);
 	}
-
-	void OnCollisionEnter(Collision c){
-				if (photonView.isMine) {
-						isJumping = false;
-				}
-		}
 }
