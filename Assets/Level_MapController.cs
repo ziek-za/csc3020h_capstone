@@ -48,8 +48,8 @@ public class Level_MapController : MonoBehaviour {
 		Debug.Log (jn ["prefab"]);
 		if (jn ["prefab"].Value == "LevelObjects") {
 			spawned_prefab = new GameObject();//Instantiate(pos, rotation);
-			spawned_prefab.name = "LevelObjects - " + _MainController.MapObject["name"] + "(" +
-				_MainController.MapObject["version"] + ")";
+			spawned_prefab.name = "LevelObjects - (ID: " + _MainController.MapObject["levelData"]["name"] + ") " +
+				_MainController.MapObject["name"] + " v" +_MainController.MapObject["version"];
 			spawned_prefab.transform.position = pos;
 			spawned_prefab.transform.rotation = rotation;
 		} else {
