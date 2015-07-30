@@ -1,1 +1,1 @@
-{"levelData":{"path":"_LevelData/", "name":"4"}, "terrainRaw":{"path":"_LevelData/terrainRaw/"}, "level_objects":[ [ {"name":"Cube", "position":{"x":"0", "y":"5", "z":"4.570007"}, "rotation":{"x":"0", "y":"0", "z":"0"}} ] ], "frozenTerrainRaw":{"path":"_LevelData/frozenTerrainRaw/"}, "name":"awe", "version":"1"}
+{"levelData":{"path":"_LevelData/", "name":"4"}, "terrainRaw":{"path":"_LevelData/terrainRaw/"}, "level_objects":[  ], "frozenTerrainRaw":{"path":"_LevelData/frozenTerrainRaw/"}, "name":"awe", "version":"1"}
