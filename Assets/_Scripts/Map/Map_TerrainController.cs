@@ -134,13 +134,14 @@ public class Map_TerrainController : Photon.MonoBehaviour {
 	}*/
 	
 	//Circular explosion
-	public void ManipulateTerrain(Vector3 explosion_pos_orig, float explosion_radius, string force_type) {
+	public void ManipulateTerrain(Vector3 explosion_pos_orig, float explosion_radius, string force_type,
+	                              float terrain_offset,float falloff,float peak_sharpness) {
 		//Debug.Log (explosion_pos);
 		Vector3 explosion_pos = new Vector3 (Mathf.Floor(explosion_pos_orig.x + 128), 0, Mathf.Floor(explosion_pos_orig.z + 128));
-		float terrain_offset = 30f; //the amount that the terrain has been offseted
-		float falloff = 2f;	//large values gives a very big center peak
+		//float terrain_offset = 30f; //the amount that the terrain has been offseted
+		//float falloff = 2f;	//large values gives a very big center peak
 		//range 1.1f - infinity
-		float peak_sharpness = 2f; //0 implies at the center is the max radius
+		//float peak_sharpness = 2f; //0 implies at the center is the max radius
 		//  < 0 implies sharp points greater than radius
 		// > 0 implies rounded and softer peak
 		if (explosion_pos.y - ((height_buffer_original [(int)explosion_pos.x, (int)explosion_pos.z] * MAX_HEIGHT) - terrain_offset) <= explosion_radius) {

@@ -2,9 +2,12 @@
 using System.Collections;
 
 public class Char_BasicMoveScript : Photon.MonoBehaviour {
-
+		
+	//float shake = 0f;
+	//float shakeAmount  = 0.05f;
+	//float decreaseFactor = 10.0f;
 	
- 	float moveSpeed = 10.0f;
+	public float moveSpeed = 10.0f;
 	public float mouseSpeed = 3.0f;
 	public float jumpSpeed=5.0f;
 	public Transform FPSCameraPos;
@@ -14,10 +17,11 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 	bool isJumping=false;
 	public float clampYAxis = 60.0f;
 
+	Vector3 prevPos = Vector3.zero;
+
 	// Use this for initialization
 	void Start () {
 		if (photonView.isMine) {
-			moveSpeed = transform.GetComponent<Char_AttributeScript>().speed / 15f;
 			Screen.lockCursor=true;
 			transform.GetComponent<Renderer>().enabled = false;
 
@@ -30,16 +34,26 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 		//Debug.Log(PhotonNetwork.networkingPeer.RoundTripTime);
 		if (photonView.isMine)
 		{
-			moveSpeed = transform.GetComponent<Char_AttributeScript>().speed / 15f;
+			//if (Input.GetButton("Fire1"))
+			//	shake = 0.5f;
+
 			InputMovement();
 			InputColorChange();
 			MouseView();
 			UpdateCameraPos();
+			//SetSynchronizedValues
 		}
 
 	}
 
 	void UpdateCameraPos(){
+		/*if (shake > 0) {
+			Debug.Log (shake);
+			FPSCameraPos.position += Random.insideUnitSphere * shakeAmount;
+			shake -= Time.deltaTime * decreaseFactor;			
+		} else {
+			shake = 0.0f;
+		}*/
 		Camera.main.transform.position = FPSCameraPos.position;
 		Camera.main.transform.rotation = FPSCameraPos.rotation;
 	}
@@ -63,15 +77,32 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 		float h = Input.GetAxis ("Horizontal");
 		float v = Input.GetAxis ("Vertical");
 		if (h != 0f || v != 0){
-				transform.Translate(Vector3.forward*moveSpeed*Time.deltaTime * v);
-				transform.Translate(Vector3.right*moveSpeed*Time.deltaTime * h);
+			Vector3 speed = (Vector3.forward*moveSpeed*Time.deltaTime * v) + (Vector3.right*moveSpeed*Time.deltaTime * h);
+			//transform.Translate(Vector3.forward*moveSpeed*Time.deltaTime * v);
+			//transform.Translate(Vector3.right*moveSpeed*Time.deltaTime * h);
+			transform.Translate(speed);
+			//gameObject.GetComponent<PhotonTransformView>().SetSynchronizedValues(speed,mouseSpeed);
 		}
+
+		/*float yDiff = (transform.position.y - prevPos.y)/Time.deltaTime;
+		if (Mathf.Abs(yDiff) < 0.1f){
+			isJumping = false;
+		} else {
+			isJumping = true;
+		}*/
+
 		if(Input.GetButtonDown("Jump") && isJumping==false){
 			isJumping=true;
 			Vector3 v3 = rigidbody.velocity;
 			v3.y=jumpSpeed;
 			rigidbody.velocity=v3;
+		} else if (transform.rigidbody.velocity.y < -2f){
+			isJumping = true;
 		}
+
+
+
+		//prevPos = transform.position;
 	}
 
 	void MouseView(){
@@ -83,9 +114,9 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 		FPSCameraPos.transform.localRotation = Quaternion.Euler (mouseSensitivity, 0, 0);
 	}
 
-	void OnCollisionEnter(Collision c){
-				if (photonView.isMine) {
-						isJumping = false;
-				}
+	void OnCollisionEnter(Collision other){
+		if (Mathf.Abs(transform.rigidbody.velocity.y) < 1f){
+			isJumping = false;
 		}
+	}
 }

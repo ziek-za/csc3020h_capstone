@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿#if UNITY_EDITOR
+using UnityEngine;
 using System.Collections;
 using UnityEditor;
 
@@ -13,3 +14,4 @@ public class Map_Export_editor : Editor {
 		}
 	}
 }
+#endif

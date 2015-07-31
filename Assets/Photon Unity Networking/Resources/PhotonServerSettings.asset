@@ -40,4 +40,8 @@ MonoBehaviour:
   - PlayMuzzleFlash
   - DamagePlayer
   - KillPlayer
+  - PullTerrain
+  - PushTerrain
+  - KillGameObject
+  - PushForceExplosion
   DisableAutoOpenWizard: 0
