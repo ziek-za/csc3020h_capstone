@@ -1,13 +1,14 @@
+#if UNITY_EDITOR
 using UnityEngine;
 using System.Collections;
 using SimpleJSON;
 using System.IO;
-
+using UnityEditor;
 public class Map_Export : MonoBehaviour {
 
 	public string LevelID = "";
 	public string RawHeightMapID = "";
-	public string RawHeightMapSize = "256";
+	public string RawHeightMapSize = "257";
 	public string LevelName = "";
 
 	private string defaultPath = "_LevelData/";
@@ -29,6 +30,8 @@ public class Map_Export : MonoBehaviour {
 			GameObject mc = GameObject.Find("Map Controller");
 			Level_MapController mc_script = mc.GetComponent<Level_MapController>();
 			mc_script.SetupLevel(LevelID);
+		} else {
+			Debug.Log ("-- INVALID LEVEL IMPORT: "  + LevelID + " --");
 		}
 	}
 	// Main method to export/save all objects
@@ -62,7 +65,18 @@ public class Map_Export : MonoBehaviour {
 
 	private JSONArray RecurseChildren (GameObject curr_go, JSONArray ja) {
 		JSONNode jn = JSON.Parse ("{}");
-		jn ["prefab"] = curr_go.name;
+		jn ["isPrefab"] = "false";
+		if (PrefabUtility.GetPrefabParent (curr_go) != null) {
+			jn ["isPrefab"] = "true";
+			jn ["prefab"] = curr_go.name;
+		} else {
+			if (curr_go.transform.parent.gameObject.name == "Map") {
+				// Root LevelObjects object
+				jn["name"] = "LevelObjects";
+			} else {
+				jn["name"] = curr_go.name;
+			}
+		}
 		// Position
 		jn ["position"] ["x"] = curr_go.transform.position.x.ToString();
 		jn ["position"] ["y"] = curr_go.transform.position.y.ToString();
@@ -84,3 +98,4 @@ public class Map_Export : MonoBehaviour {
 		}
 	}
 }
+#endif

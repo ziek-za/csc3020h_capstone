@@ -10,7 +10,7 @@ public class Level_MapController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		SetupLevel ("1");
+		SetupLevel ("2");
 	}
 
 	public void SetupLevel(string level) {
@@ -25,7 +25,10 @@ public class Level_MapController : MonoBehaviour {
 			// Remove current LevelObjects
 			GameObject levelObjects = Map.transform.FindChild("LevelObjects").gameObject;
 			levelObjects.SetActive(false);
+#if UNITY_EDITOR
+#else
 			Destroy (levelObjects);
+#endif
 			// Get level objects
 			//Debug.Log (_MainController.MapObject["level_objects"]);
 			level_objects = _MainController.MapObject["level_objects"][0];
@@ -46,14 +49,28 @@ public class Level_MapController : MonoBehaviour {
 		                               jn["rotation"]["z"].AsFloat);
 		// Load resource object and instantiate
 		Debug.Log (jn ["prefab"]);
-		if (jn ["prefab"].Value == "LevelObjects") {
-			spawned_prefab = new GameObject();//Instantiate(pos, rotation);
-			spawned_prefab.name = "LevelObjects - (ID: " + _MainController.MapObject["levelData"]["name"] + ") " +
-				_MainController.MapObject["name"] + " v" +_MainController.MapObject["version"];
+		if (jn ["isPrefab"].AsBool == false) {
+			spawned_prefab = new GameObject();
+			if (jn["name"].Value == "LevelObjects") {
+				spawned_prefab.name = "LevelObjects - (ID: " + _MainController.MapObject["levelData"]["name"] + ") " +
+					_MainController.MapObject["name"] + " v" +_MainController.MapObject["version"];
+				#if UNITY_EDITOR
+				// add scripts and values from script
+				spawned_prefab.AddComponent<Map_Export>();
+				Map_Export me = spawned_prefab.GetComponent<Map_Export>();
+				me.LevelName = _MainController.MapObject["name"];
+				me.LevelID = _MainController.MapObject["levelData"]["name"];
+				me.RawHeightMapID = _MainController.MapObject["terrainRaw"]["name"];
+				me.RawHeightMapSize = _MainController.MapObject["terrainRaw"]["size"];
+				#endif
+			} else {
+				spawned_prefab.name = jn["name"];
+			}
 			spawned_prefab.transform.position = pos;
 			spawned_prefab.transform.rotation = rotation;
 		} else {
 			GameObject prefab = Resources.Load ("_Prefabs/" + jn ["prefab"]) as GameObject;
+			Debug.Log ("Loading prefab: " + jn["prefab"]);
 			spawned_prefab = Instantiate(prefab, pos, rotation) as GameObject;
 			spawned_prefab.name = jn["prefab"];
 		}
