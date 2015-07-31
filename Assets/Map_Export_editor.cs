@@ -12,6 +12,9 @@ public class Map_Export_editor : Editor {
 		if (GUILayout.Button ("Save")) {
 			me.Save();
 		}
+		if (GUILayout.Button ("Load")) {
+			me.Load();
+		}
 	}
 }
 #endif

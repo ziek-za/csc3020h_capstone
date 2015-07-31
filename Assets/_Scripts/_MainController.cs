@@ -32,12 +32,16 @@ public class _MainController {
 		try {
 			string filename = "_LevelData/" + level;
 			TextAsset file = Resources.Load (filename) as TextAsset;
-			MapObject = JSON.Parse (file.text);
-			if (MapObject != null) {
-				// If successfully loaded file
-				ImportedMapObjectBool = true;
+			if (file == null) { 
+				ImportedMapObjectBool = false;
 			} else {
-				throw new System.ArgumentException("Unable to load file: " + filename);
+				MapObject = JSON.Parse (file.text);
+				if (MapObject != null) {
+					// If successfully loaded file
+					ImportedMapObjectBool = true;
+				} else {
+					throw new System.ArgumentException("Unable to parse JSON file: " + filename);
+				}
 			}
 		} catch (System.Exception e) {
 			Debug.LogException(e);
