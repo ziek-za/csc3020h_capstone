@@ -4,7 +4,7 @@ using System.Collections;
 public class Char_BasicMoveScript : Photon.MonoBehaviour {
 
 	
-	public float moveSpeed = 10.0f;
+ 	float moveSpeed = 10.0f;
 	public float mouseSpeed = 3.0f;
 	public float jumpSpeed=5.0f;
 	public Transform FPSCameraPos;
@@ -17,6 +17,7 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		if (photonView.isMine) {
+			moveSpeed = transform.GetComponent<Char_AttributeScript>().speed / 15f;
 			Screen.lockCursor=true;
 			transform.GetComponent<Renderer>().enabled = false;
 
@@ -29,6 +30,7 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 		//Debug.Log(PhotonNetwork.networkingPeer.RoundTripTime);
 		if (photonView.isMine)
 		{
+			moveSpeed = transform.GetComponent<Char_AttributeScript>().speed / 15f;
 			InputMovement();
 			InputColorChange();
 			MouseView();
