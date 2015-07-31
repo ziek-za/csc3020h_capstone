@@ -96,7 +96,7 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 			Vector3 v3 = rigidbody.velocity;
 			v3.y=jumpSpeed;
 			rigidbody.velocity=v3;
-		} else if (transform.rigidbody.velocity.y < -2f){
+		} else if (transform.rigidbody.velocity.y < -2f){//Assumed to be falling
 			isJumping = true;
 		}
 
@@ -115,7 +115,7 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision other){
-		if (Mathf.Abs(transform.rigidbody.velocity.y) < 1f){
+		if (Mathf.Abs(transform.rigidbody.velocity.y) < 1f){//Bottom of collider is colliding
 			isJumping = false;
 		}
 	}

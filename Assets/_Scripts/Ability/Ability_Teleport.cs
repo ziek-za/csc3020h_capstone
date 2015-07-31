@@ -7,7 +7,7 @@ public class Ability_Teleport : Photon.MonoBehaviour {
 	public GameObject projection;
 	public GameObject distanceIndicator;
 	private float teleportDistance;
-	
+
 	Vector3 teleportDirection;
 
 	// Use this for initialization
@@ -16,9 +16,12 @@ public class Ability_Teleport : Photon.MonoBehaviour {
 		projection = Instantiate (projection, transform.position, Quaternion.identity) as GameObject;
 		distanceIndicator = Instantiate (distanceIndicator, transform.position, Quaternion.identity) as GameObject;
 		projection.transform.GetComponent<MeshRenderer> ().enabled = false;
+		projection.transform.Find ("SparkleParticles").GetComponent<ParticleRenderer> ().enabled = false;
 		projection.transform.Find("BasicGun").GetComponent<MeshRenderer> ().enabled = false;
 		distanceIndicator.transform.GetComponent<MeshRenderer> ().enabled = false;
 		//projection.transform.GetComponentInChildren<MeshRenderer> ().enabled = false;
+		projection.transform.parent = transform;
+		distanceIndicator.transform.parent = transform;
 	}
 	
 	// Update is called once per frame
@@ -27,6 +30,7 @@ public class Ability_Teleport : Photon.MonoBehaviour {
 
 		if (photonView.isMine && Input.GetButton ("Teleport")) {
 			projection.transform.GetComponent<MeshRenderer> ().enabled = true;
+			projection.transform.Find ("SparkleParticles").GetComponent<ParticleRenderer> ().enabled = true;
 			projection.transform.Find("BasicGun").GetComponent<MeshRenderer> ().enabled = true;
 			teleportDistance=maxDistance;
 
@@ -68,6 +72,7 @@ public class Ability_Teleport : Photon.MonoBehaviour {
 		if (photonView.isMine && Input.GetButtonUp ("Teleport")) {
 			projection.transform.GetComponent<MeshRenderer> ().enabled = false;
 			projection.transform.Find("BasicGun").GetComponent<MeshRenderer> ().enabled = false;
+			projection.transform.Find ("SparkleParticles").GetComponent<ParticleRenderer> ().enabled = false;
 			distanceIndicator.transform.GetComponent<MeshRenderer> ().enabled = false;
 		}
 	}
