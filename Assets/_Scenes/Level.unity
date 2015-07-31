@@ -5605,6 +5605,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   terrain: {fileID: 622756792}
+  RippleIsActive: 1
+  RippleDamping: .699999988
+  TerrainOffset: 128
 --- !u!114 &622756795
 MonoBehaviour:
   m_ObjectHideFlags: 0
