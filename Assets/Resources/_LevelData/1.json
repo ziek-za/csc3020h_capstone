@@ -1,17 +1,1 @@
-{
-	"name": "Booty Town",
-	"version": "1",
-	"levelData": {
-		"path": "_LevelData/",
-		"name": "1",
-	},	
-	"terrainHM": {
-		"path": "_LevelData/terrainHM/",
-		"name": "heightmap",
-		"size": 257
-	},
-	"terrainRaw": {
-		"path": "_LevelData/terrainRaw/",
-		"name": "3"
-	}
-}
+{"levelData":{"path":"_LevelData/", "name":"1"}, "terrainRaw":{"path":"_LevelData/terrainRaw/", "name":"3", "size":"257"}, "level_objects":[ {"isPrefab":"false", "name":"LevelObjects", "position":{"x":"0", "y":"0", "z":"0"}, "rotation":{"x":"0", "y":"0", "z":"0"}, "children":[ {"isPrefab":"true", "prefab":"StaticCube", "position":{"x":"0", "y":"5.96", "z":"-5.92"}, "rotation":{"x":"0", "y":"0", "z":"0"}}, {"isPrefab":"true", "prefab":"Cube", "position":{"x":"0", "y":"10", "z":"0"}, "rotation":{"x":"0", "y":"0", "z":"0"}}, {"isPrefab":"false", "name":"GameObject", "position":{"x":"0", "y":"6.22", "z":"0"}, "rotation":{"x":"0", "y":"0", "z":"0"}, "children":[ {"isPrefab":"true", "prefab":"Cube", "position":{"x":"0.41", "y":"16.22", "z":"6.37"}, "rotation":{"x":"0", "y":"0", "z":"0"}} ]} ]} ], "frozenTerrainRaw":{"path":"_LevelData/frozenTerrainRaw/"}, "name":"Booty Bay", "version":"1"}

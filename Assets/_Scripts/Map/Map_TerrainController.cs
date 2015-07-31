@@ -6,9 +6,7 @@ public class Map_TerrainController : Photon.MonoBehaviour {
 
 	//Variable to reset the hm when room first created
 	public static bool hmReset;
-	public Texture2D hm_tex;
-
-	private Terrain terrain;
+	public Terrain terrain;
 	// ** PRIVATE VARIABLES ** //
 	private float			WIDTH, LENGTH, MAX_HEIGHT;
 	private float[,]		height_buffer_1,
@@ -23,7 +21,7 @@ public class Map_TerrainController : Photon.MonoBehaviour {
 		//Initialises terrain to the host's terrain
 		//GameObject go = GameObject.Find("TerrainObject")
 		//terrain = go.GetComponent<Terrain>();;
-		terrain = Terrain.activeTerrain;
+		//terrain = Terrain.activeTerrain;
 
 		//Setting up local dimensions
 		WIDTH = terrain.terrainData.size.x;
@@ -51,21 +49,25 @@ public class Map_TerrainController : Photon.MonoBehaviour {
 		}
 	}
 
-	void SetTerrainHeightMap() {
+	public void SetTerrainHeightMap() {
 		if (_MainController.ImportedMapObjectBool) {
+			Debug.Log ("[Inside SetTerrainHeightMap]");
 			// Path to file under resources
-			string path = Application.dataPath + "/Resources/" +
-				_MainController.MapObject["terrainRaw"]["path"] +
-				_MainController.MapObject["terrainRaw"]["name"] + ".raw";
+			string path = _MainController.MapObject["terrainRaw"]["path"] +
+				_MainController.MapObject["terrainRaw"]["name"];
 			try {
+				Debug.Log(path);
 				//Texture2D hm_tex = Resources.Load(path) as Texture2D;
-				System.IO.FileInfo fi = new System.IO.FileInfo(path);
-				System.IO.FileStream fs = fi.OpenRead();
-				int m_heightMapRes = _MainController.MapObject["terrainHM"]["size"].AsInt;
+				TextAsset ta = Resources.Load(path) as TextAsset;
+				Debug.Log(ta);
+				Stream s = new MemoryStream(ta.bytes);
+				BinaryReader br = new BinaryReader(s);
+				int m_heightMapRes = _MainController.MapObject["terrainRaw"]["size"].AsInt;
 				int size = m_heightMapRes*m_heightMapRes*2;
+				Debug.Log (m_heightMapRes + " " + size);
 				byte[] data = new byte[size];
-				fs.Read(data, 0, size);
-				fs.Close();
+				br.Read(data, 0, size);
+				br.Close();
 				float[,] htmap = new float[m_heightMapRes, m_heightMapRes];
 				int i=0;
 				for(int x = 0 ; x < m_heightMapRes; x++) {
@@ -75,10 +77,14 @@ public class Map_TerrainController : Photon.MonoBehaviour {
 						htmap[m_heightMapRes-1-x,y] = ht / 65535.0f;
 					}
 				}
+				Debug.Log (htmap.Length);
+				Debug.Log ("[Setting height map]" + htmap[10, 10]);
 				terrain.terrainData.SetHeights(0,0,htmap);
 			} catch (System.Exception e) {
 				Debug.LogException(e);
 			}
+		} else {
+			Debug.Log (".raw data not loaded for height map");
 		}
 	}
 		

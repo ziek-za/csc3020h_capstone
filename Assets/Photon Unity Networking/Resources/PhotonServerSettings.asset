@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HostType: 2
   Protocol: 0
-  ServerAddress: 196.24.183.7
+  ServerAddress: 192.168.2.3
   ServerPort: 5055
   PreferredRegion: 4
   AppID: master
@@ -40,8 +40,4 @@ MonoBehaviour:
   - PlayMuzzleFlash
   - DamagePlayer
   - KillPlayer
-  - PullTerrain
-  - PushTerrain
-  - KillGameObject
-  - PushForceExplosion
   DisableAutoOpenWizard: 0
