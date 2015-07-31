@@ -14,10 +14,10 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		LNC = GameObject.Find("Network Controller").GetComponent<Level_NetworkController>();
 		if (photonView.isMine){
 			buffs= new List<string>();
 			HUD = GameObject.Find("GUI Controller").GetComponent<Level_GUIController>();
-			LNC = GameObject.Find("Network Controller").GetComponent<Level_NetworkController>();
 		}
 	}
 	
@@ -27,7 +27,7 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 			Debug.Log("Speed: "+speed);
 			HUD.UpdateHUD(health);
 		}
-		if (health <= 0 || Input.GetKeyDown(KeyCode.Escape)){
+		if (health <= 0 || Input.GetKeyDown(KeyCode.P)){
 			KillPlayer(this.gameObject.GetComponent<PhotonView>().viewID);
 			LNC.spawned=false;
 		}

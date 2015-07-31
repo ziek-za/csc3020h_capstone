@@ -14,7 +14,7 @@ public class Level_NetworkController : Photon.MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(photonView.isMine){
+		//if(photonView.isMine){
 			if(!spawned){
 				if(Input.GetKeyDown(KeyCode.Alpha1)){
 					spawned=true;
@@ -29,7 +29,7 @@ public class Level_NetworkController : Photon.MonoBehaviour {
 					PhotonNetwork.Instantiate(builderPrefab.name, new Vector3(1,10f,0), Quaternion.identity, 0);
 				}
 			}
-		}
+		//}
 	}
 
 	void OnJoinedRoom()
