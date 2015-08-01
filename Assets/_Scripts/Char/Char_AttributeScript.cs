@@ -10,11 +10,10 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 	public int energy = 100;
 
 	Level_GUIController HUD;
-	Level_NetworkController LNC;
+	Char_SelectChar Respawner;
 
 	// Use this for initialization
 	void Start () {
-		LNC = GameObject.Find("Network Controller").GetComponent<Level_NetworkController>();
 		if (photonView.isMine){
 			buffs= new List<string>();
 			HUD = GameObject.Find("GUI Controller").GetComponent<Level_GUIController>();
@@ -24,12 +23,12 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (photonView.isMine){
-			Debug.Log("Speed: "+speed);
+			//Debug.Log("Speed: "+speed);
 			HUD.UpdateHUD(health);
 		}
 		if (health <= 0 || Input.GetKeyDown(KeyCode.P)){
 			KillPlayer(this.gameObject.GetComponent<PhotonView>().viewID);
-			LNC.spawned=false;
+			Respawner.spawned=false;
 		}
 	}
 

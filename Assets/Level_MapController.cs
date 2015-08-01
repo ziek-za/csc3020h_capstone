@@ -10,7 +10,8 @@ public class Level_MapController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		SetupLevel ("2");
+		//SetupLevel ("1"); //This method is now called from Level_NetworkController as it can only be called 
+							//after a room has been joined
 	}
 
 	public void SetupLevel(string level) {
@@ -20,7 +21,7 @@ public class Level_MapController : MonoBehaviour {
 		// check to see if it is loaded before progressing
 		if (_MainController.ImportedMapObjectBool) {
 			Map_TerrainController tc = terrain.GetComponent<Map_TerrainController>();
-			tc.SetTerrainHeightMap();
+			//tc.SetTerrainHeightMap();
 			Map = GameObject.Find ("Map");
 			// Remove current LevelObjects
 			GameObject levelObjects = Map.transform.FindChild("LevelObjects").gameObject;
@@ -39,7 +40,7 @@ public class Level_MapController : MonoBehaviour {
 	}
 
 	private void RecurseChildren(JSONNode jn, GameObject parent_go) {
-		GameObject spawned_prefab;
+		GameObject spawned_prefab = null;
 		// Set orientation vectors
 		Vector3 pos = new Vector3(jn["position"]["x"].AsFloat,
 		                          jn["position"]["y"].AsFloat,
@@ -69,9 +70,10 @@ public class Level_MapController : MonoBehaviour {
 			spawned_prefab.transform.position = pos;
 			spawned_prefab.transform.rotation = rotation;
 		} else {
-			GameObject prefab = Resources.Load ("_Prefabs/" + jn ["prefab"]) as GameObject;
+			// "_Prefabs/" + 
+			GameObject prefab = Resources.Load (jn ["prefab"]) as GameObject;
 			Debug.Log ("Loading prefab: " + jn["prefab"]);
-			spawned_prefab = Instantiate(prefab, pos, rotation) as GameObject;
+			spawned_prefab = PhotonNetwork.Instantiate(prefab.name, pos, rotation, 0) as GameObject;
 			spawned_prefab.name = jn["prefab"];
 		}
 

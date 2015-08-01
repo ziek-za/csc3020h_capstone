@@ -19,6 +19,7 @@ public class Weapon_ForceGrenade : Photon.MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {	
+		Debug.Log (alreadyCollided.Count);
 	}
 
 	//All objects in the area of effect live in alreadyCollided

@@ -3,9 +3,9 @@ using System.Collections;
 
 public class Level_NetworkController : Photon.MonoBehaviour {
 
-	public GameObject thiefPrefab,builderPrefab, soldierPrefab;
-	public bool spawned=false;
-	//public Camera cam;
+	public Transform mapController;
+	public Transform respawner;
+
 	// Use this for initialization
 	void Start () {
 		//PhotonNetwork.ConnectUsingSettings("0.1");
@@ -14,22 +14,6 @@ public class Level_NetworkController : Photon.MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		//if(photonView.isMine){
-			if(!spawned){
-				if(Input.GetKeyDown(KeyCode.Alpha1)){
-					spawned=true;
-					PhotonNetwork.Instantiate(soldierPrefab.name, new Vector3(1,10f,0), Quaternion.identity, 0);
-				}
-				else if(Input.GetKeyDown(KeyCode.Alpha2)){
-					spawned=true;
-					PhotonNetwork.Instantiate(thiefPrefab.name, new Vector3(1,10f,0), Quaternion.identity, 0);
-				}
-				else if(Input.GetKeyDown(KeyCode.Alpha3)){
-					spawned=true;
-					PhotonNetwork.Instantiate(builderPrefab.name, new Vector3(1,10f,0), Quaternion.identity, 0);
-				}
-			}
-		//}
 	}
 
 	void OnJoinedRoom()
@@ -46,5 +30,7 @@ public class Level_NetworkController : Photon.MonoBehaviour {
 		//Camera.main.transform.Translate (1,10,0);
 		//Camera.main.transform.LookAt (playerPrefab.transform);
 		Debug.Log("Connected to Room");
+		mapController.GetComponent<Level_MapController>().SetupLevel("1");
+		PhotonNetwork.Instantiate(respawner.name,Vector3.zero,Quaternion.identity,0);
 	}
 }
