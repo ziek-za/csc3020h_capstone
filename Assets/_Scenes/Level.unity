@@ -5604,7 +5604,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2ba3484dd9d03541a99866da519aec7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hm_tex: {fileID: 2800000, guid: 1b87569a9440fae438581f34116c18c3, type: 3}
+  terrain: {fileID: 622756792}
+  RippleIsActive: 1
+  RippleDamping: .699999988
+  TerrainOffset: 128
 --- !u!114 &622756795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6582,6 +6585,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelID: 4
+  RawHeightMapID: 
+  RawHeightMapSize: 257
   LevelName: awe
 --- !u!1 &723060795
 GameObject:
@@ -9820,6 +9825,7 @@ GameObject:
   - 114: {fileID: 1078829610}
   - 54: {fileID: 1078829609}
   - 114: {fileID: 1078829608}
+  - 114: {fileID: 1078829615}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -9861,14 +9867,14 @@ Rigidbody:
   m_PrefabInternal: {fileID: 1993339736}
   m_GameObject: {fileID: 1078829606}
   serializedVersion: 2
-  m_Mass: 10
+  m_Mass: 1
   m_Drag: 0
   m_AngularDrag: .0500000007
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &1078829610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9999,6 +10005,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 1993339736}
   m_GameObject: {fileID: 1078829606}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1078829615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11488766, guid: 505ef99f170b13342bac8b782c98e666,
+    type: 2}
+  m_PrefabInternal: {fileID: 1993339736}
+  m_GameObject: {fileID: 1078829606}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8050735cb4b1cd42b0d501ff00f67ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1079970367
 GameObject:
   m_ObjectHideFlags: 0
