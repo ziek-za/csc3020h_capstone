@@ -312,7 +312,7 @@ MonoBehaviour:
   muzzleFlash: {fileID: 19850676}
   tracerEffect: {fileID: 19811476}
   timeBetweenShots: .333332986
-  weaponAccuracy: 1
+  weaponAccuracy: 10
 --- !u!114 &11445350
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -324,6 +324,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9db869854372664abded43335ffca60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buffs: []
+  health: 125
+  speed: 125
+  energy: 100
+  team: 0
+  Respawner: {fileID: 0}
 --- !u!114 &11463650
 MonoBehaviour:
   m_ObjectHideFlags: 1

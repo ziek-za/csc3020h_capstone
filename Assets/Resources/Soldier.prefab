@@ -399,7 +399,7 @@ MonoBehaviour:
   muzzleFlash: {fileID: 19829336}
   tracerEffect: {fileID: 19829338}
   timeBetweenShots: .333330005
-  weaponAccuracy: .5
+  weaponAccuracy: 10
 --- !u!114 &11429348
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1859,7 +1859,7 @@ ParticleSystem:
     enabled: 1
     type: 4
     radius: .00999999978
-    angle: 5
+    angle: 2
     length: 5
     boxX: 1
     boxY: 1
