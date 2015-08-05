@@ -23,11 +23,12 @@ public class _MainController {
 		}
 	}
 
+	/*
 	public static void JoinServer(string serverName){
 		Application.LoadLevel("Level");
 		ImportMapObject("1");
 		PhotonNetwork.JoinRoom(serverName);
-	}
+	}*/
 
 	public static void ImportMapObject(string level) {
 		// Load in the file from resources directory
