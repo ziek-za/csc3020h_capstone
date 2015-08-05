@@ -30,7 +30,7 @@ public class Level_NetworkController : Photon.MonoBehaviour {
 		//Camera.main.transform.Translate (1,10,0);
 		//Camera.main.transform.LookAt (playerPrefab.transform);
 		Debug.Log("Connected to Room");
-		mapController.GetComponent<Level_MapController>().SetupLevel("1");
 		PhotonNetwork.Instantiate(respawner.name,Vector3.zero,Quaternion.identity,0);
+		mapController.GetComponent<Level_MapController>().SetupLevel("1");
 	}
 }

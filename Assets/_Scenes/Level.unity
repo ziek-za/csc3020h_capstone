@@ -2984,10 +2984,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b210df150a3144245b59289b85db8acd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thiefPrefab: {fileID: 124516, guid: ac886597cac362849a41e861ffe21659, type: 2}
-  builderPrefab: {fileID: 191422, guid: 1a59202a7aa44b34facee8f13c7399ae, type: 2}
-  soldierPrefab: {fileID: 129344, guid: cfb89e1055acc684eb347ac902e2e8f0, type: 2}
-  spawned: 0
+  mapController: {fileID: 542354170}
+  respawner: {fileID: 436546, guid: c90ddc88936996f4782547dbae6bae78, type: 2}
 --- !u!4 &333886093
 Transform:
   m_ObjectHideFlags: 0
@@ -9825,7 +9823,6 @@ GameObject:
   - 114: {fileID: 1078829610}
   - 54: {fileID: 1078829609}
   - 114: {fileID: 1078829608}
-  - 114: {fileID: 1078829615}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -10005,18 +10002,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 1993339736}
   m_GameObject: {fileID: 1078829606}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1078829615
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11488766, guid: 505ef99f170b13342bac8b782c98e666,
-    type: 2}
-  m_PrefabInternal: {fileID: 1993339736}
-  m_GameObject: {fileID: 1078829606}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8050735cb4b1cd42b0d501ff00f67ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1079970367
 GameObject:
   m_ObjectHideFlags: 0

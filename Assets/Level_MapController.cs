@@ -10,7 +10,8 @@ public class Level_MapController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		SetupLevel ("1");
+		//SetupLevel ("1"); Now called in the Level_NetworkController due the
+						  //the player needing to join a room before the level loading
 	}
 
 	public void SetupLevel(string level) {
@@ -69,9 +70,10 @@ public class Level_MapController : MonoBehaviour {
 			spawned_prefab.transform.position = pos;
 			spawned_prefab.transform.rotation = rotation;
 		} else {
-			GameObject prefab = Resources.Load ("_Prefabs/" + jn ["prefab"]) as GameObject;
+			//"_Prefabs/" + 
+			GameObject prefab = Resources.Load (jn ["prefab"]) as GameObject;
 			Debug.Log ("Loading prefab: " + jn["prefab"]);
-			spawned_prefab = Instantiate(prefab, pos, rotation) as GameObject;
+			spawned_prefab = PhotonNetwork.Instantiate(prefab.name, pos, rotation,0) as GameObject;
 			spawned_prefab.name = jn["prefab"];
 		}
 
