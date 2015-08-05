@@ -21,7 +21,7 @@ public class Level_MapController : MonoBehaviour {
 		// check to see if it is loaded before progressing
 		if (_MainController.ImportedMapObjectBool) {
 			Map_TerrainController tc = terrain.GetComponent<Map_TerrainController>();
-			//tc.SetTerrainHeightMap();
+			tc.SetTerrainHeightMap();
 			Map = GameObject.Find ("Map");
 			// Remove current LevelObjects
 			GameObject levelObjects = Map.transform.FindChild("LevelObjects").gameObject;

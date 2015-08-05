@@ -3,9 +3,7 @@ using System.Collections;
 using System.IO;
 
 public class Map_TerrainController : Photon.MonoBehaviour {
-
-	//Variable to reset the hm when room first created
-	public static bool hmReset;
+	
 	public Terrain terrain;
 	public bool RippleIsActive = false;
 	public float RippleDamping = 0.7f;
@@ -27,13 +25,6 @@ public class Map_TerrainController : Photon.MonoBehaviour {
 		height_buffer_2 = new float[(int)WIDTH, (int)LENGTH];
 		flatten_buf = new float[(int)WIDTH, (int)LENGTH];
 		height_buffer_original = new float[(int)WIDTH, (int)LENGTH];
-		if (!hmReset){
-			//terrain.terrainData.SetHeights (0, 0, flatten_buf);
-			SetTerrainHeightMap ();
-			height_buffer_original = terrain.terrainData.GetHeights(0,0,(int)WIDTH, (int)LENGTH);
-			Debug.Log ("hm reset");
-			hmReset = true;
-		}
 		if (RippleIsActive) {
 			// start cou routine for rippling/blurring effect
 			StartCoroutine (BlurDisturbance ());
@@ -66,6 +57,7 @@ public class Map_TerrainController : Photon.MonoBehaviour {
 	// Used to extrapolate the height values from the .bytes (renamed from .raw)
 	// relating to the loaded map data
 	public void SetTerrainHeightMap() {
+
 		if (_MainController.ImportedMapObjectBool) {
 			Debug.Log ("[Inside SetTerrainHeightMap]");
 			// Path to file under resources
