@@ -40,11 +40,14 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 			//Debug.Log("Speed: "+speed);
 			HUD.UpdateHUD(health);
 			if (health <= 0 || Input.GetKeyDown(KeyCode.P)){
+				Screen.lockCursor=false;
 				KillPlayer(this.gameObject.GetComponent<PhotonView>().viewID);
+				GameObject.Find("CharacterSelectionGUI").transform.localScale=new Vector3(10,5,5);
+				Camera.main.GetComponent<BlurEffect>().enabled=true;
+				Char_SelectChar.classNo=10;
 				Respawner.spawned=false;
 			}
 		}
-
 	}
 
 	[RPC] void KillPlayer(int vID){
