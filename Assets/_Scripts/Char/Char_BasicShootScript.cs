@@ -49,9 +49,15 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 			{
 				Debug.DrawLine(transform.position, hit.point, Color.red);
 				if (hit.transform.gameObject.GetComponent<Char_AttributeScript>()){
+					Debug.Log (hit.transform.name);
 					//hit.transform.gameObject.rigidbody.AddForce(Vector3.Normalize(ray.direction)*100f);
 					//hit.transform.networkView.viewID;
-					DamagePlayer(-10, hit.transform.GetComponent<PhotonView>().viewID);
+					Debug.Log("Their colour: "+hit.transform.GetComponent<Char_AttributeScript>().team);
+					//Debug.Log("Our colour: "+transform.gameObject.GetComponent<Char_AttributeScript>().team);
+					Debug.Log("Our colour: "+transform.parent.parent.parent.GetComponent<Char_AttributeScript>().team);
+					//if(hit.transform.gameObject.GetComponent<Char_AttributeScript>().team!=transform.gameObject.GetComponent<Char_AttributeScript>().team){
+						DamagePlayer(-10, hit.transform.GetComponent<PhotonView>().viewID);
+					//}
 				} else {
 					//Create a bullet hole
 					Vector3 bulletHolePosition = hit.point + hit.normal * 0.01f;

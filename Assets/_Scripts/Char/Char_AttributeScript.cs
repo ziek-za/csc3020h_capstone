@@ -8,8 +8,8 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 	public int health = 125;
 	public int speed = 125;
 	public int energy = 100;
-	enum Teams {RED, BLUE};
-	Teams team;
+	public enum Teams {RED, BLUE};
+	public Teams team;
 
 	Level_GUIController HUD;
 	public Char_SelectChar Respawner;
@@ -44,12 +44,10 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 				Respawner.spawned=false;
 			}
 		}
-
 	}
 
 	[RPC] void KillPlayer(int vID){
 		Destroy(PhotonView.Find(vID).gameObject);
-		
 		if (photonView.isMine)
 			photonView.RPC("KillPlayer", PhotonTargets.OthersBuffered, vID);
 	}
@@ -61,7 +59,8 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 	[RPC] void joinTeam(Vector3 color)
 	{
 		renderer.material.color = new Color(color.x, color.y, color.z, 1f);	
-		if (photonView.isMine)
+		if (photonView.isMine){
 			photonView.RPC("joinTeam", PhotonTargets.OthersBuffered, color);
+		}
 	}
 }
