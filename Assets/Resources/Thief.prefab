@@ -104,7 +104,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 124516}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 646.338074, y: 425.725098, z: -916.451965}
+  m_LocalPosition: {x: 646.340027, y: 425.730011, z: -914.369995}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 424518}
@@ -173,7 +173,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 752a308575c9ae542b83f27c5a7746fe, type: 2}
+  - {fileID: 2100000, guid: b4f3de0a846f88745bf6d55c2c1a7d08, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -355,6 +355,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8545d59694de0f4409b66b8e3edcbc6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 10
   mouseSpeed: 2
   jumpSpeed: 5
   FPSCameraPos: {fileID: 424518}
