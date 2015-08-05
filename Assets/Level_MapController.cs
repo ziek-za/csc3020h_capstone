@@ -6,22 +6,18 @@ public class Level_MapController : MonoBehaviour {
 
 	private GameObject Map;
 	private JSONNode level_objects;
-	private Terrain terrain;
 
 	// Use this for initialization
 	void Start () {
-		//SetupLevel ("1"); Now called in the Level_NetworkController due the
-						  //the player needing to join a room before the level loading
 	}
 
-	public void SetupLevel(string level) {
-		terrain = Terrain.activeTerrain;
+	public void SetLevelObjects() {
 		// Load level data from relevant JSON file
-		_MainController.ImportMapObject (level);
+		//_MainController.ImportMapObject (level);
 		// check to see if it is loaded before progressing
 		if (_MainController.ImportedMapObjectBool) {
-			Map_TerrainController tc = terrain.GetComponent<Map_TerrainController>();
-			tc.SetTerrainHeightMap();
+			//Map_TerrainController tc = terrain.GetComponent<Map_TerrainController>();
+			//tc.SetTerrainHeightMap();
 			Map = GameObject.Find ("Map");
 			// Remove current LevelObjects
 			GameObject levelObjects = Map.transform.FindChild("LevelObjects").gameObject;
@@ -83,10 +79,4 @@ public class Level_MapController : MonoBehaviour {
 		}
 		
 	}
-
-	IEnumerator ResetRigidbody(GameObject gm){
-		yield return new WaitForSeconds(1f);
-		gm.rigidbody.constraints = RigidbodyConstraints.None;
-	}
-
 }

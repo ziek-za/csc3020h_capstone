@@ -16,19 +16,22 @@ public class _MainController {
 
 	public static void CreateServer(){
 		Application.LoadLevel("Level");
+		ImportMapObject("1");
 		if (PhotonNetwork.room == null){
 			PhotonNetwork.CreateRoom(System.Guid.NewGuid().ToString("N"), true, true, 5);
-			Level_NetworkController.hmReset = false;
+			Level_NetworkController.firstPlayer = true;
 		}
 	}
 
 	public static void JoinServer(string serverName){
 		Application.LoadLevel("Level");
+		ImportMapObject("1");
 		PhotonNetwork.JoinRoom(serverName);
 	}
 
 	public static void ImportMapObject(string level) {
 		// Load in the file from resources directory
+		Debug.Log ("[Attempting to import map object]");
 		try {
 			string filename = "_LevelData/" + level;
 			TextAsset file = Resources.Load (filename) as TextAsset;
@@ -39,6 +42,7 @@ public class _MainController {
 				if (MapObject != null) {
 					// If successfully loaded file
 					ImportedMapObjectBool = true;
+					Debug.Log ("[Successfully loaded map object]");
 				} else {
 					throw new System.ArgumentException("Unable to parse JSON file: " + filename);
 				}
