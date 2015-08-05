@@ -21,13 +21,12 @@ public class Level_MapController : MonoBehaviour {
 		// check to see if it is loaded before progressing
 		if (_MainController.ImportedMapObjectBool) {
 			Map_TerrainController tc = terrain.GetComponent<Map_TerrainController>();
-			//tc.SetTerrainHeightMap();
+			tc.SetTerrainHeightMap();
 			Map = GameObject.Find ("Map");
 			// Remove current LevelObjects
 			GameObject levelObjects = Map.transform.FindChild("LevelObjects").gameObject;
 			levelObjects.SetActive(false);
 			// Get level objects
-			//Debug.Log (_MainController.MapObject["level_objects"]);
 			level_objects = _MainController.MapObject["level_objects"][0];
 			RecurseChildren (level_objects, Map);
 		} else {
@@ -45,7 +44,6 @@ public class Level_MapController : MonoBehaviour {
 		                               jn["rotation"]["y"].AsFloat,
 		                               jn["rotation"]["z"].AsFloat);
 		// Load resource object and instantiate
-		Debug.Log (jn ["prefab"]);
 		if (jn ["isPrefab"].AsBool == false) {
 			spawned_prefab = new GameObject();
 			if (jn["name"].Value == "LevelObjects") {
@@ -69,8 +67,8 @@ public class Level_MapController : MonoBehaviour {
 			spawned_prefab.transform.rotation = rotation;
 		} else {
 			//"_Prefabs/" + 
-			GameObject prefab = Resources.Load (jn ["prefab"]) as GameObject;
 			Debug.Log ("Loading prefab: " + jn["prefab"]);
+			GameObject prefab = Resources.Load (jn ["prefab"]) as GameObject;
 			spawned_prefab = PhotonNetwork.Instantiate(prefab.name, pos, rotation,0) as GameObject;
 			spawned_prefab.name = jn["prefab"];
 		}

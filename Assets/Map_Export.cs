@@ -8,12 +8,14 @@ public class Map_Export : MonoBehaviour {
 
 	public string LevelID = "";
 	public string RawHeightMapID = "";
-	public string RawHeightMapSize = "257";
+	public string FreezeMapID = "";
 	public string LevelName = "";
 
 	private string defaultPath = "_LevelData/";
 	private string defaultJSON = "Base";
 	private string defaultSavePath = "Assets/Resources/";
+	private string RawHeightMapSize = "257";
+	private string FreezeMapSize = "257";
 	private Terrain terrain;
 
 	// Load level objects
@@ -48,6 +50,8 @@ public class Map_Export : MonoBehaviour {
 			jn["levelData"]["name"] = LevelID;
 			jn["terrainRaw"]["name"] = RawHeightMapID;
 			jn["terrainRaw"]["size"] = RawHeightMapSize;
+			jn["terrainFreeze"]["name"] = FreezeMapID;
+			jn["terrainFreeze"]["size"] = FreezeMapSize;
 			// Generate children
 			JSONArray ja = new JSONArray();
 			ja = RecurseChildren(gameObject, ja);
