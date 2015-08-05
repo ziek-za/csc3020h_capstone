@@ -16,7 +16,7 @@ GameObject:
   - 54: {fileID: 5412842}
   - 114: {fileID: 11412842}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: CubeOld
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
