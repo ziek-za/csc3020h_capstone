@@ -70,7 +70,8 @@ public class Map_Export : MonoBehaviour {
 	private JSONArray RecurseChildren (GameObject curr_go, JSONArray ja) {
 		JSONNode jn = JSON.Parse ("{}");
 		jn ["isPrefab"] = "false";
-		if (PrefabUtility.GetPrefabParent (curr_go) != null) {
+		//Debug.Log (curr_go.name + " " + PrefabUtility.FindPrefabRoot (curr_go) + " " + PrefabUtility.GetPrefabParent (curr_go) + " " + PrefabUtility.GetPrefabObject(curr_go));// + " " + PrefabUtility.GetPrefabParent(curr_go));
+		if (PrefabUtility.GetPrefabObject(curr_go) != null && curr_go.name == PrefabUtility.FindPrefabRoot (curr_go).name) {
 			jn ["isPrefab"] = "true";
 			jn ["prefab"] = curr_go.name;
 		} else {

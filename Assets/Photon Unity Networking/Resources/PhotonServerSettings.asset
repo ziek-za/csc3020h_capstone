@@ -13,7 +13,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HostType: 2
   Protocol: 0
+<<<<<<< HEAD
   ServerAddress: 10.0.0.12
+=======
+  ServerAddress: 10.0.0.10
+>>>>>>> mock-map
   ServerPort: 5055
   PreferredRegion: 4
   AppID: master
