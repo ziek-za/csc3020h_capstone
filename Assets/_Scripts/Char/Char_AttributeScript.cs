@@ -10,14 +10,15 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 	public int energy = 100;
 
 	Level_GUIController HUD;
-	Char_SelectChar Respawner;
+	public Char_SelectChar Respawner;
 
 	// Use this for initialization
 	void Start () {
+
 		if (photonView.isMine){
 			buffs= new List<string>();
 			HUD = GameObject.Find("GUI Controller").GetComponent<Level_GUIController>();
-			Respawner = GameObject.Find("PlayerRespawner(Clone)").GetComponent<Char_SelectChar>();
+			//Respawner = GameObject.Find("PlayerRespawner(Clone)").GetComponent<Char_SelectChar>();
 		}
 	}
 	
@@ -26,11 +27,12 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 		if (photonView.isMine){
 			//Debug.Log("Speed: "+speed);
 			HUD.UpdateHUD(health);
+			if (health <= 0 || Input.GetKeyDown(KeyCode.P)){
+				KillPlayer(this.gameObject.GetComponent<PhotonView>().viewID);
+				Respawner.spawned=false;
+			}
 		}
-		if (health <= 0 || Input.GetKeyDown(KeyCode.P)){
-			KillPlayer(this.gameObject.GetComponent<PhotonView>().viewID);
-			Respawner.spawned=false;
-		}
+
 	}
 
 	[RPC] void KillPlayer(int vID){

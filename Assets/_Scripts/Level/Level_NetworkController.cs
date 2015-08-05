@@ -36,6 +36,7 @@ public class Level_NetworkController : MonoBehaviour {
 		//Camera.main.transform.LookAt (playerPrefab.transform);
 		Debug.Log("Connected to Room");
 		PhotonNetwork.Instantiate(respawner.name,Vector3.zero,Quaternion.identity,0);
+
 		if (PhotonNetwork.countOfPlayers == 1){
 				mapController.GetComponent<Level_MapController>().SetupLevel("1");
 				//terrain.terrainData.SetHeights (0, 0, flatten_buf);
