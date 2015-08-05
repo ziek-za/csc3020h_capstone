@@ -23,12 +23,12 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 			//team=Random.Range(0,2);
 			int teamColour=Random.Range(1,3);
 			if(teamColour==1){
-				team=Teams.RED;
-				joinTeam(new Vector3(Color.red.r, Color.red.g, Color.red.b));
+				//team=Teams.RED;
+				joinTeam(new Vector3(Color.red.r, Color.red.g, Color.red.b), 0);
 			}
 			else if(teamColour==2){
-				team=Teams.BLUE;
-				joinTeam(new Vector3(Color.blue.r, Color.blue.g, Color.blue.b));
+				//team=Teams.BLUE;
+				joinTeam(new Vector3(Color.blue.r, Color.blue.g, Color.blue.b), 1);
 			}
 			Debug.Log(team);
 		}
@@ -44,10 +44,12 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 				Respawner.spawned=false;
 			}
 		}
+
 	}
 
 	[RPC] void KillPlayer(int vID){
 		Destroy(PhotonView.Find(vID).gameObject);
+		
 		if (photonView.isMine)
 			photonView.RPC("KillPlayer", PhotonTargets.OthersBuffered, vID);
 	}
@@ -56,11 +58,11 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 		health += amount;
 	}
 
-	[RPC] void joinTeam(Vector3 color)
+	[RPC] void joinTeam(Vector3 color, int myTeam)
 	{
-		renderer.material.color = new Color(color.x, color.y, color.z, 1f);	
-		if (photonView.isMine){
-			photonView.RPC("joinTeam", PhotonTargets.OthersBuffered, color);
-		}
+		renderer.material.color = new Color(color.x, color.y, color.z, 1f);
+		team = (Teams)myTeam;
+		if (photonView.isMine)
+			photonView.RPC("joinTeam", PhotonTargets.OthersBuffered, color, myTeam);
 	}
 }
