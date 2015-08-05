@@ -3,13 +3,10 @@ using System.Collections;
 
 public class Level_NetworkController : MonoBehaviour {
 
-	public Transform mapController, terrainController;
+	public Transform mapController;
 	public Transform respawner;
 
-	private Terrain terrain;
-
-	//Variable to reset the hm when room first created
-	public static bool hmReset;
+	public static bool firstPlayer = false;
 
 	// Use this for initialization
 	void Start () {
@@ -37,16 +34,23 @@ public class Level_NetworkController : MonoBehaviour {
 		Debug.Log("Connected to Room");
 		PhotonNetwork.Instantiate(respawner.name,Vector3.zero,Quaternion.identity,0);
 
+		/*
 		if (PhotonNetwork.countOfPlayers == 1){
 				mapController.GetComponent<Level_MapController>().SetupLevel("1");
 				//terrain.terrainData.SetHeights (0, 0, flatten_buf);
 				//terrainController.GetComponent<Map_TerrainController>().SetTerrainHeightMap ();
 		} else {
 			Debug.Log("Not host");
-		}
+		}*/
+		
 		Map_TerrainController tc = Terrain.activeTerrain.GetComponent<Map_TerrainController>();
+		tc.SetFreezeMap();
 		tc.SetTerrainHeightMap();
 		Debug.Log ("hm reset");
 
+		if (firstPlayer){
+			firstPlayer = false;
+			mapController.GetComponent<Level_MapController>().SetLevelObjects();
+		}			
 	}
 }

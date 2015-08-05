@@ -31,7 +31,7 @@ public class Map_Export : MonoBehaviour {
 			// Load objects
 			GameObject mc = GameObject.Find("Map Controller");
 			Level_MapController mc_script = mc.GetComponent<Level_MapController>();
-			mc_script.SetupLevel(LevelID);
+			mc_script.SetLevelObjects();
 		} else {
 			Debug.Log ("-- INVALID LEVEL IMPORT: "  + LevelID + " --");
 		}

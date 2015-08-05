@@ -344,6 +344,8 @@ MonoBehaviour:
   health: 100
   speed: 150
   energy: 100
+  team: 0
+  Respawner: {fileID: 0}
 --- !u!114 &11424516
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -485,7 +487,7 @@ MonoBehaviour:
   muzzleFlash: {fileID: 19824522}
   tracerEffect: {fileID: 19824524}
   timeBetweenShots: .333330005
-  weaponAccuracy: 1
+  weaponAccuracy: .5
 --- !u!114 &11436020
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1767,7 +1769,7 @@ ParticleSystem:
         rgba: 4294967295
       minMaxState: 0
     startSize:
-      scalar: .0599999987
+      scalar: .100000001
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1840,7 +1842,7 @@ ParticleSystem:
     enabled: 1
     type: 4
     radius: .00999999978
-    angle: 0
+    angle: 5
     length: 5
     boxX: 1
     boxY: 1
@@ -2698,7 +2700,7 @@ ParticleSystemRenderer:
   m_MaxParticleSize: .5
   m_CameraVelocityScale: 0
   m_VelocityScale: 0
-  m_LengthScale: 30
+  m_LengthScale: 40
   m_SortingFudge: 0
   m_NormalDirection: 1
   m_SortMode: 0

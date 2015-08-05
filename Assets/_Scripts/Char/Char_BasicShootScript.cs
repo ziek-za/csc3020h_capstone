@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Char_BasicShootScript : Photon.MonoBehaviour {
 
 	private RaycastHit hit;
 	private Ray ray;
 	private float shotCooldown;	
+
+	private GameObject hitCrosshair;
 
 	public GameObject bulletHolePrefab;
 	public ParticleSystem muzzleFlash;
@@ -25,6 +28,19 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 	}
 
 	void Start(){
+		hitCrosshair = GameObject.Find ("EnemyHitCrosshair");
+	}
+
+	void DisableHitCrosshair(){
+		hitCrosshair.GetComponent<RawImage>().enabled = false;
+	}
+
+	void EnableHitCrosshair(){
+		hitCrosshair.GetComponent<RawImage>().enabled = true;
+	} 
+
+	void ResetTracerRotation(){
+		tracerEffect.transform.localRotation =  Quaternion.identity;
 	}
 
 	void Update()
@@ -45,15 +61,40 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 			Vector2 screenOffset = new Vector2(screenCenterPoint.x + GenerateRandomOffset(hit.distance),
 			                                   screenCenterPoint.y + GenerateRandomOffset(hit.distance));
 			ray = Camera.main.ScreenPointToRay(screenOffset);
+
+			//Physics.Raycast(ray, out hit, Camera.main.farClipPlane);
+			//tracerEffect.transform.localRotation = Quaternion.Euler(ray.direction);
+			//tracerEffect.transform.Rotate(ray.direction*10);
+
+			//tracerEffect.transform.localRotation =  Quaternion.identity;
+
+			///tracerEffect.transform.Rotate(new Vector3(transform.forward.x * Random.Range(1f,10f),
+			//                                          transform.forward.y * Random.Range(1f,10f),
+			//                                          transform.forward.z * Random.Range(1f,10f)));
+			//Quaternion.LookRotation(ray.normal)
+
+			//Invoke ("ResetTracerRotation",0.2f);
+
 			if(Physics.Raycast(ray, out hit, Camera.main.farClipPlane)) 
 			{
 				Debug.DrawLine(transform.position, hit.point, Color.red);
+
+				//Vector3 directionOfHit = Vector3.Normalize(hit.point - transform.position);
+				//transform.forward;
+				//Vector3.Dot(directionOfHit,Vector3.Normalize(transform.forward));
+				//Debug.Log(directionOfHit);
+
+
+
 				if (hit.transform.gameObject.GetComponent<Char_AttributeScript>()){
 					//hit.transform.gameObject.rigidbody.AddForce(Vector3.Normalize(ray.direction)*100f);
 					//hit.transform.networkView.viewID;
 					//Debug.Log("Their colour: "+hit.transform.gameObject.GetComponent<Char_AttributeScript>().team);
 					if (hit.transform.gameObject.GetComponent<Char_AttributeScript>().team != transform.parent.parent.parent.GetComponent<Char_AttributeScript>().team){
 						DamagePlayer(-10, hit.transform.GetComponent<PhotonView>().viewID);
+						float timeTillHit = Vector3.Magnitude(hit.point - transform.position) / 90f;
+						Invoke ("EnableHitCrosshair",timeTillHit);
+						Invoke("DisableHitCrosshair",timeTillHit + 0.1f);
 					}
 				} else {
 					//Create a bullet hole
