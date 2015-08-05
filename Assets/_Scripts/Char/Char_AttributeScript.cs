@@ -17,6 +17,7 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 		if (photonView.isMine){
 			buffs= new List<string>();
 			HUD = GameObject.Find("GUI Controller").GetComponent<Level_GUIController>();
+			Respawner = GameObject.Find("PlayerRespawner(Clone)").GetComponent<Char_SelectChar>();
 		}
 	}
 	

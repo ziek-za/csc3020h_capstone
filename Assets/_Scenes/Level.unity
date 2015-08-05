@@ -6512,8 +6512,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 719382230}
-  - 114: {fileID: 719382232}
-  - 114: {fileID: 719382231}
   m_Layer: 0
   m_Name: LevelObjects
   m_TagString: Untagged
@@ -6535,32 +6533,6 @@ Transform:
   - {fileID: 1078829607}
   m_Father: {fileID: 1399853490}
   m_RootOrder: 0
---- !u!114 &719382231
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 719382229}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff6253bc3c7d4a64880dd7c2354008bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &719382232
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 719382229}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07790a9e9d13e2848b1c83d90bc8d23d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LevelID: 1
-  RawHeightMapID: 
-  RawHeightMapSize: 257
-  LevelName: awe
 --- !u!1 &723060795
 GameObject:
   m_ObjectHideFlags: 0
@@ -11166,49 +11138,6 @@ Transform:
   - {fileID: 787368030}
   m_Father: {fileID: 645901865}
   m_RootOrder: 0
---- !u!1 &1231820992
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1231820993}
-  - 114: {fileID: 1231820994}
-  m_Layer: 0
-  m_Name: 'LevelObjects - (ID: 1) Booty Bay v1'
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1231820993
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1231820992}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1399853490}
-  m_RootOrder: 3
---- !u!114 &1231820994
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1231820992}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07790a9e9d13e2848b1c83d90bc8d23d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LevelID: 1
-  RawHeightMapID: 3
-  RawHeightMapSize: 257
-  LevelName: Booty Bay
 --- !u!1 &1233091504
 GameObject:
   m_ObjectHideFlags: 0
@@ -12700,7 +12629,6 @@ Transform:
   - {fileID: 719382230}
   - {fileID: 45923017}
   - {fileID: 1233091505}
-  - {fileID: 1231820993}
   m_Father: {fileID: 0}
   m_RootOrder: 4
 --- !u!1 &1404395841
