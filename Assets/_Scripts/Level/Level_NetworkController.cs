@@ -6,6 +6,8 @@ public class Level_NetworkController : MonoBehaviour {
 	public Transform mapController, terrainController;
 	public Transform respawner;
 
+	private Terrain terrain;
+
 	//Variable to reset the hm when room first created
 	public static bool hmReset;
 
@@ -34,13 +36,17 @@ public class Level_NetworkController : MonoBehaviour {
 		//Camera.main.transform.LookAt (playerPrefab.transform);
 		Debug.Log("Connected to Room");
 		PhotonNetwork.Instantiate(respawner.name,Vector3.zero,Quaternion.identity,0);
-		if (!hmReset){
-			mapController.GetComponent<Level_MapController>().SetupLevel("1");
-			//terrain.terrainData.SetHeights (0, 0, flatten_buf);
-			//terrainController.GetComponent<Map_TerrainController>().SetTerrainHeightMap ();
-			Debug.Log ("hm reset");
-			hmReset = true;
+
+		if (PhotonNetwork.countOfPlayers == 1){
+				mapController.GetComponent<Level_MapController>().SetupLevel("1");
+				//terrain.terrainData.SetHeights (0, 0, flatten_buf);
+				//terrainController.GetComponent<Map_TerrainController>().SetTerrainHeightMap ();
+		} else {
+			Debug.Log("Not host");
 		}
+		Map_TerrainController tc = Terrain.activeTerrain.GetComponent<Map_TerrainController>();
+		tc.SetTerrainHeightMap();
+		Debug.Log ("hm reset");
 
 	}
 }

@@ -21,15 +21,11 @@ public class Level_MapController : MonoBehaviour {
 		// check to see if it is loaded before progressing
 		if (_MainController.ImportedMapObjectBool) {
 			Map_TerrainController tc = terrain.GetComponent<Map_TerrainController>();
-			tc.SetTerrainHeightMap();
+			//tc.SetTerrainHeightMap();
 			Map = GameObject.Find ("Map");
 			// Remove current LevelObjects
 			GameObject levelObjects = Map.transform.FindChild("LevelObjects").gameObject;
 			levelObjects.SetActive(false);
-#if UNITY_EDITOR
-#else
-			Destroy (levelObjects);
-#endif
 			// Get level objects
 			//Debug.Log (_MainController.MapObject["level_objects"]);
 			level_objects = _MainController.MapObject["level_objects"][0];
@@ -55,7 +51,8 @@ public class Level_MapController : MonoBehaviour {
 			if (jn["name"].Value == "LevelObjects") {
 				spawned_prefab.name = "LevelObjects - (ID: " + _MainController.MapObject["levelData"]["name"] + ") " +
 					_MainController.MapObject["name"] + " v" +_MainController.MapObject["version"];
-				#if UNITY_EDITOR
+				/*
+				//#if UNITY_EDITOR
 				// add scripts and values from script
 				spawned_prefab.AddComponent<Map_Export>();
 				Map_Export me = spawned_prefab.GetComponent<Map_Export>();
@@ -63,7 +60,8 @@ public class Level_MapController : MonoBehaviour {
 				me.LevelID = _MainController.MapObject["levelData"]["name"];
 				me.RawHeightMapID = _MainController.MapObject["terrainRaw"]["name"];
 				me.RawHeightMapSize = _MainController.MapObject["terrainRaw"]["size"];
-				#endif
+				//#endif 
+				*/
 			} else {
 				spawned_prefab.name = jn["name"];
 			}
