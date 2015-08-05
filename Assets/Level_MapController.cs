@@ -26,6 +26,10 @@ public class Level_MapController : MonoBehaviour {
 			// Remove current LevelObjects
 			GameObject levelObjects = Map.transform.FindChild("LevelObjects").gameObject;
 			levelObjects.SetActive(false);
+#if UNITY_EDITOR
+#else
+			Destroy (levelObjects);
+#endif
 			// Get level objects
 			//Debug.Log (_MainController.MapObject["level_objects"]);
 			level_objects = _MainController.MapObject["level_objects"][0];
@@ -51,7 +55,7 @@ public class Level_MapController : MonoBehaviour {
 			if (jn["name"].Value == "LevelObjects") {
 				spawned_prefab.name = "LevelObjects - (ID: " + _MainController.MapObject["levelData"]["name"] + ") " +
 					_MainController.MapObject["name"] + " v" +_MainController.MapObject["version"];
-				/*#if UNITY_EDITOR
+				#if UNITY_EDITOR
 				// add scripts and values from script
 				spawned_prefab.AddComponent<Map_Export>();
 				Map_Export me = spawned_prefab.GetComponent<Map_Export>();
@@ -59,7 +63,7 @@ public class Level_MapController : MonoBehaviour {
 				me.LevelID = _MainController.MapObject["levelData"]["name"];
 				me.RawHeightMapID = _MainController.MapObject["terrainRaw"]["name"];
 				me.RawHeightMapSize = _MainController.MapObject["terrainRaw"]["size"];
-				#endif*/
+				#endif
 			} else {
 				spawned_prefab.name = jn["name"];
 			}
@@ -69,8 +73,6 @@ public class Level_MapController : MonoBehaviour {
 			//"_Prefabs/" + 
 			GameObject prefab = Resources.Load (jn ["prefab"]) as GameObject;
 			Debug.Log ("Loading prefab: " + jn["prefab"]);
-			// Unable to instantiate items without being apart of a room.
-			// Normal instantiate should be used if trying to load a level
 			spawned_prefab = PhotonNetwork.Instantiate(prefab.name, pos, rotation,0) as GameObject;
 			spawned_prefab.name = jn["prefab"];
 		}

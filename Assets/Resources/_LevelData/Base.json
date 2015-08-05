@@ -10,8 +10,8 @@
 		"name": ""
 	},
 	"level_objects": [],
-	"terrainFreeze": {
-		"path": "_LevelData/terrainFreeze/",
+	"frozenTerrainRaw": {
+		"path": "_LevelData/frozenTerrainRaw/",
 		"name": ""
 	}
 }

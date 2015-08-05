@@ -10,7 +10,6 @@ public class Map_TerrainController : Photon.MonoBehaviour {
 	public float TerrainOffset = 128f;
 	// ** PRIVATE VARIABLES ** //
 	private float WIDTH, LENGTH, MAX_HEIGHT;
-	private float[,] fmap;
 	private float[,] height_buffer_1, heights_orig, height_buffer_2,
 	height_buffer_original,	// temporary buffer when swapping values
 	hm_temp_buf,	// original height map (HEIGHT_MAP)
@@ -64,31 +63,19 @@ public class Map_TerrainController : Photon.MonoBehaviour {
 			// Path to file under resources
 			string path = _MainController.MapObject["terrainRaw"]["path"] +
 				_MainController.MapObject["terrainRaw"]["name"];
-			string path_f = _MainController.MapObject["terrainFreeze"]["path"] +
-				_MainController.MapObject["terrainFreeze"]["name"];
 			try {
-				// Load the .bytes files for the map heightmap as well as the freeze
-				// Freeze map variables suffixed with '_f'
-				TextAsset ta_f = Resources.Load(path_f) as TextAsset;
+				Debug.Log(path);
+				//Texture2D hm_tex = Resources.Load(path) as Texture2D;
 				TextAsset ta = Resources.Load(path) as TextAsset;
-				Stream s_f = new MemoryStream(ta_f.bytes);
+				Debug.Log(ta);
 				Stream s = new MemoryStream(ta.bytes);
-				BinaryReader br_f = new BinaryReader(s_f);
 				BinaryReader br = new BinaryReader(s);
-				int m_freezeMapRes = _MainController.MapObject["terrainFreeze"]["size"].AsInt;
 				int m_heightMapRes = _MainController.MapObject["terrainRaw"]["size"].AsInt;
-				int size_f = m_freezeMapRes * m_freezeMapRes;
 				int size = m_heightMapRes*m_heightMapRes*2;
-				//Debug.Log (m_heightMapRes + " " + size);
+				Debug.Log (m_heightMapRes + " " + size);
 				byte[] data = new byte[size];
-				byte[] data_f = new byte[size_f];
-				// Read in freeze map byte data
-				br_f.Read(data_f, 0, size_f);
-				br_f.Close ();
-				// Read in height map byte data
 				br.Read(data, 0, size);
 				br.Close();
-				// Extract values from height map and insert it into a 2D float array
 				float[,] htmap = new float[m_heightMapRes, m_heightMapRes];
 				int i=0;
 				for(int x = 0 ; x < m_heightMapRes; x++) {
@@ -98,18 +85,8 @@ public class Map_TerrainController : Photon.MonoBehaviour {
 						htmap[m_heightMapRes-1-x,y] = ht / 65535.0f;
 					}
 				}
-				// Extract values from freeze map and insert it into a 2D float array
-				i = 0;
-				fmap = new float[m_freezeMapRes, m_freezeMapRes];
-				for (int x = 0; x < m_freezeMapRes; x++) {
-					for (int y = 0; y < m_freezeMapRes; y++) {
-						//Extract 8 bit data and normalize
-						fmap[m_freezeMapRes-x-1,y] = data_f[i++]/255.0f; 
-					}
-				}
-				Debug.Log (fmap.Length);
+				Debug.Log (htmap.Length);
 				Debug.Log ("[Setting height map]" + htmap[10, 10]);
-				// Set heightmap data
 				terrain.terrainData.SetHeights(0,0,htmap);
 			} catch (System.Exception e) {
 				Debug.LogException(e);
@@ -178,7 +155,7 @@ public class Map_TerrainController : Photon.MonoBehaviour {
 		// add to exisiting terrain height map
 		for (int i = 0; i < (int)WIDTH; i++) {
 			for (int k = 0; k < (int)LENGTH; k++) {
-				t[i,k] -= dist[i,k] * fmap[i,k];
+				t[i,k] -= dist[i,k];
 			}
 		}
 		terrain.terrainData.SetHeights (0, 0, t);
