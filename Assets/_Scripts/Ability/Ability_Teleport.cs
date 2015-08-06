@@ -9,8 +9,10 @@ public class Ability_Teleport : Photon.MonoBehaviour {
 	private float teleportDistance;
 
 	public int energyCost = 50;
+	public int cooldown = 5;
 
 	Vector3 teleportDirection;
+	bool offCooldown = true;
 
 	// Use this for initialization
 
@@ -25,7 +27,11 @@ public class Ability_Teleport : Photon.MonoBehaviour {
 		projection.transform.parent = transform;
 		distanceIndicator.transform.parent = transform;
 	}
-	
+
+	void cooledDown(){
+		offCooldown = true;
+	}
+
 	// Update is called once per frame
 	void Update () {
 
@@ -67,8 +73,12 @@ public class Ability_Teleport : Photon.MonoBehaviour {
 				distanceIndicator.transform.rotation=floorRotation;
 			}
 
-			if(Input.GetButtonDown ("Fire2") && transform.GetComponent<Char_AttributeScript>().energy >= energyCost){
+			if(Input.GetButtonDown ("Fire2") && 
+			   transform.GetComponent<Char_AttributeScript>().energy >= energyCost && offCooldown)
+			{
 				transform.GetComponent<Char_AttributeScript>().energy -= energyCost;
+				Invoke("cooledDown",cooldown);
+				offCooldown = false;
 				Debug.Log("Fire2");
 				Invoke ("Teleport", 0.2f); //Delay for teleporting
 			}
