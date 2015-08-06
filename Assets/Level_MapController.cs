@@ -62,8 +62,6 @@ public class Level_MapController : MonoBehaviour {
 			spawned_prefab.transform.position = pos;
 			spawned_prefab.transform.rotation = rotation;
 		} else {
-			//"_Prefabs/" + 
-			Debug.Log ("Loading prefab: " + jn["prefab"]);
 			GameObject prefab = Resources.Load (jn ["prefab"]) as GameObject;
 			spawned_prefab = PhotonNetwork.Instantiate(prefab.name, pos, rotation,0) as GameObject;
 			spawned_prefab.name = jn["prefab"];
