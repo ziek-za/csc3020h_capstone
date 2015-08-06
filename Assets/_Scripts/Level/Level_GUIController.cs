@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class Level_GUIController : MonoBehaviour {
 
-	public Text healthText;
+	public Text healthText, energyText;
 	public enum classes {SOLDIER, THIEF, BUILDER, NONE};
 	public classes GUIClass = classes.NONE;
 
@@ -18,8 +18,12 @@ public class Level_GUIController : MonoBehaviour {
 	
 	}
 
-	public void UpdateHUD(int health){
+	public void UpdateHUDHealth(int health){
 		healthText.text = health.ToString();
+	}
+
+	public void UpdateHUDEnergy(int energy){
+		energyText.text = energy.ToString();
 	}
 
 	public void onSoldierSelectButtonPress(){

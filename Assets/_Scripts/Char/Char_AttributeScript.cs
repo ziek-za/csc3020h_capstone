@@ -8,6 +8,7 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 	public int health = 125;
 	public int speed = 125;
 	public int energy = 100;
+	public float energyTrickeRate = 1f;
 	public enum Teams {RED, BLUE};
 	public Teams team;
 
@@ -31,14 +32,23 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 				joinTeam(new Vector3(Color.blue.r, Color.blue.g, Color.blue.b), 1);
 			}
 			Debug.Log(team);
+
+			InvokeRepeating("energyTrickle",energyTrickeRate,energyTrickeRate);
 		}
 	}
-	
+
+	void energyTrickle(){
+		if (energy < 100){
+			energy++;
+		}
+	}
+
 	// Update is called once per frame
 	void Update () {
 		if (photonView.isMine){
 			//Debug.Log("Speed: "+speed);
-			HUD.UpdateHUD(health);
+			HUD.UpdateHUDHealth(health);
+			HUD.UpdateHUDEnergy(energy);
 			if (health <= 0 || Input.GetKeyDown(KeyCode.P)){
 				Screen.lockCursor=false;
 				KillPlayer(this.gameObject.GetComponent<PhotonView>().viewID);
