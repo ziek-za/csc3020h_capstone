@@ -8,6 +8,8 @@ public class Ability_Teleport : Photon.MonoBehaviour {
 	public GameObject distanceIndicator;
 	private float teleportDistance;
 
+	public int energyCost = 50;
+
 	Vector3 teleportDirection;
 
 	// Use this for initialization
@@ -29,6 +31,7 @@ public class Ability_Teleport : Photon.MonoBehaviour {
 
 
 		if (photonView.isMine && Input.GetButton ("Teleport")) {
+
 			projection.transform.GetComponent<MeshRenderer> ().enabled = true;
 			projection.transform.Find ("SparkleParticles").GetComponent<ParticleRenderer> ().enabled = true;
 			projection.transform.Find("BasicGun").GetComponent<MeshRenderer> ().enabled = true;
@@ -64,7 +67,8 @@ public class Ability_Teleport : Photon.MonoBehaviour {
 				distanceIndicator.transform.rotation=floorRotation;
 			}
 
-			if(Input.GetButtonDown ("Fire2")){
+			if(Input.GetButtonDown ("Fire2") && transform.GetComponent<Char_AttributeScript>().energy >= energyCost){
+				transform.GetComponent<Char_AttributeScript>().energy -= energyCost;
 				Debug.Log("Fire2");
 				Invoke ("Teleport", 0.2f); //Delay for teleporting
 			}

@@ -8,6 +8,7 @@ public class Ability_ForceGrenade: Photon.MonoBehaviour {
 
 	public Transform grenadePrefab;
 	public Transform grenadePosition;
+	public int energyCost = 30;
 
 	GameObject cameraDirection;
 
@@ -26,7 +27,9 @@ public class Ability_ForceGrenade: Photon.MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (photonView.isMine) {
-			if (Input.GetButtonDown("Grenade")) {
+			if (Input.GetButtonDown("Grenade") && transform.GetComponent<Char_AttributeScript>().energy >= energyCost) {
+				//Uses energy
+				transform.GetComponent<Char_AttributeScript>().energy -= energyCost;
 				//Creates the actual grenade over the photon network
 				GameObject gr = PhotonNetwork.Instantiate(grenadePrefab.name, grenadePosition.position, Quaternion.identity, 0) as GameObject;
 				gr.rigidbody.velocity = (cameraDirection.transform.forward * initialForwardVelocity) + 
