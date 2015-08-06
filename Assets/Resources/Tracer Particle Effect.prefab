@@ -35,7 +35,7 @@ ParticleSystem:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 120516}
-  lengthInSec: 1
+  lengthInSec: 2
   startDelay: 0
   speed: 1
   randomSeed: 0
@@ -1063,8 +1063,8 @@ ParticleSystem:
     plane4: {fileID: 0}
     plane5: {fileID: 0}
     dampen: 0
-    bounce: 0
-    energyLossOnCollision: 1
+    bounce: 1
+    energyLossOnCollision: .100000001
     minKillSpeed: 0
     particleRadius: .00999999978
     collidesWith:
