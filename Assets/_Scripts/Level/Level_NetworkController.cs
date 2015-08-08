@@ -46,12 +46,13 @@ public class Level_NetworkController : MonoBehaviour {
 		Map_TerrainController tc = Terrain.activeTerrain.GetComponent<Map_TerrainController>();
 		tc.SetFreezeMap();
 		tc.SetTerrainHeightMap();
+		tc.SetClampMap ();
 		tc.SetTerrainTexture (0, 0, tc.terrain.terrainData.alphamapWidth, tc.terrain.terrainData.alphamapHeight);
 		Debug.Log ("hm reset");
 
 		if (firstPlayer){
 			firstPlayer = false;
-			mapController.GetComponent<Level_MapController>().SetLevelObjects();
+			mapController.GetComponent<Level_MapController>().SetLevelObjects(false);
 		}			
 	}
 }

@@ -9,6 +9,7 @@ public class Map_Export : MonoBehaviour {
 	public string LevelID = "";
 	public string RawHeightMapID = "";
 	public string FreezeMapID = "";
+	public string ClampMapID = "";
 	public string LevelName = "";
 
 	private string defaultPath = "_LevelData/";
@@ -16,6 +17,7 @@ public class Map_Export : MonoBehaviour {
 	private string defaultSavePath = "Assets/Resources/";
 	private string RawHeightMapSize = "257";
 	private string FreezeMapSize = "257";
+	private string ClampMapSize = "257";
 	private Terrain terrain;
 
 	// Load level objects
@@ -31,7 +33,7 @@ public class Map_Export : MonoBehaviour {
 			// Load objects
 			GameObject mc = GameObject.Find("Map Controller");
 			Level_MapController mc_script = mc.GetComponent<Level_MapController>();
-			mc_script.SetLevelObjects();
+			mc_script.SetLevelObjects(true);
 		} else {
 			Debug.Log ("-- INVALID LEVEL IMPORT: "  + LevelID + " --");
 		}
@@ -48,10 +50,15 @@ public class Map_Export : MonoBehaviour {
 			jn["name"] = LevelName;
 			jn["version"] = "1";
 			jn["levelData"]["name"] = LevelID;
+			// Terrain height map
 			jn["terrainRaw"]["name"] = RawHeightMapID;
 			jn["terrainRaw"]["size"] = RawHeightMapSize;
+			// Terrain freeze map
 			jn["terrainFreeze"]["name"] = FreezeMapID;
 			jn["terrainFreeze"]["size"] = FreezeMapSize;
+			// Terrain clamp map
+			jn["terrainClamp"]["name"] = ClampMapID;
+			jn["terrainClamp"]["size"] = ClampMapSize;
 			// Generate children
 			JSONArray ja = new JSONArray();
 			ja = RecurseChildren(gameObject, ja);
@@ -67,6 +74,7 @@ public class Map_Export : MonoBehaviour {
 		}
 	}
 
+	// Used to recurse and save all the level_objects
 	private JSONArray RecurseChildren (GameObject curr_go, JSONArray ja) {
 		JSONNode jn = JSON.Parse ("{}");
 		jn ["isPrefab"] = "false";
