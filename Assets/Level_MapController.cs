@@ -38,7 +38,7 @@ public class Level_MapController : MonoBehaviour {
 		Vector3 pos = new Vector3(jn["position"]["x"].AsFloat,
 		                          jn["position"]["y"].AsFloat,
 		                          jn["position"]["z"].AsFloat);
-		Quaternion rotation = Quaternion.EulerAngles(jn["rotation"]["x"].AsFloat,
+		Quaternion rotation = Quaternion.Euler(jn["rotation"]["x"].AsFloat,
 		                               jn["rotation"]["y"].AsFloat,
 		                               jn["rotation"]["z"].AsFloat);
 		// Load resource object and instantiate
@@ -64,6 +64,7 @@ public class Level_MapController : MonoBehaviour {
 			spawned_prefab.transform.position = pos;
 			spawned_prefab.transform.rotation = rotation;
 		} else {
+			//Debug.Log ("[Instantiating prefab: " + jn ["prefab"] + "]");
 			GameObject prefab = Resources.Load (jn ["prefab"]) as GameObject;
 			if (IsUnityEditorBool) {
 				spawned_prefab = Instantiate(prefab, pos, rotation) as GameObject;

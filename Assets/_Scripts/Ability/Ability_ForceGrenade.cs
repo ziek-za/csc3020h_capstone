@@ -70,7 +70,7 @@ public class Ability_ForceGrenade: Photon.MonoBehaviour {
 	//Used to modify the terrain on PUSH only
 	[RPC] void PushTerrain(Vector3 explosion_pos){		
 		//2 1.1
-		MTC.ManipulateTerrain(explosion_pos, 5f, "push", 30f, 10f, 0.2f);
+		MTC.ManipulateTerrain(explosion_pos, 5f, "push", 30f, 2f, 1.1f);
 		if (photonView.isMine) {
 			photonView.RPC("PushTerrain",PhotonTargets.OthersBuffered, explosion_pos);
 		}

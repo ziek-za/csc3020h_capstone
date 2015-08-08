@@ -76,6 +76,7 @@ public class Map_Export : MonoBehaviour {
 
 	// Used to recurse and save all the level_objects
 	private JSONArray RecurseChildren (GameObject curr_go, JSONArray ja) {
+		bool ignore = false;
 		JSONNode jn = JSON.Parse ("{}");
 		jn ["isPrefab"] = "false";
 		//Debug.Log (curr_go.name + " " + PrefabUtility.FindPrefabRoot (curr_go) + " " + PrefabUtility.GetPrefabParent (curr_go) + " " + PrefabUtility.GetPrefabObject(curr_go));// + " " + PrefabUtility.GetPrefabParent(curr_go));
@@ -87,26 +88,31 @@ public class Map_Export : MonoBehaviour {
 				// Root LevelObjects object
 				jn["name"] = "LevelObjects";
 			} else {
-				jn["name"] = curr_go.name;
+				ignore = true;
+				//jn["name"] = curr_go.name;
 			}
 		}
-		// Position
-		jn ["position"] ["x"] = curr_go.transform.position.x.ToString();
-		jn ["position"] ["y"] = curr_go.transform.position.y.ToString();
-		jn ["position"] ["z"] = curr_go.transform.position.z.ToString();
-		// Rotation
-		jn ["rotation"] ["x"] = curr_go.transform.localRotation.x.ToString();
-		jn ["rotation"] ["y"] = curr_go.transform.localRotation.y.ToString();
-		jn ["rotation"] ["z"] = curr_go.transform.localRotation.z.ToString();
-		if (curr_go.transform.childCount > 0) {
-			JSONArray children = new JSONArray();
-			for (int i = 0; i < curr_go.transform.childCount; i++) {
-				jn["children"] = RecurseChildren(curr_go.transform.GetChild (i).gameObject, children);
+		if (!ignore) {
+			// Position
+			jn ["position"] ["x"] = curr_go.transform.position.x.ToString();
+			jn ["position"] ["y"] = curr_go.transform.position.y.ToString();
+			jn ["position"] ["z"] = curr_go.transform.position.z.ToString();
+			// Rotation
+			jn ["rotation"] ["x"] = curr_go.transform.rotation.eulerAngles.x.ToString();
+			jn ["rotation"] ["y"] = curr_go.transform.rotation.eulerAngles.y.ToString();
+			jn ["rotation"] ["z"] = curr_go.transform.rotation.eulerAngles.z.ToString();
+			if (curr_go.transform.childCount > 0) {
+				JSONArray children = new JSONArray();
+				for (int i = 0; i < curr_go.transform.childCount; i++) {
+					jn["children"] = RecurseChildren(curr_go.transform.GetChild (i).gameObject, children);
+				}
+				ja["-1"] = jn;
+				return ja;
+			} else {
+				ja["-1"] = jn;
+				return ja;
 			}
-			ja["-1"] = jn;
-			return ja;
 		} else {
-			ja["-1"] = jn;
 			return ja;
 		}
 	}
