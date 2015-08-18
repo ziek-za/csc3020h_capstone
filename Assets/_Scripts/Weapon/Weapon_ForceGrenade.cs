@@ -49,9 +49,15 @@ public class Weapon_ForceGrenade : Photon.MonoBehaviour {
 	//Method that applies the push force OR creates the pull vortex
 	void TriggerForce(){
 		for (int i = 0; i < alreadyCollided.Count; i++){
-			if (mode.Equals("push") && alreadyCollided[i].GetComponent<Rigidbody>() != null){
-				Vector3 forceDir = alreadyCollided[i].transform.position - transform.position;
-				PushForceExplosion(alreadyCollided[i].GetComponent<PhotonView>().viewID, Vector3.Normalize(forceDir) * pushForce);
+			if (mode.Equals("push") &&
+			    alreadyCollided[i].GetComponent<Rigidbody>() != null &&
+			    !alreadyCollided[i].GetComponent<Rigidbody>().isKinematic){
+				try {
+					Vector3 forceDir = alreadyCollided[i].transform.position - transform.position;
+					PushForceExplosion(alreadyCollided[i].GetComponent<PhotonView>().viewID, Vector3.Normalize(forceDir) * pushForce);
+				} catch (System.NullReferenceException e){
+					Debug.LogError("Null Ref on: " + alreadyCollided[i].name);
+				}
 			}
 			else if (mode.Equals("pull")){
 				PhotonNetwork.Instantiate(vortex.name, transform.position, Quaternion.identity, 0);
