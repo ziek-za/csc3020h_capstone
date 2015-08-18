@@ -9,8 +9,8 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 	public int speed = 125;
 	public int energy = 100;
 	public float energyTrickeRate = 1f;
-	public enum Teams {RED, BLUE};
-	public Teams team;
+	public enum Teams {RED, BLUE, NONE};
+	public Teams team = Teams.NONE;
 
 	Level_GUIController HUD;
 	public Char_SelectChar Respawner;
@@ -20,17 +20,14 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 		if (photonView.isMine){
 			buffs= new List<string>();
 			HUD = GameObject.Find("GUI Controller").GetComponent<Level_GUIController>();
-			//Respawner = GameObject.Find("PlayerRespawner(Clone)").GetComponent<Char_SelectChar>();
-			//team=Random.Range(0,2);
-			int teamColour=Random.Range(1,3);
-			if(teamColour==1){
-				//team=Teams.RED;
+
+			if(team == Teams.RED){
 				joinTeam(new Vector3(Color.red.r, Color.red.g, Color.red.b), 0);
 			}
-			else if(teamColour==2){
-				//team=Teams.BLUE;
+			else if(team == Teams.BLUE){
 				joinTeam(new Vector3(Color.blue.r, Color.blue.g, Color.blue.b), 1);
 			}
+
 			Debug.Log(team);
 
 			InvokeRepeating("energyTrickle",energyTrickeRate,energyTrickeRate);
@@ -56,6 +53,10 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 				Camera.main.GetComponent<BlurEffect>().enabled=true;
 				Char_SelectChar.classNo=10;
 				Respawner.spawned=false;
+
+				//Resets the link buttons to show correct colors
+				//HUD.SetUpLinkButtons();
+				
 			}
 		}
 	}

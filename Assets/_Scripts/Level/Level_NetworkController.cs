@@ -24,16 +24,16 @@ public class Level_NetworkController : Photon.MonoBehaviour {
 		PhotonNetwork.Instantiate(respawner.name,Vector3.zero,Quaternion.identity,0);
 		
 		Map_TerrainController tc = Terrain.activeTerrain.GetComponent<Map_TerrainController>();
-		tc.SetFreezeMap();
 		tc.SetTerrainHeightMap();
+		tc.SetFreezeMap();
+		tc.SetClampMap ();
 		Debug.Log ("hm reset");
 
 		if (firstPlayer){
 			Debug.Log("Host Joined");
 			firstPlayer = false;
-			tc.SetClampMap ();
-			tc.SetTerrainTexture (0, 0, tc.terrain.terrainData.alphamapWidth, tc.terrain.terrainData.alphamapHeight);
 			mapController.GetComponent<Level_MapController>().SetLevelObjects(false);
+			tc.SetTerrainTexture (0, 0, tc.terrain.terrainData.alphamapWidth, tc.terrain.terrainData.alphamapHeight);
 		}			
 	}
 }
