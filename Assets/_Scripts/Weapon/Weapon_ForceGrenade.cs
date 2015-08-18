@@ -28,6 +28,12 @@ public class Weapon_ForceGrenade : Photon.MonoBehaviour {
 		}
 	}
 
+	void OnTriggerExit(Collider other){
+		if (alreadyCollided.Contains(other.gameObject)){
+			alreadyCollided.Remove(other.gameObject);
+		}
+	}
+
 	//Method is called by the Ability_ForceGrenade script when the grenade should activate (i.e. after fuse time)
 	public void Explode(string newMode){
 		triggerArea.enabled = true;

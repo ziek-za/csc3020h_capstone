@@ -6,7 +6,7 @@ public class Level_MapController : MonoBehaviour {
 
 	private GameObject Map;
 	private JSONNode level_objects;
-	private bool IsUnityEditorBool;
+	private bool IsUnityEditorBool = true;
 
 	// Use this for initialization
 	void Start () {
@@ -49,13 +49,13 @@ public class Level_MapController : MonoBehaviour {
 					_MainController.MapObject["name"] + " v" +_MainController.MapObject["version"];
 					//#if UNITY_EDITOR
 					// add scripts and values from script
-					spawned_prefab.AddComponent<Map_Export>();
+					/*spawned_prefab.AddComponent<Map_Export>();
 					Map_Export me = spawned_prefab.GetComponent<Map_Export>();
 					me.LevelName = _MainController.MapObject["name"];
 					me.LevelID = _MainController.MapObject["levelData"]["name"];
 					me.RawHeightMapID = _MainController.MapObject["terrainRaw"]["name"];
 					me.FreezeMapID = _MainController.MapObject["terrainFreeze"]["name"];
-					me.ClampMapID = _MainController.MapObject["terrainClamp"]["name"];
+					me.ClampMapID = _MainController.MapObject["terrainClamp"]["name"];*/
 					//#endif 
 
 			} else {

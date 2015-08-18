@@ -1,3 +1,4 @@
+/*
 #if UNITY_EDITOR
 using UnityEngine;
 using System.Collections;
@@ -118,3 +119,4 @@ public class Map_Export : MonoBehaviour {
 	}
 }
 #endif
+*/
