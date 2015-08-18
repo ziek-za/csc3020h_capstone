@@ -13,5 +13,9 @@
 	"terrainFreeze": {
 		"path": "_LevelData/terrainFreeze/",
 		"name": ""
+	},
+	"terrainClamp": {
+		"path": "_LevelData/terrainClamp/",
+		"name": ""
 	}
 }
