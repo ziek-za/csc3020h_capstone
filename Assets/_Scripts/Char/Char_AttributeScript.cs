@@ -12,6 +12,8 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 	public enum Teams {RED, BLUE, NONE};
 	public Teams team = Teams.NONE;
 
+	public GameObject weapon1, weapon2, weapon3;
+
 	Level_GUIController HUD;
 	public Char_SelectChar Respawner;
 
@@ -40,12 +42,29 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 		}
 	}
 
+	void ChangeWeapons(){
+		if (Input.GetButton("1")){
+			weapon1.SetActive(true);
+			weapon2.SetActive(false);
+			weapon3.SetActive(false);
+		} else if (Input.GetButton("2")){
+			weapon1.SetActive(false);
+			weapon2.SetActive(true);
+			weapon3.SetActive(false);
+		} else if (Input.GetButton("3")){
+			weapon1.SetActive(false);
+			weapon2.SetActive(false);
+			weapon3.SetActive(true);
+		}
+	}
+
 	// Update is called once per frame
 	void Update () {
 		if (photonView.isMine){
 			//Debug.Log("Speed: "+speed);
 			HUD.UpdateHUDHealth(health);
 			HUD.UpdateHUDEnergy(energy);
+			ChangeWeapons();
 			if (health <= 0 || Input.GetKeyDown(KeyCode.P)){
 				Screen.lockCursor=false;
 				KillPlayer(this.gameObject.GetComponent<PhotonView>().viewID);

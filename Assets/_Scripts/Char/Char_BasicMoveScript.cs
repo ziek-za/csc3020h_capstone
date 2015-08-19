@@ -17,13 +17,10 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 	bool isJumping=false;
 	public float clampYAxis = 60.0f;
 
-	Vector3 prevPos = Vector3.zero;
-
 	// Use this for initialization
 	void Start () {
 		if (photonView.isMine) {
 			Screen.lockCursor=true;
-
 
 			//Don't hide our player for now
 			//transform.GetComponent<Renderer>().enabled = false;
@@ -41,7 +38,7 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 			//	shake = 0.5f;
 
 			InputMovement();
-			InputColorChange();
+			//InputColorChange();
 			MouseView();
 			UpdateCameraPos();
 			//SetSynchronizedValues
@@ -103,8 +100,6 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 			isJumping = true;
 		}
 
-
-
 		//prevPos = transform.position;
 	}
 
@@ -113,7 +108,6 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 		mouseSensitivity -= Input.GetAxis ("Mouse Y") * mouseSpeed;
 		mouseSensitivity = Mathf.Clamp (mouseSensitivity, -clampYAxis, clampYAxis);
 
-		float rotateY = Input.GetAxis ("Mouse Y") * mouseSpeed;
 		FPSCameraPos.transform.localRotation = Quaternion.Euler (mouseSensitivity, 0, 0);
 	}
 

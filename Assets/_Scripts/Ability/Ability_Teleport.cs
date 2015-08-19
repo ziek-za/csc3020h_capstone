@@ -36,7 +36,7 @@ public class Ability_Teleport : Photon.MonoBehaviour {
 	void Update () {
 
 
-		if (photonView.isMine && Input.GetButton ("Teleport")) {
+		if (photonView.isMine && Input.GetButton ("Ability 1")) {
 
 			projection.transform.GetComponent<MeshRenderer> ().enabled = true;
 			projection.transform.Find ("SparkleParticles").GetComponent<ParticleRenderer> ().enabled = true;
@@ -79,11 +79,10 @@ public class Ability_Teleport : Photon.MonoBehaviour {
 				transform.GetComponent<Char_AttributeScript>().energy -= energyCost;
 				Invoke("cooledDown",cooldown);
 				offCooldown = false;
-				Debug.Log("Fire2");
 				Invoke ("Teleport", 0.2f); //Delay for teleporting
 			}
 		}
-		if (photonView.isMine && Input.GetButtonUp ("Teleport")) {
+		if (photonView.isMine && Input.GetButtonUp ("Ability 1")) {
 			projection.transform.GetComponent<MeshRenderer> ().enabled = false;
 			projection.transform.Find("BasicGun").GetComponent<MeshRenderer> ().enabled = false;
 			projection.transform.Find ("SparkleParticles").GetComponent<ParticleRenderer> ().enabled = false;

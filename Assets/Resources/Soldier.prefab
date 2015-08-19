@@ -382,7 +382,11 @@ MonoBehaviour:
   health: 125
   speed: 125
   energy: 100
+  energyTrickeRate: 1
   team: 0
+  weapon1: {fileID: 129340}
+  weapon2: {fileID: 181096}
+  weapon3: {fileID: 181096}
   Respawner: {fileID: 0}
 --- !u!114 &11429344
 MonoBehaviour:
@@ -528,7 +532,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grenadePrefab: {fileID: 400502, guid: 84552cdc966f3964c87ea30a0552c768, type: 2}
   grenadePosition: {fileID: 481096}
-  fuseTime: 3
+  energyCost: 30
+  cooldown: 4
   initialForwardVelocity: 15
   initialUpwardsVelocity: 7
 --- !u!136 &13629336

@@ -3,9 +3,6 @@ using System.Collections;
 
 public class Ability_ForceGrenade: Photon.MonoBehaviour {
 
-	private Terrain terrain;
-	private Map_TerrainController MTC;
-
 	public Transform grenadePrefab;
 	public Transform grenadePosition;
 	public int energyCost = 30;
@@ -20,8 +17,6 @@ public class Ability_ForceGrenade: Photon.MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		terrain = Terrain.activeTerrain;
-		MTC = terrain.GetComponent<Map_TerrainController>();
 		cameraDirection = transform.FindChild("CameraPosition").gameObject; //Used so grenade is always thrown forwards
 	}
 
@@ -32,7 +27,7 @@ public class Ability_ForceGrenade: Photon.MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (photonView.isMine) {
-			if (Input.GetButtonDown("Grenade") && transform.GetComponent<Char_AttributeScript>().energy >= energyCost && offCooldown) {
+			if (Input.GetButtonDown("Fire2") && transform.GetComponent<Char_AttributeScript>().energy >= energyCost && offCooldown) {
 				//Uses energy
 				transform.GetComponent<Char_AttributeScript>().energy -= energyCost;
 				//Start cooldown timer
@@ -46,10 +41,10 @@ public class Ability_ForceGrenade: Photon.MonoBehaviour {
 			}
 
 			//Changing modes
-			if (Input.GetButtonDown("1")){
+			if (Input.GetButtonDown("Ability 1")){
 				mode = "push";
 			}
-			if (Input.GetButtonDown("2")){
+			if (Input.GetButtonDown("Ability 2")){
 				mode = "pull";
 			}
 
