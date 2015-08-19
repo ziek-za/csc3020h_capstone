@@ -48,4 +48,8 @@ MonoBehaviour:
   - BlueTeamCapture
   - RedTeamCapture
   - HostHasJoined
+  - SetTeam
+  - NetworkChangeWeapons
+  - PlayLaser
+  - StopLaser
   DisableAutoOpenWizard: 0

@@ -42,19 +42,32 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 		}
 	}
 
-	void ChangeWeapons(){
-		if (Input.GetButton("1")){
+	[RPC] void NetworkChangeWeapons(int vID, int weapon){
+		if (weapon == 1){
 			weapon1.SetActive(true);
 			weapon2.SetActive(false);
 			weapon3.SetActive(false);
-		} else if (Input.GetButton("2")){
+		} else if (weapon == 2){
 			weapon1.SetActive(false);
 			weapon2.SetActive(true);
 			weapon3.SetActive(false);
-		} else if (Input.GetButton("3")){
+		} else if (weapon == 3){
 			weapon1.SetActive(false);
 			weapon2.SetActive(false);
 			weapon3.SetActive(true);
+		}
+
+		if (photonView.isMine)
+			photonView.RPC ("NetworkChangeWeapons",PhotonTargets.OthersBuffered,vID,weapon);
+	}
+
+	void ChangeWeapons(){
+		if (Input.GetButton("1")){
+			NetworkChangeWeapons(transform.GetComponent<PhotonView>().viewID,1);
+		} else if (Input.GetButton("2")){
+			NetworkChangeWeapons(transform.GetComponent<PhotonView>().viewID,2);
+		} else if (Input.GetButton("3")){
+			NetworkChangeWeapons(transform.GetComponent<PhotonView>().viewID,3);
 		}
 	}
 

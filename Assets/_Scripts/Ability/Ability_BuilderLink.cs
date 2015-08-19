@@ -8,11 +8,12 @@ public class Ability_BuilderLink : MonoBehaviour {
 	
 	public ParticleSystem redBeam, blueBeam;
 
+	public float lifeTime = 30f;
+
 	Level_GUIController gui;
 
 	// Use this for initialization
 	void Start () {
-
 	}
 
 	public void SetTeam(Char_AttributeScript.Teams newTeam){
@@ -25,6 +26,7 @@ public class Ability_BuilderLink : MonoBehaviour {
 		else if (currentTeam == Char_AttributeScript.Teams.RED)
 			InitRed();
 		gui.SetUpLinkButtons();
+		Invoke("KillSelf",lifeTime);
 	}
 
 	void InitBlue(){
@@ -39,8 +41,14 @@ public class Ability_BuilderLink : MonoBehaviour {
 		redBeam.Play();
 	}
 
-	// Update is called once per frame
-	void Update () {
-	
+	void KillSelf(){
+		gameObject.tag = "Untagged";
+		gui.SetUpLinkButtons();
+		particleSystem.Play();
+		Invoke("ActuallyRemove",0.1f);
+	}
+
+	void ActuallyRemove(){
+		Destroy(gameObject);
 	}
 }

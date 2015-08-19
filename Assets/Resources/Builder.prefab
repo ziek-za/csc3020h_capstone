@@ -72,6 +72,7 @@ GameObject:
   - 114: {fileID: 11491424}
   - 114: {fileID: 11491422}
   - 136: {fileID: 13691422}
+  - 114: {fileID: 11409340}
   m_Layer: 0
   m_Name: Builder
   m_TagString: Untagged
@@ -347,6 +348,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &11409340
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 191422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94d692ec70941464da0050a313184e25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  linkFoundation: {fileID: 169046, guid: c4acc800200848d45aaaa554103b39fc, type: 2}
 --- !u!114 &11434354
 MonoBehaviour:
   m_ObjectHideFlags: 1

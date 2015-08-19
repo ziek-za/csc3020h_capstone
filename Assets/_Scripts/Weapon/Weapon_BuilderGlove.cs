@@ -17,11 +17,14 @@ public class Weapon_BuilderGlove : Photon.MonoBehaviour {
 	void Update () {
 		if (photonView.isMine){
 			if (Input.GetButtonDown("Fire1")){
-				laserSystem.Play();
+				PlayLaser(transform.GetComponent<PhotonView>().viewID);
+				//laserSystem.Play();
 
 			} else if (Input.GetButtonUp("Fire1")){
-				laserSystem.Stop();
-			} 
+				StopLaser(transform.GetComponent<PhotonView>().viewID);
+				//laserSystem.Stop();
+			}
+
 			if (Input.GetButton("Fire1")){	
 				Vector2 screenCenterPoint = new Vector2(Screen.width/2, Screen.height/2);
 				ray = Camera.main.ScreenPointToRay(screenCenterPoint);
@@ -35,7 +38,8 @@ public class Weapon_BuilderGlove : Photon.MonoBehaviour {
 						onHit.startSize = 0.5f;
 
 						if (hit.transform.GetComponent<Ability_BuilderFoundation>()){
-							hit.transform.GetComponent<Ability_BuilderFoundation>().Build(1);
+							hit.transform.GetComponent<Ability_BuilderFoundation>().Build(1,
+						      	transform.GetComponentInParent<Char_AttributeScript>().team);
 						}
 					} else {
 						onHit.startSize = 0f;
@@ -45,5 +49,17 @@ public class Weapon_BuilderGlove : Photon.MonoBehaviour {
 				}
 			}
 		}
+	}
+
+	[RPC] void PlayLaser(int vID){
+		PhotonView.Find(vID).transform.GetComponentInChildren<ParticleSystem>().Play();
+		if (photonView.isMine)
+			photonView.RPC("PlayLaser", PhotonTargets.OthersBuffered, vID);
+	}
+
+	[RPC] void StopLaser(int vID){
+		PhotonView.Find(vID).transform.GetComponentInChildren<ParticleSystem>().Stop();
+		if (photonView.isMine)
+			photonView.RPC("StopLaser", PhotonTargets.OthersBuffered, vID);
 	}
 }

@@ -7,7 +7,10 @@ public class Ability_BuilderFoundation : Photon.MonoBehaviour {
 	int required = 100;
 
 	public GameObject completedBuilding;
-	public GameObject parentBuilder;
+
+	public Char_AttributeScript.Teams currentTeam;
+
+	GameObject tempObject;
 
 	// Use this for initialization
 	void Start () {
@@ -16,18 +19,24 @@ public class Ability_BuilderFoundation : Photon.MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (completion >= required){
-			GameObject tempLink = PhotonNetwork.Instantiate(completedBuilding.name,transform.position,Quaternion.identity,0) as GameObject;
-			tempLink.GetComponent<Ability_BuilderLink>().SetTeam(parentBuilder.GetComponent<Char_AttributeScript>().team);
+			tempObject = PhotonNetwork.Instantiate(completedBuilding.name,transform.position,Quaternion.identity,0) as GameObject;
+			SetTeam (tempObject.GetPhotonView().viewID,(int)currentTeam);
 			PhotonNetwork.Destroy(gameObject);
-			//Invoke ("Die",0.1f);
 		}
 	}
 
-	public void Build(int amount){
-		completion += amount;
+	public void Build(int amount, Char_AttributeScript.Teams builderTeam){
+		if (builderTeam == currentTeam)
+			completion += amount;
 	}
 
-	void Die(){
-		PhotonNetwork.Destroy(gameObject);
+	[RPC] void SetTeam(int vID,int team){
+		if (PhotonView.Find(vID).transform.GetComponent<Ability_BuilderLink>()) //Need one for each building type
+			PhotonView.Find(vID).transform.GetComponent<Ability_BuilderLink>().SetTeam((Char_AttributeScript.Teams)team);
+		else
+			Debug.LogError("Need an if statement for that kind of building here");
+
+		if (photonView.isMine)
+			photonView.RPC("SetTeam", PhotonTargets.OthersBuffered,vID,team);
 	}
 }
