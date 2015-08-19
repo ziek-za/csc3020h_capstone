@@ -26,6 +26,7 @@ public class Level_GUIController : MonoBehaviour {
 		Char_SelectChar.classNo = 0;
 		GUIClass = classes.SOLDIER;
 		Debug.Log ("Selecting Soldier");
+		Debug.Log ("Player name is: " + _MainController.playerName);
 		}
 
 	public void onThiefSelectButtonPress(){
