@@ -81,7 +81,7 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 					}
 					//Bullet holes only on static objects and terrain
 				} else if (hit.transform.gameObject.GetComponent<Terrain>() || 
-				          (!hit.transform.collider.isTrigger && hit.transform.GetComponent<Rigidbody>().isKinematic)) {
+				          (hit.transform.GetComponent<Rigidbody>().isKinematic)) {
 					//Create a bullet hole
 					Vector3 bulletHolePosition = hit.point + hit.normal * 0.01f;
 					Quaternion bulletHoleRotation = Quaternion.FromToRotation(-Vector3.forward, hit.normal);
