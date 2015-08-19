@@ -23,7 +23,10 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 	void Start () {
 		if (photonView.isMine) {
 			Screen.lockCursor=true;
-			transform.GetComponent<Renderer>().enabled = false;
+
+
+			//Don't hide our player for now
+			//transform.GetComponent<Renderer>().enabled = false;
 
 		}
 	}

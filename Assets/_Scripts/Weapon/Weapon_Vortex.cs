@@ -37,7 +37,7 @@ public class Weapon_Vortex : Photon.MonoBehaviour {
 		if (recievedExplosion){
 			if (!channeling){
 				Invoke ("ChannelingTime",duration);
-				MTC.ManipulateTerrain(transform.position, 5f, "pull", 30f, 2f, 2f);
+				MTC.ManipulateTerrain(transform.position, 5f, "pull", 30f, 20f, 0.2f);
 				channeling = true;
 			}
 			//MTC.ManipulateTerrain(transform.position, 5f, "pull", 30f, 2f, 7f); //Rising over time

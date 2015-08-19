@@ -8,6 +8,8 @@ public class Ability_ForceGrenade: Photon.MonoBehaviour {
 
 	public Transform grenadePrefab;
 	public Transform grenadePosition;
+	public int energyCost = 30;
+	public int cooldown = 4;
 
 	GameObject cameraDirection;
 
@@ -15,6 +17,7 @@ public class Ability_ForceGrenade: Photon.MonoBehaviour {
 	public float initialForwardVelocity = 15f;
 	public float initialUpwardsVelocity = 7f;
 	string mode = "push";
+	bool offCooldown = true;
 
 	// Use this for initialization
 	void Start () {
@@ -22,11 +25,20 @@ public class Ability_ForceGrenade: Photon.MonoBehaviour {
 		MTC = terrain.GetComponent<Map_TerrainController>();
 		cameraDirection = transform.FindChild("CameraPosition").gameObject; //Used so grenade is always thrown forwards
 	}
-	
+
+	void cooledDown(){
+		offCooldown = true;
+	}
+
 	// Update is called once per frame
 	void Update () {
 		if (photonView.isMine) {
-			if (Input.GetButtonDown("Grenade")) {
+			if (Input.GetButtonDown("Grenade") && transform.GetComponent<Char_AttributeScript>().energy >= energyCost && offCooldown) {
+				//Uses energy
+				transform.GetComponent<Char_AttributeScript>().energy -= energyCost;
+				//Start cooldown timer
+				Invoke("cooledDown",cooldown);
+				offCooldown = false;
 				//Creates the actual grenade over the photon network
 				GameObject gr = PhotonNetwork.Instantiate(grenadePrefab.name, grenadePosition.position, Quaternion.identity, 0) as GameObject;
 				gr.rigidbody.velocity = (cameraDirection.transform.forward * initialForwardVelocity) + 
@@ -57,7 +69,8 @@ public class Ability_ForceGrenade: Photon.MonoBehaviour {
 
 	//Used to modify the terrain on PUSH only
 	[RPC] void PushTerrain(Vector3 explosion_pos){		
-		MTC.ManipulateTerrain(explosion_pos, 5f, "push", 30f, 2f, 2f);
+		//2 1.1
+		MTC.ManipulateTerrain(explosion_pos, 5f, "push", 30f, 2f, 1.1f);
 		if (photonView.isMine) {
 			photonView.RPC("PushTerrain",PhotonTargets.OthersBuffered, explosion_pos);
 		}

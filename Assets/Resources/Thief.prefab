@@ -344,6 +344,7 @@ MonoBehaviour:
   health: 100
   speed: 150
   energy: 100
+  energyTrickeRate: 1
   team: 0
   Respawner: {fileID: 0}
 --- !u!114 &11424516
@@ -502,6 +503,7 @@ MonoBehaviour:
   maxDistance: 15
   projection: {fileID: 130738, guid: 791e7f3ff3db4014cab368a34896bb0d, type: 2}
   distanceIndicator: {fileID: 110788, guid: 11ca0607ebe6c474f88d377f60d40e22, type: 2}
+  energyCost: 50
 --- !u!114 &11476876
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -513,7 +515,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e53894e007b406042802d2044ee7008e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown: 5
+  duration: 5
+  energyCost: 10
 --- !u!136 &13624522
 CapsuleCollider:
   m_ObjectHideFlags: 1

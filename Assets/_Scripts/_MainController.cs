@@ -17,7 +17,7 @@ public class _MainController {
 
 	public static void CreateServer(){
 		Application.LoadLevel("Level");
-		ImportMapObject("1");
+		ImportMapObject("2");
 		if (PhotonNetwork.room == null){
 			PhotonNetwork.CreateRoom(System.Guid.NewGuid().ToString("N"), true, true, 5);
 			Level_NetworkController.firstPlayer = true;

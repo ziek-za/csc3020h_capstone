@@ -21,7 +21,7 @@ public class Menu_NetworkController : MonoBehaviour {
 						if (_MainController.RoomJoined == true){
 							Application.LoadLevel("Level");
 							PhotonNetwork.JoinRoom(roomsList[i].name);
-							_MainController.ImportMapObject("1");
+							_MainController.ImportMapObject("2");
 							_MainController.RoomJoined = false;
 						}
 					}

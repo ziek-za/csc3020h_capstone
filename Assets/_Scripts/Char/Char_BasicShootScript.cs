@@ -62,27 +62,10 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 			                                   screenCenterPoint.y + GenerateRandomOffset(hit.distance));
 			ray = Camera.main.ScreenPointToRay(screenOffset);
 
-			//Physics.Raycast(ray, out hit, Camera.main.farClipPlane);
-			//tracerEffect.transform.localRotation = Quaternion.Euler(ray.direction);
-			//tracerEffect.transform.Rotate(ray.direction*10);
-
-			//tracerEffect.transform.localRotation =  Quaternion.identity;
-
-			///tracerEffect.transform.Rotate(new Vector3(transform.forward.x * Random.Range(1f,10f),
-			//                                          transform.forward.y * Random.Range(1f,10f),
-			//                                          transform.forward.z * Random.Range(1f,10f)));
-			//Quaternion.LookRotation(ray.normal)
-
-			//Invoke ("ResetTracerRotation",0.2f);
 
 			if(Physics.Raycast(ray, out hit, Camera.main.farClipPlane)) 
 			{
 				Debug.DrawLine(transform.position, hit.point, Color.red);
-
-				//Vector3 directionOfHit = Vector3.Normalize(hit.point - transform.position);
-				//transform.forward;
-				//Vector3.Dot(directionOfHit,Vector3.Normalize(transform.forward));
-				//Debug.Log(directionOfHit);
 
 
 
@@ -96,7 +79,9 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 						Invoke ("EnableHitCrosshair",timeTillHit);
 						Invoke("DisableHitCrosshair",timeTillHit + 0.1f);
 					}
-				} else {
+					//Bullet holes only on static objects and terrain
+				} else if (hit.transform.gameObject.GetComponent<Terrain>() || 
+				          (hit.transform.GetComponent<Rigidbody>().isKinematic)) {
 					//Create a bullet hole
 					Vector3 bulletHolePosition = hit.point + hit.normal * 0.01f;
 					Quaternion bulletHoleRotation = Quaternion.FromToRotation(-Vector3.forward, hit.normal);
