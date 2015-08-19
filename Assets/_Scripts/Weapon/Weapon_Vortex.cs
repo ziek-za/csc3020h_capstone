@@ -57,6 +57,13 @@ public class Weapon_Vortex : Photon.MonoBehaviour {
 		}
 	}
 
+	//All objects in the area of effect live in alreadyCollided
+	void OnTriggerExit(Collider other){
+		if (alreadyCollided.Contains(other.gameObject)){
+			alreadyCollided.Remove(other.gameObject);
+		}
+	}
+
 	//RPC to tell other clients to start exploding
 	[RPC] void PullTerrain(Vector3 vortexCenter, bool re){
 		recievedExplosion = true;

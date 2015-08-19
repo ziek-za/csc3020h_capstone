@@ -7,18 +7,25 @@ public class Weapon_ForceGrenade : Photon.MonoBehaviour {
 	public SphereCollider triggerArea;
 	public float pushForce = 700f;
 	public Transform vortex;
+	public float fuseTime = 3;
+
+	private Terrain terrain;
+	private Map_TerrainController MTC;
 
 	List<GameObject> alreadyCollided;
-	string mode;
+	public string mode;
 
 	// Use this for initialization
 	void Start () {	
+		terrain = Terrain.activeTerrain;
 		alreadyCollided = new List<GameObject>();
-		mode = "none";
+		MTC = terrain.GetComponent<Map_TerrainController>();
+		StartCoroutine("StartFuse");
 	}
-	
-	// Update is called once per frame
-	void Update () {	
+
+	IEnumerator StartFuse(){
+		yield return new WaitForSeconds(fuseTime);
+		Explode(mode);
 	}
 
 	//All objects in the area of effect live in alreadyCollided
@@ -39,6 +46,8 @@ public class Weapon_ForceGrenade : Photon.MonoBehaviour {
 		triggerArea.enabled = true;
 		Invoke ("TriggerForce",0.05f);
 		mode = newMode; //Mode (push/pull) is recieved when this method is called
+		if (mode.Equals("push"))
+			PushTerrain(transform.position);
 		Invoke("KillGODelay",0.1f); //Slight delay when removing the grenade to make sure forces have time to be applied
 	}
 
@@ -63,6 +72,15 @@ public class Weapon_ForceGrenade : Photon.MonoBehaviour {
 				PhotonNetwork.Instantiate(vortex.name, transform.position, Quaternion.identity, 0);
 				break; //Break because only want to create one vortex
 			}
+		}
+	}
+
+	//Used to modify the terrain on PUSH only
+	[RPC] void PushTerrain(Vector3 explosion_pos){		
+		//2 1.1
+		MTC.ManipulateTerrain(explosion_pos, 5f, "push", 30f, 2f, 1.1f);
+		if (photonView.isMine) {
+			photonView.RPC("PushTerrain",PhotonTargets.OthersBuffered, explosion_pos);
 		}
 	}
 
