@@ -52,4 +52,5 @@ MonoBehaviour:
   - NetworkChangeWeapons
   - PlayLaser
   - StopLaser
+  - NeutralTeamCapture
   DisableAutoOpenWizard: 0
