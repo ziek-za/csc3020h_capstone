@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HostType: 2
   Protocol: 0
-  ServerAddress: 192.168.1.104
+  ServerAddress: 196.24.181.151
   ServerPort: 5055
   PreferredRegion: 4
   AppID: master
@@ -48,4 +48,5 @@ MonoBehaviour:
   - BlueTeamCapture
   - RedTeamCapture
   - HostHasJoined
+  - NeutralTeamCapture
   DisableAutoOpenWizard: 0
