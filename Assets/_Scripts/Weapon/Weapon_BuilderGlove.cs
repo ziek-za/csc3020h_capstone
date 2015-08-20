@@ -9,8 +9,15 @@ public class Weapon_BuilderGlove : Photon.MonoBehaviour {
 	public ParticleSystem onHit, laserSystem;
 	public float range = 7;
 
+	int buildRate = 8;
+	int bRCounter = 0;
+
 	// Use this for initialization
 	void Start () {
+		if (transform.GetComponentInParent<Char_AttributeScript>().team == Char_AttributeScript.Teams.BLUE){
+			onHit.startColor = Color.blue;
+			laserSystem.startColor = Color.blue;
+		}
 	}
 	
 	// Update is called once per frame
@@ -37,9 +44,17 @@ public class Weapon_BuilderGlove : Photon.MonoBehaviour {
 						Debug.DrawLine(transform.position, hit.point, Color.green);
 						onHit.startSize = 0.5f;
 
-						if (hit.transform.GetComponent<Ability_BuilderFoundation>()){
-							hit.transform.GetComponent<Ability_BuilderFoundation>().Build(1,
-						      	transform.GetComponentInParent<Char_AttributeScript>().team);
+						if (hit.transform.GetComponent<Ability_BuilderFoundation>() && 
+						    transform.GetComponentInParent<Char_AttributeScript>().energy > 0){
+							//Adjust build rate here
+							bRCounter++;
+							if (bRCounter > buildRate){
+								if (hit.transform.GetComponent<Ability_BuilderFoundation>().Build(1,
+								    transform.GetComponentInParent<Char_AttributeScript>().team)){
+									transform.GetComponentInParent<Char_AttributeScript>().energy--;
+									bRCounter = 0;
+								}
+							}
 						}
 					} else {
 						onHit.startSize = 0f;

@@ -4,7 +4,7 @@ using System.Collections;
 public class Ability_BuilderFoundation : Photon.MonoBehaviour {
 
 	int completion = 0;
-	int required = 100;
+	int required = 60;
 
 	public GameObject completedBuilding;
 
@@ -25,9 +25,12 @@ public class Ability_BuilderFoundation : Photon.MonoBehaviour {
 		}
 	}
 
-	public void Build(int amount, Char_AttributeScript.Teams builderTeam){
-		if (builderTeam == currentTeam)
+	public bool Build(int amount, Char_AttributeScript.Teams builderTeam){
+		if (builderTeam == currentTeam){
 			completion += amount;
+			return true;
+		}
+		return false;
 	}
 
 	[RPC] void SetTeam(int vID,int team){

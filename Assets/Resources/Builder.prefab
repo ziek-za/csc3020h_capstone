@@ -359,7 +359,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94d692ec70941464da0050a313184e25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxDistance: 2
   linkFoundation: {fileID: 169046, guid: c4acc800200848d45aaaa554103b39fc, type: 2}
+  distanceIndicator: {fileID: 198366, guid: acc4bca2a9b2b9749afa793f7788e5c6, type: 2}
+  aimingPoint: {fileID: 139666, guid: a7c2ddd915f6ee24a9d4bf59618f0b34, type: 2}
+  placeLinkEnergyCost: 10
+  placeLinkCD: 25
 --- !u!114 &11434354
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -861,7 +866,7 @@ ParticleSystem:
         rgba: 4294967295
       maxColor:
         serializedVersion: 2
-        rgba: 4294967295
+        rgba: 4278190335
       minMaxState: 0
     startSize:
       scalar: 0
@@ -1061,7 +1066,7 @@ ParticleSystem:
         m_PostInfinity: 2
       minMaxState: 0
   ColorModule:
-    enabled: 1
+    enabled: 0
     gradient:
       maxGradient:
         key0:
@@ -1913,7 +1918,7 @@ ParticleSystem:
         rgba: 4294967295
       maxColor:
         serializedVersion: 2
-        rgba: 4294967295
+        rgba: 4278255871
       minMaxState: 0
     startSize:
       scalar: .300000012
@@ -2113,7 +2118,7 @@ ParticleSystem:
         m_PostInfinity: 2
       minMaxState: 0
   ColorModule:
-    enabled: 1
+    enabled: 0
     gradient:
       maxGradient:
         key0:
