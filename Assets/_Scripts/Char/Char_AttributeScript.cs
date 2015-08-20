@@ -12,6 +12,8 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 	public enum Teams {RED, BLUE, NONE};
 	public Teams team = Teams.NONE;
 
+	public GameObject weapon1, weapon2, weapon3;
+
 	Level_GUIController HUD;
 	public Char_SelectChar Respawner;
 
@@ -40,12 +42,42 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 		}
 	}
 
+	[RPC] void NetworkChangeWeapons(int vID, int weapon){
+		if (weapon == 1){
+			weapon1.SetActive(true);
+			weapon2.SetActive(false);
+			weapon3.SetActive(false);
+		} else if (weapon == 2){
+			weapon1.SetActive(false);
+			weapon2.SetActive(true);
+			weapon3.SetActive(false);
+		} else if (weapon == 3){
+			weapon1.SetActive(false);
+			weapon2.SetActive(false);
+			weapon3.SetActive(true);
+		}
+
+		if (photonView.isMine)
+			photonView.RPC ("NetworkChangeWeapons",PhotonTargets.OthersBuffered,vID,weapon);
+	}
+
+	void ChangeWeapons(){
+		if (Input.GetButton("1")){
+			NetworkChangeWeapons(transform.GetComponent<PhotonView>().viewID,1);
+		} else if (Input.GetButton("2")){
+			NetworkChangeWeapons(transform.GetComponent<PhotonView>().viewID,2);
+		} else if (Input.GetButton("3")){
+			NetworkChangeWeapons(transform.GetComponent<PhotonView>().viewID,3);
+		}
+	}
+
 	// Update is called once per frame
 	void Update () {
 		if (photonView.isMine){
 			//Debug.Log("Speed: "+speed);
 			HUD.UpdateHUDHealth(health);
 			HUD.UpdateHUDEnergy(energy);
+			ChangeWeapons();
 			if (health <= 0 || Input.GetKeyDown(KeyCode.P)){
 				Screen.lockCursor=false;
 				KillPlayer(this.gameObject.GetComponent<PhotonView>().viewID);

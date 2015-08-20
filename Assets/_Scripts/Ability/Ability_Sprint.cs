@@ -20,7 +20,7 @@ public class Ability_Sprint : Photon.MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(photonView.isMine){
-			if(Input.GetButtonDown("Sprint") && 
+			if(Input.GetButtonDown("Ability 2") && 
 			   !transform.GetComponent<Char_AttributeScript> ().buffs.Contains ("sprint") &&
 				transform.GetComponent<Char_AttributeScript>().energy >= energyCost &&
 			  	offCooldown)

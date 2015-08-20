@@ -29,7 +29,12 @@ public class Level_GUIController : MonoBehaviour {
 		
 		for (int i = 0; i < links.Length; i++){
 			Vector3 linkPos = links[i].transform.position + new Vector3(Random.Range(2,5),2,Random.Range(2,5));
-			Char_AttributeScript.Teams linkTeam = links[i].GetComponent<Map_LinkScript>().currentTeam;
+			Char_AttributeScript.Teams linkTeam = Char_AttributeScript.Teams.NONE;
+
+			if (links[i].GetComponent<Map_LinkScript>())
+				linkTeam = links[i].GetComponent<Map_LinkScript>().currentTeam;  //For proper links
+			else if (links[i].GetComponent<Ability_BuilderLink>())
+				linkTeam = links[i].GetComponent<Ability_BuilderLink>().currentTeam; //For builder links
 
 			//Set up postion on screen and in heirarcy
 			Vector3 buttonPos = new Vector3(50,yPos,0);
