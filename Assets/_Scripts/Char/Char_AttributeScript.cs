@@ -17,6 +17,8 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 	Level_GUIController HUD;
 	public Char_SelectChar Respawner;
 
+	public Map_LinkScript currentLink;
+
 	// Use this for initialization
 	void Start () {
 		if (photonView.isMine){
@@ -78,11 +80,14 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 			HUD.UpdateHUDHealth(health);
 			HUD.UpdateHUDEnergy(energy);
 			ChangeWeapons();
-			if (health <= 0 || Input.GetKeyDown(KeyCode.P)){
+			if (health <= 0 || Input.GetKey(KeyCode.P)){
+				if (currentLink != null){
+					ReduceCounter(currentLink.GetComponent<PhotonView>().viewID);
+				}
 				Screen.lockCursor=false;
-				KillPlayer(this.gameObject.GetComponent<PhotonView>().viewID);
 				GameObject.Find("CharacterSelectionGUI").transform.localScale=new Vector3(10,5,5);
 				Camera.main.GetComponent<BlurEffect>().enabled=true;
+				KillPlayer(this.gameObject.GetComponent<PhotonView>().viewID);
 				Char_SelectChar.classNo=10;
 				Respawner.spawned=false;
 
@@ -91,6 +96,25 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 				
 			}
 		}
+	}
+
+	[RPC] void ReduceCounter(int linkID){
+		PhotonView.Find(linkID).GetComponent<Map_LinkScript>().PlayerDeathMethod(collider);
+		if (photonView.isMine)
+			photonView.RPC("ReduceCounter", PhotonTargets.OthersBuffered, linkID);
+	}
+
+	[RPC] public void EnterLink(int playerID,int linkID){
+		PhotonView.Find (playerID).GetComponent<Char_AttributeScript> ().currentLink =
+			PhotonView.Find (linkID).GetComponent<Map_LinkScript> ();
+		if (photonView.isMine)
+			photonView.RPC("EnterLink", PhotonTargets.OthersBuffered, playerID, linkID);
+	}
+
+	[RPC] public void ExitLink(int playerID){
+		PhotonView.Find (playerID).GetComponent<Char_AttributeScript> ().currentLink = null;
+		if (photonView.isMine)
+			photonView.RPC("ExitLink", PhotonTargets.OthersBuffered, playerID);
 	}
 
 	[RPC] void KillPlayer(int vID){

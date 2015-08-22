@@ -122,8 +122,25 @@ public class Map_LinkScript : Photon.MonoBehaviour {
 			photonView.RPC("NeutralTeamCapture", PhotonTargets.OthersBuffered);
 	}
 
+	public void PlayerDeathMethod(Collider other){
+		if(other.GetComponent<Char_AttributeScript>().team== Char_AttributeScript.Teams.BLUE){
+			blueCounter--;
+		}
+		else if(other.GetComponent<Char_AttributeScript>().team== Char_AttributeScript.Teams.RED){
+			redCounter--;
+		}
+		if (other.GetComponent<PhotonView>().isMine){
+			linkSlider.gameObject.SetActive (false);
+			CancelInvoke("UpdateSlider");
+		}
+	}
+
 	void OnTriggerExit(Collider other){
+		Debug.Log ("Leaving collider: ");
 		if (other.GetComponent<Char_AttributeScript>()){
+			//other.GetComponent<Char_AttributeScript>().currentLink = null;
+			other.GetComponent<Char_AttributeScript>().
+				ExitLink(other.GetComponent<PhotonView>().viewID);
 			if(other.GetComponent<Char_AttributeScript>().team== Char_AttributeScript.Teams.BLUE){
 				blueCounter--;
 			}
@@ -137,9 +154,12 @@ public class Map_LinkScript : Photon.MonoBehaviour {
 				
 		}
 	}
-	
+
 	void OnTriggerEnter(Collider other){
 		if (other.GetComponent<Char_AttributeScript>()){
+			//other.GetComponent<Char_AttributeScript>().currentLink = transform.GetComponent<Map_LinkScript>();
+			other.GetComponent<Char_AttributeScript>().
+				EnterLink(other.GetComponent<PhotonView>().viewID, GetComponent<PhotonView>().viewID);
 			if(other.GetComponent<Char_AttributeScript>().team== Char_AttributeScript.Teams.BLUE){
 				blueCounter++;
 				if(linkValue>0 && other.GetComponent<PhotonView>().isMine){

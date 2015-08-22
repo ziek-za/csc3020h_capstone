@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HostType: 2
   Protocol: 0
-  ServerAddress: 196.24.183.146
+  ServerAddress: 10.0.0.7
   ServerPort: 5055
   PreferredRegion: 4
   AppID: master
@@ -53,4 +53,7 @@ MonoBehaviour:
   - PlayLaser
   - StopLaser
   - NeutralTeamCapture
+  - EnterLink
+  - ExitLink
+  - ReduceCounter
   DisableAutoOpenWizard: 0
