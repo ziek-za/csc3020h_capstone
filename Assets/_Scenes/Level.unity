@@ -8751,11 +8751,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07790a9e9d13e2848b1c83d90bc8d23d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LevelID: 2
-  RawHeightMapID: 1
-  FreezeMapID: 1
-  ClampMapID: 1
-  LevelName: Caves Galore
 --- !u!1 &784944992
 GameObject:
   m_ObjectHideFlags: 0
@@ -10904,8 +10899,8 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 0, y: .25}
   m_AnchorMax: {x: 1, y: .75}
-  m_AnchoredPosition: {x: 2.5, y: 0}
-  m_SizeDelta: {x: -5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: .5, y: .5}
 --- !u!1 &1101659294
 GameObject:
@@ -12947,7 +12942,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22499678, guid: b6f7c5e1fd45ec045b18008e97fdbf7a, type: 2}
       propertyPath: m_SizeDelta.x
-      value: 75
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 22499678, guid: b6f7c5e1fd45ec045b18008e97fdbf7a, type: 2}
       propertyPath: m_SizeDelta.y
@@ -12975,6 +12970,18 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22499678, guid: b6f7c5e1fd45ec045b18008e97fdbf7a, type: 2}
       propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 199676, guid: b6f7c5e1fd45ec045b18008e97fdbf7a, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22499670, guid: b6f7c5e1fd45ec045b18008e97fdbf7a, type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22499670, guid: b6f7c5e1fd45ec045b18008e97fdbf7a, type: 2}
+      propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -13085,7 +13092,7 @@ RectTransform:
   m_Father: {fileID: 1072710898}
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: .5, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: .5, y: .5}
@@ -19534,7 +19541,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 75, y: 60}
+  m_SizeDelta: {x: 100, y: 60}
   m_Pivot: {x: 0, y: 0}
 --- !u!1 &2004845915
 GameObject:
