@@ -8,7 +8,7 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 	private Ray ray;
 	private float shotCooldown;	
 
-	private GameObject hitCrosshair;
+	public GameObject hitCrosshair;
 
 	public GameObject bulletHolePrefab;
 	public ParticleSystem muzzleFlash;
@@ -43,6 +43,10 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 		tracerEffect.transform.localRotation =  Quaternion.identity;
 	}
 
+	int DamageAmount(){
+		return -10;
+	}
+
 	void Update()
 	{
 		if(photonView.isMine && Time.time >= shotCooldown && Input.GetButton("Fire1")) {
@@ -67,22 +71,25 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 			{
 				Debug.DrawLine(transform.position, hit.point, Color.red);
 
-
-
+				//Damaging enemy players
 				if (hit.transform.gameObject.GetComponent<Char_AttributeScript>()){
-					//hit.transform.gameObject.rigidbody.AddForce(Vector3.Normalize(ray.direction)*100f);
-					//hit.transform.networkView.viewID;
-					//Debug.Log("Their colour: "+hit.transform.gameObject.GetComponent<Char_AttributeScript>().team);
 					if (hit.transform.gameObject.GetComponent<Char_AttributeScript>().team != transform.parent.parent.parent.GetComponent<Char_AttributeScript>().team){
-						DamagePlayer(-10, hit.transform.GetComponent<PhotonView>().viewID);
+						DamagePlayer(DamageAmount(), hit.transform.GetComponent<PhotonView>().viewID);
 						float timeTillHit = Vector3.Magnitude(hit.point - transform.position) / 90f;
 						Invoke ("EnableHitCrosshair",timeTillHit);
 						Invoke("DisableHitCrosshair",timeTillHit + 0.1f);
 					}
-					//Bullet holes only on static objects and terrain
+
+				//Damaging builder 'links'
+				} else if (hit.transform.gameObject.GetComponent<Ability_BuilderLink>()) {
+					DamageBuildingLink(DamageAmount(),hit.transform.GetComponent<PhotonView>().viewID);
+					float timeTillHit = Vector3.Magnitude(hit.point - transform.position) / 90f;
+					Invoke ("EnableHitCrosshair",timeTillHit);
+					Invoke("DisableHitCrosshair",timeTillHit + 0.1f);
+				
+				//Bullet holes only on static objects and terrain
 				} else if (hit.transform.gameObject.GetComponent<Terrain>() || 
-				          (hit.transform.GetComponent<Rigidbody>().isKinematic)) {
-					//Create a bullet hole
+				           (hit.transform.GetComponent<Rigidbody>() && hit.rigidbody.isKinematic)) {
 					Vector3 bulletHolePosition = hit.point + hit.normal * 0.01f;
 					Quaternion bulletHoleRotation = Quaternion.FromToRotation(-Vector3.forward, hit.normal);
 					GameObject hole = Instantiate(bulletHolePrefab, bulletHolePosition, bulletHoleRotation) as GameObject;
@@ -103,5 +110,11 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 		cas.ChangeHP(damage);
 		if (photonView.isMine)
 			photonView.RPC("DamagePlayer", PhotonTargets.OthersBuffered, damage, vID);
+	}
+
+	[RPC] void DamageBuildingLink(int damage, int vID){
+		PhotonView.Find(vID).transform.GetComponent<Ability_BuilderLink>().ChangeHP(damage);
+		if (photonView.isMine)
+			photonView.RPC("DamageBuildingLink", PhotonTargets.OthersBuffered, damage, vID);
 	}
 }

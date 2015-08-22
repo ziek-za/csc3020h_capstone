@@ -73,7 +73,8 @@ public class Ability_BuilderPlaceFoundations : Photon.MonoBehaviour {
 					linkOffCooldown = false;
 					GameObject link = PhotonNetwork.Instantiate(linkFoundation.name,
 					                                distanceIndicator.transform.position,distanceIndicator.transform.rotation,0);
-					link.GetComponent<Ability_BuilderFoundation>().currentTeam = transform.GetComponent<Char_AttributeScript>().team;
+					//link.GetComponent<Ability_BuilderFoundation>().currentTeam = transform.GetComponent<Char_AttributeScript>().team;
+					SetBoxTeam (link.GetComponent<PhotonView>().viewID,(int)transform.GetComponent<Char_AttributeScript>().team);
 				}
 				//GameObject link = PhotonNetwork.Instantiate(linkFoundation.name,transform.position,Quaternion.identity,0);
 				//link.GetComponent<Ability_BuilderFoundation>().currentTeam = transform.GetComponent<Char_AttributeScript>().team;
@@ -82,5 +83,12 @@ public class Ability_BuilderPlaceFoundations : Photon.MonoBehaviour {
 				distanceIndicator.transform.GetComponent<MeshRenderer> ().enabled = false;
 			}
 		}
+	}
+
+	[RPC] void SetBoxTeam(int vID, int team){
+		PhotonView.Find(vID).GetComponent<Ability_BuilderFoundation>().currentTeam = (Char_AttributeScript.Teams) team;
+		
+		if (photonView.isMine)
+			photonView.RPC("SetBoxTeam", PhotonTargets.OthersBuffered, vID, team);
 	}
 }

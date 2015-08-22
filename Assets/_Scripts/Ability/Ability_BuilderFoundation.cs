@@ -11,6 +11,8 @@ public class Ability_BuilderFoundation : Photon.MonoBehaviour {
 	public Char_AttributeScript.Teams currentTeam;
 
 	GameObject tempObject;
+	float lifetimeAccum = 0;
+	float linkLifetime = 40f;
 
 	// Use this for initialization
 	void Start () {
@@ -18,28 +20,40 @@ public class Ability_BuilderFoundation : Photon.MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (completion >= required){
-			tempObject = PhotonNetwork.Instantiate(completedBuilding.name,transform.position,Quaternion.identity,0) as GameObject;
-			SetTeam (tempObject.GetPhotonView().viewID,(int)currentTeam);
-			PhotonNetwork.Destroy(gameObject);
+		//Debug.Log(completion);
+		if (photonView.isMine){
+			lifetimeAccum += Time.deltaTime;
+			if (completion >= required){
+				tempObject = PhotonNetwork.Instantiate(completedBuilding.name,transform.position,Quaternion.identity,0) as GameObject;
+				SetTeam (tempObject.GetPhotonView().viewID,(int)currentTeam, lifetimeAccum);
+				DestroyBox(GetComponent<PhotonView>().viewID);
+			}
+			if (lifetimeAccum >= linkLifetime){
+				DestroyBox(GetComponent<PhotonView>().viewID);
+			}
 		}
 	}
 
-	public bool Build(int amount, Char_AttributeScript.Teams builderTeam){
-		if (builderTeam == currentTeam){
-			completion += amount;
-			return true;
-		}
-		return false;
+	public void Build(int amount){
+		completion += amount;
 	}
 
-	[RPC] void SetTeam(int vID,int team){
-		if (PhotonView.Find(vID).transform.GetComponent<Ability_BuilderLink>()) //Need one for each building type
+	[RPC] void DestroyBox(int vID){
+		Destroy(PhotonView.Find(vID).gameObject);
+
+		if (photonView.isMine)
+			photonView.RPC("DestroyBox", PhotonTargets.OthersBuffered, vID);
+	}
+
+	[RPC] void SetTeam(int vID,int team, float lifeTime){
+		if (PhotonView.Find(vID).transform.GetComponent<Ability_BuilderLink>()){ //Need one for each building type
 			PhotonView.Find(vID).transform.GetComponent<Ability_BuilderLink>().SetTeam((Char_AttributeScript.Teams)team);
+			PhotonView.Find(vID).transform.GetComponent<Ability_BuilderLink>().SetLifetime(lifeTime);
+		}
 		else
 			Debug.LogError("Need an if statement for that kind of building here");
 
 		if (photonView.isMine)
-			photonView.RPC("SetTeam", PhotonTargets.OthersBuffered,vID,team);
+			photonView.RPC("SetTeam", PhotonTargets.OthersBuffered,vID,team,lifeTime);
 	}
 }
