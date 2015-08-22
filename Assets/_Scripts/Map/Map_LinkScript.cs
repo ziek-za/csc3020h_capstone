@@ -14,7 +14,7 @@ public class Map_LinkScript : Photon.MonoBehaviour {
 	float captureSpeed=0;
 	public ParticleSystem redBeam, blueBeam, neutralBeam;
 
-	Level_GUIController gui;
+	protected Level_GUIController gui;
 
 	// Use this for initialization
 	void Start () {

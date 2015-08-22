@@ -533,7 +533,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grenadePrefab: {fileID: 400502, guid: 84552cdc966f3964c87ea30a0552c768, type: 2}
   grenadePosition: {fileID: 481096}
-  energyCost: 10
+  energyCost: 20
   cooldown: 1
   initialForwardVelocity: 25
   initialUpwardsVelocity: 10

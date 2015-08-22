@@ -102,7 +102,9 @@ public class Weapon_BuilderGlove : Photon.MonoBehaviour {
 	}
 
 	[RPC] void Build(int amount, int vID){
-		PhotonView.Find(vID).GetComponent<Ability_BuilderFoundation>().Build(amount);
+		try {
+			PhotonView.Find(vID).GetComponent<Ability_BuilderFoundation>().Build(amount);
+		} catch (System.NullReferenceException e){}
 		if (photonView.isMine)
 			photonView.RPC("Build",PhotonTargets.OthersBuffered,amount,vID);
 	}

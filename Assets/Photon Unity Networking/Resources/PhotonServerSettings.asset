@@ -62,4 +62,5 @@ MonoBehaviour:
   - RPCBuild
   - DamageBuildingLink
   - RepairLink
+  - RegenEnergy
   DisableAutoOpenWizard: 0

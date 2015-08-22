@@ -507,8 +507,8 @@ MonoBehaviour:
   maxDistance: 15
   projection: {fileID: 130738, guid: 791e7f3ff3db4014cab368a34896bb0d, type: 2}
   distanceIndicator: {fileID: 110788, guid: 11ca0607ebe6c474f88d377f60d40e22, type: 2}
-  energyCost: 10
-  cooldown: 3
+  energyCost: 20
+  cooldown: 1
   redMat: {fileID: 2100000, guid: c7cf1bb431b424a468eb880c591a6177, type: 2}
 --- !u!114 &11476876
 MonoBehaviour:

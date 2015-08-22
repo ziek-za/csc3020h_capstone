@@ -9,6 +9,8 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 	public int health = 125;
 	public int speed = 125;
 	public int energy = 100;
+	float enegryRegenRate = 0.5f;
+	float linkRateCounter = 0.5f; //These values determine link regen rate
 	float energyTrickeRate = 1f;
 	public enum Teams {RED, BLUE, NONE};
 	public Teams team = Teams.NONE;
@@ -74,10 +76,24 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 		}
 	}
 
+	void LinkRegenEnergy(){
+		if (energy < 100){
+			energy ++;
+		}
+	}
+
 	// Update is called once per frame
 	void Update () {
 		if (photonView.isMine){
-			//Debug.Log("Speed: "+speed);
+			if (currentLink && currentLink.currentTeam == team){
+				linkRateCounter += Time.deltaTime;
+				if (linkRateCounter >= enegryRegenRate){
+					linkRateCounter -= enegryRegenRate;
+					LinkRegenEnergy();
+				} else {
+					linkRateCounter = enegryRegenRate;
+				}
+			}
 			HUD.UpdateHUDHealth(health);
 			HUD.UpdateHUDEnergy(energy);
 			ChangeWeapons();
@@ -109,6 +125,10 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 		}
 	}
 
+	[RPC] public void RegenEnergy(int vID){
+
+	}
+
 	[RPC] void ReduceCounter(int linkID){
 		PhotonView.Find(linkID).GetComponent<Map_LinkScript>().PlayerDeathMethod(collider);
 		if (photonView.isMine)
@@ -116,8 +136,15 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 	}
 
 	[RPC] public void EnterLink(int playerID,int linkID){
-		PhotonView.Find (playerID).GetComponent<Char_AttributeScript> ().currentLink =
-			PhotonView.Find (linkID).GetComponent<Map_LinkScript> ();
+		if (PhotonView.Find (linkID).GetComponent<Map_LinkScript> ()){
+			PhotonView.Find (playerID).GetComponent<Char_AttributeScript> ().currentLink =
+				PhotonView.Find (linkID).GetComponent<Map_LinkScript> ();
+		} 
+		if (PhotonView.Find (linkID).GetComponent<Ability_BuilderLink> ()){
+			PhotonView.Find (playerID).GetComponent<Char_AttributeScript> ().currentLink =
+				PhotonView.Find (linkID).GetComponent<Ability_BuilderLink> ();
+		}
+
 		if (photonView.isMine)
 			photonView.RPC("EnterLink", PhotonTargets.OthersBuffered, playerID, linkID);
 	}
@@ -145,5 +172,5 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 		team = (Teams)myTeam;
 		if (photonView.isMine)
 			photonView.RPC("joinTeam", PhotonTargets.OthersBuffered, color, myTeam);
-	}
+	}	
 }

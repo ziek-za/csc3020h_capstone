@@ -11,6 +11,8 @@ public class Ability_BuilderFoundation : Photon.MonoBehaviour {
 	public Char_AttributeScript.Teams currentTeam;
 
 	GameObject tempObject;
+	float lifetimeAccum = 0;
+	float linkLifetime = 40f;
 
 	// Use this for initialization
 	void Start () {
@@ -20,10 +22,13 @@ public class Ability_BuilderFoundation : Photon.MonoBehaviour {
 	void Update () {
 		//Debug.Log(completion);
 		if (photonView.isMine){
-			Debug.Log (completion);
+			lifetimeAccum += Time.deltaTime;
 			if (completion >= required){
 				tempObject = PhotonNetwork.Instantiate(completedBuilding.name,transform.position,Quaternion.identity,0) as GameObject;
-				SetTeam (tempObject.GetPhotonView().viewID,(int)currentTeam);
+				SetTeam (tempObject.GetPhotonView().viewID,(int)currentTeam, lifetimeAccum);
+				DestroyBox(GetComponent<PhotonView>().viewID);
+			}
+			if (lifetimeAccum >= linkLifetime){
 				DestroyBox(GetComponent<PhotonView>().viewID);
 			}
 		}
@@ -40,13 +45,15 @@ public class Ability_BuilderFoundation : Photon.MonoBehaviour {
 			photonView.RPC("DestroyBox", PhotonTargets.OthersBuffered, vID);
 	}
 
-	[RPC] void SetTeam(int vID,int team){
-		if (PhotonView.Find(vID).transform.GetComponent<Ability_BuilderLink>()) //Need one for each building type
+	[RPC] void SetTeam(int vID,int team, float lifeTime){
+		if (PhotonView.Find(vID).transform.GetComponent<Ability_BuilderLink>()){ //Need one for each building type
 			PhotonView.Find(vID).transform.GetComponent<Ability_BuilderLink>().SetTeam((Char_AttributeScript.Teams)team);
+			PhotonView.Find(vID).transform.GetComponent<Ability_BuilderLink>().SetLifetime(lifeTime);
+		}
 		else
 			Debug.LogError("Need an if statement for that kind of building here");
 
 		if (photonView.isMine)
-			photonView.RPC("SetTeam", PhotonTargets.OthersBuffered,vID,team);
+			photonView.RPC("SetTeam", PhotonTargets.OthersBuffered,vID,team,lifeTime);
 	}
 }
