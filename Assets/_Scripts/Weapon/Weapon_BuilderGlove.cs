@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Weapon_BuilderGlove : Photon.MonoBehaviour {
 
@@ -9,11 +10,14 @@ public class Weapon_BuilderGlove : Photon.MonoBehaviour {
 	public ParticleSystem onHit, laserSystem;
 	public float range = 7;
 
+	public GameObject buildCrosshair;
+
 	int buildRate = 8;
 	int bRCounter = 0;
 
 	// Use this for initialization
 	void Start () {
+		buildCrosshair = GameObject.Find ("BuildHitCrosshair");
 		if (transform.GetComponentInParent<Char_AttributeScript>().team == Char_AttributeScript.Teams.BLUE){
 			onHit.startColor = Color.blue;
 			laserSystem.startColor = Color.blue;
@@ -32,7 +36,7 @@ public class Weapon_BuilderGlove : Photon.MonoBehaviour {
 				//laserSystem.Stop();
 			}
 
-			if (Input.GetButton("Fire1")){	
+			if (Input.GetButton("Fire1")){
 				Vector2 screenCenterPoint = new Vector2(Screen.width/2, Screen.height/2);
 				ray = Camera.main.ScreenPointToRay(screenCenterPoint);
 				Physics.Raycast(ray, out hit, Camera.main.farClipPlane);
@@ -44,15 +48,38 @@ public class Weapon_BuilderGlove : Photon.MonoBehaviour {
 						Debug.DrawLine(transform.position, hit.point, Color.green);
 						onHit.startSize = 0.5f;
 
+						//Building a foundation
 						if (hit.transform.GetComponent<Ability_BuilderFoundation>() && 
 						    transform.GetComponentInParent<Char_AttributeScript>().energy > 0){
 							//Adjust build rate here
 							bRCounter++;
 							if (bRCounter > buildRate){
-								if (hit.transform.GetComponent<Ability_BuilderFoundation>().Build(1,
-								    transform.GetComponentInParent<Char_AttributeScript>().team)){
+								if (transform.GetComponentInParent<Char_AttributeScript>().team == 
+								    hit.transform.GetComponent<Ability_BuilderFoundation>().currentTeam)
+								{
+									buildCrosshair.GetComponent<RawImage>().enabled = true;
+									Build (1,hit.transform.GetComponent<PhotonView>().viewID);
 									transform.GetComponentInParent<Char_AttributeScript>().energy--;
 									bRCounter = 0;
+								}
+							}
+						}
+
+						//Repairing a link
+						else if (hit.transform.GetComponent<Ability_BuilderLink>() && 
+						         transform.GetComponentInParent<Char_AttributeScript>().energy > 0){
+							bRCounter++;
+							if (bRCounter > buildRate){
+								if (transform.GetComponentInParent<Char_AttributeScript>().team == 
+								    hit.transform.GetComponent<Ability_BuilderLink>().currentTeam &&
+								    hit.transform.GetComponent<Ability_BuilderLink>().health < 100)
+								{
+									buildCrosshair.GetComponent<RawImage>().enabled = true;
+									RepairLink (2,hit.transform.GetComponent<PhotonView>().viewID);
+									transform.GetComponentInParent<Char_AttributeScript>().energy--;
+									bRCounter = 0;
+								} else {
+									buildCrosshair.GetComponent<RawImage>().enabled = false;
 								}
 							}
 						}
@@ -62,8 +89,22 @@ public class Weapon_BuilderGlove : Photon.MonoBehaviour {
 
 						
 				}
+			} else {
+				buildCrosshair.GetComponent<RawImage>().enabled = false;
 			}
 		}
+	}
+
+	[RPC] void RepairLink(int amount, int vID){
+		PhotonView.Find(vID).GetComponent<Ability_BuilderLink>().ChangeHP(amount);
+		if (photonView.isMine)
+			photonView.RPC("RepairLink",PhotonTargets.OthersBuffered,amount,vID);
+	}
+
+	[RPC] void Build(int amount, int vID){
+		PhotonView.Find(vID).GetComponent<Ability_BuilderFoundation>().Build(amount);
+		if (photonView.isMine)
+			photonView.RPC("Build",PhotonTargets.OthersBuffered,amount,vID);
 	}
 
 	[RPC] void PlayLaser(int vID){

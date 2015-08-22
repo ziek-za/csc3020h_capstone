@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HostType: 2
   Protocol: 0
-  ServerAddress: 10.0.0.7
+  ServerAddress: 10.0.0.10
   ServerPort: 5055
   PreferredRegion: 4
   AppID: master
@@ -56,4 +56,10 @@ MonoBehaviour:
   - EnterLink
   - ExitLink
   - ReduceCounter
+  - DestroyBox
+  - SetBoxTeam
+  - Build
+  - RPCBuild
+  - DamageBuildingLink
+  - RepairLink
   DisableAutoOpenWizard: 0

@@ -18,19 +18,26 @@ public class Ability_BuilderFoundation : Photon.MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (completion >= required){
-			tempObject = PhotonNetwork.Instantiate(completedBuilding.name,transform.position,Quaternion.identity,0) as GameObject;
-			SetTeam (tempObject.GetPhotonView().viewID,(int)currentTeam);
-			PhotonNetwork.Destroy(gameObject);
+		//Debug.Log(completion);
+		if (photonView.isMine){
+			Debug.Log (completion);
+			if (completion >= required){
+				tempObject = PhotonNetwork.Instantiate(completedBuilding.name,transform.position,Quaternion.identity,0) as GameObject;
+				SetTeam (tempObject.GetPhotonView().viewID,(int)currentTeam);
+				DestroyBox(GetComponent<PhotonView>().viewID);
+			}
 		}
 	}
 
-	public bool Build(int amount, Char_AttributeScript.Teams builderTeam){
-		if (builderTeam == currentTeam){
-			completion += amount;
-			return true;
-		}
-		return false;
+	public void Build(int amount){
+		completion += amount;
+	}
+
+	[RPC] void DestroyBox(int vID){
+		Destroy(PhotonView.Find(vID).gameObject);
+
+		if (photonView.isMine)
+			photonView.RPC("DestroyBox", PhotonTargets.OthersBuffered, vID);
 	}
 
 	[RPC] void SetTeam(int vID,int team){

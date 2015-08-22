@@ -85,13 +85,22 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 				if (currentLink != null){
 					ReduceCounter(currentLink.GetComponent<PhotonView>().viewID);
 				}
+
+				//Disabling various crosshairs
+				try {
+					GetComponentInChildren<Char_BasicShootScript>().hitCrosshair.GetComponent<RawImage>().enabled = false;
+				} catch (System.NullReferenceException e){}
+				try {
+					GetComponentInChildren<Weapon_BuilderGlove>().buildCrosshair.GetComponent<RawImage>().enabled = false;
+				} catch (System.NullReferenceException e){}
+
 				Screen.lockCursor=false;
 				GameObject.Find("CharacterSelectionGUI").transform.localScale=new Vector3(10,5,5);
 				Camera.main.GetComponent<BlurEffect>().enabled=true;
 				KillPlayer(this.gameObject.GetComponent<PhotonView>().viewID);
 				Char_SelectChar.classNo=10;
 				Respawner.spawned=false;
-				GetComponent<Char_BasicShootScript>().hitCrosshair.GetComponent<RawImage>().enabled = false;
+
 
 				//Resets the link buttons to show correct colors
 				//HUD.SetUpLinkButtons();

@@ -9,11 +9,23 @@ public class Ability_BuilderLink : MonoBehaviour {
 	public ParticleSystem redBeam, blueBeam;
 
 	public float lifeTime = 30f;
+	public int health = 100;
 
 	Level_GUIController gui;
 
 	// Use this for initialization
 	void Start () {
+	}
+
+	public void ChangeHP(int change){
+		health += change;
+	}
+
+	void Update(){
+		if (health <= 0){
+			CancelInvoke("KillSelf");
+			KillSelf();
+		}
 	}
 
 	public void SetTeam(Char_AttributeScript.Teams newTeam){
