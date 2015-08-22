@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Char_AttributeScript : Photon.MonoBehaviour {
 
@@ -8,7 +9,7 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 	public int health = 125;
 	public int speed = 125;
 	public int energy = 100;
-	public float energyTrickeRate = 1f;
+	float energyTrickeRate = 1f;
 	public enum Teams {RED, BLUE, NONE};
 	public Teams team = Teams.NONE;
 
@@ -90,6 +91,7 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 				KillPlayer(this.gameObject.GetComponent<PhotonView>().viewID);
 				Char_SelectChar.classNo=10;
 				Respawner.spawned=false;
+				GetComponent<Char_BasicShootScript>().hitCrosshair.GetComponent<RawImage>().enabled = false;
 
 				//Resets the link buttons to show correct colors
 				//HUD.SetUpLinkButtons();

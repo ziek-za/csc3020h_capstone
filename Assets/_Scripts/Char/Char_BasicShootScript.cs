@@ -8,7 +8,7 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 	private Ray ray;
 	private float shotCooldown;	
 
-	private GameObject hitCrosshair;
+	public GameObject hitCrosshair;
 
 	public GameObject bulletHolePrefab;
 	public ParticleSystem muzzleFlash;
