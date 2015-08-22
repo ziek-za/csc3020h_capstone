@@ -382,12 +382,12 @@ MonoBehaviour:
   health: 125
   speed: 125
   energy: 100
-  energyTrickeRate: 1
   team: 0
   weapon1: {fileID: 129340}
   weapon2: {fileID: 181096}
   weapon3: {fileID: 181096}
   Respawner: {fileID: 0}
+  currentLink: {fileID: 0}
 --- !u!114 &11429344
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -399,6 +399,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98c885136e314544580f8c69057aee38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitCrosshair: {fileID: 0}
   bulletHolePrefab: {fileID: 185902, guid: dea55ba2cdbead54ba3497383c460581, type: 2}
   muzzleFlash: {fileID: 19829336}
   tracerEffect: {fileID: 19829338}
@@ -532,10 +533,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grenadePrefab: {fileID: 400502, guid: 84552cdc966f3964c87ea30a0552c768, type: 2}
   grenadePosition: {fileID: 481096}
-  energyCost: 30
-  cooldown: 4
-  initialForwardVelocity: 15
-  initialUpwardsVelocity: 7
+  energyCost: 20
+  cooldown: 1
+  initialForwardVelocity: 25
+  initialUpwardsVelocity: 10
 --- !u!136 &13629336
 CapsuleCollider:
   m_ObjectHideFlags: 1

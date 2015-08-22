@@ -11,6 +11,8 @@ public class Ability_Teleport : Photon.MonoBehaviour {
 	public int energyCost = 50;
 	public int cooldown = 5;
 
+	public Material redMat;
+
 	Vector3 teleportDirection;
 	bool offCooldown = true;
 
@@ -26,6 +28,14 @@ public class Ability_Teleport : Photon.MonoBehaviour {
 		//projection.transform.GetComponentInChildren<MeshRenderer> ().enabled = false;
 		projection.transform.parent = transform;
 		distanceIndicator.transform.parent = transform;
+
+		//Red team looks red
+		if (GetComponent<Char_AttributeScript>().team == Char_AttributeScript.Teams.RED){
+			projection.GetComponent<MeshRenderer> ().material = redMat;
+			projection.transform.Find("BasicGun").GetComponent<MeshRenderer> ().material = redMat;
+			distanceIndicator.GetComponent<MeshRenderer>().materials[0].color = Color.red;
+		}
+
 	}
 
 	void cooledDown(){
@@ -93,6 +103,7 @@ public class Ability_Teleport : Photon.MonoBehaviour {
 	void Teleport(){
 		transform.Translate (teleportDirection * teleportDistance);
 		Camera.main.transform.Translate(teleportDirection * teleportDistance);
+		rigidbody.velocity = Vector3.zero;
 	}
 	
 }

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Char_AttributeScript : Photon.MonoBehaviour {
 
@@ -8,7 +9,9 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 	public int health = 125;
 	public int speed = 125;
 	public int energy = 100;
-	public float energyTrickeRate = 1f;
+	float enegryRegenRate = 0.5f;
+	float linkRateCounter = 0.5f; //These values determine link regen rate
+	float energyTrickeRate = 1f;
 	public enum Teams {RED, BLUE, NONE};
 	public Teams team = Teams.NONE;
 
@@ -73,10 +76,24 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 		}
 	}
 
+	void LinkRegenEnergy(){
+		if (energy < 100){
+			energy ++;
+		}
+	}
+
 	// Update is called once per frame
 	void Update () {
 		if (photonView.isMine){
-			//Debug.Log("Speed: "+speed);
+			if (currentLink && currentLink.currentTeam == team){
+				linkRateCounter += Time.deltaTime;
+				if (linkRateCounter >= enegryRegenRate){
+					linkRateCounter -= enegryRegenRate;
+					LinkRegenEnergy();
+				} else {
+					linkRateCounter = enegryRegenRate;
+				}
+			}
 			HUD.UpdateHUDHealth(health);
 			HUD.UpdateHUDEnergy(energy);
 			ChangeWeapons();
@@ -84,6 +101,15 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 				if (currentLink != null){
 					ReduceCounter(currentLink.GetComponent<PhotonView>().viewID);
 				}
+
+				//Disabling various crosshairs
+				try {
+					GetComponentInChildren<Char_BasicShootScript>().hitCrosshair.GetComponent<RawImage>().enabled = false;
+				} catch (System.NullReferenceException e){}
+				try {
+					GetComponentInChildren<Weapon_BuilderGlove>().buildCrosshair.GetComponent<RawImage>().enabled = false;
+				} catch (System.NullReferenceException e){}
+
 				Screen.lockCursor=false;
 				GameObject.Find("CharacterSelectionGUI").transform.localScale=new Vector3(10,5,5);
 				Camera.main.GetComponent<BlurEffect>().enabled=true;
@@ -91,11 +117,16 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 				Char_SelectChar.classNo=10;
 				Respawner.spawned=false;
 
+
 				//Resets the link buttons to show correct colors
 				//HUD.SetUpLinkButtons();
 				
 			}
 		}
+	}
+
+	[RPC] public void RegenEnergy(int vID){
+
 	}
 
 	[RPC] void ReduceCounter(int linkID){
@@ -105,8 +136,15 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 	}
 
 	[RPC] public void EnterLink(int playerID,int linkID){
-		PhotonView.Find (playerID).GetComponent<Char_AttributeScript> ().currentLink =
-			PhotonView.Find (linkID).GetComponent<Map_LinkScript> ();
+		if (PhotonView.Find (linkID).GetComponent<Map_LinkScript> ()){
+			PhotonView.Find (playerID).GetComponent<Char_AttributeScript> ().currentLink =
+				PhotonView.Find (linkID).GetComponent<Map_LinkScript> ();
+		} 
+		if (PhotonView.Find (linkID).GetComponent<Ability_BuilderLink> ()){
+			PhotonView.Find (playerID).GetComponent<Char_AttributeScript> ().currentLink =
+				PhotonView.Find (linkID).GetComponent<Ability_BuilderLink> ();
+		}
+
 		if (photonView.isMine)
 			photonView.RPC("EnterLink", PhotonTargets.OthersBuffered, playerID, linkID);
 	}
@@ -134,5 +172,5 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 		team = (Teams)myTeam;
 		if (photonView.isMine)
 			photonView.RPC("joinTeam", PhotonTargets.OthersBuffered, color, myTeam);
-	}
+	}	
 }
