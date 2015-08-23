@@ -42,6 +42,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 429338}
+  - 114: {fileID: 11475936}
+  - 114: {fileID: 11426136}
   m_Layer: 0
   m_Name: LauncherMuzzle
   m_TagString: Untagged
@@ -174,7 +176,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 129338}
-  m_LocalRotation: {x: .707106829, y: 0, z: 0, w: -.707106829}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: .0199999996, y: 1.00699997, z: -.0500000007}
   m_LocalScale: {x: .666666687, y: .666666687, z: .571428657}
   m_Children: []
@@ -342,6 +344,31 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &11426136
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 129338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ownerId: 0
+  group: 0
+  prefixBackup: -1
+  observed: {fileID: 0}
+  synchronization: 0
+  onSerializeTransformOption: 3
+  onSerializeRigidBodyOption: 2
+  ownershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 0}
+  ObservedComponentsFoldoutOpen: 1
+  viewIdField: 0
+  instantiationId: -1
+  isRuntimeInstantiated: 0
 --- !u!114 &11429336
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -622,6 +649,24 @@ MonoBehaviour:
   cooldown: 1
   initialForwardVelocity: 25
   initialUpwardsVelocity: 10
+--- !u!114 &11475936
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 129338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9164392a867a4fd4fbf32645b4986ae4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitCrosshair: {fileID: 0}
+  bulletHolePrefab: {fileID: 185902, guid: dea55ba2cdbead54ba3497383c460581, type: 2}
+  muzzleFlash: {fileID: 19820516, guid: 32ce1bbf65cf6db4aaff7b299000905b, type: 2}
+  tracerEffect: {fileID: 19820516, guid: 32ce1bbf65cf6db4aaff7b299000905b, type: 2}
+  timeBetweenShots: 1
+  weaponAccuracy: 1
+  rocket: {fileID: 152258, guid: cc73a4ac3d664c747bfc4fe4436fd12f, type: 2}
 --- !u!136 &13629336
 CapsuleCollider:
   m_ObjectHideFlags: 1
