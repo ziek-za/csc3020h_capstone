@@ -100,6 +100,7 @@ GameObject:
   - 4: {fileID: 402496}
   - 33: {fileID: 3302498}
   - 23: {fileID: 2302498}
+  - 64: {fileID: 6428610}
   m_Layer: 0
   m_Name: stair_5
   m_TagString: Untagged
@@ -1619,7 +1620,7 @@ MeshCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_SmoothSphereCollisions: 0
-  m_Convex: 1
+  m_Convex: 0
   m_Mesh: {fileID: 4300106, guid: cdec9da478ea48547a09cb58f5249ba7, type: 3}
 --- !u!64 &6402522
 MeshCollider:
@@ -1632,7 +1633,7 @@ MeshCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_SmoothSphereCollisions: 0
-  m_Convex: 1
+  m_Convex: 0
   m_Mesh: {fileID: 4300108, guid: cdec9da478ea48547a09cb58f5249ba7, type: 3}
 --- !u!64 &6402524
 MeshCollider:
@@ -1697,7 +1698,7 @@ MeshCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_SmoothSphereCollisions: 0
-  m_Convex: 1
+  m_Convex: 0
   m_Mesh: {fileID: 4300104, guid: cdec9da478ea48547a09cb58f5249ba7, type: 3}
 --- !u!64 &6402534
 MeshCollider:
@@ -1736,7 +1737,7 @@ MeshCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_SmoothSphereCollisions: 0
-  m_Convex: 1
+  m_Convex: 0
   m_Mesh: {fileID: 4300056, guid: cdec9da478ea48547a09cb58f5249ba7, type: 3}
 --- !u!64 &6402540
 MeshCollider:
@@ -1751,6 +1752,19 @@ MeshCollider:
   m_SmoothSphereCollisions: 0
   m_Convex: 0
   m_Mesh: {fileID: 4300054, guid: cdec9da478ea48547a09cb58f5249ba7, type: 3}
+--- !u!64 &6428610
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 102496}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_SmoothSphereCollisions: 0
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: 983ae35f0173a374698a5a0fb213f57e, type: 3}
 --- !u!65 &6502512
 BoxCollider:
   m_ObjectHideFlags: 1
