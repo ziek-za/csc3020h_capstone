@@ -64,4 +64,5 @@ MonoBehaviour:
   - RepairLink
   - RegenEnergy
   - PushForce
+  - DisablePlayerControls
   DisableAutoOpenWizard: 0
