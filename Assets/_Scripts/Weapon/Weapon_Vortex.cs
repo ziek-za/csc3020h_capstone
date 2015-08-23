@@ -24,12 +24,23 @@ public class Weapon_Vortex : Photon.MonoBehaviour {
 	}
 
 	void ChannelingTime(){
-		for (int i = 0; i < alreadyCollided.Count; i++){
-			if (alreadyCollided[i].GetComponent<Weapon_Rocket>()){
-				Debug.Log("boom");
-				alreadyCollided[i].GetComponent<Weapon_Rocket>().Explode();
+		try {
+			for (int i = 0; i < alreadyCollided.Count; i++){
+				if (alreadyCollided[i].GetComponent<Weapon_Rocket>()){
+					alreadyCollided[i].GetComponent<Weapon_Rocket>().Explode();
+				} else if (alreadyCollided[i].GetComponent<Rigidbody>() != null && 
+				           !alreadyCollided[i].GetComponent<Rigidbody>().isKinematic){
+					Vector3 forceDir =  alreadyCollided[i].transform.position - transform.position;
+					alreadyCollided[i].transform.rigidbody.velocity = forceDir * pullForce * 0.35f;
+					//alreadyCollided[i].transform.rigidbody.AddForce(forceDir * pullForce *50);
+
+					//Need to disable player movement in vortex
+					if (alreadyCollided[i].GetComponent<Char_AttributeScript>()){
+
+					}
+				}
 			}
-		}
+		} catch (MissingReferenceException e){}
 		Destroy(gameObject);
 	}
 	
@@ -45,8 +56,10 @@ public class Weapon_Vortex : Photon.MonoBehaviour {
 						alreadyCollided[i].transform.rigidbody.AddForce(rocketPull * pullForce * 0.6f);
 						//rocketPullForce += 0.1f;
 
-					} else {
-						alreadyCollided[i].transform.rigidbody.AddForce(forceDir * pullForce);
+					} else if (!alreadyCollided[i].GetComponent<Rigidbody>().isKinematic) {
+						//Debug.Log((Vector3.Normalize(forceDir)*));
+						alreadyCollided[i].transform.rigidbody.velocity = (forceDir * pullForce * 0.1f);
+						//alreadyCollided[i].transform.rigidbody.AddForce(forceDir * pullForce);
 					}
 				}
 			} catch (MissingReferenceException e){}
@@ -65,7 +78,7 @@ public class Weapon_Vortex : Photon.MonoBehaviour {
 	[RPC] void KillGameObject(int vID){
 		Destroy(PhotonView.Find(vID).gameObject);
 		if (photonView.isMine)
-			photonView.RPC("KillGameObject", PhotonTargets.OthersBuffered, vID);
+				photonView.RPC("KillGameObject", PhotonTargets.OthersBuffered, vID);
 	}
 
 	//All objects in the area of effect live in alreadyCollided

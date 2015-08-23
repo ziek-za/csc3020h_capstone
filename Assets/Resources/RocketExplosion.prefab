@@ -68,7 +68,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 343af6fdd13586b4e9b975d2c8f8d585, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pushForce: 700
+  pushForce: 500
 --- !u!135 &13531346
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -79,7 +79,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.5
+  m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!198 &19827274
 ParticleSystem:
