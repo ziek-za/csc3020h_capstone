@@ -17,6 +17,8 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 	bool isJumping=false;
 	public float clampYAxis = 60.0f;
 
+	public bool inVortex = false;
+
 	// Use this for initialization
 	void Start () {
 		if (photonView.isMine) {
@@ -36,8 +38,8 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 		{
 			//if (Input.GetButton("Fire1"))
 			//	shake = 0.5f;
-
-			InputMovement();
+			if (!inVortex)
+				InputMovement();
 			//InputColorChange();
 			MouseView();
 			UpdateCameraPos();
