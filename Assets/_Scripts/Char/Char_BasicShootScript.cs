@@ -6,7 +6,7 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 
 	private RaycastHit hit;
 	private Ray ray;
-	private float shotCooldown;	
+	protected float shotCooldown;	
 
 	public GameObject hitCrosshair;
 
