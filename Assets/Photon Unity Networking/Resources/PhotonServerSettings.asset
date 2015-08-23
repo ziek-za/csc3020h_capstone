@@ -63,4 +63,5 @@ MonoBehaviour:
   - DamageBuildingLink
   - RepairLink
   - RegenEnergy
+  - PushForce
   DisableAutoOpenWizard: 0

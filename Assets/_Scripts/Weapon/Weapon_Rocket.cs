@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Weapon_Rocket : MonoBehaviour {
+public class Weapon_Rocket : Photon.MonoBehaviour {
 
 	public GameObject explosion;
-
 	// Use this for initialization
 	void Start () {
 		Destroy(gameObject,10f);
@@ -17,12 +16,13 @@ public class Weapon_Rocket : MonoBehaviour {
 	}
 
 	public void Explode(){
-		GameObject expl = Instantiate (explosion,transform.position,Quaternion.identity) as GameObject;
+		GameObject expl = PhotonNetwork.Instantiate (explosion.name,transform.position,Quaternion.identity,0) as GameObject;
 		Destroy(gameObject);
 	}
 
 	void OnCollisionEnter(Collision other){
 		Explode();
+		//Debug.Log(other.gameObject.name);
 		/*GameObject expl = Instantiate (explosion,transform.position,Quaternion.identity) as GameObject;
 		expl.GetComponent<ParticleSystem>().Play();
 		Destroy(expl,5f);

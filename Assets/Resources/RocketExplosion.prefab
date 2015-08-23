@@ -13,6 +13,8 @@ GameObject:
   - 114: {fileID: 11470482}
   - 114: {fileID: 11482314}
   - 135: {fileID: 13531346}
+  - 54: {fileID: 5434484}
+  - 114: {fileID: 11425790}
   m_Layer: 0
   m_Name: RocketExplosion
   m_TagString: Untagged
@@ -32,6 +34,46 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!54 &5434484
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 127274}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &11425790
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 127274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ownerId: 0
+  group: 0
+  prefixBackup: -1
+  observed: {fileID: 0}
+  synchronization: 0
+  onSerializeTransformOption: 3
+  onSerializeRigidBodyOption: 2
+  ownershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 0}
+  ObservedComponentsFoldoutOpen: 1
+  viewIdField: 0
+  instantiationId: -1
+  isRuntimeInstantiated: 0
 --- !u!114 &11470482
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -68,7 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 343af6fdd13586b4e9b975d2c8f8d585, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pushForce: 500
+  pushForce: 200
 --- !u!135 &13531346
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -76,10 +118,10 @@ SphereCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 127274}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 1.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!198 &19827274
 ParticleSystem:

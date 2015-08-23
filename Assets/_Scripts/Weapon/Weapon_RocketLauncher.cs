@@ -15,7 +15,7 @@ public class Weapon_RocketLauncher : Char_BasicShootScript {
 	void Update () {
 		if(photonView.isMine && Time.time >= shotCooldown && Input.GetButton("Fire1")) {
 			shotCooldown = Time.time + timeBetweenShots;
-			GameObject fired = Instantiate(rocket,transform.position,transform.rotation) as GameObject;
+			GameObject fired = PhotonNetwork.Instantiate(rocket.name,transform.position,transform.rotation,0) as GameObject;
 			fired.rigidbody.AddForce(transform.up*200);
 		}
 	
