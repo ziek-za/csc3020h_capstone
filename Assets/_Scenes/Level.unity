@@ -16060,6 +16060,7 @@ GameObject:
   - 4: {fileID: 1654331496}
   - 33: {fileID: 1654331498}
   - 23: {fileID: 1654331497}
+  - 64: {fileID: 1654331499}
   m_Layer: 0
   m_Name: stair_5
   m_TagString: Untagged
@@ -16108,6 +16109,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 146371344}
   m_GameObject: {fileID: 1654331495}
   m_Mesh: {fileID: 4300064, guid: cdec9da478ea48547a09cb58f5249ba7, type: 3}
+--- !u!64 &1654331499
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1654331495}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_SmoothSphereCollisions: 0
+  m_Convex: 0
+  m_Mesh: {fileID: 4300102, guid: cdec9da478ea48547a09cb58f5249ba7, type: 3}
 --- !u!1 &1654430489
 GameObject:
   m_ObjectHideFlags: 0
