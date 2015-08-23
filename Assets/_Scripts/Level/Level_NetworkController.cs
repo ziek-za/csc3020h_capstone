@@ -33,7 +33,7 @@ public class Level_NetworkController : Photon.MonoBehaviour {
 			Debug.Log("Host Joined");
 			firstPlayer = false;
 			//mapController.GetComponent<Level_MapController>().SetLevelObjects(false);
-			tc.SetTerrainTexture (0, 0, tc.terrain.terrainData.alphamapWidth, tc.terrain.terrainData.alphamapHeight);
+			//tc.SetTerrainTexture (0, 0, tc.terrain.terrainData.alphamapWidth, tc.terrain.terrainData.alphamapHeight);
 		}			
 	}
 }
