@@ -17,6 +17,7 @@ ModelImporter:
     3300004: //RootNode
     4300000: Box001
     4300002: Box002
+    4300004: Box003
     9500000: //RootNode
   materials:
     importMaterials: 1
