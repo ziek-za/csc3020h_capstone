@@ -1,0 +1,137 @@
+fileFormatVersion: 2
+guid: 6827b2cf0ba89804c81a6477468bb16a
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: building_1
+    100002: building_2
+    100004: building_fractured
+    100006: building_gl
+    100008: building_pillar_036
+    100010: building_pillar_037
+    100012: building_pillar_039
+    100014: building_pillar_041
+    100016: building_pillar_042
+    100018: building_pillar_043
+    100020: building_pillar_044
+    100022: building_pillar_045
+    100024: //RootNode
+    100026: stair_011
+    100028: stair_012
+    100030: stair_013
+    400000: building_1
+    400002: building_2
+    400004: building_fractured
+    400006: building_gl
+    400008: building_pillar_036
+    400010: building_pillar_037
+    400012: building_pillar_039
+    400014: building_pillar_041
+    400016: building_pillar_042
+    400018: building_pillar_043
+    400020: building_pillar_044
+    400022: building_pillar_045
+    400024: //RootNode
+    400026: stair_011
+    400028: stair_012
+    400030: stair_013
+    2300000: building_1
+    2300002: building_2
+    2300004: building_fractured
+    2300006: building_gl
+    2300008: building_pillar_036
+    2300010: building_pillar_037
+    2300012: building_pillar_039
+    2300014: building_pillar_041
+    2300016: building_pillar_042
+    2300018: building_pillar_043
+    2300020: building_pillar_044
+    2300022: building_pillar_045
+    2300024: stair_011
+    2300026: stair_012
+    2300028: stair_013
+    3300000: building_1
+    3300002: building_2
+    3300004: building_fractured
+    3300006: building_gl
+    3300008: building_pillar_036
+    3300010: building_pillar_037
+    3300012: building_pillar_039
+    3300014: building_pillar_041
+    3300016: building_pillar_042
+    3300018: building_pillar_043
+    3300020: building_pillar_044
+    3300022: building_pillar_045
+    3300024: stair_011
+    3300026: stair_012
+    3300028: stair_013
+    4300000: building_gl
+    4300002: building_pillar_036
+    4300004: building_1
+    4300006: building_2
+    4300008: building_pillar_037
+    4300010: building_pillar_039
+    4300012: building_pillar_041
+    4300014: building_pillar_042
+    4300016: building_pillar_043
+    4300018: building_pillar_044
+    4300020: building_fractured
+    4300022: building_pillar_045
+    4300024: stair_011
+    4300026: stair_012
+    4300028: stair_013
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 

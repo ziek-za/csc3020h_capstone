@@ -32,12 +32,12 @@ public class Weapon_Vortex : Photon.MonoBehaviour {
 				} else if (alreadyCollided[i].GetComponent<Rigidbody>() != null && 
 				           !alreadyCollided[i].GetComponent<Rigidbody>().isKinematic){
 					Vector3 forceDir =  alreadyCollided[i].transform.position - transform.position;
-					alreadyCollided[i].transform.rigidbody.velocity = forceDir * pullForce * 0.35f;
+					alreadyCollided[i].transform.rigidbody.velocity = forceDir * pullForce * 0.1f;
 					//alreadyCollided[i].transform.rigidbody.AddForce(forceDir * pullForce *50);
 
 					//Need to re-enable player movement in vortex
 					if (alreadyCollided[i].GetComponent<Char_AttributeScript>()){
-
+						DisablePlayerControls(false,alreadyCollided[i].GetComponent<PhotonView>().viewID);
 						//Damage if rocket
 						if (rocketInVortex){
 							float damage = -40/((alreadyCollided[i].transform.position - transform.position).magnitude + 1);
@@ -100,7 +100,7 @@ public class Weapon_Vortex : Photon.MonoBehaviour {
 
 			//Need to disable player movement in vortex
 			if (other.gameObject.GetComponent<Char_AttributeScript>()){
-				
+				DisablePlayerControls(true,other.gameObject.GetComponent<PhotonView>().viewID);
 			}
 		}
 	}
@@ -125,6 +125,12 @@ public class Weapon_Vortex : Photon.MonoBehaviour {
 		cas.ChangeHP(damage);
 		if (photonView.isMine)
 			photonView.RPC("DamagePlayer", PhotonTargets.OthersBuffered, damage, vID);
+	}
+
+	[RPC] void DisablePlayerControls(bool controls, int vID){
+		PhotonView.Find(vID).transform.GetComponent<Char_BasicMoveScript>().inVortex = controls;
+		if (photonView.isMine)
+			photonView.RPC("DisablePlayerControls", PhotonTargets.OthersBuffered, controls, vID);
 	}
 
 }
