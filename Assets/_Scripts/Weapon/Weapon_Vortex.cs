@@ -11,6 +11,7 @@ public class Weapon_Vortex : Photon.MonoBehaviour {
 	public float duration = 2f;
 	public SphereCollider triggerCollider;
 
+	bool rocketInVortex = false;
 	//float rocketPullForce = 0f;
 
 	List<GameObject> alreadyCollided = new List<GameObject>();
@@ -34,9 +35,14 @@ public class Weapon_Vortex : Photon.MonoBehaviour {
 					alreadyCollided[i].transform.rigidbody.velocity = forceDir * pullForce * 0.35f;
 					//alreadyCollided[i].transform.rigidbody.AddForce(forceDir * pullForce *50);
 
-					//Need to disable player movement in vortex
+					//Need to re-enable player movement in vortex
 					if (alreadyCollided[i].GetComponent<Char_AttributeScript>()){
 
+						//Damage if rocket
+						if (rocketInVortex){
+							float damage = -40/((alreadyCollided[i].transform.position - transform.position).magnitude + 1);
+							DamagePlayer(Mathf.RoundToInt(damage),alreadyCollided[i].GetComponent<PhotonView>().viewID);
+						}
 					}
 				}
 			}
@@ -68,7 +74,9 @@ public class Weapon_Vortex : Photon.MonoBehaviour {
 		if (recievedExplosion){
 			if (!channeling){
 				Invoke ("ChannelingTime",duration);
-				MTC.ManipulateTerrain(transform.position, 5f, "pull", 30f, 20f, 0.2f);
+				//MTC.ManipulateTerrain(transform.position, 5f, "pull", 30f, 20f, 0.2f);
+				MTC.ManipulateTerrain(transform.position, 5f, "pull", 30f, 2f, 2f);
+				//MTC.ManipulateTerrain(transform.position, 5f, "pull", 30f, 1.0595f, 2f);
 				channeling = true;
 			}
 			//MTC.ManipulateTerrain(transform.position, 5f, "pull", 30f, 2f, 7f); //Rising over time
@@ -87,6 +95,12 @@ public class Weapon_Vortex : Photon.MonoBehaviour {
 			alreadyCollided.Add(other.gameObject);
 			if (other.gameObject.GetComponent<Weapon_Rocket>()){
 				other.gameObject.GetComponent<CapsuleCollider>().enabled = false;
+				rocketInVortex = true;
+			}
+
+			//Need to disable player movement in vortex
+			if (other.gameObject.GetComponent<Char_AttributeScript>()){
+				
 			}
 		}
 	}
@@ -104,6 +118,13 @@ public class Weapon_Vortex : Photon.MonoBehaviour {
 		if (photonView.isMine) {
 			photonView.RPC("PullTerrain",PhotonTargets.OthersBuffered, vortexCenter, true);
 		}
-	}	
+	}
+
+	[RPC] void DamagePlayer(int damage, int vID){
+		Char_AttributeScript cas = PhotonView.Find(vID).transform.GetComponent<Char_AttributeScript>();
+		cas.ChangeHP(damage);
+		if (photonView.isMine)
+			photonView.RPC("DamagePlayer", PhotonTargets.OthersBuffered, damage, vID);
+	}
 
 }
