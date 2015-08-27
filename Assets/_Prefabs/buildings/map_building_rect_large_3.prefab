@@ -298,6 +298,7 @@ GameObject:
   - 33: {fileID: 3312242}
   - 23: {fileID: 2312242}
   - 65: {fileID: 6512214}
+  - 114: {fileID: 11436340}
   m_Layer: 0
   m_Name: building_gl_fracture001
   m_TagString: Untagged
@@ -1434,6 +1435,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: .260831892, y: .404391527, z: 8.40000534}
   m_Center: {x: -3.05473861e-07, y: 7.62939453e-06, z: 2.38418565e-07}
+--- !u!114 &11436340
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 112242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18d8c56c703498a479a76b22e59ba987, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  destructableObjsList:
+  - {fileID: 0}
+  particleSystem: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
