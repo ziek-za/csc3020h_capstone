@@ -1446,9 +1446,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18d8c56c703498a479a76b22e59ba987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
-  destructableObjsList:
-  - {fileID: 0}
+  health: 100
+  objects: []
+  thresholds: 32000000
   particleSystem: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
