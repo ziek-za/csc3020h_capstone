@@ -13,8 +13,8 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 	public int health = 125;
 	public int speed = 125;
 	public int energy = 100;
-	float enegryRegenRate = 1f;
-	float linkRateCounter = 1f; //These values determine link regen rate
+	float enegryRegenRate = 0.1f;
+	float linkRateCounter = 0.1f; //These values determine link regen rate
 	float energyTrickeRate = 1f;
 	public enum Teams {RED, BLUE, NONE};
 	public Teams team = Teams.NONE;
@@ -108,9 +108,9 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 				if (linkRateCounter >= enegryRegenRate){
 					linkRateCounter -= enegryRegenRate;
 					LinkRegenEnergy();
-				} else {
-					linkRateCounter = enegryRegenRate;
 				}
+			} else {
+				linkRateCounter = enegryRegenRate;
 			}
 			HUD.UpdateHUDHealth(health);
 			HUD.UpdateHUDEnergy(energy);

@@ -66,4 +66,5 @@ MonoBehaviour:
   - PushForce
   - DisablePlayerControls
   - SetPlayerName
+  - DamageDestructableObject
   DisableAutoOpenWizard: 0

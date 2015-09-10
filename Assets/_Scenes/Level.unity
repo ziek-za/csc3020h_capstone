@@ -11052,6 +11052,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 326088198}
   - 54: {fileID: 326088199}
+  - 114: {fileID: 326088200}
   m_Layer: 0
   m_Name: map_building_rect_small_3
   m_TagString: Untagged
@@ -11102,6 +11103,32 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &326088200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11496294, guid: c03ee3d54a6143a489a01d4ef7616d04,
+    type: 2}
+  m_PrefabInternal: {fileID: 1627296941}
+  m_GameObject: {fileID: 326088197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ownerId: 0
+  group: 0
+  prefixBackup: -1
+  observed: {fileID: 0}
+  synchronization: 0
+  onSerializeTransformOption: 3
+  onSerializeRigidBodyOption: 2
+  ownershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 0}
+  ObservedComponentsFoldoutOpen: 1
+  viewIdField: 19
+  instantiationId: 19
+  isRuntimeInstantiated: 0
 --- !u!1 &333886091
 GameObject:
   m_ObjectHideFlags: 0
@@ -17799,7 +17826,8 @@ MonoBehaviour:
   onSerializeTransformOption: 3
   onSerializeRigidBodyOption: 2
   ownershipTransfer: 0
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 0}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 13
   instantiationId: 13
@@ -20141,6 +20169,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 739656613}
   - 54: {fileID: 739656614}
+  - 114: {fileID: 739656615}
   m_Layer: 0
   m_Name: map_building_rect_large_4
   m_TagString: Untagged
@@ -20203,6 +20232,32 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &739656615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11414088, guid: 3333940f14efab04eac740b53b1aa8a6,
+    type: 2}
+  m_PrefabInternal: {fileID: 862762347}
+  m_GameObject: {fileID: 739656612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ownerId: 0
+  group: 0
+  prefixBackup: -1
+  observed: {fileID: 0}
+  synchronization: 0
+  onSerializeTransformOption: 3
+  onSerializeRigidBodyOption: 2
+  ownershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 0}
+  ObservedComponentsFoldoutOpen: 1
+  viewIdField: 16
+  instantiationId: 16
+  isRuntimeInstantiated: 0
 --- !u!1 &741051826
 GameObject:
   m_ObjectHideFlags: 0
@@ -22573,6 +22628,14 @@ Prefab:
     - target: {fileID: 402520, guid: 3333940f14efab04eac740b53b1aa8a6, type: 2}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11414088, guid: 3333940f14efab04eac740b53b1aa8a6, type: 2}
+      propertyPath: viewIdField
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 11414088, guid: 3333940f14efab04eac740b53b1aa8a6, type: 2}
+      propertyPath: instantiationId
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3333940f14efab04eac740b53b1aa8a6, type: 2}
@@ -26211,6 +26274,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1003518218}
   - 54: {fileID: 1003518219}
+  - 114: {fileID: 1003518220}
   m_Layer: 0
   m_Name: map_building_rect_small_3
   m_TagString: Untagged
@@ -26261,6 +26325,32 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1003518220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11496294, guid: c03ee3d54a6143a489a01d4ef7616d04,
+    type: 2}
+  m_PrefabInternal: {fileID: 1871549183}
+  m_GameObject: {fileID: 1003518217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ownerId: 0
+  group: 0
+  prefixBackup: -1
+  observed: {fileID: 0}
+  synchronization: 0
+  onSerializeTransformOption: 3
+  onSerializeRigidBodyOption: 2
+  ownershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 0}
+  ObservedComponentsFoldoutOpen: 1
+  viewIdField: 20
+  instantiationId: 20
+  isRuntimeInstantiated: 0
 --- !u!1 &1010999267
 GameObject:
   m_ObjectHideFlags: 0
@@ -31001,6 +31091,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1266259957}
   - 54: {fileID: 1266259958}
+  - 114: {fileID: 1266259959}
   m_Layer: 0
   m_Name: map_building_rect_large_3
   m_TagString: Untagged
@@ -31056,6 +31147,32 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1266259959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11445596, guid: a4169afdd919891468169d52ffa75b66,
+    type: 2}
+  m_PrefabInternal: {fileID: 1446333138}
+  m_GameObject: {fileID: 1266259956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ownerId: 0
+  group: 0
+  prefixBackup: -1
+  observed: {fileID: 0}
+  synchronization: 0
+  onSerializeTransformOption: 3
+  onSerializeRigidBodyOption: 2
+  ownershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 0}
+  ObservedComponentsFoldoutOpen: 1
+  viewIdField: 15
+  instantiationId: 15
+  isRuntimeInstantiated: 0
 --- !u!1 &1269359564
 GameObject:
   m_ObjectHideFlags: 0
@@ -34863,6 +34980,14 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11445596, guid: a4169afdd919891468169d52ffa75b66, type: 2}
+      propertyPath: viewIdField
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 11445596, guid: a4169afdd919891468169d52ffa75b66, type: 2}
+      propertyPath: instantiationId
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a4169afdd919891468169d52ffa75b66, type: 2}
   m_RootGameObject: {fileID: 1266259956}
@@ -35183,6 +35308,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1483041018}
   - 54: {fileID: 1483041019}
+  - 114: {fileID: 1483041020}
   m_Layer: 0
   m_Name: map_building_rect_regular_3
   m_TagString: Untagged
@@ -35233,6 +35359,32 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1483041020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11409110, guid: 3902536dbbb53d94a964fa1587020bd3,
+    type: 2}
+  m_PrefabInternal: {fileID: 1627959482}
+  m_GameObject: {fileID: 1483041017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ownerId: 0
+  group: 0
+  prefixBackup: -1
+  observed: {fileID: 0}
+  synchronization: 0
+  onSerializeTransformOption: 3
+  onSerializeRigidBodyOption: 2
+  ownershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 0}
+  ObservedComponentsFoldoutOpen: 1
+  viewIdField: 17
+  instantiationId: 17
+  isRuntimeInstantiated: 0
 --- !u!1 &1483201904
 GameObject:
   m_ObjectHideFlags: 0
@@ -38015,6 +38167,14 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 11496294, guid: c03ee3d54a6143a489a01d4ef7616d04, type: 2}
+      propertyPath: viewIdField
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 11496294, guid: c03ee3d54a6143a489a01d4ef7616d04, type: 2}
+      propertyPath: instantiationId
+      value: 19
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c03ee3d54a6143a489a01d4ef7616d04, type: 2}
   m_RootGameObject: {fileID: 326088197}
@@ -38058,6 +38218,14 @@ Prefab:
     - target: {fileID: 413190, guid: 3902536dbbb53d94a964fa1587020bd3, type: 2}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11409110, guid: 3902536dbbb53d94a964fa1587020bd3, type: 2}
+      propertyPath: viewIdField
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 11409110, guid: 3902536dbbb53d94a964fa1587020bd3, type: 2}
+      propertyPath: instantiationId
+      value: 17
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3902536dbbb53d94a964fa1587020bd3, type: 2}
@@ -41453,6 +41621,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1738695119}
   - 54: {fileID: 1738695120}
+  - 114: {fileID: 1738695121}
   m_Layer: 0
   m_Name: map_building_rect_smal_wooden_2
   m_TagString: Untagged
@@ -41504,6 +41673,32 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1738695121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11496168, guid: b5f2572590787c64187d87652abc9771,
+    type: 2}
+  m_PrefabInternal: {fileID: 1828368303}
+  m_GameObject: {fileID: 1738695118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ownerId: 0
+  group: 0
+  prefixBackup: -1
+  observed: {fileID: 0}
+  synchronization: 0
+  onSerializeTransformOption: 3
+  onSerializeRigidBodyOption: 2
+  ownershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 0}
+  ObservedComponentsFoldoutOpen: 1
+  viewIdField: 18
+  instantiationId: 18
+  isRuntimeInstantiated: 0
 --- !u!1 &1744730557
 GameObject:
   m_ObjectHideFlags: 0
@@ -42780,6 +42975,14 @@ Prefab:
     - target: {fileID: 465804, guid: b5f2572590787c64187d87652abc9771, type: 2}
       propertyPath: m_LocalRotation.w
       value: .707106829
+      objectReference: {fileID: 0}
+    - target: {fileID: 11496168, guid: b5f2572590787c64187d87652abc9771, type: 2}
+      propertyPath: viewIdField
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 11496168, guid: b5f2572590787c64187d87652abc9771, type: 2}
+      propertyPath: instantiationId
+      value: 18
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b5f2572590787c64187d87652abc9771, type: 2}
@@ -48815,6 +49018,14 @@ Prefab:
     - target: {fileID: 429524, guid: c03ee3d54a6143a489a01d4ef7616d04, type: 2}
       propertyPath: m_RootOrder
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 11496294, guid: c03ee3d54a6143a489a01d4ef7616d04, type: 2}
+      propertyPath: viewIdField
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 11496294, guid: c03ee3d54a6143a489a01d4ef7616d04, type: 2}
+      propertyPath: instantiationId
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c03ee3d54a6143a489a01d4ef7616d04, type: 2}
