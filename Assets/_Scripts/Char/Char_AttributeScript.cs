@@ -39,8 +39,7 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 				joinTeam(new Vector3(Color.blue.r, Color.blue.g, Color.blue.b), 1);
 			}
 
-			SetPlayerName(GetComponent<PhotonView>().viewID, playerName);
-			Debug.Log(team);
+			SetPlayerName(GetComponent<PhotonView>().viewID, _MainController.playerName);
 
 			InvokeRepeating("energyTrickle",energyTrickeRate,energyTrickeRate);
 		}
@@ -91,6 +90,7 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 	void Update () {
 		if (photonView.isMine){
 
+			HUD.playerNameLabel.text = "";
 			//Get playerName
 			Vector2 screenCenterPoint = new Vector2(Screen.width/2, Screen.height/2);
 			ray = Camera.main.ScreenPointToRay(screenCenterPoint);
@@ -99,6 +99,7 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 			{
 				Debug.DrawLine(transform.position, hit.point, Color.green);
 				if (hit.transform.gameObject.GetComponent<Char_AttributeScript>()){
+					HUD.playerNameLabel.text = hit.transform.gameObject.GetComponent<Char_AttributeScript>().playerName;
 				}
 			}
 
