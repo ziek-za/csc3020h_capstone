@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class Char_AttributeScript : Photon.MonoBehaviour {
 
+	private RaycastHit hit;
+	private Ray ray;
+	public string playerName;
+
 	public List<string> buffs;
 	public int health = 125;
 	public int speed = 125;
@@ -35,6 +39,7 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 				joinTeam(new Vector3(Color.blue.r, Color.blue.g, Color.blue.b), 1);
 			}
 
+			SetPlayerName(GetComponent<PhotonView>().viewID, playerName);
 			Debug.Log(team);
 
 			InvokeRepeating("energyTrickle",energyTrickeRate,energyTrickeRate);
@@ -85,6 +90,18 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (photonView.isMine){
+
+			//Get playerName
+			Vector2 screenCenterPoint = new Vector2(Screen.width/2, Screen.height/2);
+			ray = Camera.main.ScreenPointToRay(screenCenterPoint);
+
+			if(Physics.Raycast(ray, out hit, Camera.main.farClipPlane)) 
+			{
+				Debug.DrawLine(transform.position, hit.point, Color.green);
+				if (hit.transform.gameObject.GetComponent<Char_AttributeScript>()){
+				}
+			}
+
 			if (currentLink && currentLink.currentTeam == team){
 				linkRateCounter += Time.deltaTime;
 				if (linkRateCounter >= enegryRegenRate){
@@ -123,10 +140,6 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 				
 			}
 		}
-	}
-
-	[RPC] public void RegenEnergy(int vID){
-
 	}
 
 	[RPC] void ReduceCounter(int linkID){
@@ -172,5 +185,11 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 		team = (Teams)myTeam;
 		if (photonView.isMine)
 			photonView.RPC("joinTeam", PhotonTargets.OthersBuffered, color, myTeam);
-	}	
+	}
+
+	[RPC] void SetPlayerName(int vID, string pName){
+		PhotonView.Find(vID).GetComponent<Char_AttributeScript>().playerName = pName;
+		if (photonView.isMine)
+			photonView.RPC("SetPlayerName", PhotonTargets.OthersBuffered, vID, pName);
+	}
 }
