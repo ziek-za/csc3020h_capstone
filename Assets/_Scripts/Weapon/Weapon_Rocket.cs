@@ -4,6 +4,7 @@ using System.Collections;
 public class Weapon_Rocket : Photon.MonoBehaviour {
 
 	public GameObject explosion;
+
 	// Use this for initialization
 	void Start () {
 		Destroy(gameObject,10f);
@@ -23,13 +24,8 @@ public class Weapon_Rocket : Photon.MonoBehaviour {
 	void OnCollisionEnter(Collision other){
 		Explode();
 		if (other.gameObject.GetComponent<Char_AttributeScript>()){
-			DamagePlayer(-30,other.gameObject.GetComponent<PhotonView>().viewID);
+			DamagePlayer(-20,other.gameObject.GetComponent<PhotonView>().viewID);
 		}
-		//Debug.Log(other.gameObject.name);
-		/*GameObject expl = Instantiate (explosion,transform.position,Quaternion.identity) as GameObject;
-		expl.GetComponent<ParticleSystem>().Play();
-		Destroy(expl,5f);
-		Destroy(gameObject);*/
 	}
 	[RPC] void DamagePlayer(int damage, int vID){
 		Char_AttributeScript cas = PhotonView.Find(vID).transform.GetComponent<Char_AttributeScript>();

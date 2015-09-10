@@ -12,6 +12,7 @@ public class Level_GUIController : MonoBehaviour {
 	public Image builderImage, thiefImage, soldierImage;
 	public Button linkButton;
 	public Transform linkButtonParent;
+	public Text playerNameLabel;
 
 	// Use this for initialization
 	void Start () {

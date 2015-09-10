@@ -1138,6 +1138,7 @@ MonoBehaviour:
   thresholds: 
   HasThresholdMeshesBool: 0
   HasParticleSystem: 1
+  DestroyFinal: 0
   particleSystem: {fileID: 19865804}
 --- !u!198 &19865804
 ParticleSystem:

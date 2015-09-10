@@ -86,11 +86,8 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 					Invoke ("EnableHitCrosshair",timeTillHit);
 					Invoke("DisableHitCrosshair",timeTillHit + 0.1f);
 				//Damaging buildings
-				} else if (hit.collider.GetComponentInParent<Map_DestructableObject>()) {
-					hit.collider.GetComponentInParent<Map_DestructableObject>().Hit(DamageAmount());
-					float timeTillHit = Vector3.Magnitude(hit.point - transform.position) / 90f;
-					Invoke ("EnableHitCrosshair",timeTillHit);
-					Invoke("DisableHitCrosshair",timeTillHit + 0.1f);
+				} else if (hit.collider.GetComponentInParent<Map_DestructableObject>() || hit.collider.GetComponent<Map_DestructableObject>()) {
+					DamageDestructableObject(-1, hit.transform.GetComponent<PhotonView>().viewID);
 				//Bullet holes only on static objects and terrain
 				} else if (hit.transform.gameObject.GetComponent<Terrain>() || 
 				           (hit.transform.GetComponent<Rigidbody>() && hit.rigidbody.isKinematic)) {
@@ -120,5 +117,11 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 		PhotonView.Find(vID).transform.GetComponent<Ability_BuilderLink>().ChangeHP(damage);
 		if (photonView.isMine)
 			photonView.RPC("DamageBuildingLink", PhotonTargets.OthersBuffered, damage, vID);
+	}
+
+	[RPC] void DamageDestructableObject(int damage, int vID){
+		PhotonView.Find(vID).transform.GetComponent<Map_DestructableObject>().Hit(damage);
+		if (photonView.isMine)
+			photonView.RPC("DamageDestructableObject", PhotonTargets.OthersBuffered, damage, vID);
 	}
 }
