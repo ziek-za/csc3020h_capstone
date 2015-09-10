@@ -545,7 +545,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 484678}
   - 114: {fileID: 11471012}
-  - 114: {fileID: 11430814}
   m_Layer: 0
   m_Name: gl_to_tunnel
   m_TagString: Untagged
@@ -2035,31 +2034,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: .260831296, y: .40439105, z: 8.40000343}
   m_Center: {x: 0, y: 0, z: 3.81469727e-06}
---- !u!114 &11430814
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 184678}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ownerId: 0
-  group: 0
-  prefixBackup: -1
-  observed: {fileID: 0}
-  synchronization: 0
-  onSerializeTransformOption: 3
-  onSerializeRigidBodyOption: 2
-  ownershipTransfer: 0
-  ObservedComponents:
-  - {fileID: 0}
-  ObservedComponentsFoldoutOpen: 1
-  viewIdField: 0
-  instantiationId: -1
-  isRuntimeInstantiated: 0
 --- !u!114 &11471012
 MonoBehaviour:
   m_ObjectHideFlags: 1
