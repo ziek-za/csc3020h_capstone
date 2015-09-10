@@ -86,8 +86,8 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 					Invoke ("EnableHitCrosshair",timeTillHit);
 					Invoke("DisableHitCrosshair",timeTillHit + 0.1f);
 				//Damaging buildings
-				} else if (hit.collider.transform.gameObject.GetComponent<Map_DestructableObject>()) {
-					hit.collider.transform.gameObject.GetComponent<Map_DestructableObject>().Hit(DamageAmount());
+				} else if (hit.collider.GetComponentInParent<Map_DestructableObject>()) {
+					hit.collider.GetComponentInParent<Map_DestructableObject>().Hit(DamageAmount());
 					float timeTillHit = Vector3.Magnitude(hit.point - transform.position) / 90f;
 					Invoke ("EnableHitCrosshair",timeTillHit);
 					Invoke("DisableHitCrosshair",timeTillHit + 0.1f);
