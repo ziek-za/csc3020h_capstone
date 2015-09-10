@@ -33,8 +33,15 @@ BlendTree:
   m_PrefabInternal: {fileID: 0}
   m_Name: Blend Tree
   m_Childs:
-  - m_Motion: {fileID: 7400008, guid: b2f30e1ee0faa3643801c27c00a72fb2, type: 3}
+  - m_Motion: {fileID: 7400002, guid: b2f30e1ee0faa3643801c27c00a72fb2, type: 3}
     m_Threshold: 0
+    m_Position: {x: 0, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_IsAnim: 1
+    m_Mirror: 0
+  - m_Motion: {fileID: 7400008, guid: b2f30e1ee0faa3643801c27c00a72fb2, type: 3}
+    m_Threshold: 1
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
