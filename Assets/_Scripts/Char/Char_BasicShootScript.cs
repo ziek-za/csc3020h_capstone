@@ -70,7 +70,6 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 			if(Physics.Raycast(ray, out hit, Camera.main.farClipPlane)) 
 			{
 				Debug.DrawLine(transform.position, hit.point, Color.red);
-
 				//Damaging enemy players
 				if (hit.transform.gameObject.GetComponent<Char_AttributeScript>()){
 					if (hit.transform.gameObject.GetComponent<Char_AttributeScript>().team != transform.parent.parent.parent.GetComponent<Char_AttributeScript>().team){
@@ -86,7 +85,12 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 					float timeTillHit = Vector3.Magnitude(hit.point - transform.position) / 90f;
 					Invoke ("EnableHitCrosshair",timeTillHit);
 					Invoke("DisableHitCrosshair",timeTillHit + 0.1f);
-				
+				//Damaging buildings
+				} else if (hit.collider.GetComponentInParent<Map_DestructableObject>()) {
+					hit.collider.GetComponentInParent<Map_DestructableObject>().Hit(DamageAmount());
+					float timeTillHit = Vector3.Magnitude(hit.point - transform.position) / 90f;
+					Invoke ("EnableHitCrosshair",timeTillHit);
+					Invoke("DisableHitCrosshair",timeTillHit + 0.1f);
 				//Bullet holes only on static objects and terrain
 				} else if (hit.transform.gameObject.GetComponent<Terrain>() || 
 				           (hit.transform.GetComponent<Rigidbody>() && hit.rigidbody.isKinematic)) {
