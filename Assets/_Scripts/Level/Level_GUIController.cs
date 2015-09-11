@@ -9,10 +9,11 @@ public class Level_GUIController : MonoBehaviour {
 	public enum classes {SOLDIER, THIEF, BUILDER, NONE};
 	public classes GUIClass = classes.NONE;
 
-	public Image builderImage, thiefImage, soldierImage;
+	public GameObject shotIndicatorPivot;
+	public Image builderImage, thiefImage, soldierImage, shotIndicator;
 	public Button linkButton;
 	public Transform linkButtonParent;
-	public Text playerNameLabel;
+	public Text playerNameLabel, playerKilledLabel;
 
 	// Use this for initialization
 	void Start () {

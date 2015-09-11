@@ -59,7 +59,7 @@ public class Weapon_RocketExplosion : Photon.MonoBehaviour {
 
 						//Hit Player
 						if (alreadyCollided[i].GetComponent<Char_AttributeScript>()){
-							DamagePlayer(Mathf.RoundToInt(damage),alreadyCollided[i].GetComponent<PhotonView>().viewID);
+							DamagePlayer(Mathf.RoundToInt(damage),alreadyCollided[i].GetComponent<PhotonView>().viewID, transform.position);
 							EnableHitCrosshair();
 							Invoke("DisableHitCrosshair",0.1f);
 						} 
@@ -86,12 +86,12 @@ public class Weapon_RocketExplosion : Photon.MonoBehaviour {
 		}
 	}
 
-	[RPC] void DamagePlayer(int damage, int vID){
+	[RPC] void DamagePlayer(int damage, int vID, Vector3 rocketPos){
 		try {
-			Char_AttributeScript cas = PhotonView.Find(vID).transform.GetComponent<Char_AttributeScript>();
-			cas.ChangeHP(damage);
-			if (photonView.isMine)
-				photonView.RPC("DamagePlayer", PhotonTargets.OthersBuffered, damage, vID);
+		Char_AttributeScript cas = PhotonView.Find(vID).transform.GetComponent<Char_AttributeScript>();
+		cas.ChangeHP(damage, rocketPos);
+		if (photonView.isMine)
+			photonView.RPC("DamagePlayer", PhotonTargets.OthersBuffered, damage, vID, rocketPos);
 		} catch (System.Exception e){}
 	}
 
