@@ -122,7 +122,7 @@ public class Weapon_Vortex : Photon.MonoBehaviour {
 
 	[RPC] void DamagePlayer(int damage, int vID){
 		Char_AttributeScript cas = PhotonView.Find(vID).transform.GetComponent<Char_AttributeScript>();
-		cas.ChangeHP(damage);
+		cas.ChangeHP(damage, Vector3.zero);
 		if (photonView.isMine)
 			photonView.RPC("DamagePlayer", PhotonTargets.OthersBuffered, damage, vID);
 	}

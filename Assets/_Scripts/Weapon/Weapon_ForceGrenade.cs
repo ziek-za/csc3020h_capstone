@@ -58,6 +58,16 @@ public class Weapon_ForceGrenade : Photon.MonoBehaviour {
 	//Method that applies the push force OR creates the pull vortex
 	void TriggerForce(){
 		for (int i = 0; i < alreadyCollided.Count; i++){
+
+			//Break Destructible objects
+			try {
+				if (alreadyCollided[i].GetComponentInParent<Map_DestructableObject>()){
+					DamageDestructableObject(-10,alreadyCollided[i].GetComponentInParent<PhotonView>().viewID);
+				} else if (alreadyCollided[i].GetComponent<Map_DestructableObject>()){
+					DamageDestructableObject(-10,alreadyCollided[i].GetComponent<PhotonView>().viewID);
+				} 
+			} catch (System.NullReferenceException e){}
+
 			if (mode.Equals("push") &&
 			    alreadyCollided[i].GetComponent<Rigidbody>() != null &&
 			    !alreadyCollided[i].GetComponent<Rigidbody>().isKinematic){
@@ -91,10 +101,18 @@ public class Weapon_ForceGrenade : Photon.MonoBehaviour {
 			photonView.RPC("PushForceExplosion", PhotonTargets.OthersBuffered, vID, force);
 	}
 
+
+
 	//RPC to tell other clients to remove their grenade gameObjects as well
 	[RPC] void KillGameObject(int vID){
 		Destroy(PhotonView.Find(vID).gameObject);
 		if (photonView.isMine)
 			photonView.RPC("KillGameObject", PhotonTargets.OthersBuffered, vID);
+	}
+
+	[RPC] void DamageDestructableObject(int damage, int vID){
+		PhotonView.Find(vID).transform.GetComponent<Map_DestructableObject>().Hit(damage);
+		if (photonView.isMine)
+			photonView.RPC("DamageDestructableObject", PhotonTargets.OthersBuffered, damage, vID);
 	}
 }

@@ -73,10 +73,15 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 				//Damaging enemy players
 				if (hit.transform.gameObject.GetComponent<Char_AttributeScript>()){
 					if (hit.transform.gameObject.GetComponent<Char_AttributeScript>().team != transform.parent.parent.parent.GetComponent<Char_AttributeScript>().team){
-						DamagePlayer(DamageAmount(), hit.transform.GetComponent<PhotonView>().viewID);
+						DamagePlayer(DamageAmount(), hit.transform.GetComponent<PhotonView>().viewID, transform.position);
 						float timeTillHit = Vector3.Magnitude(hit.point - transform.position) / 90f;
 						Invoke ("EnableHitCrosshair",timeTillHit);
 						Invoke("DisableHitCrosshair",timeTillHit + 0.1f);
+
+						if (hit.transform.gameObject.GetComponent<Char_AttributeScript>().health <= 0){
+							transform.parent.parent.parent.GetComponent<Char_AttributeScript>().EnableKillHUD(hit.transform.GetComponent<Char_AttributeScript>().playerName);
+						}
+
 					}
 
 				//Damaging builder 'links'
@@ -87,10 +92,9 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 					Invoke("DisableHitCrosshair",timeTillHit + 0.1f);
 				//Damaging buildings
 				} else if (hit.collider.GetComponentInParent<Map_DestructableObject>()) {
-					hit.collider.GetComponentInParent<Map_DestructableObject>().Hit(DamageAmount());
-					float timeTillHit = Vector3.Magnitude(hit.point - transform.position) / 90f;
-					Invoke ("EnableHitCrosshair",timeTillHit);
-					Invoke("DisableHitCrosshair",timeTillHit + 0.1f);
+					DamageDestructableObject(-1, hit.transform.GetComponentInParent<PhotonView>().viewID);
+				} else if (hit.collider.GetComponent<Map_DestructableObject>()) {
+					DamageDestructableObject(-1, hit.transform.GetComponent<PhotonView>().viewID);
 				//Bullet holes only on static objects and terrain
 				} else if (hit.transform.gameObject.GetComponent<Terrain>() || 
 				           (hit.transform.GetComponent<Rigidbody>() && hit.rigidbody.isKinematic)) {
@@ -109,16 +113,22 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 			photonView.RPC("PlayMuzzleFlash", PhotonTargets.OthersBuffered, vID);
 	}
 
-	[RPC] void DamagePlayer(int damage, int vID){
+	[RPC] void DamagePlayer(int damage, int vID, Vector3 shooterPos){
 		Char_AttributeScript cas = PhotonView.Find(vID).transform.GetComponent<Char_AttributeScript>();
-		cas.ChangeHP(damage);
+		cas.ChangeHP(damage, shooterPos);
 		if (photonView.isMine)
-			photonView.RPC("DamagePlayer", PhotonTargets.OthersBuffered, damage, vID);
+			photonView.RPC("DamagePlayer", PhotonTargets.OthersBuffered, damage, vID, shooterPos);
 	}
 
 	[RPC] void DamageBuildingLink(int damage, int vID){
 		PhotonView.Find(vID).transform.GetComponent<Ability_BuilderLink>().ChangeHP(damage);
 		if (photonView.isMine)
 			photonView.RPC("DamageBuildingLink", PhotonTargets.OthersBuffered, damage, vID);
+	}
+
+	[RPC] void DamageDestructableObject(int damage, int vID){
+		PhotonView.Find(vID).transform.GetComponent<Map_DestructableObject>().Hit(damage);
+		if (photonView.isMine)
+			photonView.RPC("DamageDestructableObject", PhotonTargets.OthersBuffered, damage, vID);
 	}
 }

@@ -5,12 +5,16 @@ using UnityEngine.UI;
 
 public class Char_AttributeScript : Photon.MonoBehaviour {
 
+	private RaycastHit hit;
+	private Ray ray;
+	public string playerName;
+
 	public List<string> buffs;
 	public int health = 125;
 	public int speed = 125;
 	public int energy = 100;
-	float enegryRegenRate = 0.5f;
-	float linkRateCounter = 0.5f; //These values determine link regen rate
+	float enegryRegenRate = 0.1f;
+	float linkRateCounter = 0.1f; //These values determine link regen rate
 	float energyTrickeRate = 1f;
 	public enum Teams {RED, BLUE, NONE};
 	public Teams team = Teams.NONE;
@@ -35,7 +39,7 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 				joinTeam(new Vector3(Color.blue.r, Color.blue.g, Color.blue.b), 1);
 			}
 
-			Debug.Log(team);
+			SetPlayerName(GetComponent<PhotonView>().viewID, _MainController.playerName);
 
 			InvokeRepeating("energyTrickle",energyTrickeRate,energyTrickeRate);
 		}
@@ -82,17 +86,43 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 		}
 	}
 
+	/*void DisableKillHUD(){
+		HUD.playerKilledLabel.text = "";
+		HUD.playerKilledLabel.CrossFadeAlpha(1,0.1f,false);
+	}*/
+	
+	public void EnableKillHUD(string killedName){
+		HUD.playerKilledLabel.CrossFadeAlpha(1,0.000001f,false);
+		HUD.playerKilledLabel.text = "YOU JUST KILLED " + killedName;
+		//Invoke("DisableKillHUD",2f);
+		HUD.playerKilledLabel.CrossFadeAlpha(0,2,false);
+	} 
+
 	// Update is called once per frame
 	void Update () {
 		if (photonView.isMine){
+
+			HUD.playerNameLabel.text = "";
+			//Get playerName
+			Vector2 screenCenterPoint = new Vector2(Screen.width/2, Screen.height/2);
+			ray = Camera.main.ScreenPointToRay(screenCenterPoint);
+
+			if(Physics.Raycast(ray, out hit, Camera.main.farClipPlane)) 
+			{
+				Debug.DrawLine(transform.position, hit.point, Color.green);
+				if (hit.transform.gameObject.GetComponent<Char_AttributeScript>()){
+					HUD.playerNameLabel.text = hit.transform.gameObject.GetComponent<Char_AttributeScript>().playerName;
+				}
+			}
+
 			if (currentLink && currentLink.currentTeam == team){
 				linkRateCounter += Time.deltaTime;
 				if (linkRateCounter >= enegryRegenRate){
 					linkRateCounter -= enegryRegenRate;
 					LinkRegenEnergy();
-				} else {
-					linkRateCounter = enegryRegenRate;
 				}
+			} else {
+				linkRateCounter = enegryRegenRate;
 			}
 			HUD.UpdateHUDHealth(health);
 			HUD.UpdateHUDEnergy(energy);
@@ -123,10 +153,6 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 				
 			}
 		}
-	}
-
-	[RPC] public void RegenEnergy(int vID){
-
 	}
 
 	[RPC] void ReduceCounter(int linkID){
@@ -162,8 +188,26 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 			photonView.RPC("KillPlayer", PhotonTargets.OthersBuffered, vID);
 	}
 
-	public void ChangeHP(int amount){
+	public void ChangeHP(int amount, Vector3 shooterPos){
 		health += amount;
+
+		if (photonView.isMine){
+			if (!shooterPos.Equals(Vector3.zero)){
+
+				Vector3 shotVector = transform.position - shooterPos;
+
+				float angle = Vector3.Angle(shotVector, -transform.right);
+				Vector3 cross = Vector3.Cross(shotVector, transform.right);
+				if (cross.y > 0) angle = -angle;
+
+				Vector3 rotationVector = new Vector3(0,0,angle);
+				HUD.shotIndicatorPivot.transform.rotation = Quaternion.Euler(rotationVector);
+
+				HUD.shotIndicator.GetComponent<Image>().CrossFadeAlpha(1,0.00001f,false);
+				HUD.shotIndicator.GetComponent<Image>().enabled = true;
+				HUD.shotIndicator.GetComponent<Image>().CrossFadeAlpha(0,2,false);
+			}
+		}
 	}
 
 	[RPC] void joinTeam(Vector3 color, int myTeam)
@@ -172,5 +216,11 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 		team = (Teams)myTeam;
 		if (photonView.isMine)
 			photonView.RPC("joinTeam", PhotonTargets.OthersBuffered, color, myTeam);
-	}	
+	}
+
+	[RPC] void SetPlayerName(int vID, string pName){
+		PhotonView.Find(vID).GetComponent<Char_AttributeScript>().playerName = pName;
+		if (photonView.isMine)
+			photonView.RPC("SetPlayerName", PhotonTargets.OthersBuffered, vID, pName);
+	}
 }
