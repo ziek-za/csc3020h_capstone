@@ -49,7 +49,14 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 
 	void Update()
 	{
+		if(photonView.isMine && Input.GetButton("Fire1")){
+			Char_BasicMoveScript.anim.SetBool("Shooting", true);
+		} else {
+			Char_BasicMoveScript.anim.SetBool("Shooting",false);
+		}
+		
 		if(photonView.isMine && Time.time >= shotCooldown && Input.GetButton("Fire1")) {
+
 			shotCooldown = Time.time + timeBetweenShots;
 			//muzzleFlash.Play();
 			PlayMuzzleFlash(photonView.viewID);

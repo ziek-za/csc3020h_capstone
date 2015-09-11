@@ -3989,8 +3989,8 @@ ModelImporter:
     - serializedVersion: 16
       name: Jump_Pistol
       takeName: Take 001
-      firstFrame: 180
-      lastFrame: 200
+      firstFrame: 200
+      lastFrame: 200.100006
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

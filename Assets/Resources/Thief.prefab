@@ -2602,13 +2602,13 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 112594}
   m_LocalRotation: {x: 0, y: -0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 412294}
   - {fileID: 412292}
   m_Father: {fileID: 424516}
-  m_RootOrder: 1
+  m_RootOrder: 0
 --- !u!4 &412326
 Transform:
   m_ObjectHideFlags: 1
@@ -4372,8 +4372,8 @@ Transform:
   m_LocalPosition: {x: 646.340027, y: 425.730011, z: -914.369995}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 424518}
   - {fileID: 412324}
+  - {fileID: 424518}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &424518
@@ -4388,7 +4388,7 @@ Transform:
   m_Children:
   - {fileID: 424524}
   m_Father: {fileID: 424516}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!4 &424520
 Transform:
   m_ObjectHideFlags: 1
@@ -4433,7 +4433,7 @@ Renderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 124516}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_LightmapIndex: 255
@@ -4503,7 +4503,7 @@ Animator:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 112594}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: b2f30e1ee0faa3643801c27c00a72fb2, type: 3}
   m_Controller: {fileID: 9100000, guid: 17b21ea224c28dc4fa8b0db2784fda69, type: 2}
   m_CullingMode: 1
@@ -4642,7 +4642,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8545d59694de0f4409b66b8e3edcbc6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 0}
   moveSpeed: 10
   mouseSpeed: 2
   jumpSpeed: 5

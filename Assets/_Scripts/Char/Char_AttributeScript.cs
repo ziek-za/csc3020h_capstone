@@ -113,7 +113,10 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 				Screen.lockCursor=false;
 				GameObject.Find("CharacterSelectionGUI").transform.localScale=new Vector3(10,5,5);
 				Camera.main.GetComponent<BlurEffect>().enabled=true;
-				KillPlayer(this.gameObject.GetComponent<PhotonView>().viewID);
+				gameObject.GetComponent<Char_BasicMoveScript>().inVortex=true;
+				Char_BasicMoveScript.anim.SetBool ("Dead", true);
+				StartCoroutine("KillPlayerWait",this.gameObject.GetComponent<PhotonView>().viewID);
+				//KillPlayer(this.gameObject.GetComponent<PhotonView>().viewID);
 				Char_SelectChar.classNo=10;
 				Respawner.spawned=false;
 
@@ -155,9 +158,13 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 			photonView.RPC("ExitLink", PhotonTargets.OthersBuffered, playerID);
 	}
 
+	IEnumerator KillPlayerWait(int vID){
+		yield return new WaitForSeconds(0.417f);
+		KillPlayer (vID);
+	}
+
 	[RPC] void KillPlayer(int vID){
 		Destroy(PhotonView.Find(vID).gameObject);
-		
 		if (photonView.isMine)
 			photonView.RPC("KillPlayer", PhotonTargets.OthersBuffered, vID);
 	}

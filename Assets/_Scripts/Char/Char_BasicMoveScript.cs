@@ -6,7 +6,7 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 	//float shake = 0f;
 	//float shakeAmount  = 0.05f;
 	//float decreaseFactor = 10.0f;
-	public Animator anim;
+	public static Animator anim;
 	public float moveSpeed = 10.0f;
 	public float mouseSpeed = 3.0f;
 	public float jumpSpeed=5.0f;
@@ -22,7 +22,7 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		if (photonView.isMine) {
-			anim=GetComponent<Animator>();
+			anim=GetComponentInChildren<Animator>();
 			Screen.lockCursor=true;
 
 			//Don't hide our player for now
@@ -84,8 +84,16 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 			//transform.Translate(Vector3.forward*moveSpeed*Time.deltaTime * v);
 			//transform.Translate(Vector3.right*moveSpeed*Time.deltaTime * h);
 			transform.Translate(speed);
-			//anim.SetFloat("Speed",0);
+			Debug.Log("Speed: "+speed);
+			Debug.Log("Mag: "+speed.magnitude);
+			Debug.Log("Norm: "+speed.normalized);
+			Debug.Log("Norm&Mag: "+speed.normalized.magnitude);
+			anim.SetFloat("Speed",Mathf.Abs(speed.magnitude)*6);
+			//Debug.Log(anim.speed);
+			//float test = Mathf.Abs(speed.magnitude);
 			//gameObject.GetComponent<PhotonTransformView>().SetSynchronizedValues(speed,mouseSpeed);
+		}else{
+			anim.SetFloat ("Speed",0);
 		}
 
 		/*float yDiff = (transform.position.y - prevPos.y)/Time.deltaTime;
@@ -96,12 +104,14 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 		}*/
 
 		if(Input.GetButtonDown("Jump") && isJumping==false){
+			anim.SetBool("Jumping",true);
 			isJumping=true;
 			Vector3 v3 = rigidbody.velocity;
 			v3.y=jumpSpeed;
 			rigidbody.velocity=v3;
 		} else if (transform.rigidbody.velocity.y < -2f){//Assumed to be falling
 			isJumping = true;
+			anim.SetBool("Jumping",false);
 		}
 
 		//prevPos = transform.position;

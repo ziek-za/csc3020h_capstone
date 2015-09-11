@@ -34,6 +34,10 @@ public class Map_LinkScript : Photon.MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		if (blueCounter < 0)
+			blueCounter = 0;
+		if (redCounter < 0)
+			redCounter = 0;
 
 		captureSpeed = defaultCaptureSpeed * Time.deltaTime * (5/(2+3*(Mathf.Pow(Mathf.Abs(redCounter-blueCounter),-2))));
 	
