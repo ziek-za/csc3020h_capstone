@@ -24,6 +24,7 @@ public class Map_DestructableObject : MonoBehaviour {
 		// Subtract from health
 		if (thresholds.Count != 0 && health >= 0) {
 			health += damage;
+			Debug.Log (health);
 			// switch to destructable game object based on threshold
 			for (int i = thresholds.Count - 1; i > -1; i--) {
 				// Find the first threshold it is below
