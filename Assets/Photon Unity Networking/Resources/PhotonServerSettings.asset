@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HostType: 2
   Protocol: 0
-  ServerAddress: 196.24.179.162
+  ServerAddress: 196.24.183.184
   ServerPort: 5055
   PreferredRegion: 4
   AppID: master
@@ -65,6 +65,4 @@ MonoBehaviour:
   - RegenEnergy
   - PushForce
   - DisablePlayerControls
-  - DamageDestructableObject
-  - SetPlayerName
   DisableAutoOpenWizard: 0
