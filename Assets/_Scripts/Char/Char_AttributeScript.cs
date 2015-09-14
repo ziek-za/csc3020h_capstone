@@ -21,16 +21,34 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 
 	public GameObject weapon1, weapon2, weapon3;
 
+	public GameObject thirdPersonPlayer, pistolMuzzleFlash, pistolFPSMuzzle; 
+
 	Level_GUIController HUD;
+	public SkinnedMeshRenderer armour;
 	public Char_SelectChar Respawner;
 
 	public Map_LinkScript currentLink;
 
 	// Use this for initialization
 	void Start () {
+
 		if (photonView.isMine){
 			buffs= new List<string>();
 			HUD = GameObject.Find("GUI Controller").GetComponent<Level_GUIController>();
+			pistolMuzzleFlash.transform.parent = weapon1.transform;
+			pistolMuzzleFlash.transform.position = pistolFPSMuzzle.transform.position;
+			pistolMuzzleFlash.transform.rotation = Quaternion.identity;
+
+			SkinnedMeshRenderer[] meshes = thirdPersonPlayer.GetComponentsInChildren<SkinnedMeshRenderer>();
+			for (int i = 0; i < meshes.Length; i++){
+				meshes[i].enabled = false;
+			}
+
+			SkinnedMeshRenderer[] fpWeapon1 = weapon1.GetComponentsInChildren<SkinnedMeshRenderer>();
+			for (int i = 0; i < fpWeapon1.Length; i++){
+				fpWeapon1[i].enabled = true;
+
+			}
 
 			if(team == Teams.RED){
 				joinTeam(new Vector3(Color.red.r, Color.red.g, Color.red.b), 0);
@@ -143,7 +161,10 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 				Screen.lockCursor=false;
 				GameObject.Find("CharacterSelectionGUI").transform.localScale=new Vector3(10,5,5);
 				Camera.main.GetComponent<BlurEffect>().enabled=true;
-				KillPlayer(this.gameObject.GetComponent<PhotonView>().viewID);
+				gameObject.GetComponent<Char_BasicMoveScript>().inVortex=true;
+				Char_BasicMoveScript.anim.SetBool ("Dead", true);
+				StartCoroutine("KillPlayerWait",this.gameObject.GetComponent<PhotonView>().viewID);
+				//KillPlayer(this.gameObject.GetComponent<PhotonView>().viewID);
 				Char_SelectChar.classNo=10;
 				Respawner.spawned=false;
 
@@ -181,9 +202,13 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 			photonView.RPC("ExitLink", PhotonTargets.OthersBuffered, playerID);
 	}
 
+	IEnumerator KillPlayerWait(int vID){
+		yield return new WaitForSeconds(0.417f);
+		KillPlayer (vID);
+	}
+
 	[RPC] void KillPlayer(int vID){
 		Destroy(PhotonView.Find(vID).gameObject);
-		
 		if (photonView.isMine)
 			photonView.RPC("KillPlayer", PhotonTargets.OthersBuffered, vID);
 	}
@@ -213,6 +238,7 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 	[RPC] void joinTeam(Vector3 color, int myTeam)
 	{
 		renderer.material.color = new Color(color.x, color.y, color.z, 1f);
+		armour.material.color = new Color(color.x, color.y, color.z, 1f);
 		team = (Teams)myTeam;
 		if (photonView.isMine)
 			photonView.RPC("joinTeam", PhotonTargets.OthersBuffered, color, myTeam);

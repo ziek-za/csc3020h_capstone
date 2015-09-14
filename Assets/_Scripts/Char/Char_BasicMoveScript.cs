@@ -6,7 +6,7 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 	//float shake = 0f;
 	//float shakeAmount  = 0.05f;
 	//float decreaseFactor = 10.0f;
-	
+	public static Animator anim;
 	public float moveSpeed = 10.0f;
 	public float mouseSpeed = 3.0f;
 	public float jumpSpeed=5.0f;
@@ -22,6 +22,7 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		if (photonView.isMine) {
+			anim=GetComponentInChildren<Animator>();
 			Screen.lockCursor=true;
 
 			//Don't hide our player for now
@@ -79,11 +80,18 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 		float h = Input.GetAxis ("Horizontal");
 		float v = Input.GetAxis ("Vertical");
 		if (h != 0f || v != 0){
-			Vector3 speed = (Vector3.forward*moveSpeed*Time.deltaTime * v) + (Vector3.right*moveSpeed*Time.deltaTime * h);
+			Vector3 speed =  0.75f * ((transform.forward*moveSpeed*Time.deltaTime * v) + (transform.right*moveSpeed*Time.deltaTime * h));
 			//transform.Translate(Vector3.forward*moveSpeed*Time.deltaTime * v);
 			//transform.Translate(Vector3.right*moveSpeed*Time.deltaTime * h);
-			transform.Translate(speed);
+			//transform.Translate(speed);
+			transform.rigidbody.MovePosition(transform.position + speed);
+
+			anim.SetFloat("Speed",Mathf.Abs(speed.magnitude)*6);
+			//Debug.Log(anim.speed);
+			//float test = Mathf.Abs(speed.magnitude);
 			//gameObject.GetComponent<PhotonTransformView>().SetSynchronizedValues(speed,mouseSpeed);
+		}else{
+			anim.SetFloat ("Speed",0);
 		}
 
 		/*float yDiff = (transform.position.y - prevPos.y)/Time.deltaTime;
@@ -94,12 +102,17 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 		}*/
 
 		if(Input.GetButtonDown("Jump") && isJumping==false){
+			anim.SetBool("Jumping",true);
 			isJumping=true;
 			Vector3 v3 = rigidbody.velocity;
 			v3.y=jumpSpeed;
 			rigidbody.velocity=v3;
 		} else if (transform.rigidbody.velocity.y < -2f){//Assumed to be falling
+			anim.SetBool("Falling",true);
 			isJumping = true;
+			anim.SetBool("Jumping",false);
+		}else{
+			anim.SetBool("Falling",false);
 		}
 
 		//prevPos = transform.position;
