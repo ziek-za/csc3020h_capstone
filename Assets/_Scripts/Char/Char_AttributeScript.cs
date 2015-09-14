@@ -24,12 +24,14 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 	public GameObject thirdPersonPlayer, pistolMuzzleFlash, pistolFPSMuzzle; 
 
 	Level_GUIController HUD;
+	public SkinnedMeshRenderer armour;
 	public Char_SelectChar Respawner;
 
 	public Map_LinkScript currentLink;
 
 	// Use this for initialization
 	void Start () {
+
 		if (photonView.isMine){
 			buffs= new List<string>();
 			HUD = GameObject.Find("GUI Controller").GetComponent<Level_GUIController>();
@@ -45,9 +47,8 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 			SkinnedMeshRenderer[] fpWeapon1 = weapon1.GetComponentsInChildren<SkinnedMeshRenderer>();
 			for (int i = 0; i < fpWeapon1.Length; i++){
 				fpWeapon1[i].enabled = true;
-			}
 
-			Debug.Log("Anything");	
+			}
 
 			if(team == Teams.RED){
 				joinTeam(new Vector3(Color.red.r, Color.red.g, Color.red.b), 0);
@@ -237,6 +238,7 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 	[RPC] void joinTeam(Vector3 color, int myTeam)
 	{
 		renderer.material.color = new Color(color.x, color.y, color.z, 1f);
+		armour.material.color = new Color(color.x, color.y, color.z, 1f);
 		team = (Teams)myTeam;
 		if (photonView.isMine)
 			photonView.RPC("joinTeam", PhotonTargets.OthersBuffered, color, myTeam);

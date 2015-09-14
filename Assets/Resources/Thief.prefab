@@ -2311,6 +2311,7 @@ GameObject:
   - 136: {fileID: 13624522}
   - 114: {fileID: 11476876}
   - 114: {fileID: 11436020}
+  - 65: {fileID: 6539380}
   m_Layer: 0
   m_Name: Thief
   m_TagString: Untagged
@@ -4697,6 +4698,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!65 &6539380
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 124516}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: .850000024, y: 2, z: .74000001}
+  m_Center: {x: 5.96046448e-08, y: 0, z: -8.94069672e-08}
 --- !u!95 &9512292
 Animator:
   serializedVersion: 3
@@ -4837,6 +4850,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9db869854372664abded43335ffca60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerName: 
   buffs: []
   health: 100
   speed: 150
@@ -4848,6 +4862,7 @@ MonoBehaviour:
   thirdPersonPlayer: {fileID: 112594}
   pistolMuzzleFlash: {fileID: 124520}
   pistolFPSMuzzle: {fileID: 148172}
+  armour: {fileID: 13712308}
   Respawner: {fileID: 0}
   currentLink: {fileID: 0}
 --- !u!114 &11424516
@@ -4989,7 +5004,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitCrosshair: {fileID: 0}
-  actualPlayerObject: {fileID: 124516}
   bulletHolePrefab: {fileID: 185902, guid: dea55ba2cdbead54ba3497383c460581, type: 2}
   muzzleFlash: {fileID: 19824522}
   tracerEffect: {fileID: 19824524}
@@ -5678,8 +5692,8 @@ SkinnedMeshRenderer:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 128338}
   m_Enabled: 0
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:

@@ -65,4 +65,6 @@ MonoBehaviour:
   - RegenEnergy
   - PushForce
   - DisablePlayerControls
+  - DamageDestructableObject
+  - SetPlayerName
   DisableAutoOpenWizard: 0
