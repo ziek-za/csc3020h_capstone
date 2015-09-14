@@ -80,14 +80,12 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 		float h = Input.GetAxis ("Horizontal");
 		float v = Input.GetAxis ("Vertical");
 		if (h != 0f || v != 0){
-			Vector3 speed = (Vector3.forward*moveSpeed*Time.deltaTime * v) + (Vector3.right*moveSpeed*Time.deltaTime * h);
+			Vector3 speed =  0.75f * ((transform.forward*moveSpeed*Time.deltaTime * v) + (transform.right*moveSpeed*Time.deltaTime * h));
 			//transform.Translate(Vector3.forward*moveSpeed*Time.deltaTime * v);
 			//transform.Translate(Vector3.right*moveSpeed*Time.deltaTime * h);
-			transform.Translate(speed);
-			Debug.Log("Speed: "+speed);
-			Debug.Log("Mag: "+speed.magnitude);
-			Debug.Log("Norm: "+speed.normalized);
-			Debug.Log("Norm&Mag: "+speed.normalized.magnitude);
+			//transform.Translate(speed);
+			transform.rigidbody.MovePosition(transform.position + speed);
+
 			anim.SetFloat("Speed",Mathf.Abs(speed.magnitude)*6);
 			//Debug.Log(anim.speed);
 			//float test = Mathf.Abs(speed.magnitude);
