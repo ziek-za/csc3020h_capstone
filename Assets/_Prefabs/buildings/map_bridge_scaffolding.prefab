@@ -143,8 +143,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 174490}
-  m_LocalRotation: {x: -.0325286686, y: -.706358254, z: -.706358135, w: .0325287506}
-  m_LocalPosition: {x: -22.2099991, y: -1.41999996, z: -12.8000002}
+  m_LocalRotation: {x: -.707074404, y: .00677034352, z: .006770432, w: .707074344}
+  m_LocalPosition: {x: -17.8999996, y: -1.54999995, z: -12.8500004}
   m_LocalScale: {x: 1.46662188, y: 1.4666214, z: 3.69033599}
   m_Children:
   - {fileID: 430780}
@@ -280,11 +280,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18d8c56c703498a479a76b22e59ba987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 50
-  thresholds: 14000000
+  health: 10
+  thresholds: 
   HasThresholdMeshesBool: 1
   HasParticleSystem: 1
-  DestroyFinal: 1
+  DestroyFinal: 0
   particleSystem: {fileID: 19830780}
 --- !u!198 &19830778
 ParticleSystem:
