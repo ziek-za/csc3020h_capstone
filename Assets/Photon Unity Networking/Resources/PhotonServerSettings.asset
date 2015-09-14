@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HostType: 2
   Protocol: 0
-  ServerAddress: 196.24.179.162
+  ServerAddress: 196.24.183.69
   ServerPort: 5055
   PreferredRegion: 4
   AppID: master
