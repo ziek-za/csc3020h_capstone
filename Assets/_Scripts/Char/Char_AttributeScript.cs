@@ -86,6 +86,18 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 		}
 	}
 
+	/*void DisableKillHUD(){
+		HUD.playerKilledLabel.text = "";
+		HUD.playerKilledLabel.CrossFadeAlpha(1,0.1f,false);
+	}*/
+	
+	public void EnableKillHUD(string killedName){
+		HUD.playerKilledLabel.CrossFadeAlpha(1,0.000001f,false);
+		HUD.playerKilledLabel.text = "YOU JUST KILLED " + killedName;
+		//Invoke("DisableKillHUD",2f);
+		HUD.playerKilledLabel.CrossFadeAlpha(0,2,false);
+	} 
+
 	// Update is called once per frame
 	void Update () {
 		if (photonView.isMine){
@@ -176,8 +188,26 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 			photonView.RPC("KillPlayer", PhotonTargets.OthersBuffered, vID);
 	}
 
-	public void ChangeHP(int amount){
+	public void ChangeHP(int amount, Vector3 shooterPos){
 		health += amount;
+
+		if (photonView.isMine){
+			if (!shooterPos.Equals(Vector3.zero)){
+
+				Vector3 shotVector = transform.position - shooterPos;
+
+				float angle = Vector3.Angle(shotVector, -transform.right);
+				Vector3 cross = Vector3.Cross(shotVector, transform.right);
+				if (cross.y > 0) angle = -angle;
+
+				Vector3 rotationVector = new Vector3(0,0,angle);
+				HUD.shotIndicatorPivot.transform.rotation = Quaternion.Euler(rotationVector);
+
+				HUD.shotIndicator.GetComponent<Image>().CrossFadeAlpha(1,0.00001f,false);
+				HUD.shotIndicator.GetComponent<Image>().enabled = true;
+				HUD.shotIndicator.GetComponent<Image>().CrossFadeAlpha(0,2,false);
+			}
+		}
 	}
 
 	[RPC] void joinTeam(Vector3 color, int myTeam)
