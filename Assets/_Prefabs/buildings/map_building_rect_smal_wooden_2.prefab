@@ -1136,11 +1136,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18d8c56c703498a479a76b22e59ba987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 40
+  health: 10
   thresholds: 
   HasThresholdMeshesBool: 0
   HasParticleSystem: 1
-  DestroyFinal: 0
+  DestroyFinal: 1
   particleSystem: {fileID: 19865804}
 --- !u!114 &11443464
 MonoBehaviour:
