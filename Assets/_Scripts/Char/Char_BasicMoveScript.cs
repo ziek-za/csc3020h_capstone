@@ -110,8 +110,11 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 			v3.y=jumpSpeed;
 			rigidbody.velocity=v3;
 		} else if (transform.rigidbody.velocity.y < -2f){//Assumed to be falling
+			anim.SetBool("Falling",true);
 			isJumping = true;
 			anim.SetBool("Jumping",false);
+		}else{
+			anim.SetBool("Falling",false);
 		}
 
 		//prevPos = transform.position;

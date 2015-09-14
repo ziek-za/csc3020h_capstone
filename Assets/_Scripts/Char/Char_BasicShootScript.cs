@@ -9,6 +9,7 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 	protected float shotCooldown;	
 
 	public GameObject hitCrosshair;
+	public GameObject actualPlayerObject;
 
 	public GameObject bulletHolePrefab;
 	public ParticleSystem muzzleFlash;
@@ -49,10 +50,12 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 
 	void Update()
 	{
-		if(photonView.isMine && Input.GetButton("Fire1")){
-			Char_BasicMoveScript.anim.SetBool("Shooting", true);
-		} else {
-			Char_BasicMoveScript.anim.SetBool("Shooting",false);
+		if(photonView.isMine) {
+			if(Input.GetButton("Fire1")){
+				Char_BasicMoveScript.anim.SetBool("Shooting", true);
+			} else {
+				Char_BasicMoveScript.anim.SetBool("Shooting",false);
+			}
 		}
 		
 		if(photonView.isMine && Time.time >= shotCooldown && Input.GetButton("Fire1")) {
@@ -79,7 +82,7 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 				Debug.DrawLine(transform.position, hit.point, Color.red);
 				//Damaging enemy players
 				if (hit.transform.gameObject.GetComponent<Char_AttributeScript>()){
-					if (hit.transform.gameObject.GetComponent<Char_AttributeScript>().team != transform.parent.parent.parent.GetComponent<Char_AttributeScript>().team){
+					if (hit.transform.gameObject.GetComponent<Char_AttributeScript>().team != actualPlayerObject.GetComponent<Char_AttributeScript>().team){
 						DamagePlayer(DamageAmount(), hit.transform.GetComponent<PhotonView>().viewID);
 						float timeTillHit = Vector3.Magnitude(hit.point - transform.position) / 90f;
 						Invoke ("EnableHitCrosshair",timeTillHit);

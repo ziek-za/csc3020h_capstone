@@ -17,6 +17,8 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 
 	public GameObject weapon1, weapon2, weapon3;
 
+	public GameObject thirdPersonPlayer, pistolMuzzleFlash, pistolFPSMuzzle; 
+
 	Level_GUIController HUD;
 	public Char_SelectChar Respawner;
 
@@ -27,6 +29,21 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 		if (photonView.isMine){
 			buffs= new List<string>();
 			HUD = GameObject.Find("GUI Controller").GetComponent<Level_GUIController>();
+			pistolMuzzleFlash.transform.parent = weapon1.transform;
+			pistolMuzzleFlash.transform.position = pistolFPSMuzzle.transform.position;
+			pistolMuzzleFlash.transform.rotation = Quaternion.identity;
+
+			SkinnedMeshRenderer[] meshes = thirdPersonPlayer.GetComponentsInChildren<SkinnedMeshRenderer>();
+			for (int i = 0; i < meshes.Length; i++){
+				meshes[i].enabled = false;
+			}
+
+			SkinnedMeshRenderer[] fpWeapon1 = weapon1.GetComponentsInChildren<SkinnedMeshRenderer>();
+			for (int i = 0; i < fpWeapon1.Length; i++){
+				fpWeapon1[i].enabled = true;
+			}
+
+			Debug.Log("Anything");	
 
 			if(team == Teams.RED){
 				joinTeam(new Vector3(Color.red.r, Color.red.g, Color.red.b), 0);
