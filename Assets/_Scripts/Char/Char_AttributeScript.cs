@@ -8,7 +8,7 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 	private RaycastHit hit;
 	private Ray ray;
 	public string playerName;
-
+		
 	public List<string> buffs;
 	public int health = 125;
 	public int speed = 125;
@@ -22,8 +22,10 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 	public GameObject weapon1, weapon2, weapon3;
 
 	public GameObject thirdPersonPlayer, pistolMuzzleFlash, pistolFPSMuzzle; 
+	public GameObject secondaryMuzzleFlash, secondaryFPSMuzzle, thirdPersonPistol, thirdPersonSecondary; 
 
 	Level_GUIController HUD;
+	Char_BasicMoveScript animInstance;
 	public SkinnedMeshRenderer armour;
 	public Char_SelectChar Respawner;
 
@@ -32,12 +34,25 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
+		animInstance = GetComponent<Char_BasicMoveScript> ();
+
 		if (photonView.isMine){
 			buffs= new List<string>();
 			HUD = GameObject.Find("GUI Controller").GetComponent<Level_GUIController>();
+			animInstance.anim.SetBool("Pistol",true);
+			animInstance.anim.SetBool("SecondaryWeapon",false);
+
 			pistolMuzzleFlash.transform.parent = weapon1.transform;
 			pistolMuzzleFlash.transform.position = pistolFPSMuzzle.transform.position;
 			pistolMuzzleFlash.transform.rotation = Quaternion.identity;
+
+			secondaryMuzzleFlash.transform.parent = weapon2.transform;
+			secondaryMuzzleFlash.transform.position = secondaryFPSMuzzle.transform.position;
+			secondaryMuzzleFlash.transform.rotation = Quaternion.identity;
+
+			//thirdPersonSecondary.SetActive(false);
+			//secondaryMuzzleFlash.transform.parent.gameObject.SetActive(false);
+
 
 			SkinnedMeshRenderer[] meshes = thirdPersonPlayer.GetComponentsInChildren<SkinnedMeshRenderer>();
 			for (int i = 0; i < meshes.Length; i++){
@@ -47,7 +62,11 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 			SkinnedMeshRenderer[] fpWeapon1 = weapon1.GetComponentsInChildren<SkinnedMeshRenderer>();
 			for (int i = 0; i < fpWeapon1.Length; i++){
 				fpWeapon1[i].enabled = true;
+			}
 
+			SkinnedMeshRenderer[] fpWeapon2 = weapon2.GetComponentsInChildren<SkinnedMeshRenderer>();
+			for (int i = 0; i < fpWeapon2.Length; i++){
+				fpWeapon2[i].enabled = true;
 			}
 
 			if(team == Teams.RED){
@@ -61,6 +80,8 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 
 			InvokeRepeating("energyTrickle",energyTrickeRate,energyTrickeRate);
 		}
+		weapon2.SetActive(false);
+		thirdPersonSecondary.SetActive (false);
 	}
 
 	void energyTrickle(){
@@ -74,10 +95,23 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 			weapon1.SetActive(true);
 			weapon2.SetActive(false);
 			weapon3.SetActive(false);
+			thirdPersonPistol.SetActive(true);
+			thirdPersonSecondary.SetActive(false);
+			Debug.LogError(GetComponent<PhotonView>().viewID+" Pistol beforehand: "+animInstance.anim.GetBool("Pistol"));
+			animInstance.anim.SetBool("Pistol",true);
+			animInstance.anim.SetBool("SecondaryWeapon",false);
+			Debug.LogError(GetComponent<PhotonView>().viewID+" Pistol afterwards: "+animInstance.anim.GetBool("Pistol"));
 		} else if (weapon == 2){
 			weapon1.SetActive(false);
 			weapon2.SetActive(true);
 			weapon3.SetActive(false);
+			thirdPersonPistol.SetActive(false);
+			thirdPersonSecondary.SetActive(true);
+			Debug.LogError(GetComponent<PhotonView>().viewID+" Secondary beforehand: "+animInstance.anim.GetBool("SecondaryWeapon"));
+			animInstance.anim.SetBool("Pistol",false);
+			animInstance.anim.SetBool("SecondaryWeapon",true);
+			Debug.LogError(GetComponent<PhotonView>().viewID+" Secondary bafterhand: "+animInstance.anim.GetBool("SecondaryWeapon"));
+
 		} else if (weapon == 3){
 			weapon1.SetActive(false);
 			weapon2.SetActive(false);
@@ -89,13 +123,13 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 	}
 
 	void ChangeWeapons(){
-		if (Input.GetButton("1")){
+		if (Input.GetButtonDown("1")){
 			NetworkChangeWeapons(transform.GetComponent<PhotonView>().viewID,1);
-		} else if (Input.GetButton("2")){
+		} else if (Input.GetButtonDown("2")){
 			NetworkChangeWeapons(transform.GetComponent<PhotonView>().viewID,2);
-		} else if (Input.GetButton("3")){
-			NetworkChangeWeapons(transform.GetComponent<PhotonView>().viewID,3);
-		}
+		}// else if (Input.GetButton("3")){
+		//	NetworkChangeWeapons(transform.GetComponent<PhotonView>().viewID,3);
+		//}
 	}
 
 	void LinkRegenEnergy(){
@@ -162,7 +196,7 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 				GameObject.Find("CharacterSelectionGUI").transform.localScale=new Vector3(10,5,5);
 				Camera.main.GetComponent<BlurEffect>().enabled=true;
 				gameObject.GetComponent<Char_BasicMoveScript>().inVortex=true;
-				Char_BasicMoveScript.anim.SetBool ("Dead", true);
+				animInstance.anim.SetBool ("Dead", true);
 				StartCoroutine("KillPlayerWait",this.gameObject.GetComponent<PhotonView>().viewID);
 				//KillPlayer(this.gameObject.GetComponent<PhotonView>().viewID);
 				Char_SelectChar.classNo=10;
