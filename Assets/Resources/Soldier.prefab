@@ -5092,7 +5092,7 @@ MonoBehaviour:
   secondaryMuzzleFlash: {fileID: 129338}
   secondaryFPSMuzzle: {fileID: 179638}
   thirdPersonPistol: {fileID: 164094}
-  thirdPersonSecondary: {fileID: 164094}
+  thirdPersonSecondary: {fileID: 111704}
   builderGloveMuzzle: {fileID: 139666, guid: a7c2ddd915f6ee24a9d4bf59618f0b34, type: 2}
   builderGloveFPSPos: {fileID: 139666, guid: a7c2ddd915f6ee24a9d4bf59618f0b34, type: 2}
   thirdPersonBuilderGlove: {fileID: 139666, guid: a7c2ddd915f6ee24a9d4bf59618f0b34,

@@ -49,7 +49,7 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 
 			secondaryMuzzleFlash.transform.parent = weapon2.transform;
 			secondaryMuzzleFlash.transform.position = secondaryFPSMuzzle.transform.position;
-			secondaryMuzzleFlash.transform.rotation = Quaternion.identity;
+			secondaryMuzzleFlash.transform.localRotation = Quaternion.identity;
 
 			//thirdPersonSecondary.SetActive(false);
 			//secondaryMuzzleFlash.transform.parent.gameObject.SetActive(false);
