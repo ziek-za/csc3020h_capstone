@@ -5243,6 +5243,10 @@ MonoBehaviour:
   secondaryFPSMuzzle: {fileID: 185642}
   thirdPersonPistol: {fileID: 184946}
   thirdPersonSecondary: {fileID: 192180}
+  builderGloveMuzzle: {fileID: 139666, guid: a7c2ddd915f6ee24a9d4bf59618f0b34, type: 2}
+  builderGloveFPSPos: {fileID: 139666, guid: a7c2ddd915f6ee24a9d4bf59618f0b34, type: 2}
+  thirdPersonBuilderGlove: {fileID: 139666, guid: a7c2ddd915f6ee24a9d4bf59618f0b34,
+    type: 2}
   armour: {fileID: 13712308}
   Respawner: {fileID: 0}
   currentLink: {fileID: 0}
@@ -7228,7 +7232,7 @@ ParticleSystem:
   looping: 0
   prewarm: 0
   playOnAwake: 0
-  moveWithTransform: 1
+  moveWithTransform: 0
   InitialModule:
     enabled: 1
     startLifetime:
@@ -8280,7 +8284,7 @@ ParticleSystem:
   looping: 0
   prewarm: 0
   playOnAwake: 0
-  moveWithTransform: 1
+  moveWithTransform: 0
   InitialModule:
     enabled: 1
     startLifetime:

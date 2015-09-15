@@ -23,6 +23,7 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 
 	public GameObject thirdPersonPlayer, pistolMuzzleFlash, pistolFPSMuzzle; 
 	public GameObject secondaryMuzzleFlash, secondaryFPSMuzzle, thirdPersonPistol, thirdPersonSecondary; 
+	public GameObject builderGloveMuzzle, builderGloveFPSPos, thirdPersonBuilderGlove;
 
 	Level_GUIController HUD;
 	Char_BasicMoveScript animInstance;
@@ -69,6 +70,11 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 				fpWeapon2[i].enabled = true;
 			}
 
+			SkinnedMeshRenderer[] fpBuilderGlove = weapon3.GetComponentsInChildren<SkinnedMeshRenderer>();
+			for (int i = 0; i < fpBuilderGlove.Length; i++){
+				fpBuilderGlove[i].enabled = true;
+			}
+
 			if(team == Teams.RED){
 				joinTeam(new Vector3(Color.red.r, Color.red.g, Color.red.b), 0);
 			}
@@ -82,6 +88,8 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 		}
 		weapon2.SetActive(false);
 		thirdPersonSecondary.SetActive (false);
+		weapon3.SetActive(false);
+		thirdPersonBuilderGlove.SetActive(false); 
 	}
 
 	void energyTrickle(){
@@ -97,6 +105,7 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 			weapon3.SetActive(false);
 			thirdPersonPistol.SetActive(true);
 			thirdPersonSecondary.SetActive(false);
+			thirdPersonBuilderGlove.SetActive(false);
 			//Debug.LogError(GetComponent<PhotonView>().viewID+" Pistol beforehand: "+animInstance.anim.GetBool("Pistol"));
 			animInstance.anim.SetBool("Pistol",true);
 			animInstance.anim.SetBool("SecondaryWeapon",false);
@@ -107,6 +116,7 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 			weapon3.SetActive(false);
 			thirdPersonPistol.SetActive(false);
 			thirdPersonSecondary.SetActive(true);
+			thirdPersonBuilderGlove.SetActive(false);
 			//Debug.LogError(GetComponent<PhotonView>().viewID+" Secondary beforehand: "+animInstance.anim.GetBool("SecondaryWeapon"));
 			animInstance.anim.SetBool("Pistol",false);
 			animInstance.anim.SetBool("SecondaryWeapon",true);
@@ -116,6 +126,9 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 			weapon1.SetActive(false);
 			weapon2.SetActive(false);
 			weapon3.SetActive(true);
+			thirdPersonPistol.SetActive(false);
+			thirdPersonSecondary.SetActive(false);
+			thirdPersonBuilderGlove.SetActive(true);
 		}
 
 		if (photonView.isMine)
@@ -127,9 +140,10 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 			NetworkChangeWeapons(transform.GetComponent<PhotonView>().viewID,1);
 		} else if (Input.GetButtonDown("2")){
 			NetworkChangeWeapons(transform.GetComponent<PhotonView>().viewID,2);
-		}// else if (Input.GetButton("3")){
-		//	NetworkChangeWeapons(transform.GetComponent<PhotonView>().viewID,3);
-		//}
+		} else if (Input.GetButton("3")){
+			if (weapon3.name.Equals("BuilderGlove"))
+			NetworkChangeWeapons(transform.GetComponent<PhotonView>().viewID,3);
+		}
 	}
 
 	void LinkRegenEnergy(){
