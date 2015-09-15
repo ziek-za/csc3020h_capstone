@@ -278,7 +278,7 @@ Transition:
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: a
+    m_ConditionEvent: SecondaryWeapon
     m_EventTreshold: 0
     m_ExitTime: .625
   - m_ConditionMode: 2
@@ -410,7 +410,7 @@ Transition:
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: a
+    m_ConditionEvent: SecondaryWeapon
     m_EventTreshold: 0
     m_ExitTime: .647058845
   - m_ConditionMode: 1
@@ -478,7 +478,7 @@ Transition:
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: a
+    m_ConditionEvent: SecondaryWeapon
     m_EventTreshold: 0
     m_ExitTime: .625
   - m_ConditionMode: 2
@@ -634,7 +634,7 @@ Transition:
     m_EventTreshold: 0
     m_ExitTime: .647058845
   - m_ConditionMode: 2
-    m_ConditionEvent: a
+    m_ConditionEvent: SecondaryWeapon
     m_EventTreshold: 0
     m_ExitTime: .647058845
   m_Atomic: 1
@@ -816,7 +816,7 @@ State:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Shooting
-  m_Speed: 1
+  m_Speed: .208000004
   m_CycleOffset: 0
   m_Motions:
   - {fileID: 7400012, guid: b2f30e1ee0faa3643801c27c00a72fb2, type: 3}
@@ -871,7 +871,7 @@ State:
   m_Speed: .624000013
   m_CycleOffset: 0
   m_Motions:
-  - {fileID: 7400014, guid: b2f30e1ee0faa3643801c27c00a72fb2, type: 3}
+  - {fileID: 7400010, guid: b2f30e1ee0faa3643801c27c00a72fb2, type: 3}
   - {fileID: 0}
   m_ParentStateMachine: {fileID: 110755180}
   m_Position: {x: 624, y: -24, z: 0}
