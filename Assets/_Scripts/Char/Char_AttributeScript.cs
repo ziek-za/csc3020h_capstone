@@ -49,7 +49,7 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 
 			secondaryMuzzleFlash.transform.parent = weapon2.transform;
 			secondaryMuzzleFlash.transform.position = secondaryFPSMuzzle.transform.position;
-			secondaryMuzzleFlash.transform.rotation = Quaternion.identity;
+			secondaryMuzzleFlash.transform.localRotation = Quaternion.identity;
 
 			//thirdPersonSecondary.SetActive(false);
 			//secondaryMuzzleFlash.transform.parent.gameObject.SetActive(false);
@@ -215,6 +215,10 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 				//KillPlayer(this.gameObject.GetComponent<PhotonView>().viewID);
 				Char_SelectChar.classNo=10;
 				Respawner.spawned=false;
+				try {
+					GetComponentInChildren<WeaponSniperScript>().sniperCrosshair.GetComponent<RawImage>().enabled = false;
+					Camera.main.fieldOfView = 60;
+				} catch (System.Exception e) {}
 
 
 				//Resets the link buttons to show correct colors
