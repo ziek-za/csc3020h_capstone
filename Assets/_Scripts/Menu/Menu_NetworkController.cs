@@ -18,7 +18,7 @@ public class Menu_NetworkController : MonoBehaviour {
 
 		//PhotonNetwork.networkingPeer.ServerAddress = "0.0.0.0:5055";
 		//Debug.LogError(PhotonNetwork.ServerAddress);
-		_MainController.hostIP = "0.0.0.0";
+		_MainController.hostIP = "192.168.1.107";
 		TryConnect();
 		//InvokeRepeating("TryConnect",0,5);
 	}
