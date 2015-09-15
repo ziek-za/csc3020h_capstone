@@ -19,6 +19,12 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 	public float timeBetweenShots = 0.333333f;
 	public float weaponAccuracy = 1f; //Higher values = more accurate
 
+	//Variables for Camera Shake
+	private Vector3 originPosition;
+	private Quaternion originRotation;
+	private float shake_decay;
+	private float shake_intensity;
+	
 	//Weapon accuracy is a public variable that can be changed in Unity
 	// 100 ~ perfect accuracy
 	// 1 ~ fairly accurate
@@ -51,8 +57,28 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 		return -damage;
 	}
 
+    /*protected void CameraShake(float si, float sd){
+		originPosition = animInstance.FPSCameraPos.localPosition;
+		originRotation = animInstance.FPSCameraPos.localRotation;
+		shake_intensity = si;
+		shake_decay = sd;
+	}*/
+
 	protected void Update()
 	{
+		/*if (photonView.isMine){
+			//Screen Shake
+			if (shake_intensity > 0){
+				animInstance.FPSCameraPos.localPosition = originPosition + Random.insideUnitSphere * shake_intensity;
+				animInstance.FPSCameraPos.localRotation = new Quaternion(
+					originRotation.x + Random.Range (-shake_intensity,shake_intensity) * .2f,
+					originRotation.y + Random.Range (-shake_intensity,shake_intensity) * .2f,
+					originRotation.z + Random.Range (-shake_intensity,shake_intensity) * .2f,
+					originRotation.w + Random.Range (-shake_intensity,shake_intensity) * .2f);
+				shake_intensity -= shake_decay;
+			}
+		}*/
+
 		if(photonView.isMine) {
 			if(Input.GetButton("Fire1")){
 				animInstance.anim.SetBool("Shooting", true);
@@ -62,8 +88,8 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 		}
 
 		if(photonView.isMine && Time.time >= shotCooldown && Input.GetButton("Fire1")) {
+			//CameraShake(0.03f,0.01f);
 			shotCooldown = Time.time + timeBetweenShots;
-			//muzzleFlash.Play();
 			PlayMuzzleFlash(photonView.viewID);
 			tracerEffect.Play();
 

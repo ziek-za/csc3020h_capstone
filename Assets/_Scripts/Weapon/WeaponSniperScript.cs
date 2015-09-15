@@ -45,6 +45,10 @@ public class WeaponSniperScript : Char_BasicShootScript {
 					base.weaponAccuracy = originalAccuracy;
 				}
 			}
+			/*if (Input.GetButtonDown("Fire1")){
+				if(zoomed)
+					base.CameraShake(1f,0.2f);
+			}*/
 		}
 
 	}

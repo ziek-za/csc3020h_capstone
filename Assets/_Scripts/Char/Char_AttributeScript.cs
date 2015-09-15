@@ -30,7 +30,7 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 	public Char_SelectChar Respawner;
 
 	public Map_LinkScript currentLink;
-
+	
 	// Use this for initialization
 	void Start () {
 
@@ -97,20 +97,20 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 			weapon3.SetActive(false);
 			thirdPersonPistol.SetActive(true);
 			thirdPersonSecondary.SetActive(false);
-			Debug.LogError(GetComponent<PhotonView>().viewID+" Pistol beforehand: "+animInstance.anim.GetBool("Pistol"));
+			//Debug.LogError(GetComponent<PhotonView>().viewID+" Pistol beforehand: "+animInstance.anim.GetBool("Pistol"));
 			animInstance.anim.SetBool("Pistol",true);
 			animInstance.anim.SetBool("SecondaryWeapon",false);
-			Debug.LogError(GetComponent<PhotonView>().viewID+" Pistol afterwards: "+animInstance.anim.GetBool("Pistol"));
+			//Debug.LogError(GetComponent<PhotonView>().viewID+" Pistol afterwards: "+animInstance.anim.GetBool("Pistol"));
 		} else if (weapon == 2){
 			weapon1.SetActive(false);
 			weapon2.SetActive(true);
 			weapon3.SetActive(false);
 			thirdPersonPistol.SetActive(false);
 			thirdPersonSecondary.SetActive(true);
-			Debug.LogError(GetComponent<PhotonView>().viewID+" Secondary beforehand: "+animInstance.anim.GetBool("SecondaryWeapon"));
+			//Debug.LogError(GetComponent<PhotonView>().viewID+" Secondary beforehand: "+animInstance.anim.GetBool("SecondaryWeapon"));
 			animInstance.anim.SetBool("Pistol",false);
 			animInstance.anim.SetBool("SecondaryWeapon",true);
-			Debug.LogError(GetComponent<PhotonView>().viewID+" Secondary bafterhand: "+animInstance.anim.GetBool("SecondaryWeapon"));
+			//Debug.LogError(GetComponent<PhotonView>().viewID+" Secondary bafterhand: "+animInstance.anim.GetBool("SecondaryWeapon"));
 
 		} else if (weapon == 3){
 			weapon1.SetActive(false);
