@@ -11,6 +11,8 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 	public GameObject hitCrosshair;
 	public int damage = 10;
 
+	Char_BasicMoveScript animInstance;
+
 	public GameObject bulletHolePrefab;
 	public ParticleSystem muzzleFlash;
 	public ParticleSystem tracerEffect;
@@ -29,6 +31,7 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 	}
 
 	protected void Start(){
+		animInstance = GetComponentInParent<Char_BasicMoveScript> ();
 		hitCrosshair = GameObject.Find ("EnemyHitCrosshair");
 	}
 
@@ -52,9 +55,9 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 	{
 		if(photonView.isMine) {
 			if(Input.GetButton("Fire1")){
-				Char_BasicMoveScript.anim.SetBool("Shooting", true);
+				animInstance.anim.SetBool("Shooting", true);
 			} else {
-				Char_BasicMoveScript.anim.SetBool("Shooting",false);
+				animInstance.anim.SetBool("Shooting",false);
 			}
 		}
 

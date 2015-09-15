@@ -6,7 +6,7 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 	//float shake = 0f;
 	//float shakeAmount  = 0.05f;
 	//float decreaseFactor = 10.0f;
-	public static Animator anim;
+	public Animator anim;
 	public float moveSpeed = 10.0f;
 	public float mouseSpeed = 3.0f;
 	public float jumpSpeed=5.0f;
@@ -21,8 +21,9 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		anim=GetComponentInChildren<Animator>();
 		if (photonView.isMine) {
-			anim=GetComponentInChildren<Animator>();
+
 			Screen.lockCursor=true;
 
 			//Don't hide our player for now
@@ -86,7 +87,7 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 			//transform.Translate(speed);
 			transform.rigidbody.MovePosition(transform.position + speed);
 
-			anim.SetFloat("Speed",Mathf.Abs(speed.magnitude)*6);
+			anim.SetFloat("Speed",Mathf.Abs(speed.magnitude)*8);
 			//Debug.Log(anim.speed);
 			//float test = Mathf.Abs(speed.magnitude);
 			//gameObject.GetComponent<PhotonTransformView>().SetSynchronizedValues(speed,mouseSpeed);

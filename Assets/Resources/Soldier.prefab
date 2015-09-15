@@ -5061,6 +5061,8 @@ MonoBehaviour:
   thirdPersonPlayer: {fileID: 164138}
   pistolMuzzleFlash: {fileID: 164180}
   pistolFPSMuzzle: {fileID: 163888}
+  secondaryMuzzleFlash: {fileID: 0}
+  secondaryFPSMuzzle: {fileID: 0}
   armour: {fileID: 13763890}
   Respawner: {fileID: 0}
   currentLink: {fileID: 0}
@@ -5076,6 +5078,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitCrosshair: {fileID: 0}
+  damage: 10
   bulletHolePrefab: {fileID: 185902, guid: dea55ba2cdbead54ba3497383c460581, type: 2}
   muzzleFlash: {fileID: 19829336}
   tracerEffect: {fileID: 19829338}
@@ -5310,6 +5313,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitCrosshair: {fileID: 0}
+  damage: 10
   bulletHolePrefab: {fileID: 185902, guid: dea55ba2cdbead54ba3497383c460581, type: 2}
   muzzleFlash: {fileID: 19863890}
   tracerEffect: {fileID: 19863888}
@@ -5327,6 +5331,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitCrosshair: {fileID: 0}
+  damage: 10
   bulletHolePrefab: {fileID: 185902, guid: dea55ba2cdbead54ba3497383c460581, type: 2}
   muzzleFlash: {fileID: 19820516, guid: 32ce1bbf65cf6db4aaff7b299000905b, type: 2}
   tracerEffect: {fileID: 19820516, guid: 32ce1bbf65cf6db4aaff7b299000905b, type: 2}
