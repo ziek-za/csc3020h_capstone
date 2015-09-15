@@ -9,6 +9,7 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 	protected float shotCooldown;	
 
 	public GameObject hitCrosshair;
+	public int damage = 10;
 
 	public GameObject bulletHolePrefab;
 	public ParticleSystem muzzleFlash;
@@ -20,34 +21,34 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 	// 100 ~ perfect accuracy
 	// 1 ~ fairly accurate
 	// 0.01 ~ wildly inaccurate
-	private float GenerateRandomOffset(float distance){
+	protected float GenerateRandomOffset(float distance){
 		int sign = -1;
 		if (Random.value > 0.5)
 			sign = 1;
 		return sign * Random.value * distance/weaponAccuracy;
 	}
 
-	void Start(){
+	protected void Start(){
 		hitCrosshair = GameObject.Find ("EnemyHitCrosshair");
 	}
 
-	void DisableHitCrosshair(){
+	protected void DisableHitCrosshair(){
 		hitCrosshair.GetComponent<RawImage>().enabled = false;
 	}
 
-	void EnableHitCrosshair(){
+	protected void EnableHitCrosshair(){
 		hitCrosshair.GetComponent<RawImage>().enabled = true;
 	} 
 
-	void ResetTracerRotation(){
+	protected void ResetTracerRotation(){
 		tracerEffect.transform.localRotation =  Quaternion.identity;
 	}
 
-	int DamageAmount(){
-		return -10;
+	protected int DamageAmount(){
+		return -damage;
 	}
 
-	void Update()
+	protected void Update()
 	{
 		if(photonView.isMine) {
 			if(Input.GetButton("Fire1")){
@@ -115,27 +116,29 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 		}
 	}
 
-	[RPC] void PlayMuzzleFlash(int vID){
+	[RPC] protected void PlayMuzzleFlash(int vID){
 		PhotonView.Find(vID).transform.GetComponent<ParticleSystem>().Play();
 		if (photonView.isMine)
 			photonView.RPC("PlayMuzzleFlash", PhotonTargets.OthersBuffered, vID);
 	}
 
-	[RPC] void DamagePlayer(int damage, int vID, Vector3 shooterPos){
+	[RPC] protected void DamagePlayer(int damage, int vID, Vector3 shooterPos){
 		Char_AttributeScript cas = PhotonView.Find(vID).transform.GetComponent<Char_AttributeScript>();
 		cas.ChangeHP(damage, shooterPos);
 		if (photonView.isMine)
 			photonView.RPC("DamagePlayer", PhotonTargets.OthersBuffered, damage, vID, shooterPos);
 	}
 
-	[RPC] void DamageBuildingLink(int damage, int vID){
+	[RPC] protected void DamageBuildingLink(int damage, int vID){
 		PhotonView.Find(vID).transform.GetComponent<Ability_BuilderLink>().ChangeHP(damage);
 		if (photonView.isMine)
 			photonView.RPC("DamageBuildingLink", PhotonTargets.OthersBuffered, damage, vID);
 	}
 
-	[RPC] void DamageDestructableObject(int damage, int vID){
-		PhotonView.Find(vID).transform.GetComponent<Map_DestructableObject>().Hit(damage);
+	[RPC] protected void DamageDestructableObject(int damage, int vID){
+		try {
+			PhotonView.Find(vID).transform.GetComponent<Map_DestructableObject>().Hit(damage);
+		} catch (System.Exception e) {}
 		if (photonView.isMine)
 			photonView.RPC("DamageDestructableObject", PhotonTargets.OthersBuffered, damage, vID);
 	}
