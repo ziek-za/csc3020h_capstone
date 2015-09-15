@@ -11,7 +11,7 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 	public GameObject hitCrosshair;
 	public int damage = 10;
 
-	Char_BasicMoveScript animInstance;
+	protected Char_BasicMoveScript animInstance;
 
 	public GameObject bulletHolePrefab;
 	public ParticleSystem muzzleFlash;

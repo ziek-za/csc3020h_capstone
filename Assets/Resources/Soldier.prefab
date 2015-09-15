@@ -5063,6 +5063,8 @@ MonoBehaviour:
   pistolFPSMuzzle: {fileID: 163888}
   secondaryMuzzleFlash: {fileID: 0}
   secondaryFPSMuzzle: {fileID: 0}
+  thirdPersonPistol: {fileID: 0}
+  thirdPersonSecondary: {fileID: 0}
   armour: {fileID: 13763890}
   Respawner: {fileID: 0}
   currentLink: {fileID: 0}
@@ -5194,6 +5196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8545d59694de0f4409b66b8e3edcbc6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 0}
   moveSpeed: 10
   mouseSpeed: 2
   jumpSpeed: 5
