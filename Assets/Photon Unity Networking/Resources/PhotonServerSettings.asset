@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HostType: 2
   Protocol: 0
-  ServerAddress: 10.0.0.7
+  ServerAddress: 0.0.0.0
   ServerPort: 5055
   PreferredRegion: 4
   AppID: master

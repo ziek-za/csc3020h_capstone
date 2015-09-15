@@ -66,7 +66,7 @@ public class Weapon_ForceGrenade : Photon.MonoBehaviour {
 				} else if (alreadyCollided[i].GetComponent<Map_DestructableObject>()){
 					DamageDestructableObject(-10,alreadyCollided[i].GetComponent<PhotonView>().viewID);
 				} 
-			} catch (System.NullReferenceException e){}
+			} catch (System.Exception e){}
 
 			if (mode.Equals("push") &&
 			    alreadyCollided[i].GetComponent<Rigidbody>() != null &&

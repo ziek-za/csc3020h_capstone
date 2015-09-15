@@ -42,6 +42,8 @@ public class Region
 [Serializable]
 public class ServerSettings : ScriptableObject
 {
+	//public static string StaticHostIP = "";
+
     public enum HostingOption { NotSet, PhotonCloud, SelfHosted, OfflineMode, BestRegion }
     public HostingOption HostType = HostingOption.NotSet;
     public ConnectionProtocol Protocol = ConnectionProtocol.Udp;
@@ -84,7 +86,10 @@ public class ServerSettings : ScriptableObject
         this.HostType = HostingOption.SelfHosted;
         this.AppID = (application != null) ? application : "master";
 
+		//if (StaticHostIP.Equals(""))
         this.ServerAddress = serverAddress;
+		//else
+		//this.ServerAddress = StaticHostIP;
         this.ServerPort = serverPort;
     }
 

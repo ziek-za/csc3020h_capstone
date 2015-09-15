@@ -5,6 +5,12 @@ using UnityEngine.UI;
 public class Menu_GUIController : MonoBehaviour {
 
 	public InputField playerNameInput;
+	public InputField IPaddressInput;
+
+	public Button HostButton;
+	public Button JoinButton;
+
+	public Menu_NetworkController NetworkController;
 
 	// Use this for initialization
 	void Start () {
@@ -17,6 +23,12 @@ public class Menu_GUIController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
+	}
+
+	public void EnterIpAddress(){
+		_MainController.hostIP = IPaddressInput.text;
+		NetworkController.TryConnect();
+		//Debug.Log(IPaddressInput.text);
 	}
 
 	public void HostGameButtonClick(){

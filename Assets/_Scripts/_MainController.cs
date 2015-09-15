@@ -10,6 +10,7 @@ public class _MainController {
 	public static bool ImportedMapObjectBool = false;
 	public static bool ImportedStringLookupBool = false;
 	public static string playerName;
+	public static string hostIP;
 
 	public static string ExampleLookupMethod(){
 		return "some info";
