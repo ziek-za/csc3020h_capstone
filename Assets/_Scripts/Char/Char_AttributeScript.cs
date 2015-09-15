@@ -215,6 +215,10 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 				//KillPlayer(this.gameObject.GetComponent<PhotonView>().viewID);
 				Char_SelectChar.classNo=10;
 				Respawner.spawned=false;
+				try {
+					GetComponentInChildren<WeaponSniperScript>().sniperCrosshair.GetComponent<RawImage>().enabled = false;
+					Camera.main.fieldOfView = 60;
+				} catch (System.Exception e) {}
 
 
 				//Resets the link buttons to show correct colors
