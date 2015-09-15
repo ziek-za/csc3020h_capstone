@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &129336
 GameObject:
   m_ObjectHideFlags: 1
@@ -2566,6 +2566,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &179638
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 479638}
+  m_Layer: 0
+  m_Name: FPRocketPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &181096
 GameObject:
   m_ObjectHideFlags: 0
@@ -2592,6 +2607,7 @@ Transform:
   m_LocalScale: {x: .300000012, y: .899999976, z: .300000012}
   m_Children:
   - {fileID: 429338}
+  - {fileID: 479638}
   m_Father: {fileID: 429342}
   m_RootOrder: 1
 --- !u!4 &429336
@@ -4765,6 +4781,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 463902}
   m_RootOrder: 30
+--- !u!4 &479638
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 179638}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .0199999996, y: 1.00699997, z: -.0500000007}
+  m_LocalScale: {x: .666666687, y: .666666687, z: .571428657}
+  m_Children: []
+  m_Father: {fileID: 411704}
+  m_RootOrder: 1
 --- !u!4 &481096
 Transform:
   m_ObjectHideFlags: 1
@@ -5061,8 +5089,14 @@ MonoBehaviour:
   thirdPersonPlayer: {fileID: 164138}
   pistolMuzzleFlash: {fileID: 164180}
   pistolFPSMuzzle: {fileID: 163888}
-  secondaryMuzzleFlash: {fileID: 0}
-  secondaryFPSMuzzle: {fileID: 0}
+  secondaryMuzzleFlash: {fileID: 129338}
+  secondaryFPSMuzzle: {fileID: 179638}
+  thirdPersonPistol: {fileID: 164094}
+  thirdPersonSecondary: {fileID: 164094}
+  builderGloveMuzzle: {fileID: 139666, guid: a7c2ddd915f6ee24a9d4bf59618f0b34, type: 2}
+  builderGloveFPSPos: {fileID: 139666, guid: a7c2ddd915f6ee24a9d4bf59618f0b34, type: 2}
+  thirdPersonBuilderGlove: {fileID: 139666, guid: a7c2ddd915f6ee24a9d4bf59618f0b34,
+    type: 2}
   armour: {fileID: 13763890}
   Respawner: {fileID: 0}
   currentLink: {fileID: 0}
@@ -5194,6 +5228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8545d59694de0f4409b66b8e3edcbc6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 0}
   moveSpeed: 10
   mouseSpeed: 2
   jumpSpeed: 5
@@ -7053,7 +7088,7 @@ ParticleSystem:
   looping: 0
   prewarm: 0
   playOnAwake: 0
-  moveWithTransform: 1
+  moveWithTransform: 0
   InitialModule:
     enabled: 1
     startLifetime:
@@ -8105,7 +8140,7 @@ ParticleSystem:
   looping: 0
   prewarm: 0
   playOnAwake: 0
-  moveWithTransform: 1
+  moveWithTransform: 0
   InitialModule:
     enabled: 1
     startLifetime:
