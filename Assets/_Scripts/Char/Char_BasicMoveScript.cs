@@ -11,11 +11,13 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 	public float mouseSpeed = 3.0f;
 	public float jumpSpeed=5.0f;
 	public Transform FPSCameraPos;
+	public float sniperRotationModifier = 0f;
+
 	//public Transform currentPlayer;
-	
+
 	float mouseSensitivity=2f;
 	bool isJumping=false;
-	public float clampYAxis = 60.0f;
+	float clampYAxis = 90.0f;
 
 	public bool inVortex = false;
 
@@ -101,7 +103,7 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 		mouseSensitivity -= Input.GetAxis ("Mouse Y") * mouseSpeed;
 		mouseSensitivity = Mathf.Clamp (mouseSensitivity, -clampYAxis, clampYAxis);
 
-		FPSCameraPos.transform.localRotation = Quaternion.Euler (mouseSensitivity, 0, 0);
+		FPSCameraPos.transform.localRotation = Quaternion.Euler (mouseSensitivity + sniperRotationModifier, 0, 0);
 	}
 
 	void OnCollisionEnter(Collision other){

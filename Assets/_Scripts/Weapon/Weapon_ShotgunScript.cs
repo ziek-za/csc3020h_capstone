@@ -63,14 +63,26 @@ public class Weapon_ShotgunScript : Char_BasicShootScript {
 						float timeTillHit = Vector3.Magnitude(hit.point - transform.position) / 90f;
 						Invoke ("EnableHitCrosshair",timeTillHit);
 						Invoke("DisableHitCrosshair",timeTillHit + 0.1f);
+
 						//Damaging buildings
 					} else if (hit.collider.GetComponentInParent<Map_DestructableObject>()) {
 						DamageDestructableObject(-1, hit.transform.GetComponentInParent<PhotonView>().viewID);
+						Vector3 bulletHolePosition = hit.point + hit.normal * 0.01f;
+						Quaternion bulletHoleRotation = Quaternion.FromToRotation(-Vector3.forward, hit.normal);
+						GameObject hole = Instantiate(bulletHolePrefab, bulletHolePosition, bulletHoleRotation) as GameObject;
+						try {
+							hole.transform.parent = hit.transform.GetComponentInChildren<Collider>().transform;
+						} catch (System.Exception e){}
+						Destroy(hole,10f);
 					} else if (hit.collider.GetComponent<Map_DestructableObject>()) {
 						DamageDestructableObject(-1, hit.transform.GetComponent<PhotonView>().viewID);
+						Vector3 bulletHolePosition = hit.point + hit.normal * 0.01f;
+						Quaternion bulletHoleRotation = Quaternion.FromToRotation(-Vector3.forward, hit.normal);
+						GameObject hole = Instantiate(bulletHolePrefab, bulletHolePosition, bulletHoleRotation) as GameObject;
+						hole.transform.parent = hit.transform;
+						Destroy(hole,10f);
 						//Bullet holes only on static objects and terrain
-					} else if (hit.transform.gameObject.GetComponent<Terrain>() || 
-					           (hit.transform.GetComponent<Rigidbody>() && hit.rigidbody.isKinematic)) {
+					} else {
 						Vector3 bulletHolePosition = hit.point + hit.normal * 0.01f;
 						Quaternion bulletHoleRotation = Quaternion.FromToRotation(-Vector3.forward, hit.normal);
 						GameObject hole = Instantiate(bulletHolePrefab, bulletHolePosition, bulletHoleRotation) as GameObject;

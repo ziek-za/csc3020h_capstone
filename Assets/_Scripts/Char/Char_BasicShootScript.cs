@@ -20,10 +20,10 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 	public float weaponAccuracy = 1f; //Higher values = more accurate
 
 	//Variables for Camera Shake
-	private Vector3 originPosition;
-	private Quaternion originRotation;
-	private float shake_decay;
-	private float shake_intensity;
+	protected Vector3 originPosition;
+	protected Quaternion originRotation;
+	protected float shake_decay;
+	protected float shake_intensity;
 	
 	//Weapon accuracy is a public variable that can be changed in Unity
 	// 100 ~ perfect accuracy
@@ -125,17 +125,32 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 				//Damaging builder 'links'
 				} else if (hit.transform.gameObject.GetComponent<Ability_BuilderLink>()) {
 					DamageBuildingLink(DamageAmount(),hit.transform.GetComponent<PhotonView>().viewID);
-					float timeTillHit = Vector3.Magnitude(hit.point - transform.position) / 90f;
-					Invoke ("EnableHitCrosshair",timeTillHit);
-					Invoke("DisableHitCrosshair",timeTillHit + 0.1f);
+					//float timeTillHit = Vector3.Magnitude(hit.point - transform.position) / 90f;
+					//Invoke ("EnableHitCrosshair",0);
+					EnableHitCrosshair();
+					Invoke("DisableHitCrosshair",0.1f);
+
 				//Damaging buildings
 				} else if (hit.collider.GetComponentInParent<Map_DestructableObject>()) {
 					DamageDestructableObject(-1, hit.transform.GetComponentInParent<PhotonView>().viewID);
+					Vector3 bulletHolePosition = hit.point + hit.normal * 0.01f;
+					Quaternion bulletHoleRotation = Quaternion.FromToRotation(-Vector3.forward, hit.normal);
+					GameObject hole = Instantiate(bulletHolePrefab, bulletHolePosition, bulletHoleRotation) as GameObject;
+					try {
+						hole.transform.parent = hit.transform.GetComponentInChildren<Collider>().transform;
+					} catch (System.Exception e){}
+					Destroy(hole,10f);
+
 				} else if (hit.collider.GetComponent<Map_DestructableObject>()) {
 					DamageDestructableObject(-1, hit.transform.GetComponent<PhotonView>().viewID);
+					Vector3 bulletHolePosition = hit.point + hit.normal * 0.01f;
+					Quaternion bulletHoleRotation = Quaternion.FromToRotation(-Vector3.forward, hit.normal);
+					GameObject hole = Instantiate(bulletHolePrefab, bulletHolePosition, bulletHoleRotation) as GameObject;
+					hole.transform.parent = hit.transform;
+					Destroy(hole,10f);
+
 				//Bullet holes only on static objects and terrain
-				} else if (hit.transform.gameObject.GetComponent<Terrain>() || 
-				           (hit.transform.GetComponent<Rigidbody>() && hit.rigidbody.isKinematic)) {
+				} else {//(if !(hit.transform.GetComponent<Rigidbody>() &&  !hit.rigidbody.isKinematic)) {
 					Vector3 bulletHolePosition = hit.point + hit.normal * 0.01f;
 					Quaternion bulletHoleRotation = Quaternion.FromToRotation(-Vector3.forward, hit.normal);
 					GameObject hole = Instantiate(bulletHolePrefab, bulletHolePosition, bulletHoleRotation) as GameObject;

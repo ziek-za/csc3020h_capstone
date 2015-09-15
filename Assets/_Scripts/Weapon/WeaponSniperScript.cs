@@ -24,10 +24,25 @@ public class WeaponSniperScript : Char_BasicShootScript {
 		originalSensitivity = moveScript.mouseSpeed;
 	}
 
+	void SniperRecoil(float si, float sd){
+		shake_intensity = si;
+		shake_decay = sd;
+		//animInstance.FPSCameraPos.Rotate(-shake_intensity,0,0);
+		animInstance.sniperRotationModifier = -shake_intensity;
+	}
+	
 	// Update is called once per frame
 	void Update () {
 		base.Update();
 
+		if (photonView.isMine){
+			//Recoil
+			if (shake_intensity > 0 ){
+				animInstance.sniperRotationModifier += shake_decay;
+				shake_intensity -= shake_decay;
+			}
+		}
+		
 		if (photonView.isMine){
 			if (Input.GetButtonDown("Fire3")){
 				if (!zoomed){
@@ -40,6 +55,8 @@ public class WeaponSniperScript : Char_BasicShootScript {
 					zoomed = true;
 					base.weaponAccuracy = zoomedAccuracy;
 					moveScript.mouseSpeed = moveScript.mouseSpeed/5;
+					tracerEffect.enableEmission = false;
+					muzzleFlash.enableEmission = false;
 				} else {
 					sniperCrosshair.GetComponent<RawImage>().enabled = false;
 					Camera.main.fieldOfView = 60;
@@ -50,12 +67,16 @@ public class WeaponSniperScript : Char_BasicShootScript {
 					}
 					base.weaponAccuracy = originalAccuracy;
 					moveScript.mouseSpeed = originalSensitivity;
+					tracerEffect.enableEmission = true;
+					muzzleFlash.enableEmission = true;
+					shake_intensity = 0;
 				}
 			}
-			/*if (Input.GetButtonDown("Fire1")){
-				if(zoomed)
-					base.CameraShake(1f,0.2f);
-			}*/
+			if (Input.GetButtonDown("Fire1")){
+				if(zoomed){
+					SniperRecoil(7f,0.2f);
+				}
+			}
 		}
 
 	}
