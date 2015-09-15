@@ -26,9 +26,6 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 
 			Screen.lockCursor=true;
 
-			//Don't hide our player for now
-			//transform.GetComponent<Renderer>().enabled = false;
-
 		}
 	}
 	
@@ -38,26 +35,20 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 		//Debug.Log(PhotonNetwork.networkingPeer.RoundTripTime);
 		if (photonView.isMine)
 		{
-			//if (Input.GetButton("Fire1"))
-			//	shake = 0.5f;
 			if (!inVortex)
 				InputMovement();
 			//InputColorChange();
 			MouseView();
+
 			UpdateCameraPos();
 			//SetSynchronizedValues
 		}
 
 	}
 
+
+
 	void UpdateCameraPos(){
-		/*if (shake > 0) {
-			Debug.Log (shake);
-			FPSCameraPos.position += Random.insideUnitSphere * shakeAmount;
-			shake -= Time.deltaTime * decreaseFactor;			
-		} else {
-			shake = 0.0f;
-		}*/
 		Camera.main.transform.position = FPSCameraPos.position;
 		Camera.main.transform.rotation = FPSCameraPos.rotation;
 	}
@@ -82,25 +73,12 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 		float v = Input.GetAxis ("Vertical");
 		if (h != 0f || v != 0){
 			Vector3 speed =  0.75f * ((transform.forward*moveSpeed*Time.deltaTime * v) + (transform.right*moveSpeed*Time.deltaTime * h));
-			//transform.Translate(Vector3.forward*moveSpeed*Time.deltaTime * v);
-			//transform.Translate(Vector3.right*moveSpeed*Time.deltaTime * h);
-			//transform.Translate(speed);
 			transform.rigidbody.MovePosition(transform.position + speed);
 
 			anim.SetFloat("Speed",Mathf.Abs(speed.magnitude)*8);
-			//Debug.Log(anim.speed);
-			//float test = Mathf.Abs(speed.magnitude);
-			//gameObject.GetComponent<PhotonTransformView>().SetSynchronizedValues(speed,mouseSpeed);
 		}else{
 			anim.SetFloat ("Speed",0);
 		}
-
-		/*float yDiff = (transform.position.y - prevPos.y)/Time.deltaTime;
-		if (Mathf.Abs(yDiff) < 0.1f){
-			isJumping = false;
-		} else {
-			isJumping = true;
-		}*/
 
 		if(Input.GetButtonDown("Jump") && isJumping==false){
 			anim.SetBool("Jumping",true);
@@ -116,7 +94,6 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 			anim.SetBool("Falling",false);
 		}
 
-		//prevPos = transform.position;
 	}
 
 	void MouseView(){

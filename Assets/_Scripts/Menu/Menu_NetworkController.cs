@@ -58,7 +58,9 @@ public class Menu_NetworkController : MonoBehaviour {
 	{
 		roomsList = PhotonNetwork.GetRoomList();
 		GUIController.HostButton.interactable = true;
-		GUIController.JoinButton.interactable = true;
+		if (roomsList.Length > 0) {
+			GUIController.JoinButton.interactable = true;
+		}
 		//CancelInvoke("TryConnect");
 	}
 }

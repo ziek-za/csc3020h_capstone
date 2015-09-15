@@ -10,6 +10,9 @@ public class WeaponSniperScript : Char_BasicShootScript {
 	public float zoomedAccuracy = 100f;
 	float originalAccuracy;
 
+	float originalSensitivity;
+	Char_BasicMoveScript moveScript;
+
 	bool zoomed = false;
 
 	// Use this for initialization
@@ -17,6 +20,8 @@ public class WeaponSniperScript : Char_BasicShootScript {
 		base.Start();
 		sniperCrosshair = GameObject.Find ("SniperCrosshair");
 		originalAccuracy = base.weaponAccuracy;
+		moveScript = GetComponentInParent<Char_BasicMoveScript>();
+		originalSensitivity = moveScript.mouseSpeed;
 	}
 
 	// Update is called once per frame
@@ -34,6 +39,7 @@ public class WeaponSniperScript : Char_BasicShootScript {
 					}
 					zoomed = true;
 					base.weaponAccuracy = zoomedAccuracy;
+					moveScript.mouseSpeed = moveScript.mouseSpeed/5;
 				} else {
 					sniperCrosshair.GetComponent<RawImage>().enabled = false;
 					Camera.main.fieldOfView = 60;
@@ -43,8 +49,13 @@ public class WeaponSniperScript : Char_BasicShootScript {
 						meshes[i].enabled = true;
 					}
 					base.weaponAccuracy = originalAccuracy;
+					moveScript.mouseSpeed = originalSensitivity;
 				}
 			}
+			/*if (Input.GetButtonDown("Fire1")){
+				if(zoomed)
+					base.CameraShake(1f,0.2f);
+			}*/
 		}
 
 	}
