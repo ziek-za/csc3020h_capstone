@@ -225,6 +225,10 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 				//HUD.SetUpLinkButtons();
 				
 			}
+
+			if (Input.GetKey(KeyCode.M)){
+				Screen.lockCursor = true;
+			}
 		}
 	}
 
@@ -260,6 +264,12 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 	}
 
 	[RPC] void KillPlayer(int vID){
+		GameObject[] goList = GameObject.FindGameObjectsWithTag("Turret");
+		for (int i = 0; i < goList.Length; i++){
+			if (goList[i].GetComponent<Ability_BuilderTurret>().trackedEnemies.Contains(PhotonView.Find(vID).gameObject))
+				goList[i].GetComponent<Ability_BuilderTurret>().trackedEnemies.Remove(PhotonView.Find(vID).gameObject);
+		}
+
 		Destroy(PhotonView.Find(vID).gameObject);
 		if (photonView.isMine)
 			photonView.RPC("KillPlayer", PhotonTargets.OthersBuffered, vID);

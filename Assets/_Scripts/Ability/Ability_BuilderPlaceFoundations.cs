@@ -5,6 +5,7 @@ public class Ability_BuilderPlaceFoundations : Photon.MonoBehaviour {
 
 	public float maxDistance = 2f;
 	public GameObject linkFoundation;
+	public GameObject turretFoundation;
 	public GameObject distanceIndicator;
 	public GameObject aimingPoint;
 
@@ -12,9 +13,12 @@ public class Ability_BuilderPlaceFoundations : Photon.MonoBehaviour {
 
 	public int placeLinkEnergyCost = 10;
 	public int placeLinkCD = 25;
+
+	public int placeTurretEnergyCost = 10;
+	public int placeTurretCD = 25;
 	
 	Vector3 teleportDirection;
-	bool linkOffCooldown = true;
+	bool linkOffCooldown = true, turretOffCooldown = true;
 	 
 	// Use this for initialization
 	void Start () {
@@ -29,6 +33,10 @@ public class Ability_BuilderPlaceFoundations : Photon.MonoBehaviour {
 		linkOffCooldown = true;
 	}
 
+	void turretCooledDown(){
+		turretOffCooldown = true;
+	}
+
 	void CastShadowBuildingRay(){
 		placeDistance=maxDistance;
 		
@@ -41,8 +49,7 @@ public class Ability_BuilderPlaceFoundations : Photon.MonoBehaviour {
 				placeDistance=hit.distance;
 			}
 		}
-		
-		
+
 		teleportDirection = new Vector3 (0, ray.direction.y , 1);
 		
 		Vector3 projectionPosition = teleportDirection * placeDistance;
@@ -57,9 +64,11 @@ public class Ability_BuilderPlaceFoundations : Photon.MonoBehaviour {
 			Debug.DrawRay(floorRay.origin, floorHit.point-floorRay.origin, Color.red);
 			distanceIndicator.transform.GetComponent<MeshRenderer> ().enabled = true;
 			Vector3 floorPosition = floorHit.point+new Vector3(0,0.5f,0)+floorHit.normal*0.01f;
-			Quaternion floorRotation = Quaternion.FromToRotation(-Vector3.forward, floorHit.normal);
+			//Quaternion floorRotation = Quaternion.FromToRotation(-Vector3.forward, floorHit.normal);
 			distanceIndicator.transform.position = floorPosition;
-			distanceIndicator.transform.rotation=floorRotation;
+			Vector3 facingAway = transform.rotation.eulerAngles;
+			facingAway.y += 180;
+			distanceIndicator.transform.rotation=Quaternion.Euler(facingAway);
 		}
 	}
 	
@@ -77,14 +86,29 @@ public class Ability_BuilderPlaceFoundations : Photon.MonoBehaviour {
 					distanceIndicator.transform.GetComponent<MeshRenderer> ().enabled = false;
 					linkOffCooldown = false;
 					GameObject link = PhotonNetwork.Instantiate(linkFoundation.name,
-					                                distanceIndicator.transform.position,distanceIndicator.transform.rotation,0);
+					                                            distanceIndicator.transform.position,distanceIndicator.transform.rotation,0);
 					//link.GetComponent<Ability_BuilderFoundation>().currentTeam = transform.GetComponent<Char_AttributeScript>().team;
 					SetBoxTeam (link.GetComponent<PhotonView>().viewID,(int)transform.GetComponent<Char_AttributeScript>().team);
+				}
+
+			} else if (Input.GetButton("Building 2") && turretOffCooldown){
+				
+				CastShadowBuildingRay();
+				
+				if (Input.GetButtonDown("Fire2")
+				    && transform.GetComponent<Char_AttributeScript>().energy >= placeTurretEnergyCost && turretOffCooldown){
+					transform.GetComponent<Char_AttributeScript>().energy -= placeTurretEnergyCost;
+					Invoke("turretCooledDown",placeTurretCD);
+					distanceIndicator.transform.GetComponent<MeshRenderer> ().enabled = false;
+					turretOffCooldown = false;
+					GameObject turret = PhotonNetwork.Instantiate(turretFoundation.name,
+					                                              distanceIndicator.transform.position,distanceIndicator.transform.rotation,0);
+					SetBoxTeam (turret.GetComponent<PhotonView>().viewID,(int)transform.GetComponent<Char_AttributeScript>().team);
 				}
 				//GameObject link = PhotonNetwork.Instantiate(linkFoundation.name,transform.position,Quaternion.identity,0);
 				//link.GetComponent<Ability_BuilderFoundation>().currentTeam = transform.GetComponent<Char_AttributeScript>().team;
 			}
-			else if (Input.GetButtonUp("Building 1")){
+			else {
 				distanceIndicator.transform.GetComponent<MeshRenderer> ().enabled = false;
 			}
 		}

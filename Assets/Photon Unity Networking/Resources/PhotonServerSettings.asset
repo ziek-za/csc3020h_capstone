@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HostType: 2
   Protocol: 0
-  ServerAddress: 192.168.1.110
+  ServerAddress: 192.168.1.107
   ServerPort: 5055
   PreferredRegion: 4
   AppID: master
@@ -67,4 +67,5 @@ MonoBehaviour:
   - DisablePlayerControls
   - DamageDestructableObject
   - SetPlayerName
+  - DamageBuildingTurret
   DisableAutoOpenWizard: 0

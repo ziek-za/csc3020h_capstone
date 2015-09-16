@@ -2,31 +2,73 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Ability_BuilderTurret : MonoBehaviour {
+public class Ability_BuilderTurret : Photon.MonoBehaviour {
 
 	public Char_AttributeScript.Teams currentTeam;
 	float lifeTime = 10000f;
 	public int health = 100;
 	public GameObject muzzle;
-	
+	float timeBetweenShots = 0.1f;
+	float shotCooldown;	
+
+	public ParticleSystem muzzleFlash, tracerEffect;
+
 	float lifetimeAccum = 0;
 	
-	List<GameObject> trackedEnemies;
+	public List<GameObject> trackedEnemies;
 
-	public GameObject leftConeEdge, rightConeEdge;
-	
+	Quaternion originalRotation, leftPanEdge, rightPanEdge, currentEdge;
+
 	// Use this for initialization
 	void Start () {
 		trackedEnemies = new List<GameObject>();
+		originalRotation = transform.rotation;
+		leftPanEdge.eulerAngles = originalRotation.eulerAngles + new Vector3(0,60f,0);
+		rightPanEdge.eulerAngles = originalRotation.eulerAngles + new Vector3(0,-60f,0);
+		currentEdge = leftPanEdge;
 	}
 	
 	public void ChangeHP(int change){
 		health += change;
 	}
 
-	float oldAngle = 0;
-	float rotationsPerSecond = 0.1f;
-	float rotationAccum = 0;
+	Quaternion ClampRotation(Quaternion toClamp){
+
+		//X rotation i.e. up/down
+		if (toClamp.eulerAngles.x < (originalRotation.eulerAngles.x-30) && toClamp.eulerAngles.x > (originalRotation.eulerAngles.x+60)){
+			toClamp.eulerAngles = new Vector3((originalRotation.eulerAngles.x-30),toClamp.eulerAngles.y,toClamp.eulerAngles.z);
+		} else if (toClamp.eulerAngles.x < (originalRotation.eulerAngles.x-40) && toClamp.eulerAngles.x > (originalRotation.eulerAngles.x+50)){
+			toClamp.eulerAngles = new Vector3((originalRotation.eulerAngles.x+50),toClamp.eulerAngles.y,toClamp.eulerAngles.z);
+		}
+
+		//Y rotation i.e. left/right
+		if (toClamp.eulerAngles.y < (originalRotation.eulerAngles.y-70) && toClamp.eulerAngles.y > (originalRotation.eulerAngles.y+80)){
+			toClamp.eulerAngles = new Vector3(toClamp.eulerAngles.x,(originalRotation.eulerAngles.y-70),toClamp.eulerAngles.z);
+		} else if (toClamp.eulerAngles.y < (originalRotation.eulerAngles.y-80) && toClamp.eulerAngles.y > (originalRotation.eulerAngles.y+70)){
+			toClamp.eulerAngles = new Vector3(toClamp.eulerAngles.x,(originalRotation.eulerAngles.y+70),toClamp.eulerAngles.z);
+		} 
+
+		return toClamp;
+	}
+
+	bool RotationsEqual(Quaternion q1, Quaternion q2, float error){
+		if (Mathf.Abs(Mathf.Abs(q1.eulerAngles.x) - Mathf.Abs(q2.eulerAngles.x)) > error)
+			return false;
+		if (Mathf.Abs(Mathf.Abs(q1.eulerAngles.y) - Mathf.Abs(q2.eulerAngles.y)) > error)
+			return false;
+		if (Mathf.Abs(Mathf.Abs(q1.eulerAngles.z) - Mathf.Abs(q2.eulerAngles.z)) > error)
+			return false;
+		return true;
+	}
+
+	void PanMode(){
+		if (RotationsEqual(transform.rotation,leftPanEdge,5f)){
+			currentEdge = rightPanEdge;
+		} else if (RotationsEqual(transform.rotation,rightPanEdge,5f)){
+			currentEdge = leftPanEdge;
+		}
+		transform.rotation = Quaternion.RotateTowards(ClampRotation(transform.rotation),currentEdge,0.2f);
+	}
 
 	void Update(){
 		lifetimeAccum += Time.deltaTime;
@@ -39,20 +81,57 @@ public class Ability_BuilderTurret : MonoBehaviour {
 			KillSelf();
 		}
 
-		rotationAccum += Time.deltaTime;
-
 		if (trackedEnemies.Count > 0){
+			RaycastHit hit;
+			Ray enemyTrackingRay = new Ray(muzzle.transform.position, trackedEnemies[0].transform.position-muzzle.transform.position);
+			if(Physics.Raycast(enemyTrackingRay, out hit, 100f)){
+				Debug.Log(hit.transform.name);
 
-			Vector3 dir = transform.position - trackedEnemies[0].transform.position; // find direction
-			//dir.y = 0; // keep only the horizontal direction
-			Quaternion rot = Quaternion.LookRotation(dir);
+				if (hit.transform.GetComponent<Char_AttributeScript>()){
 
-			//muzzle.transform.LookAt(trackedEnemies[0].transform.position);
-			//Vector3 muzzleDir = muzzle.transform.position - trackedEnemies[0].transform.position;
-			//Debug.Log(Vector3.Angle(dir,muzzleDir));
-			transform.rotation = Quaternion.Slerp(transform.rotation, rot, 5f * Time.deltaTime);
-			//Debug.Log (dir);
+
+					Vector3 offsetPos = transform.position - trackedEnemies[0].transform.position;
+					Quaternion rotToTarget = Quaternion.LookRotation(offsetPos);
+					float amountToRotate = Quaternion.Angle( transform.rotation, rotToTarget );
+					transform.rotation = Quaternion.Slerp( ClampRotation(transform.rotation), rotToTarget, 5f * Time.deltaTime);
+
+					if (Time.time >= shotCooldown){
+						shotCooldown = Time.time + timeBetweenShots;
+						muzzle.transform.rotation = Quaternion.RotateTowards(muzzle.transform.rotation,
+						                                                     Quaternion.LookRotation(trackedEnemies[0].transform.position-muzzle.transform.position),
+						                                                     5f);
+						PlayMuzzleFlash(photonView.viewID);
+						DamagePlayer(-3, hit.transform.GetComponent<PhotonView>().viewID, transform.position);
+					}
+					
+				} else {
+					PanMode();
+				}
+			} else {
+				PanMode();
+			}
+		} else {
+			PanMode();
 		}
+	}
+
+	[RPC] void PlayMuzzleFlash(int vID){
+		PhotonView.Find(vID).transform.GetComponent<Ability_BuilderTurret>().muzzleFlash.Play();
+		PhotonView.Find(vID).transform.GetComponent<Ability_BuilderTurret>().tracerEffect.Play();
+		if (photonView.isMine)
+			photonView.RPC("PlayMuzzleFlash", PhotonTargets.OthersBuffered, vID);
+	}
+	
+	[RPC] void DamagePlayer(int damage, int vID, Vector3 shooterPos){
+		try {
+			Char_AttributeScript cas = PhotonView.Find(vID).transform.GetComponent<Char_AttributeScript>();
+			cas.ChangeHP(damage, shooterPos);
+			if (cas.health < 0){
+				trackedEnemies.Remove(cas.gameObject);
+			}
+		} catch (System.Exception e){}
+		if (photonView.isMine)
+			photonView.RPC("DamagePlayer", PhotonTargets.OthersBuffered, damage, vID, shooterPos);
 	}
 	
 	public void SetTeam(Char_AttributeScript.Teams newTeam){
@@ -80,15 +159,16 @@ public class Ability_BuilderTurret : MonoBehaviour {
 
 	
 	void OnTriggerExit(Collider other){
-		if (other.GetComponent<Char_AttributeScript>()){// &&  other.GetComponent<Char_AttributeScript>().team != currentTeam){
-			Debug.Log("exit");
+		if (other.GetComponent<Char_AttributeScript>() && other.GetComponent<Char_AttributeScript>().team != currentTeam &&
+		    trackedEnemies.Contains(other.gameObject)){
+			//Debug.Log("exit");
 			trackedEnemies.Remove(other.gameObject);
 		}
 	}
 	
 	void OnTriggerEnter(Collider other){
-		if (other.GetComponent<Char_AttributeScript>()){// &&  other.GetComponent<Char_AttributeScript>().team != currentTeam){
-			Debug.Log("enter");
+		if (other.GetComponent<Char_AttributeScript>() && other.GetComponent<Char_AttributeScript>().team != currentTeam){
+			//Debug.Log("enter");
 			trackedEnemies.Add(other.gameObject);
 		}
 	}

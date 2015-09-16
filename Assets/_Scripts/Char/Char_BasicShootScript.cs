@@ -125,8 +125,12 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 				//Damaging builder 'links'
 				} else if (hit.transform.gameObject.GetComponent<Ability_BuilderLink>()) {
 					DamageBuildingLink(DamageAmount(),hit.transform.GetComponent<PhotonView>().viewID);
-					//float timeTillHit = Vector3.Magnitude(hit.point - transform.position) / 90f;
-					//Invoke ("EnableHitCrosshair",0);
+					EnableHitCrosshair();
+					Invoke("DisableHitCrosshair",0.1f);
+
+					//Damaging builder 'turrets'
+				} else if (hit.transform.gameObject.GetComponent<Ability_BuilderTurret>()) {
+					DamageBuildingTurret(DamageAmount(),hit.transform.GetComponent<PhotonView>().viewID);
 					EnableHitCrosshair();
 					Invoke("DisableHitCrosshair",0.1f);
 
@@ -150,7 +154,7 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 					Destroy(hole,10f);
 
 				//Bullet holes only on static objects and terrain
-				} else {//(if !(hit.transform.GetComponent<Rigidbody>() &&  !hit.rigidbody.isKinematic)) {
+				} else {
 					Vector3 bulletHolePosition = hit.point + hit.normal * 0.01f;
 					Quaternion bulletHoleRotation = Quaternion.FromToRotation(-Vector3.forward, hit.normal);
 					GameObject hole = Instantiate(bulletHolePrefab, bulletHolePosition, bulletHoleRotation) as GameObject;
@@ -177,6 +181,12 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 		PhotonView.Find(vID).transform.GetComponent<Ability_BuilderLink>().ChangeHP(damage);
 		if (photonView.isMine)
 			photonView.RPC("DamageBuildingLink", PhotonTargets.OthersBuffered, damage, vID);
+	}
+
+	[RPC] protected void DamageBuildingTurret(int damage, int vID){
+		PhotonView.Find(vID).transform.GetComponent<Ability_BuilderTurret>().ChangeHP(damage);
+		if (photonView.isMine)
+			photonView.RPC("DamageBuildingTurret", PhotonTargets.OthersBuffered, damage, vID);
 	}
 
 	[RPC] protected void DamageDestructableObject(int damage, int vID){
