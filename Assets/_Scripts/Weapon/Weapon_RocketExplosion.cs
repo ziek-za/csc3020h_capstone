@@ -55,7 +55,7 @@ public class Weapon_RocketExplosion : Photon.MonoBehaviour {
 							PushForce(alreadyCollided[i].GetComponent<PhotonView>().viewID, Vector3.Normalize(forceDir) * pushForce);
 						}
 
-						float damage = -30/((alreadyCollided[i].transform.position - transform.position).magnitude + 1);
+						float damage = -60/((alreadyCollided[i].transform.position - transform.position).magnitude + 1);
 
 						//Hit Player
 						if (alreadyCollided[i].GetComponent<Char_AttributeScript>()){
@@ -69,7 +69,14 @@ public class Weapon_RocketExplosion : Photon.MonoBehaviour {
 							DamageBuildingLink(Mathf.RoundToInt(damage),alreadyCollided[i].GetComponent<PhotonView>().viewID);
 							EnableHitCrosshair();
 							Invoke("DisableHitCrosshair",0.1f);
-						} 
+						}
+
+						//Hit Builder Turret
+						if (alreadyCollided[i].GetComponent<Ability_BuilderTurret>()){
+							DamageBuildingTurret(Mathf.RoundToInt(damage-30),alreadyCollided[i].GetComponent<PhotonView>().viewID);
+							EnableHitCrosshair();
+							Invoke("DisableHitCrosshair",0.1f);
+						}
 					} catch (System.NullReferenceException e){
 						Debug.LogError("Null Ref on: " + alreadyCollided[i].name);
 					}
@@ -99,6 +106,12 @@ public class Weapon_RocketExplosion : Photon.MonoBehaviour {
 		PhotonView.Find(vID).transform.GetComponent<Ability_BuilderLink>().ChangeHP(damage);
 		if (photonView.isMine)
 			photonView.RPC("DamageBuildingLink", PhotonTargets.OthersBuffered, damage, vID);
+	}
+
+	[RPC] void DamageBuildingTurret(int damage, int vID){
+		PhotonView.Find(vID).transform.GetComponent<Ability_BuilderTurret>().ChangeHP(damage);
+		if (photonView.isMine)
+			photonView.RPC("DamageBuildingTurret", PhotonTargets.OthersBuffered, damage, vID);
 	}
 	
 	[RPC] void DamageDestructableObject(int damage, int vID){
