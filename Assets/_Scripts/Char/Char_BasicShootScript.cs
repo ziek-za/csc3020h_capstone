@@ -8,7 +8,7 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 	private Ray ray;
 	protected float shotCooldown;	
 
-	public GameObject hitCrosshair;
+	public GameObject hitCrosshair, headshotCrosshair;
 	public int damage = 10;
 
 	protected Char_BasicMoveScript animInstance;
@@ -39,6 +39,7 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 	protected void Start(){
 		animInstance = GetComponentInParent<Char_BasicMoveScript> ();
 		hitCrosshair = GameObject.Find ("EnemyHitCrosshair");
+		headshotCrosshair = GameObject.Find ("EnemyHeadshotCrosshair");
 	}
 
 	protected void DisableHitCrosshair(){
@@ -47,6 +48,14 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 
 	protected void EnableHitCrosshair(){
 		hitCrosshair.GetComponent<RawImage>().enabled = true;
+	} 
+
+	protected void DisableHeadshotCrosshair(){
+		headshotCrosshair.GetComponent<RawImage>().enabled = false;
+	}
+	
+	protected void EnableHeadshotCrosshair(){
+		headshotCrosshair.GetComponent<RawImage>().enabled = true;
 	} 
 
 	protected void ResetTracerRotation(){
@@ -108,13 +117,25 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 			if(Physics.Raycast(ray, out hit, Camera.main.farClipPlane)) 
 			{
 				Debug.DrawLine(transform.position, hit.point, Color.red);
+
+				//Headshots do 2x damage
+				if (hit.collider.gameObject.CompareTag("Head")){
+
+					if (hit.transform.gameObject.GetComponent<Char_AttributeScript>().team != transform.GetComponentInParent<Char_AttributeScript>().team){
+						DamagePlayer(2*DamageAmount(), hit.transform.GetComponent<PhotonView>().viewID, transform.position);
+						EnableHeadshotCrosshair();
+						Invoke("DisableHeadshotCrosshair",0.1f);
+						if (hit.transform.gameObject.GetComponent<Char_AttributeScript>().health <= 0){
+							transform.parent.parent.parent.GetComponent<Char_AttributeScript>().EnableKillHUD(hit.transform.GetComponent<Char_AttributeScript>().playerName);
+						}
+					}
+
 				//Damaging enemy players
-				if (hit.transform.gameObject.GetComponent<Char_AttributeScript>()){
-					if (hit.transform.gameObject.GetComponent<Char_AttributeScript>().team != transform.parent.parent.parent.GetComponent<Char_AttributeScript>().team){
+				} else if (hit.transform.gameObject.GetComponent<Char_AttributeScript>()){
+					if (hit.transform.gameObject.GetComponent<Char_AttributeScript>().team != transform.GetComponentInParent<Char_AttributeScript>().team){
 						DamagePlayer(DamageAmount(), hit.transform.GetComponent<PhotonView>().viewID, transform.position);
-						float timeTillHit = Vector3.Magnitude(hit.point - transform.position) / 90f;
-						Invoke ("EnableHitCrosshair",timeTillHit);
-						Invoke("DisableHitCrosshair",timeTillHit + 0.1f);
+						EnableHitCrosshair();
+						Invoke("DisableHitCrosshair",0.1f);
 
 						if (hit.transform.gameObject.GetComponent<Char_AttributeScript>().health <= 0){
 							transform.parent.parent.parent.GetComponent<Char_AttributeScript>().EnableKillHUD(hit.transform.GetComponent<Char_AttributeScript>().playerName);

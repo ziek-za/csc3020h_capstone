@@ -5,6 +5,7 @@ TagManager:
   tags:
   - Link
   - Turret
+  - Head
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
