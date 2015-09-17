@@ -12,8 +12,9 @@ public class Level_GUIController : MonoBehaviour {
 	public GameObject shotIndicatorPivot;
 	public Image builderImage, thiefImage, soldierImage, shotIndicator;
 	public Button linkButton;
-	public Transform linkButtonParent;
 	public Text playerNameLabel, playerKilledLabel;
+
+	public GameObject mapCenter;
 
 	// Use this for initialization
 	void Start () {
@@ -22,10 +23,10 @@ public class Level_GUIController : MonoBehaviour {
 
 	public void SetUpLinkButtons(){
 		GameObject[] links = GameObject.FindGameObjectsWithTag("Link");
-		int yPos = 40;
+		//int yPos = 40;
 		
 		//Clear existing buttons
-		foreach (Transform child in linkButtonParent) {
+		foreach (Transform child in mapCenter.transform) {
 			GameObject.Destroy(child.gameObject);
 		}
 		
@@ -39,23 +40,39 @@ public class Level_GUIController : MonoBehaviour {
 				linkTeam = links[i].GetComponent<Ability_BuilderLink>().currentTeam; //For builder links
 
 			//Set up postion on screen and in heirarcy
-			Vector3 buttonPos = new Vector3(50,yPos,0);
-			Button tempButton = Instantiate(linkButton,linkButtonParent.position, Quaternion.identity) as Button;
-			tempButton.transform.SetParent(linkButtonParent);
+			Vector3 buttonPos = new Vector3(links[i].transform.position.x*0.78125f,links[i].transform.position.z*0.78125f,0);
+			Button tempButton = Instantiate(linkButton,Vector3.zero, Quaternion.identity) as Button;
+			tempButton.transform.SetParent(mapCenter.transform);
 			tempButton.transform.localPosition = buttonPos;
-			tempButton.transform.localScale = linkButton.transform.localScale;
-			yPos -= 16;
+			tempButton.transform.localScale = new Vector3(1,1,1);
+			//yPos -= 16;
+
+			Debug.Log(tempButton.transform.lossyScale);
 
 			//Set up text and colour
-			tempButton.GetComponentInChildren<Text>().text = "Link " + i;
+			//tempButton.GetComponentInChildren<Text>().text = "Link " + i;
 			if (linkTeam == Char_AttributeScript.Teams.BLUE) {
-				tempButton.GetComponentInChildren<Text>().color = Color.blue;
+				ColorBlock blueColors = new ColorBlock();
+				blueColors.normalColor = Color.blue;
+				blueColors.highlightedColor = Color.blue;
+				blueColors.pressedColor = Color.cyan;
+				blueColors.colorMultiplier = 1;
+				tempButton.GetComponent<Button>().colors = blueColors;
 				tempButton.interactable = true;
 			} else if (linkTeam == Char_AttributeScript.Teams.RED){
-				tempButton.GetComponentInChildren<Text>().color = Color.red;
+				ColorBlock redColors = new ColorBlock();
+				redColors.normalColor = Color.red;
+				redColors.highlightedColor = Color.red;
+				redColors.pressedColor = new Color(0.6f,0f,0f);
+				redColors.colorMultiplier = 1;
+				tempButton.GetComponent<Button>().colors = redColors;
 				tempButton.interactable = true;
 			} else {
-				tempButton.GetComponentInChildren<Text>().color = Color.grey;
+				ColorBlock neutColors = new ColorBlock();
+				neutColors.normalColor = Color.black;
+				neutColors.disabledColor = Color.grey;
+				neutColors.colorMultiplier = 1;
+				tempButton.GetComponent<Button>().colors = neutColors;
 				tempButton.interactable = false;
 			}
 
