@@ -20,6 +20,13 @@ Material:
           m_Texture: {fileID: 2800000, guid: 082f6f0c8780b4aadb213eb3efa4ae1a, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _BumpMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
         first:
@@ -34,3 +41,7 @@ Material:
         first:
           name: _TintColor
         second: {r: 1, g: 1, b: 1, a: .392156869}
+      data:
+        first:
+          name: _EmisColor
+        second: {r: .200000003, g: .200000003, b: .200000003, a: 0}
