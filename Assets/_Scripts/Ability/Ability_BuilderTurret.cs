@@ -32,20 +32,31 @@ public class Ability_BuilderTurret : Photon.MonoBehaviour {
 		health += change;
 	}
 
+	float ClampToDegrees(float input){
+		if (input < 0)
+			return input + 360;
+		else if (input > 360)
+			return input - 360;
+		else
+			return input;
+	}
+
 	Quaternion ClampRotation(Quaternion toClamp){
 
+		//Debug.Log(originalRotation.eulerAngles.y + 80);
+
 		//X rotation i.e. up/down
-		if (toClamp.eulerAngles.x < (originalRotation.eulerAngles.x-30) && toClamp.eulerAngles.x > (originalRotation.eulerAngles.x+60)){
-			toClamp.eulerAngles = new Vector3((originalRotation.eulerAngles.x-30),toClamp.eulerAngles.y,toClamp.eulerAngles.z);
-		} else if (toClamp.eulerAngles.x < (originalRotation.eulerAngles.x-40) && toClamp.eulerAngles.x > (originalRotation.eulerAngles.x+50)){
-			toClamp.eulerAngles = new Vector3((originalRotation.eulerAngles.x+50),toClamp.eulerAngles.y,toClamp.eulerAngles.z);
+		if (toClamp.eulerAngles.x < ClampToDegrees(originalRotation.eulerAngles.x-30) && toClamp.eulerAngles.x > ClampToDegrees(originalRotation.eulerAngles.x+60)){
+			toClamp.eulerAngles = new Vector3(ClampToDegrees(originalRotation.eulerAngles.x-30),toClamp.eulerAngles.y,toClamp.eulerAngles.z);
+		} else if (toClamp.eulerAngles.x < ClampToDegrees(originalRotation.eulerAngles.x-40) && toClamp.eulerAngles.x > ClampToDegrees(originalRotation.eulerAngles.x+50)){
+			toClamp.eulerAngles = new Vector3(ClampToDegrees(originalRotation.eulerAngles.x+50),toClamp.eulerAngles.y,toClamp.eulerAngles.z);
 		}
 
 		//Y rotation i.e. left/right
-		if (toClamp.eulerAngles.y < (originalRotation.eulerAngles.y-70) && toClamp.eulerAngles.y > (originalRotation.eulerAngles.y+80)){
-			toClamp.eulerAngles = new Vector3(toClamp.eulerAngles.x,(originalRotation.eulerAngles.y-70),toClamp.eulerAngles.z);
-		} else if (toClamp.eulerAngles.y < (originalRotation.eulerAngles.y-80) && toClamp.eulerAngles.y > (originalRotation.eulerAngles.y+70)){
-			toClamp.eulerAngles = new Vector3(toClamp.eulerAngles.x,(originalRotation.eulerAngles.y+70),toClamp.eulerAngles.z);
+		if (toClamp.eulerAngles.y < ClampToDegrees(originalRotation.eulerAngles.y-70) && toClamp.eulerAngles.y > ClampToDegrees(originalRotation.eulerAngles.y+80)){
+			toClamp.eulerAngles = new Vector3(toClamp.eulerAngles.x,ClampToDegrees(originalRotation.eulerAngles.y-70),toClamp.eulerAngles.z);
+		} else if (toClamp.eulerAngles.y < ClampToDegrees(originalRotation.eulerAngles.y-80) && toClamp.eulerAngles.y > ClampToDegrees(originalRotation.eulerAngles.y+70)){
+			toClamp.eulerAngles = new Vector3(toClamp.eulerAngles.x,ClampToDegrees(originalRotation.eulerAngles.y+70),toClamp.eulerAngles.z);
 		} 
 
 		return toClamp;
@@ -82,34 +93,35 @@ public class Ability_BuilderTurret : Photon.MonoBehaviour {
 		}
 
 		if (trackedEnemies.Count > 0){
-			RaycastHit hit;
-			Ray enemyTrackingRay = new Ray(muzzle.transform.position, trackedEnemies[0].transform.position-muzzle.transform.position);
-			if(Physics.Raycast(enemyTrackingRay, out hit, 100f)){
-				Debug.Log(hit.transform.name);
+			for (int i = 0; i < trackedEnemies.Count; i++){
+				RaycastHit hit;
+				Ray enemyTrackingRay = new Ray(muzzle.transform.position, trackedEnemies[i].transform.position-muzzle.transform.position);
+				if(Physics.Raycast(enemyTrackingRay, out hit, 100f)){
+					Debug.Log(hit.transform.name);
 
-				if (hit.transform.GetComponent<Char_AttributeScript>()){
+					if (hit.transform.GetComponent<Char_AttributeScript>()){ //If we have a target player
+						Vector3 offsetPos = transform.position - trackedEnemies[i].transform.position;
+						Quaternion rotToTarget = Quaternion.LookRotation(offsetPos);
+						float amountToRotate = Quaternion.Angle( transform.rotation, rotToTarget );
+						transform.rotation = Quaternion.Slerp( ClampRotation(transform.rotation), rotToTarget, 5f * Time.deltaTime);
 
-
-					Vector3 offsetPos = transform.position - trackedEnemies[0].transform.position;
-					Quaternion rotToTarget = Quaternion.LookRotation(offsetPos);
-					float amountToRotate = Quaternion.Angle( transform.rotation, rotToTarget );
-					transform.rotation = Quaternion.Slerp( ClampRotation(transform.rotation), rotToTarget, 5f * Time.deltaTime);
-
-					if (Time.time >= shotCooldown){
-						shotCooldown = Time.time + timeBetweenShots;
-						muzzle.transform.rotation = Quaternion.RotateTowards(muzzle.transform.rotation,
-						                                                     Quaternion.LookRotation(trackedEnemies[0].transform.position-muzzle.transform.position),
-						                                                     5f);
-						PlayMuzzleFlash(photonView.viewID);
-						DamagePlayer(-3, hit.transform.GetComponent<PhotonView>().viewID, transform.position);
+						if (Time.time >= shotCooldown){
+							shotCooldown = Time.time + timeBetweenShots;
+							muzzle.transform.rotation = Quaternion.RotateTowards(muzzle.transform.rotation,
+							                                                     Quaternion.LookRotation(trackedEnemies[i].transform.position-muzzle.transform.position),
+							                                                     5f);
+							PlayMuzzleFlash(photonView.viewID);
+							DamagePlayer(-3, hit.transform.GetComponent<PhotonView>().viewID, transform.position);
+						}
+						break; //Turret must only have a single target at a time
+						
+					} else {
+						PanMode();
 					}
-					
 				} else {
 					PanMode();
 				}
-			} else {
-				PanMode();
-			}
+			} //End For loop
 		} else {
 			PanMode();
 		}
