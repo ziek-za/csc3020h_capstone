@@ -132,7 +132,9 @@ public class Map_LinkScript : Photon.MonoBehaviour {
 			redCounter--;
 		}
 		if (other.GetComponent<PhotonView>().isMine){
-			linkSlider.gameObject.SetActive (false);
+			try {
+				linkSlider.gameObject.SetActive (false);
+			} catch (System.Exception e){}
 			CancelInvoke("UpdateSlider");
 		}
 	}

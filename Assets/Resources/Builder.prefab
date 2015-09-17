@@ -2472,6 +2472,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &153970
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 453970}
+  - 135: {fileID: 13553970}
+  m_Layer: 0
+  m_Name: Head
+  m_TagString: Head
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &160830
 GameObject:
   m_ObjectHideFlags: 1
@@ -2573,7 +2589,7 @@ GameObject:
   - 114: {fileID: 11409340}
   m_Layer: 0
   m_Name: Builder
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2835,6 +2851,7 @@ Transform:
   - {fileID: 416948}
   - {fileID: 417002}
   - {fileID: 417120}
+  - {fileID: 453970}
   m_Father: {fileID: 417142}
   m_RootOrder: 0
 --- !u!4 &416946
@@ -4862,6 +4879,18 @@ Transform:
   - {fileID: 491428}
   m_Father: {fileID: 462846}
   m_RootOrder: 2
+--- !u!4 &453970
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 153970}
+  m_LocalRotation: {x: 8.61901057e-08, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .00100710092, y: .059432216, z: .00459074322}
+  m_LocalScale: {x: .499999881, y: .499999881, z: .499999881}
+  m_Children: []
+  m_Father: {fileID: 416944}
+  m_RootOrder: 37
 --- !u!4 &460830
 Transform:
   m_ObjectHideFlags: 1
@@ -4934,7 +4963,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 191422}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -58.2900009, y: -3.04999995, z: -66.2799988}
+  m_LocalPosition: {x: 309.565521, y: 345.620819, z: -362.966156}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 417180}
@@ -4948,7 +4977,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 191424}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .00200000009, y: .787999988, z: 0}
+  m_LocalPosition: {x: .00200000009, y: .787999988, z: .100000001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 491430}
@@ -5240,10 +5269,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxDistance: 2
   linkFoundation: {fileID: 169046, guid: c4acc800200848d45aaaa554103b39fc, type: 2}
+  turretFoundation: {fileID: 151350, guid: 31f7faf464cb31c4fabc8cf8cc5e72fc, type: 2}
   distanceIndicator: {fileID: 198366, guid: acc4bca2a9b2b9749afa793f7788e5c6, type: 2}
   aimingPoint: {fileID: 139666, guid: a7c2ddd915f6ee24a9d4bf59618f0b34, type: 2}
   placeLinkEnergyCost: 10
   placeLinkCD: 25
+  placeTurretEnergyCost: 10
+  placeTurretCD: 25
 --- !u!114 &11417252
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5346,6 +5378,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitCrosshair: {fileID: 0}
+  headshotCrosshair: {fileID: 0}
   damage: 10
   bulletHolePrefab: {fileID: 185902, guid: dea55ba2cdbead54ba3497383c460581, type: 2}
   muzzleFlash: {fileID: 19817258}
@@ -5364,7 +5397,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitCrosshair: {fileID: 0}
-  damage: 7
+  headshotCrosshair: {fileID: 0}
+  damage: 15
   bulletHolePrefab: {fileID: 185902, guid: dea55ba2cdbead54ba3497383c460581, type: 2}
   muzzleFlash: {fileID: 19891422}
   tracerEffect: {fileID: 19891424}
@@ -5583,7 +5617,7 @@ MonoBehaviour:
   mouseSpeed: 2
   jumpSpeed: 5
   FPSCameraPos: {fileID: 491424}
-  clampYAxis: 60
+  sniperRotationModifier: 0
   inVortex: 0
 --- !u!114 &11491432
 MonoBehaviour:
@@ -5707,12 +5741,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitCrosshair: {fileID: 0}
+  headshotCrosshair: {fileID: 0}
   damage: 10
   bulletHolePrefab: {fileID: 185902, guid: dea55ba2cdbead54ba3497383c460581, type: 2}
   muzzleFlash: {fileID: 19896234}
   tracerEffect: {fileID: 19896236}
   timeBetweenShots: .333330005
   weaponAccuracy: 10
+--- !u!135 &13553970
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 153970}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: .200000003
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &13691422
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -5723,9 +5770,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: .500000119
-  m_Height: 2
+  m_Height: 1.64999998
   m_Direction: 1
-  m_Center: {x: 5.96046448e-08, y: 0, z: -8.94069672e-08}
+  m_Center: {x: 5.96046448e-08, y: -.174999997, z: -.100000001}
 --- !u!136 &13691424
 CapsuleCollider:
   m_ObjectHideFlags: 1

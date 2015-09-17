@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Net.Sockets;
 
 public class Menu_NetworkController : MonoBehaviour {
 
@@ -18,20 +17,17 @@ public class Menu_NetworkController : MonoBehaviour {
 
 		//PhotonNetwork.networkingPeer.ServerAddress = "0.0.0.0:5055";
 		//Debug.LogError(PhotonNetwork.ServerAddress);
-		_MainController.hostIP = "196.24.181.118";
+		Debug.Log (Network.player.ipAddress);
+		_MainController.hostIP = Network.player.ipAddress;
 		TryConnect();
 		//InvokeRepeating("TryConnect",0,5);
 	}
 
 	public void TryConnect(){
-		try {
-			PhotonNetwork.PhotonServerSettings.ServerAddress = _MainController.hostIP; 
-			PhotonNetwork.ConnectUsingSettings("0.1");
-			QualitySettings.vSyncCount = 1;
-			//InvokeRepeating("TryConnect",5,5);
-		} catch (SocketException e){
-			Debug.Log ("here");
-		}
+		PhotonNetwork.PhotonServerSettings.ServerAddress = _MainController.hostIP; 
+		PhotonNetwork.ConnectUsingSettings("0.1");
+		QualitySettings.vSyncCount = 1;
+		//InvokeRepeating("TryConnect",5,5);
 	}
 	
 	// Update is called once per frame

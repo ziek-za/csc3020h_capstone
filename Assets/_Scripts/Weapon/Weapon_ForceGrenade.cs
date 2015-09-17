@@ -7,7 +7,7 @@ public class Weapon_ForceGrenade : Photon.MonoBehaviour {
 	public SphereCollider triggerArea;
 	public float pushForce = 700f;
 	public Transform vortex;
-	public float fuseTime = 3;
+	public float fuseTime = 5;
 
 	private Terrain terrain;
 	private Map_TerrainController MTC;
@@ -15,12 +15,16 @@ public class Weapon_ForceGrenade : Photon.MonoBehaviour {
 	List<GameObject> alreadyCollided;
 	public string mode;
 
+	public ParticleSystem fuse, explosionEffect;
+	bool detonated = false;
+
 	// Use this for initialization
 	void Start () {	
 		terrain = Terrain.activeTerrain;
 		alreadyCollided = new List<GameObject>();
 		MTC = terrain.GetComponent<Map_TerrainController>();
 		StartCoroutine("StartFuse");
+		fuse.Play();
 	}
 
 	IEnumerator StartFuse(){
@@ -41,14 +45,24 @@ public class Weapon_ForceGrenade : Photon.MonoBehaviour {
 		}
 	}
 
+	void OnCollisionEnter(Collision collision){
+		Debug.Log("collide");
+		rigidbody.velocity = Vector3.zero;
+		rigidbody.angularVelocity = Vector3.zero;
+		rigidbody.drag = 1000f;
+	}
+
 	//Method is called by the Ability_ForceGrenade script when the grenade should activate (i.e. after fuse time)
 	public void Explode(string newMode){
-		triggerArea.enabled = true;
-		Invoke ("TriggerForce",0.05f);
-		mode = newMode; //Mode (push/pull) is recieved when this method is called
-		if (mode.Equals("push"))
-			PushTerrain(transform.position);
-		Invoke("KillGODelay",0.1f); //Slight delay when removing the grenade to make sure forces have time to be applied
+		if (!detonated){
+			detonated = true;
+			triggerArea.enabled = true;
+			Invoke ("TriggerForce",0.05f);
+			if (mode.Equals("push"))
+				PlayExplosionParticleEffect();
+			mode = newMode; //Mode (push/pull) is recieved when this method is called
+			Invoke("KillGODelay",0.5f); //Slight delay when removing the grenade to make sure forces have time to be applied
+		}
 	}
 
 	void KillGODelay(){
@@ -57,6 +71,9 @@ public class Weapon_ForceGrenade : Photon.MonoBehaviour {
 
 	//Method that applies the push force OR creates the pull vortex
 	void TriggerForce(){
+		fuse.gameObject.SetActive(false);
+		GetComponent<MeshRenderer>().enabled = false;
+
 		for (int i = 0; i < alreadyCollided.Count; i++){
 
 			//Break Destructible objects
@@ -67,6 +84,9 @@ public class Weapon_ForceGrenade : Photon.MonoBehaviour {
 					DamageDestructableObject(-10,alreadyCollided[i].GetComponent<PhotonView>().viewID);
 				} 
 			} catch (System.Exception e){}
+
+			if (mode.Equals("push") && alreadyCollided[i].name.Equals("TerrainObject"))
+				PushTerrain(transform.position);
 
 			if (mode.Equals("push") &&
 			    alreadyCollided[i].GetComponent<Rigidbody>() != null &&
@@ -101,7 +121,11 @@ public class Weapon_ForceGrenade : Photon.MonoBehaviour {
 			photonView.RPC("PushForceExplosion", PhotonTargets.OthersBuffered, vID, force);
 	}
 
-
+	[RPC] void PlayExplosionParticleEffect(){
+		explosionEffect.Play();
+		if (photonView.isMine)
+			photonView.RPC("PlayExplosionParticleEffect", PhotonTargets.OthersBuffered);
+	}
 
 	//RPC to tell other clients to remove their grenade gameObjects as well
 	[RPC] void KillGameObject(int vID){

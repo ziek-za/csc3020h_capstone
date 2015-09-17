@@ -12,7 +12,7 @@ public class Weapon_BuilderGlove : Photon.MonoBehaviour {
 
 	public GameObject buildCrosshair;
 
-	int buildRate = 8;
+	int buildRate = 3;
 	int bRCounter = 0;
 
 	// Use this for initialization

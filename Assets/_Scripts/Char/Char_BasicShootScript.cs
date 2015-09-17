@@ -8,7 +8,7 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 	private Ray ray;
 	protected float shotCooldown;	
 
-	public GameObject hitCrosshair;
+	public GameObject hitCrosshair, headshotCrosshair;
 	public int damage = 10;
 
 	protected Char_BasicMoveScript animInstance;
@@ -39,6 +39,7 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 	protected void Start(){
 		animInstance = GetComponentInParent<Char_BasicMoveScript> ();
 		hitCrosshair = GameObject.Find ("EnemyHitCrosshair");
+		headshotCrosshair = GameObject.Find ("EnemyHeadshotCrosshair");
 	}
 
 	protected void DisableHitCrosshair(){
@@ -47,6 +48,14 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 
 	protected void EnableHitCrosshair(){
 		hitCrosshair.GetComponent<RawImage>().enabled = true;
+	} 
+
+	protected void DisableHeadshotCrosshair(){
+		headshotCrosshair.GetComponent<RawImage>().enabled = false;
+	}
+	
+	protected void EnableHeadshotCrosshair(){
+		headshotCrosshair.GetComponent<RawImage>().enabled = true;
 	} 
 
 	protected void ResetTracerRotation(){
@@ -108,13 +117,25 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 			if(Physics.Raycast(ray, out hit, Camera.main.farClipPlane)) 
 			{
 				Debug.DrawLine(transform.position, hit.point, Color.red);
+
+				//Headshots do 2x damage
+				if (hit.collider.gameObject.CompareTag("Head")){
+
+					if (hit.transform.gameObject.GetComponent<Char_AttributeScript>().team != transform.GetComponentInParent<Char_AttributeScript>().team){
+						DamagePlayer(2*DamageAmount(), hit.transform.GetComponent<PhotonView>().viewID, transform.position);
+						EnableHeadshotCrosshair();
+						Invoke("DisableHeadshotCrosshair",0.1f);
+						if (hit.transform.gameObject.GetComponent<Char_AttributeScript>().health <= 0){
+							transform.parent.parent.parent.GetComponent<Char_AttributeScript>().EnableKillHUD(hit.transform.GetComponent<Char_AttributeScript>().playerName);
+						}
+					}
+
 				//Damaging enemy players
-				if (hit.transform.gameObject.GetComponent<Char_AttributeScript>()){
-					if (hit.transform.gameObject.GetComponent<Char_AttributeScript>().team != transform.parent.parent.parent.GetComponent<Char_AttributeScript>().team){
+				} else if (hit.transform.gameObject.GetComponent<Char_AttributeScript>()){
+					if (hit.transform.gameObject.GetComponent<Char_AttributeScript>().team != transform.GetComponentInParent<Char_AttributeScript>().team){
 						DamagePlayer(DamageAmount(), hit.transform.GetComponent<PhotonView>().viewID, transform.position);
-						float timeTillHit = Vector3.Magnitude(hit.point - transform.position) / 90f;
-						Invoke ("EnableHitCrosshair",timeTillHit);
-						Invoke("DisableHitCrosshair",timeTillHit + 0.1f);
+						EnableHitCrosshair();
+						Invoke("DisableHitCrosshair",0.1f);
 
 						if (hit.transform.gameObject.GetComponent<Char_AttributeScript>().health <= 0){
 							transform.parent.parent.parent.GetComponent<Char_AttributeScript>().EnableKillHUD(hit.transform.GetComponent<Char_AttributeScript>().playerName);
@@ -125,8 +146,12 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 				//Damaging builder 'links'
 				} else if (hit.transform.gameObject.GetComponent<Ability_BuilderLink>()) {
 					DamageBuildingLink(DamageAmount(),hit.transform.GetComponent<PhotonView>().viewID);
-					//float timeTillHit = Vector3.Magnitude(hit.point - transform.position) / 90f;
-					//Invoke ("EnableHitCrosshair",0);
+					EnableHitCrosshair();
+					Invoke("DisableHitCrosshair",0.1f);
+
+					//Damaging builder 'turrets'
+				} else if (hit.transform.gameObject.GetComponent<Ability_BuilderTurret>()) {
+					DamageBuildingTurret(DamageAmount(),hit.transform.GetComponent<PhotonView>().viewID);
 					EnableHitCrosshair();
 					Invoke("DisableHitCrosshair",0.1f);
 
@@ -150,7 +175,7 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 					Destroy(hole,10f);
 
 				//Bullet holes only on static objects and terrain
-				} else {//(if !(hit.transform.GetComponent<Rigidbody>() &&  !hit.rigidbody.isKinematic)) {
+				} else {
 					Vector3 bulletHolePosition = hit.point + hit.normal * 0.01f;
 					Quaternion bulletHoleRotation = Quaternion.FromToRotation(-Vector3.forward, hit.normal);
 					GameObject hole = Instantiate(bulletHolePrefab, bulletHolePosition, bulletHoleRotation) as GameObject;
@@ -177,6 +202,12 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 		PhotonView.Find(vID).transform.GetComponent<Ability_BuilderLink>().ChangeHP(damage);
 		if (photonView.isMine)
 			photonView.RPC("DamageBuildingLink", PhotonTargets.OthersBuffered, damage, vID);
+	}
+
+	[RPC] protected void DamageBuildingTurret(int damage, int vID){
+		PhotonView.Find(vID).transform.GetComponent<Ability_BuilderTurret>().ChangeHP(damage);
+		if (photonView.isMine)
+			photonView.RPC("DamageBuildingTurret", PhotonTargets.OthersBuffered, damage, vID);
 	}
 
 	[RPC] protected void DamageDestructableObject(int damage, int vID){

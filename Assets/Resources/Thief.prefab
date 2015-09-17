@@ -2375,10 +2375,9 @@ GameObject:
   - 136: {fileID: 13624522}
   - 114: {fileID: 11476876}
   - 114: {fileID: 11436020}
-  - 65: {fileID: 6539380}
   m_Layer: 0
   m_Name: Thief
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2437,6 +2436,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!1 &127338
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 427338}
+  - 135: {fileID: 13527338}
+  m_Layer: 0
+  m_Name: Head
+  m_TagString: Head
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &128336
 GameObject:
   m_ObjectHideFlags: 1
@@ -2793,7 +2808,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 109324}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .00200000009, y: .787999988, z: 0}
+  m_LocalPosition: {x: .00200000009, y: .787999988, z: .100000001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 424524}
@@ -3583,7 +3598,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 412514}
-  m_RootOrder: 36
+  m_RootOrder: 37
 --- !u!4 &412412
 Transform:
   m_ObjectHideFlags: 1
@@ -4166,7 +4181,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 412514}
-  m_RootOrder: 35
+  m_RootOrder: 36
 --- !u!4 &412502
 Transform:
   m_ObjectHideFlags: 1
@@ -4204,7 +4219,7 @@ Transform:
   m_Children:
   - {fileID: 412322}
   m_Father: {fileID: 412514}
-  m_RootOrder: 34
+  m_RootOrder: 35
 --- !u!4 &412508
 Transform:
   m_ObjectHideFlags: 1
@@ -4290,6 +4305,7 @@ Transform:
   - {fileID: 412524}
   - {fileID: 412522}
   - {fileID: 412520}
+  - {fileID: 427338}
   - {fileID: 412506}
   - {fileID: 412500}
   - {fileID: 412410}
@@ -4831,6 +4847,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 409324}
   m_RootOrder: 0
+--- !u!4 &427338
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 127338}
+  m_LocalRotation: {x: 8.61901057e-08, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .00100710092, y: .059432216, z: .00459074322}
+  m_LocalScale: {x: .499999881, y: .499999881, z: .499999881}
+  m_Children: []
+  m_Father: {fileID: 412514}
+  m_RootOrder: 34
 --- !u!4 &428336
 Transform:
   m_ObjectHideFlags: 1
@@ -5142,18 +5170,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!65 &6539380
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 124516}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: .850000024, y: 2, z: .74000001}
-  m_Center: {x: 5.96046448e-08, y: 0, z: -8.94069672e-08}
 --- !u!95 &9501334
 Animator:
   serializedVersion: 3
@@ -5591,7 +5607,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitCrosshair: {fileID: 0}
-  damage: 80
+  headshotCrosshair: {fileID: 0}
+  damage: 65
   bulletHolePrefab: {fileID: 185902, guid: dea55ba2cdbead54ba3497383c460581, type: 2}
   muzzleFlash: {fileID: 19824522}
   tracerEffect: {fileID: 19824524}
@@ -5651,12 +5668,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitCrosshair: {fileID: 0}
+  headshotCrosshair: {fileID: 0}
   damage: 10
   bulletHolePrefab: {fileID: 185902, guid: dea55ba2cdbead54ba3497383c460581, type: 2}
   muzzleFlash: {fileID: 19885644}
   tracerEffect: {fileID: 19885642}
   timeBetweenShots: .333330005
   weaponAccuracy: 10
+--- !u!135 &13527338
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 127338}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: .200000003
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &13624522
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -5667,9 +5697,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: .500000119
-  m_Height: 2
+  m_Height: 1.64999998
   m_Direction: 1
-  m_Center: {x: 5.96046448e-08, y: 0, z: -8.94069672e-08}
+  m_Center: {x: 5.96046448e-08, y: -.174999997, z: -.100000001}
 --- !u!136 &13624524
 CapsuleCollider:
   m_ObjectHideFlags: 1

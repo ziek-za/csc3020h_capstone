@@ -20,6 +20,7 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 	float clampYAxis = 90.0f;
 
 	public bool inVortex = false;
+	float inVortexTime = 2;
 
 	// Use this for initialization
 	void Start () {
@@ -30,6 +31,10 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 
 		}
 	}
+
+	void EnableKeys(){
+		inVortex = false;
+	}
 	
 	// Update is called once per frame
 	void Update () {
@@ -39,6 +44,8 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 		{
 			if (!inVortex)
 				InputMovement();
+			else if (!IsInvoking("EnableKeys"))
+				Invoke ("EnableKeys",inVortexTime);
 			//InputColorChange();
 			MouseView();
 
@@ -47,8 +54,6 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 		}
 
 	}
-
-
 
 	void UpdateCameraPos(){
 		Camera.main.transform.position = FPSCameraPos.position;

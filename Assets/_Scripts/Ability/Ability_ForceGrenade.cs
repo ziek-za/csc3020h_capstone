@@ -10,10 +10,11 @@ public class Ability_ForceGrenade: Photon.MonoBehaviour {
 
 	GameObject cameraDirection;
 	
-	public float initialForwardVelocity = 15f;
-	public float initialUpwardsVelocity = 7f;
+	float initialForwardVelocity = 25f;
+	float initialUpwardsVelocity = 5f;
 	string mode = "push";
 	bool offCooldown = true;
+	GameObject gr;
 
 	// Use this for initialization
 	void Start () {
@@ -34,10 +35,14 @@ public class Ability_ForceGrenade: Photon.MonoBehaviour {
 				Invoke("cooledDown",cooldown);
 				offCooldown = false;
 				//Creates the actual grenade over the photon network
-				GameObject gr = PhotonNetwork.Instantiate(grenadePrefab.name, grenadePosition.position, Quaternion.identity, 0) as GameObject;
+				gr = PhotonNetwork.Instantiate(grenadePrefab.name, grenadePosition.position, Quaternion.identity, 0) as GameObject;
 				gr.rigidbody.velocity = (cameraDirection.transform.forward * initialForwardVelocity) + 
 										(cameraDirection.transform.up * initialUpwardsVelocity);
 				gr.GetComponent<Weapon_ForceGrenade>().mode = mode;
+				gr.rigidbody.angularVelocity = transform.right*1000;
+			} 
+			else if (Input.GetButtonDown("Fire2") && gr){
+				gr.GetComponent<Weapon_ForceGrenade>().Explode(gr.GetComponent<Weapon_ForceGrenade>().mode);
 			}
 
 			//Changing modes

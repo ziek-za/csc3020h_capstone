@@ -43,13 +43,26 @@ public class Weapon_ShotgunScript : Char_BasicShootScript {
 				if(Physics.Raycast(ray, out hit, Camera.main.farClipPlane)) 
 				{
 					Debug.DrawLine(transform.position, hit.point, Color.red);
+
+					//Headshots do 2x damage
+					if (hit.collider.gameObject.CompareTag("Head")){
+						
+						if (hit.transform.gameObject.GetComponent<Char_AttributeScript>().team != transform.GetComponentInParent<Char_AttributeScript>().team){
+							DamagePlayer(2*DamageAmount(), hit.transform.GetComponent<PhotonView>().viewID, transform.position);
+							EnableHeadshotCrosshair();
+							Invoke("DisableHeadshotCrosshair",0.1f);
+							if (hit.transform.gameObject.GetComponent<Char_AttributeScript>().health <= 0){
+								transform.parent.parent.parent.GetComponent<Char_AttributeScript>().EnableKillHUD(hit.transform.GetComponent<Char_AttributeScript>().playerName);
+							}
+						}
+
+
 					//Damaging enemy players
-					if (hit.transform.gameObject.GetComponent<Char_AttributeScript>()){
+					}else if (hit.transform.gameObject.GetComponent<Char_AttributeScript>()){
 						if (hit.transform.gameObject.GetComponent<Char_AttributeScript>().team != transform.parent.parent.parent.GetComponent<Char_AttributeScript>().team){
 							DamagePlayer(DamageAmount(), hit.transform.GetComponent<PhotonView>().viewID, transform.position);
-							float timeTillHit = Vector3.Magnitude(hit.point - transform.position) / 90f;
-							Invoke ("EnableHitCrosshair",timeTillHit);
-							Invoke("DisableHitCrosshair",timeTillHit + 0.1f);
+							EnableHitCrosshair();
+							Invoke("DisableHitCrosshair",0.1f);
 							
 							if (hit.transform.gameObject.GetComponent<Char_AttributeScript>().health <= 0){
 								transform.parent.parent.parent.GetComponent<Char_AttributeScript>().EnableKillHUD(hit.transform.GetComponent<Char_AttributeScript>().playerName);
@@ -60,9 +73,15 @@ public class Weapon_ShotgunScript : Char_BasicShootScript {
 						//Damaging builder 'links'
 					} else if (hit.transform.gameObject.GetComponent<Ability_BuilderLink>()) {
 						DamageBuildingLink(DamageAmount(),hit.transform.GetComponent<PhotonView>().viewID);
-						float timeTillHit = Vector3.Magnitude(hit.point - transform.position) / 90f;
-						Invoke ("EnableHitCrosshair",timeTillHit);
-						Invoke("DisableHitCrosshair",timeTillHit + 0.1f);
+						EnableHitCrosshair();
+						Invoke("DisableHitCrosshair",0.1f);
+
+						//Damaging builder 'turrets'
+					} else if (hit.transform.gameObject.GetComponent<Ability_BuilderTurret>()) {
+						DamageBuildingTurret(DamageAmount(),hit.transform.GetComponent<PhotonView>().viewID);
+						EnableHitCrosshair();
+						Invoke("DisableHitCrosshair",0.1f);
+
 
 						//Damaging buildings
 					} else if (hit.collider.GetComponentInParent<Map_DestructableObject>()) {

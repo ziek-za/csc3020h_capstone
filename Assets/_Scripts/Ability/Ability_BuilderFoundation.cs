@@ -12,7 +12,7 @@ public class Ability_BuilderFoundation : Photon.MonoBehaviour {
 
 	GameObject tempObject;
 	float lifetimeAccum = 0;
-	float linkLifetime = 40f;
+	float totalLifetime = 40f;
 
 	// Use this for initialization
 	void Start () {
@@ -24,11 +24,12 @@ public class Ability_BuilderFoundation : Photon.MonoBehaviour {
 		if (photonView.isMine){
 			lifetimeAccum += Time.deltaTime;
 			if (completion >= required){
-				tempObject = PhotonNetwork.Instantiate(completedBuilding.name,transform.position,Quaternion.identity,0) as GameObject;
+				Debug.Log(transform.rotation);
+				tempObject = PhotonNetwork.Instantiate(completedBuilding.name,transform.position,transform.rotation,0) as GameObject;
 				SetTeam (tempObject.GetPhotonView().viewID,(int)currentTeam, lifetimeAccum);
 				DestroyBox(GetComponent<PhotonView>().viewID);
 			}
-			if (lifetimeAccum >= linkLifetime){
+			if (lifetimeAccum >= totalLifetime){
 				DestroyBox(GetComponent<PhotonView>().viewID);
 			}
 		}
@@ -49,6 +50,10 @@ public class Ability_BuilderFoundation : Photon.MonoBehaviour {
 		if (PhotonView.Find(vID).transform.GetComponent<Ability_BuilderLink>()){ //Need one for each building type
 			PhotonView.Find(vID).transform.GetComponent<Ability_BuilderLink>().SetTeam((Char_AttributeScript.Teams)team);
 			PhotonView.Find(vID).transform.GetComponent<Ability_BuilderLink>().SetLifetime(lifeTime);
+		} 
+		else if (PhotonView.Find(vID).transform.GetComponentInChildren<Ability_BuilderTurret>()){
+			PhotonView.Find(vID).transform.GetComponentInChildren<Ability_BuilderTurret>().SetTeam((Char_AttributeScript.Teams)team);
+			PhotonView.Find(vID).transform.GetComponentInChildren<Ability_BuilderTurret>().SetLifetime(lifeTime);
 		}
 		else
 			Debug.LogError("Need an if statement for that kind of building here");
