@@ -10,6 +10,7 @@ public class Weapon_RocketExplosion : Photon.MonoBehaviour {
 	List<GameObject> alreadyCollided;
 
 	public float pushForce = 10f;
+	public Char_AttributeScript whoFiredMe;
 	
 	// Use this for initialization
 	void Start () {	
@@ -59,9 +60,18 @@ public class Weapon_RocketExplosion : Photon.MonoBehaviour {
 
 						//Hit Player
 						if (alreadyCollided[i].GetComponent<Char_AttributeScript>()){
-							DamagePlayer(Mathf.RoundToInt(damage),alreadyCollided[i].GetComponent<PhotonView>().viewID, transform.position);
-							EnableHitCrosshair();
-							Invoke("DisableHitCrosshair",0.1f);
+							if (alreadyCollided[i].GetComponent<Char_AttributeScript>() == whoFiredMe){
+								DamagePlayer(-5,alreadyCollided[i].GetComponent<PhotonView>().viewID, transform.position);
+							} else {
+								DamagePlayer(Mathf.RoundToInt(damage),alreadyCollided[i].GetComponent<PhotonView>().viewID, transform.position);
+								EnableHitCrosshair();
+								Invoke("DisableHitCrosshair",0.1f);
+							}
+
+							if (alreadyCollided[i].GetComponent<Char_AttributeScript>().health <= 0 && 
+							    whoFiredMe.team != alreadyCollided[i].GetComponent<Char_AttributeScript>().team){
+								whoFiredMe.EnableKillHUD(alreadyCollided[i].GetComponent<Char_AttributeScript>().playerName);
+							}
 						} 
 
 						//Hit Builder Link

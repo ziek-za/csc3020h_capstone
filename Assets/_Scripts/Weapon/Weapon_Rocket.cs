@@ -4,6 +4,7 @@ using System.Collections;
 public class Weapon_Rocket : Photon.MonoBehaviour {
 
 	public GameObject explosion;
+	public Char_AttributeScript whoFiredMe;
 
 	// Use this for initialization
 	void Start () {
@@ -18,6 +19,7 @@ public class Weapon_Rocket : Photon.MonoBehaviour {
 
 	public void Explode(){
 		GameObject expl = PhotonNetwork.Instantiate (explosion.name,transform.position,Quaternion.identity,0) as GameObject;
+		expl.GetComponent<Weapon_RocketExplosion>().whoFiredMe = whoFiredMe;
 		Destroy(gameObject);
 	}
 
@@ -25,6 +27,10 @@ public class Weapon_Rocket : Photon.MonoBehaviour {
 		Explode();
 		if (other.gameObject.GetComponent<Char_AttributeScript>()){
 			DamagePlayer(-20,other.gameObject.GetComponent<PhotonView>().viewID);
+			if (other.gameObject.GetComponent<Char_AttributeScript>().health <= 0 && 
+			    whoFiredMe.team != other.gameObject.GetComponent<Char_AttributeScript>().team){
+				whoFiredMe.EnableKillHUD(other.transform.GetComponent<Char_AttributeScript>().playerName);
+			}
 		}
 	}
 	[RPC] void DamagePlayer(int damage, int vID){

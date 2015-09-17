@@ -2573,7 +2573,7 @@ GameObject:
   - 114: {fileID: 11409340}
   m_Layer: 0
   m_Name: Builder
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5367,7 +5367,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitCrosshair: {fileID: 0}
-  damage: 7
+  damage: 15
   bulletHolePrefab: {fileID: 185902, guid: dea55ba2cdbead54ba3497383c460581, type: 2}
   muzzleFlash: {fileID: 19891422}
   tracerEffect: {fileID: 19891424}

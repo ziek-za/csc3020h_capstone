@@ -106,7 +106,7 @@ GameObject:
   - 114: {fileID: 11450394}
   m_Layer: 0
   m_Name: Soldier
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5233,7 +5233,7 @@ MonoBehaviour:
   mouseSpeed: 2
   jumpSpeed: 5
   FPSCameraPos: {fileID: 429342}
-  clampYAxis: 60
+  sniperRotationModifier: 0
   inVortex: 0
 --- !u!114 &11450394
 MonoBehaviour:

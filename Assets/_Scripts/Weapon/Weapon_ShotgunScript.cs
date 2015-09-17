@@ -64,6 +64,13 @@ public class Weapon_ShotgunScript : Char_BasicShootScript {
 						Invoke ("EnableHitCrosshair",timeTillHit);
 						Invoke("DisableHitCrosshair",timeTillHit + 0.1f);
 
+						//Damaging builder 'turrets'
+					} else if (hit.transform.gameObject.GetComponent<Ability_BuilderTurret>()) {
+						DamageBuildingTurret(DamageAmount(),hit.transform.GetComponent<PhotonView>().viewID);
+						EnableHitCrosshair();
+						Invoke("DisableHitCrosshair",0.1f);
+
+
 						//Damaging buildings
 					} else if (hit.collider.GetComponentInParent<Map_DestructableObject>()) {
 						DamageDestructableObject(-1, hit.transform.GetComponentInParent<PhotonView>().viewID);
