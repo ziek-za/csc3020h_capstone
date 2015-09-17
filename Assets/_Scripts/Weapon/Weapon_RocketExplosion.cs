@@ -46,60 +46,66 @@ public class Weapon_RocketExplosion : Photon.MonoBehaviour {
 	} 
 
 	void TriggerForce(){
-		for (int i = 0; i < alreadyCollided.Count; i++){
+		if (whoFiredMe && whoFiredMe.gameObject.GetComponent<PhotonView>().isMine) {
+			for (int i = 0; i < alreadyCollided.Count; i++){
+				try {
+					if (alreadyCollided[i].GetComponent<Rigidbody>() != null) {
+						try {
+							if (!alreadyCollided[i].GetComponent<Rigidbody>().isKinematic){
+								Vector3 forceDir = alreadyCollided[i].transform.position - transform.position;
+								PushForce(alreadyCollided[i].GetComponent<PhotonView>().viewID, Vector3.Normalize(forceDir) * pushForce);
+							}
 
-			try {
-				if (alreadyCollided[i].GetComponent<Rigidbody>() != null) {
-					try {
-						if (!alreadyCollided[i].GetComponent<Rigidbody>().isKinematic){
-							Vector3 forceDir = alreadyCollided[i].transform.position - transform.position;
-							PushForce(alreadyCollided[i].GetComponent<PhotonView>().viewID, Vector3.Normalize(forceDir) * pushForce);
-						}
+							float damage = -60/((alreadyCollided[i].transform.position - transform.position).magnitude + 1);
 
-						float damage = -60/((alreadyCollided[i].transform.position - transform.position).magnitude + 1);
+							//Hit Player
+							if (alreadyCollided[i].GetComponent<Char_AttributeScript>()){
 
-						//Hit Player
-						if (alreadyCollided[i].GetComponent<Char_AttributeScript>()){
-							if (alreadyCollided[i].GetComponent<Char_AttributeScript>() == whoFiredMe){
-								DamagePlayer(-5,alreadyCollided[i].GetComponent<PhotonView>().viewID, transform.position);
-							} else {
-								DamagePlayer(Mathf.RoundToInt(damage),alreadyCollided[i].GetComponent<PhotonView>().viewID, transform.position);
+								if (alreadyCollided[i].GetComponent<PhotonView>().isMine){
+									DamagePlayer(-5,alreadyCollided[i].GetComponent<PhotonView>().viewID, transform.position);
+								} else {
+									DamagePlayer(Mathf.RoundToInt(damage),alreadyCollided[i].GetComponent<PhotonView>().viewID, transform.position);
+								} 
+
+								//Show kill success message
+								try {
+									if (whoFiredMe.team != alreadyCollided[i].GetComponent<Char_AttributeScript>().team){
+										EnableHitCrosshair();
+										Invoke("DisableHitCrosshair",0.1f);
+										if (alreadyCollided[i].GetComponent<Char_AttributeScript>().health <= 0){
+											whoFiredMe.EnableKillHUD(alreadyCollided[i].GetComponent<Char_AttributeScript>().playerName);
+										}
+									}
+								} catch (System.NullReferenceException e){}
+							} 
+
+							//Hit Builder Link
+							if (alreadyCollided[i].GetComponent<Ability_BuilderLink>()){
+								DamageBuildingLink(Mathf.RoundToInt(damage),alreadyCollided[i].GetComponent<PhotonView>().viewID);
 								EnableHitCrosshair();
 								Invoke("DisableHitCrosshair",0.1f);
 							}
 
-							if (alreadyCollided[i].GetComponent<Char_AttributeScript>().health <= 0 && 
-							    whoFiredMe.team != alreadyCollided[i].GetComponent<Char_AttributeScript>().team){
-								whoFiredMe.EnableKillHUD(alreadyCollided[i].GetComponent<Char_AttributeScript>().playerName);
+							//Hit Builder Turret
+							if (alreadyCollided[i].GetComponent<Ability_BuilderTurret>()){
+								DamageBuildingTurret(Mathf.RoundToInt(damage-30),alreadyCollided[i].GetComponent<PhotonView>().viewID);
+								EnableHitCrosshair();
+								Invoke("DisableHitCrosshair",0.1f);
 							}
-						} 
-
-						//Hit Builder Link
-						if (alreadyCollided[i].GetComponent<Ability_BuilderLink>()){
-							DamageBuildingLink(Mathf.RoundToInt(damage),alreadyCollided[i].GetComponent<PhotonView>().viewID);
-							EnableHitCrosshair();
-							Invoke("DisableHitCrosshair",0.1f);
+						} catch (System.NullReferenceException e){
+							//Debug.LogError("Null Ref on: " + alreadyCollided[i].name);
 						}
-
-						//Hit Builder Turret
-						if (alreadyCollided[i].GetComponent<Ability_BuilderTurret>()){
-							DamageBuildingTurret(Mathf.RoundToInt(damage-30),alreadyCollided[i].GetComponent<PhotonView>().viewID);
-							EnableHitCrosshair();
-							Invoke("DisableHitCrosshair",0.1f);
-						}
-					} catch (System.NullReferenceException e){
-						Debug.LogError("Null Ref on: " + alreadyCollided[i].name);
 					}
-				}
 
-				//Hit destructible object
-				if (alreadyCollided[i].GetComponentInParent<Map_DestructableObject>()){
-					DamageDestructableObject(-10,alreadyCollided[i].GetComponentInParent<PhotonView>().viewID);
-				} else if (alreadyCollided[i].GetComponent<Map_DestructableObject>()){
-					DamageDestructableObject(-10,alreadyCollided[i].GetComponent<PhotonView>().viewID);
-				} 
+					//Hit destructible object
+					if (alreadyCollided[i].GetComponentInParent<Map_DestructableObject>()){
+						DamageDestructableObject(-10,alreadyCollided[i].GetComponentInParent<PhotonView>().viewID);
+					} else if (alreadyCollided[i].GetComponent<Map_DestructableObject>()){
+						DamageDestructableObject(-10,alreadyCollided[i].GetComponent<PhotonView>().viewID);
+					} 
 
-			} catch (System.Exception e){}
+				} catch (System.Exception e){}
+			}
 		}
 	}
 

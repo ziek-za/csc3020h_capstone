@@ -26,11 +26,13 @@ public class Weapon_Rocket : Photon.MonoBehaviour {
 	void OnCollisionEnter(Collision other){
 		Explode();
 		if (other.gameObject.GetComponent<Char_AttributeScript>()){
+			try {
+				if (other.gameObject.GetComponent<Char_AttributeScript>().health <= 0 && 
+				    whoFiredMe.team != other.gameObject.GetComponent<Char_AttributeScript>().team){
+					whoFiredMe.EnableKillHUD(other.transform.GetComponent<Char_AttributeScript>().playerName);
+				}
+			} catch (System.NullReferenceException e){}
 			DamagePlayer(-20,other.gameObject.GetComponent<PhotonView>().viewID);
-			if (other.gameObject.GetComponent<Char_AttributeScript>().health <= 0 && 
-			    whoFiredMe.team != other.gameObject.GetComponent<Char_AttributeScript>().team){
-				whoFiredMe.EnableKillHUD(other.transform.GetComponent<Char_AttributeScript>().playerName);
-			}
 		}
 	}
 	[RPC] void DamagePlayer(int damage, int vID){

@@ -4,7 +4,7 @@ using System.Collections;
 public class Ability_BuilderFoundation : Photon.MonoBehaviour {
 
 	int completion = 0;
-	int required = 10;
+	int required = 60;
 
 	public GameObject completedBuilding;
 

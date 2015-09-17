@@ -5,11 +5,13 @@ using System.Collections.Generic;
 public class Ability_BuilderTurret : Photon.MonoBehaviour {
 
 	public Char_AttributeScript.Teams currentTeam;
-	float lifeTime = 10000f;
+	float lifeTime = 40f;
 	public int health = 100;
 	public GameObject muzzle;
 	float timeBetweenShots = 0.1f;
 	float shotCooldown;	
+
+	int damage = 6;
 
 	public ParticleSystem muzzleFlash, tracerEffect;
 
@@ -111,7 +113,7 @@ public class Ability_BuilderTurret : Photon.MonoBehaviour {
 							                                                     Quaternion.LookRotation(trackedEnemies[i].transform.position-muzzle.transform.position),
 							                                                     5f);
 							PlayMuzzleFlash(photonView.viewID);
-							DamagePlayer(-3, hit.transform.GetComponent<PhotonView>().viewID, transform.position);
+							DamagePlayer(-damage, hit.transform.GetComponent<PhotonView>().viewID, transform.position);
 						}
 						break; //Turret must only have a single target at a time
 						
