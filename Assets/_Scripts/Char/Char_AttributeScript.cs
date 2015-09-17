@@ -176,7 +176,8 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 			if(Physics.Raycast(ray, out hit, Camera.main.farClipPlane)) 
 			{
 				Debug.DrawLine(transform.position, hit.point, Color.green);
-				if (hit.transform.gameObject.GetComponent<Char_AttributeScript>()){
+				if (hit.transform.gameObject.GetComponent<Char_AttributeScript>() && 
+				    hit.transform.gameObject.GetComponent<Char_AttributeScript>() != this){
 					HUD.playerNameLabel.text = hit.transform.gameObject.GetComponent<Char_AttributeScript>().playerName;
 				}
 			}

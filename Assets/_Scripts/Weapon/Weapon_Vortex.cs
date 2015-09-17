@@ -28,16 +28,13 @@ public class Weapon_Vortex : Photon.MonoBehaviour {
 		try {
 			for (int i = 0; i < alreadyCollided.Count; i++){
 				if (alreadyCollided[i].GetComponent<Weapon_Rocket>()){
-					alreadyCollided[i].GetComponent<Weapon_Rocket>().Explode();
+					alreadyCollided[i].GetComponent<Weapon_Rocket>().Explode(); //Blow up rocket at vortex end
 				} else if (alreadyCollided[i].GetComponent<Rigidbody>() != null && 
 				           !alreadyCollided[i].GetComponent<Rigidbody>().isKinematic){
-					Vector3 forceDir =  alreadyCollided[i].transform.position - transform.position;
+					Vector3 forceDir =  alreadyCollided[i].transform.position - transform.position; //Shoot objects out at vortex end
 					alreadyCollided[i].transform.rigidbody.velocity = forceDir * pullForce * 0.1f;
-					//alreadyCollided[i].transform.rigidbody.AddForce(forceDir * pullForce *50);
 
-					//Need to re-enable player movement in vortex
 					if (alreadyCollided[i].GetComponent<Char_AttributeScript>()){
-						DisablePlayerControls(false,alreadyCollided[i].GetComponent<PhotonView>().viewID);
 						//Damage if rocket
 						if (rocketInVortex){
 							float damage = -40/((alreadyCollided[i].transform.position - transform.position).magnitude + 1);
@@ -74,9 +71,7 @@ public class Weapon_Vortex : Photon.MonoBehaviour {
 		if (recievedExplosion){
 			if (!channeling){
 				Invoke ("ChannelingTime",duration);
-				//MTC.ManipulateTerrain(transform.position, 5f, "pull", 30f, 20f, 0.2f);
 				MTC.ManipulateTerrain(transform.position, 5f, "pull", 30f, 2f, 2f);
-				//MTC.ManipulateTerrain(transform.position, 5f, "pull", 30f, 1.0595f, 2f);
 				channeling = true;
 			}
 			//MTC.ManipulateTerrain(transform.position, 5f, "pull", 30f, 2f, 7f); //Rising over time

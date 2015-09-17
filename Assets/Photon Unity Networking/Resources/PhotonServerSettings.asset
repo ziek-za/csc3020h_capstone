@@ -68,4 +68,5 @@ MonoBehaviour:
   - DamageDestructableObject
   - SetPlayerName
   - DamageBuildingTurret
+  - PlayExplosionParticleEffect
   DisableAutoOpenWizard: 0
