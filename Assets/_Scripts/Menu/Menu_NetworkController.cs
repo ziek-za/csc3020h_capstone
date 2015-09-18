@@ -4,6 +4,18 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading;
 
+public struct LANgameInfo {
+	public string ip, gameName, gameHost;
+	public int ping, joinedPlayers, maxPlayers;
+	public LANgameInfo(string newIp, string newGameName, string newGameHost,
+	                   int newPing, int newJoinedPlayers, int newMaxPlayers)
+	{
+		ip = newIp; gameName = newGameName; gameHost = newGameHost;
+		ping = newPing; joinedPlayers = newJoinedPlayers; maxPlayers = newMaxPlayers;
+	}
+	
+}
+
 public class Menu_NetworkController : MonoBehaviour {
 	
 	private RoomInfo[] roomsList;
@@ -50,13 +62,13 @@ public class Menu_NetworkController : MonoBehaviour {
 			}).Start();
 		}
 
-		TryConnect(Network.player.ipAddress);
+		//TryConnect(Network.player.ipAddress);
 
 	}
 
 	void TestPing(int i, string ip){
 		System.Net.NetworkInformation.Ping p = new System.Net.NetworkInformation.Ping();
-		System.Net.NetworkInformation.PingReply rep = p.Send(ip+i.ToString(),1000);
+		System.Net.NetworkInformation.PingReply rep = p.Send(ip+i.ToString(),10000);
 		if (rep.Status == System.Net.NetworkInformation.IPStatus.Success)
 		{
 			Debug.Log(rep.Address + ": got reply");
