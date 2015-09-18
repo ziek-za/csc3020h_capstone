@@ -27,7 +27,7 @@ public class Menu_GUIController : MonoBehaviour {
 
 	public void EnterIpAddress(){
 		_MainController.hostIP = IPaddressInput.text;
-		NetworkController.TryConnect();
+		//NetworkController.TryConnect();
 		//Debug.Log(IPaddressInput.text);
 	}
 
