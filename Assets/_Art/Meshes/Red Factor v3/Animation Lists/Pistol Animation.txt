@@ -1,0 +1,4 @@
+pistol pose - Frame (1)
+pisto rotate - Frames (2-63)
+pistol run - Frames (64-73)
+pistol fire - Frames (74-84)

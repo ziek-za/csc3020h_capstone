@@ -17,6 +17,7 @@ public class Weapon_ForceGrenade : Photon.MonoBehaviour {
 
 	public ParticleSystem fuse, explosionEffect;
 	bool detonated = false;
+	bool madeVortex = false;
 
 	// Use this for initialization
 	void Start () {	
@@ -85,9 +86,15 @@ public class Weapon_ForceGrenade : Photon.MonoBehaviour {
 				} 
 			} catch (System.Exception e){}
 
-			if (mode.Equals("push") && alreadyCollided[i].name.Equals("TerrainObject"))
-				PushTerrain(transform.position);
-
+			if (alreadyCollided[i].name.Equals("TerrainObject")){
+				if (mode.Equals("push")){
+					PushTerrain(transform.position);
+				}
+				else if (mode.Equals("pull")){
+					PullTerrain(transform.position);
+				}
+			}
+				
 			if (mode.Equals("push") &&
 			    alreadyCollided[i].GetComponent<Rigidbody>() != null &&
 			    !alreadyCollided[i].GetComponent<Rigidbody>().isKinematic){
@@ -98,9 +105,9 @@ public class Weapon_ForceGrenade : Photon.MonoBehaviour {
 					Debug.LogError("Null Ref on: " + alreadyCollided[i].name);
 				}
 			}
-			else if (mode.Equals("pull")){
+			else if (mode.Equals("pull") && !madeVortex){
 				PhotonNetwork.Instantiate(vortex.name, transform.position, Quaternion.identity, 0);
-				break; //Break because only want to create one vortex
+				madeVortex = true; //Break because only want to create one vortex
 			}
 		}
 	}
@@ -111,6 +118,14 @@ public class Weapon_ForceGrenade : Photon.MonoBehaviour {
 		MTC.ManipulateTerrain(explosion_pos, 5f, "push", 30f, 2f, 2f);
 		if (photonView.isMine) {
 			photonView.RPC("PushTerrain",PhotonTargets.OthersBuffered, explosion_pos);
+		}
+	}
+
+	//Used to modify the terrain on PULL only
+	[RPC] void PullTerrain(Vector3 explosion_pos){		
+		MTC.ManipulateTerrain(transform.position, 5f, "pull", 30f, 2f, 2f);
+		if (photonView.isMine) {
+			photonView.RPC("PullTerrain",PhotonTargets.OthersBuffered, explosion_pos);
 		}
 	}
 

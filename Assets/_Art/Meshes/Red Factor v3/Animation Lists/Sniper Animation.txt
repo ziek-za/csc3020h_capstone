@@ -1,0 +1,4 @@
+Sniper pose - Frame (1)
+Sniper rotate - Frames (2-63)
+Sniper run - Frames (64-73)
+Sniper fire - Frames (74-84)

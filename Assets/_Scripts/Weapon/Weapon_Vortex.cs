@@ -3,9 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Weapon_Vortex : Photon.MonoBehaviour {
-		
-	private Terrain terrain;
-	private Map_TerrainController MTC;
 
 	public float pullForce = 15f;
 	public float duration = 2f;
@@ -19,9 +16,7 @@ public class Weapon_Vortex : Photon.MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		terrain = Terrain.activeTerrain;
-		MTC = terrain.GetComponent<Map_TerrainController>();
-		PullTerrain(transform.position, true);
+		RecieveVortexRPC(transform.position, true);
 	}
 
 	void ChannelingTime(){
@@ -71,10 +66,8 @@ public class Weapon_Vortex : Photon.MonoBehaviour {
 		if (recievedExplosion){
 			if (!channeling){
 				Invoke ("ChannelingTime",duration);
-				MTC.ManipulateTerrain(transform.position, 5f, "pull", 30f, 2f, 2f);
 				channeling = true;
 			}
-			//MTC.ManipulateTerrain(transform.position, 5f, "pull", 30f, 2f, 7f); //Rising over time
 		}	 
 	}
 
@@ -107,11 +100,11 @@ public class Weapon_Vortex : Photon.MonoBehaviour {
 		}
 	}
 
-	//RPC to tell other clients to start exploding
-	[RPC] void PullTerrain(Vector3 vortexCenter, bool re){
+	//RPC to tell other clients to start the vortex
+	[RPC] void RecieveVortexRPC(Vector3 vortexCenter, bool re){
 		recievedExplosion = true;
 		if (photonView.isMine) {
-			photonView.RPC("PullTerrain",PhotonTargets.OthersBuffered, vortexCenter, true);
+			photonView.RPC("RecieveVortexRPC",PhotonTargets.OthersBuffered, vortexCenter, true);
 		}
 	}
 
