@@ -19,7 +19,6 @@ public struct LANgameInfo {
 public class Menu_NetworkController : MonoBehaviour {
 	
 	private RoomInfo[] roomsList;
-	bool connectedToIP = false;
 
 	public Menu_GUIController GUIController;
 	List<string> localNetworkAddresses;
@@ -67,12 +66,15 @@ public class Menu_NetworkController : MonoBehaviour {
 	}
 
 	void TestPing(int i, string ip){
-		System.Net.NetworkInformation.Ping p = new System.Net.NetworkInformation.Ping();
-		System.Net.NetworkInformation.PingReply rep = p.Send(ip+i.ToString(),10000);
-		if (rep.Status == System.Net.NetworkInformation.IPStatus.Success)
-		{
-			Debug.Log(rep.Address + ": got reply");
-			localNetworkAddresses.Add(rep.Address.ToString());
+		for (int j = 0; j < 5; j++){ //Five pings per IP
+			System.Net.NetworkInformation.Ping p = new System.Net.NetworkInformation.Ping();
+			System.Net.NetworkInformation.PingReply rep = p.Send(ip+i.ToString(),1000);
+			if (rep.Status == System.Net.NetworkInformation.IPStatus.Success)
+			{
+				Debug.Log(rep.Address + ": got reply");
+				if (!localNetworkAddresses.Contains(rep.Address.ToString()))
+					localNetworkAddresses.Add(rep.Address.ToString());
+			}
 		}
 	}
 
