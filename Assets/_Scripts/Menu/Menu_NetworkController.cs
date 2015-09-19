@@ -5,13 +5,21 @@ using System.Net;
 using System.Threading;
 
 public struct LANgameInfo {
-	public string ip, gameName, gameHost;
+	public string ip, gameName, gameHost, serverName;
 	public int ping, joinedPlayers, maxPlayers;
-	public LANgameInfo(string newIp, string newGameName, string newGameHost,
+	public LANgameInfo(string newIp, string newGameName, string newGameHost, string newServerName,
 	                   int newPing, int newJoinedPlayers, int newMaxPlayers)
 	{
-		ip = newIp; gameName = newGameName; gameHost = newGameHost;
+		ip = newIp; gameName = newGameName; gameHost = newGameHost; serverName = newServerName;
 		ping = newPing; joinedPlayers = newJoinedPlayers; maxPlayers = newMaxPlayers;
+	}
+
+	public string ToString(){
+		return ("\t" + gameName.PadRight(24) + gameHost.PadRight(24) + (joinedPlayers+"/"+maxPlayers).PadRight(24) + ping.ToString().PadRight(24) + ip);
+		/*
+		return string.Format("\t{0,-4}\t\t\t\t\t\t{1,-4}\t\t\t\t\t\t{2,-7}" +
+							 "\t\t\t\t\t\t{3,-4}\t\t\t\t\t\t {4,-2}",
+		                     gameName, gameHost, joinedPlayers+"/"+maxPlayers, ping, ip);*/
 	}
 	
 }
@@ -107,13 +115,16 @@ public class Menu_NetworkController : MonoBehaviour {
 			Debug.Log("fail");
 		}
 	}*/
-	
+
+	public bool buttonClicked = false;
+
 	public IEnumerator CheckLocalForPhoton(){
 		//string ipPrefix = Network.player.ipAddress.Substring(0,Network.player.ipAddress.LastIndexOf('.') + 1);
 		for (int i = 0; i < localNetworkAddresses.Count; i++){
 			//Debug.Log(localNetworkAddresses[i]);
+			yield return new WaitForSeconds(2f);
 			TryConnect(localNetworkAddresses[i]);
-			yield return new WaitForSeconds(3f);
+			yield return new WaitForSeconds(2f);
 			CutLocalConnection(localNetworkAddresses[i]);	
 		}
 	}
@@ -121,18 +132,30 @@ public class Menu_NetworkController : MonoBehaviour {
 	public void TryConnect(string ip){
 		PhotonNetwork.PhotonServerSettings.ServerAddress = ip;
 		PhotonNetwork.ConnectUsingSettings("0.1");
-		_MainController.hostIP = ip;
 		QualitySettings.vSyncCount = 1;
 	}
 
 	void CutLocalConnection(string ip){
-		if (PhotonNetwork.connected && roomsList.Length > 0){
-			Debug.LogWarning("Connection successful: " + PhotonNetwork.PhotonServerSettings.ServerAddress);
-			Debug.Log(roomsList[0].name+":"+PhotonNetwork.GetPing()+":"+roomsList[0].playerCount+"/"+roomsList[0].maxPlayers+":"+ip);
-		} else {
-			Debug.LogWarning("Disconnected from " + PhotonNetwork.PhotonServerSettings.ServerAddress);
+		if (!buttonClicked){
+			if (PhotonNetwork.connected && roomsList.Length > 0){
+				Debug.LogWarning("Connection successful: " + PhotonNetwork.PhotonServerSettings.ServerAddress);
+				LANgameInfo gameInfo = new LANgameInfo(ip,
+					                                   roomsList[0].name.Substring(0,roomsList[0].name.LastIndexOf("|")),
+					                                   roomsList[0].name.Substring(roomsList[0].name.LastIndexOf("|")+1),
+					                                   roomsList[0].name,
+					                                   PhotonNetwork.GetPing(),
+					                                   roomsList[0].playerCount,
+					                                   roomsList[0].maxPlayers);
+				GUIController.listOfButtons.Add(gameInfo);
+				//Debug.Log(roomsList[0].name+":"+PhotonNetwork.GetPing()+":"+roomsList[0].playerCount+"/"+roomsList[0].maxPlayers+":"+ip);
+			} else {
+				Debug.LogWarning("Disconnected from " + PhotonNetwork.PhotonServerSettings.ServerAddress);
+			}
+			PhotonNetwork.Disconnect();
+			//while (!PhotonNetwork.connectionState.Equals("Disconnected")){
+			Debug.Log("Coroutine - "+PhotonNetwork.connectionState);
 		}
-		PhotonNetwork.Disconnect();
+		//}
 	}
 	
 	// Update is called once per frame
