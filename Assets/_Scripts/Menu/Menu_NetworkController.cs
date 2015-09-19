@@ -23,6 +23,8 @@ public class Menu_NetworkController : MonoBehaviour {
 	public Menu_GUIController GUIController;
 	List<string> localNetworkAddresses;
 
+	int pingReplyCount = 0;
+
 	// Use this for initialization
 	void Start () {
 		//PhotonNetwork.PhotonServerSettings.ServerAddress = "192.168.1.107"; 
@@ -53,8 +55,10 @@ public class Menu_NetworkController : MonoBehaviour {
 
 		localNetworkAddresses = new List<string>();
 		string ipPrefix = Network.player.ipAddress.Substring(0,Network.player.ipAddress.LastIndexOf('.') + 1);
+		localNetworkAddresses.Add(Network.player.ipAddress);
+		Debug.Log(Network.player.ipAddress + ": got reply");
 
-		for (int i = 1; i < 255; i++){
+		for (int i = 1; i < 256; i++){
 			new Thread(() => 
 			{
 				TestPing(i,ipPrefix); 
@@ -71,10 +75,12 @@ public class Menu_NetworkController : MonoBehaviour {
 			System.Net.NetworkInformation.PingReply rep = p.Send(ip+i.ToString(),1000);
 			if (rep.Status == System.Net.NetworkInformation.IPStatus.Success)
 			{
-				Debug.Log(rep.Address + ": got reply");
-				if (!localNetworkAddresses.Contains(rep.Address.ToString()))
+				if (!localNetworkAddresses.Contains(rep.Address.ToString())){
 					localNetworkAddresses.Add(rep.Address.ToString());
+					Debug.Log(rep.Address + ": got reply");
+				}
 			}
+			pingReplyCount++;
 		}
 	}
 
@@ -102,14 +108,14 @@ public class Menu_NetworkController : MonoBehaviour {
 		}
 	}*/
 	
-	IEnumerator CheckLocalForPhoton(){
-		string ipPrefix = Network.player.ipAddress.Substring(0,Network.player.ipAddress.LastIndexOf('.') + 1);
-		for (int i = 100; i < 120; i++){
-			TryConnect((ipPrefix+i.ToString()));
-			yield return new WaitForSeconds(0.5f);
-			CutLocalConnection();
+	public IEnumerator CheckLocalForPhoton(){
+		//string ipPrefix = Network.player.ipAddress.Substring(0,Network.player.ipAddress.LastIndexOf('.') + 1);
+		for (int i = 0; i < localNetworkAddresses.Count; i++){
+			//Debug.Log(localNetworkAddresses[i]);
+			TryConnect(localNetworkAddresses[i]);
+			yield return new WaitForSeconds(3f);
+			CutLocalConnection(localNetworkAddresses[i]);	
 		}
-		yield return 0;
 	}
 
 	public void TryConnect(string ip){
@@ -119,19 +125,23 @@ public class Menu_NetworkController : MonoBehaviour {
 		QualitySettings.vSyncCount = 1;
 	}
 
-	void CutLocalConnection(){
-		if (PhotonNetwork.connecting){
-			PhotonNetwork.Disconnect();
-			Debug.LogWarning("Disconnected from " + PhotonNetwork.PhotonServerSettings.ServerAddress);
-		} else if (PhotonNetwork.connected){
-			PhotonNetwork.Disconnect();
+	void CutLocalConnection(string ip){
+		if (PhotonNetwork.connected && roomsList.Length > 0){
 			Debug.LogWarning("Connection successful: " + PhotonNetwork.PhotonServerSettings.ServerAddress);
+			Debug.Log(roomsList[0].name+":"+PhotonNetwork.GetPing()+":"+roomsList[0].playerCount+"/"+roomsList[0].maxPlayers+":"+ip);
+		} else {
+			Debug.LogWarning("Disconnected from " + PhotonNetwork.PhotonServerSettings.ServerAddress);
 		}
+		PhotonNetwork.Disconnect();
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		//if (pingReplyCount >= 1275 && GUIController.JoinButton.interactable == false){
+		//	GUIController.JoinButton.interactable = true;
+		//}
 		//if (connectedToIP){
+		/*
 			if (PhotonNetwork.room == null)
 			{
 				if (roomsList != null){
@@ -145,17 +155,12 @@ public class Menu_NetworkController : MonoBehaviour {
 							}
 						}
 					}
-			}
+			}*/
 		//}
 	}
 
 	void OnReceivedRoomListUpdate()
 	{
 		roomsList = PhotonNetwork.GetRoomList();
-		GUIController.HostButton.interactable = true;
-		if (roomsList.Length > 0) {
-			GUIController.JoinButton.interactable = true;
-		}
-		//CancelInvoke("TryConnect");
 	}
 }

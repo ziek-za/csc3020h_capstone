@@ -17,10 +17,10 @@ public class _MainController {
 	}
 
 	public static void CreateServer(){
-		Application.LoadLevel("Level");
-		ImportMapObject("2");
+		//Application.LoadLevel("Level");
+		//ImportMapObject("2");
 		if (PhotonNetwork.room == null){
-			PhotonNetwork.CreateRoom(System.Guid.NewGuid().ToString("N"), true, true, 5);
+			PhotonNetwork.CreateRoom(playerName, true, true, 8);
 			Level_NetworkController.firstPlayer = true;
 		}
 	}

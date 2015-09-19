@@ -19,10 +19,21 @@ public class Menu_GUIController : MonoBehaviour {
 		_MainController.ImportStringLookup ();
 
 	}
-	
+
+	bool madeRoom = false, hostButtonClicked = false;
+
 	// Update is called once per frame
 	void Update () {
-	
+		if (PhotonNetwork.connected && !madeRoom && hostButtonClicked){
+			madeRoom = true;
+			Debug.LogError("Room hosted");
+			if (!playerNameInput.text.Equals(""))
+				_MainController.playerName = playerNameInput.text;
+			else
+				_MainController.playerName = "default";
+			
+			_MainController.CreateServer();
+		}
 	}
 
 	public void EnterIpAddress(){
@@ -32,12 +43,8 @@ public class Menu_GUIController : MonoBehaviour {
 	}
 
 	public void HostGameButtonClick(){
-		if (!playerNameInput.text.Equals(""))
-			_MainController.playerName = playerNameInput.text;
-		else
-			_MainController.playerName = "default";
-
-		_MainController.CreateServer();
+		NetworkController.TryConnect(Network.player.ipAddress);
+		hostButtonClicked = true;
 	}
 
 	public void JoinGameButtonClick(){
@@ -47,5 +54,6 @@ public class Menu_GUIController : MonoBehaviour {
 			_MainController.playerName = "default";
 
 		_MainController.RoomJoined = true;
+		StartCoroutine(NetworkController.CheckLocalForPhoton());
 	}
 }
