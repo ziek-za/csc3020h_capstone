@@ -9,28 +9,31 @@ public class _MainController {
 	public static JSONNode MapObject;
 	public static bool ImportedMapObjectBool = false;
 	public static bool ImportedStringLookupBool = false;
-	public static string playerName;
-	public static string hostIP;
+	public static string playerName, gameName;
 
 	public static string ExampleLookupMethod(){
 		return "some info";
 	}
 
 	public static void CreateServer(){
-		Application.LoadLevel("Level");
-		ImportMapObject("2");
+		//Application.LoadLevel("Level");
+		//ImportMapObject("2");
 		if (PhotonNetwork.room == null){
-			PhotonNetwork.CreateRoom(System.Guid.NewGuid().ToString("N"), true, true, 5);
+			PhotonNetwork.CreateRoom(gameName+"|"+playerName, true, true, 8);
 			Level_NetworkController.firstPlayer = true;
 		}
+		Application.LoadLevel("Level");
+		ImportMapObject("2");
 	}
 
-	/*
+
 	public static void JoinServer(string serverName){
-		Application.LoadLevel("Level");
-		ImportMapObject("1");
+		//Application.LoadLevel("Level");
+		//ImportMapObject("1");
 		PhotonNetwork.JoinRoom(serverName);
-	}*/
+		Application.LoadLevel("Level");
+		ImportMapObject("2");
+	}
 
 	public static void ImportMapObject(string level) {
 		// Load in the file from resources directory

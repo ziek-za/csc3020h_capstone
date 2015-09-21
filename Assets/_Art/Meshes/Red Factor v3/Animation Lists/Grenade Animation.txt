@@ -1,0 +1,3 @@
+Grenade pose - Frame (1)
+Grenade Explode Mode - Frames (2-10)
+Grenade Impload Mode - Frames (11-20)

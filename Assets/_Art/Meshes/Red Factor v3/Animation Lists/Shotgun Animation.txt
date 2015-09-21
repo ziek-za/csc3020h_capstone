@@ -1,0 +1,4 @@
+Shotgun pose - Frame (1)
+Shotgun rotate - Frames (2-63)
+Shotgun run - Frames (64-73)
+Shotgun fire - Frames (74-84)

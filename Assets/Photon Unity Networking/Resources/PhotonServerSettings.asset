@@ -69,4 +69,5 @@ MonoBehaviour:
   - SetPlayerName
   - DamageBuildingTurret
   - PlayExplosionParticleEffect
+  - RecieveVortexRPC
   DisableAutoOpenWizard: 0
