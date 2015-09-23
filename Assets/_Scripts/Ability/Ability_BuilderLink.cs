@@ -17,10 +17,14 @@ public class Ability_BuilderLink : Map_LinkScript {
 	// Use this for initialization
 	void Start () {
 		whoBuiltMe.currentLink = this.gameObject;
+		// Set HP on GUI for building
+		whoBuiltMe.GetComponent<Char_AttributeScript> ().HUD.linkIcon.SetBuildingHealth (health);
 	}
 
 	public void ChangeHP(int change){
 		health += change;
+		// Set HP on GUI for building
+		whoBuiltMe.GetComponent<Char_AttributeScript> ().HUD.linkIcon.ActivateBuildingHealth (health);
 	}
 
 	void Update(){

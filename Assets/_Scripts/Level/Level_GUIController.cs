@@ -27,6 +27,9 @@ public class Level_GUIController : MonoBehaviour {
 	public Button linkButton;
 	public Text playerNameLabel, playerKilledLabel;
 
+	//Boolean for when the player is dead
+	public bool isDeadBool = false;
+
 	public GameObject mapCenter;
 
 	// Use this for initialization
@@ -97,7 +100,16 @@ public class Level_GUIController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	}
-
+	// Used to reset all cooldowns
+	public void ResetIconsCooldown() {
+		// SOLDIER
+		vortexAndExplosionIcon.ResetCooldown ();
+		// THIEF
+		teleportIcon.ResetCooldown (); sprintIcon.ResetCooldown ();
+		// BUILDER
+		linkIcon.ResetCooldown (); turretIcon.ResetCooldown (); boosterIcon.ResetCooldown ();
+	}
+	
 	public void UpdateHUDHealth(int health){
 		healthText.text = health.ToString();
 	}

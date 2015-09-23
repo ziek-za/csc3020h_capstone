@@ -64,6 +64,12 @@ public class Char_SelectChar : Photon.MonoBehaviour {
 					GameObject.Find("CharacterSelectionGUI").transform.localScale=new Vector3(0,0,0);
 					// Turn the HUD on
 					gc.HUDPivot.SetActive(true);
+					gc.isDeadBool = false;
+				} else {
+					// Turn the HUD off
+					gc.isDeadBool = true;
+					gc.ResetIconsCooldown();
+					gc.HUDPivot.SetActive(false);
 				}
 			}
 		}
