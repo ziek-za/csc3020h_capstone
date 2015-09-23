@@ -30,6 +30,7 @@ public class Ability_Sprint : Photon.MonoBehaviour {
 					transform.GetComponent<Char_AttributeScript>().buffs.Add("sprint");
 					Invoke ("Debuff",duration);
 					Invoke("cooledDown",cooldown);
+					GetComponent<Char_AttributeScript>().HUD.sprintIcon.ActivateCooldownGUI(cooldown);
 					offCooldown = false;
 			}
 		}
