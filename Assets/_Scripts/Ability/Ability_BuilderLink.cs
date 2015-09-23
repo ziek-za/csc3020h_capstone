@@ -9,15 +9,14 @@ public class Ability_BuilderLink : Map_LinkScript {
 	
 	//public ParticleSystem redBeam, blueBeam;
 
-	public float lifeTime = 40f;
 	public int health = 100;
-
-	float lifetimeAccum = 0;
+	public Ability_BuilderPlaceFoundations whoBuiltMe;
 
 	//Level_GUIController gui;
 
 	// Use this for initialization
 	void Start () {
+		whoBuiltMe.currentLink = this.gameObject;
 	}
 
 	public void ChangeHP(int change){
@@ -25,12 +24,6 @@ public class Ability_BuilderLink : Map_LinkScript {
 	}
 
 	void Update(){
-		lifetimeAccum += Time.deltaTime;
-
-		if (lifetimeAccum >= lifeTime){
-			KillSelf();
-		}
-
 		if (health <= 0){
 			KillSelf();
 		}
@@ -47,10 +40,6 @@ public class Ability_BuilderLink : Map_LinkScript {
 			InitRed();
 		gui.SetUpLinkButtons();
 		//Invoke("KillSelf",lifeTime);
-	}
-
-	public void SetLifetime(float baselifetime){
-		lifetimeAccum = baselifetime;
 	}
 
 	void InitBlue(){

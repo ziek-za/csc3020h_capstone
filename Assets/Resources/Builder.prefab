@@ -4353,7 +4353,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 117180}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: -.258819044, z: 0, w: .965925813}
   m_LocalPosition: {x: 0, y: -1.00000024, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
@@ -4963,7 +4963,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 191422}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 309.565521, y: 345.620819, z: -362.966156}
+  m_LocalPosition: {x: -40.3800011, y: 2.32999992, z: -39.6699982}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 417180}
@@ -4977,7 +4977,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 191424}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .00200000009, y: .787999988, z: .100000001}
+  m_LocalPosition: {x: .00200000009, y: .5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 491430}
@@ -5270,12 +5270,18 @@ MonoBehaviour:
   maxDistance: 2
   linkFoundation: {fileID: 169046, guid: c4acc800200848d45aaaa554103b39fc, type: 2}
   turretFoundation: {fileID: 151350, guid: 31f7faf464cb31c4fabc8cf8cc5e72fc, type: 2}
+  boosterFoundation: {fileID: 160544, guid: 619fb80c16d955a4db4a148f3b902626, type: 2}
   distanceIndicator: {fileID: 198366, guid: acc4bca2a9b2b9749afa793f7788e5c6, type: 2}
   aimingPoint: {fileID: 139666, guid: a7c2ddd915f6ee24a9d4bf59618f0b34, type: 2}
   placeLinkEnergyCost: 10
   placeLinkCD: 25
   placeTurretEnergyCost: 10
   placeTurretCD: 25
+  placeBoosterEnergyCost: 10
+  placeBoosterCD: 20
+  currentLink: {fileID: 0}
+  currentTurret: {fileID: 0}
+  currentBooster: {fileID: 0}
 --- !u!114 &11417252
 MonoBehaviour:
   m_ObjectHideFlags: 1

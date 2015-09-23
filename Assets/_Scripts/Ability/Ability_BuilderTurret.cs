@@ -5,24 +5,23 @@ using System.Collections.Generic;
 public class Ability_BuilderTurret : Photon.MonoBehaviour {
 
 	public Char_AttributeScript.Teams currentTeam;
-	float lifeTime = 40f;
 	public int health = 100;
 	public GameObject muzzle;
 	float timeBetweenShots = 0.1f;
 	float shotCooldown;	
 
-	int damage = 6;
+	int damage = 9;
 
 	public ParticleSystem muzzleFlash, tracerEffect;
-
-	float lifetimeAccum = 0;
 	
 	public List<GameObject> trackedEnemies;
+	public Ability_BuilderPlaceFoundations whoBuiltMe;
 
 	Quaternion originalRotation, leftPanEdge, rightPanEdge, currentEdge;
 
 	// Use this for initialization
 	void Start () {
+		whoBuiltMe.currentTurret = this.gameObject;
 		trackedEnemies = new List<GameObject>();
 		originalRotation = transform.rotation;
 		leftPanEdge.eulerAngles = originalRotation.eulerAngles + new Vector3(0,60f,0);
@@ -54,12 +53,14 @@ public class Ability_BuilderTurret : Photon.MonoBehaviour {
 			toClamp.eulerAngles = new Vector3(ClampToDegrees(originalRotation.eulerAngles.x+50),toClamp.eulerAngles.y,toClamp.eulerAngles.z);
 		}
 
+		/*
 		//Y rotation i.e. left/right
 		if (toClamp.eulerAngles.y < ClampToDegrees(originalRotation.eulerAngles.y-70) && toClamp.eulerAngles.y > ClampToDegrees(originalRotation.eulerAngles.y+80)){
 			toClamp.eulerAngles = new Vector3(toClamp.eulerAngles.x,ClampToDegrees(originalRotation.eulerAngles.y-70),toClamp.eulerAngles.z);
 		} else if (toClamp.eulerAngles.y < ClampToDegrees(originalRotation.eulerAngles.y-80) && toClamp.eulerAngles.y > ClampToDegrees(originalRotation.eulerAngles.y+70)){
 			toClamp.eulerAngles = new Vector3(toClamp.eulerAngles.x,ClampToDegrees(originalRotation.eulerAngles.y+70),toClamp.eulerAngles.z);
 		} 
+		*/
 
 		return toClamp;
 	}
@@ -84,12 +85,6 @@ public class Ability_BuilderTurret : Photon.MonoBehaviour {
 	}
 
 	void Update(){
-		lifetimeAccum += Time.deltaTime;
-		
-		if (lifetimeAccum >= lifeTime){
-			KillSelf();
-		}
-		
 		if (health <= 0){
 			KillSelf();
 		}
@@ -97,7 +92,7 @@ public class Ability_BuilderTurret : Photon.MonoBehaviour {
 		if (trackedEnemies.Count > 0){
 			for (int i = 0; i < trackedEnemies.Count; i++){
 				RaycastHit hit;
-				Ray enemyTrackingRay = new Ray(muzzle.transform.position, trackedEnemies[i].transform.position-muzzle.transform.position);
+				Ray enemyTrackingRay = new Ray(transform.position, trackedEnemies[i].transform.position-transform.position);
 				if(Physics.Raycast(enemyTrackingRay, out hit, 100f)){
 					Debug.Log(hit.transform.name);
 
@@ -155,10 +150,6 @@ public class Ability_BuilderTurret : Photon.MonoBehaviour {
 		else if (currentTeam == Char_AttributeScript.Teams.RED)
 			InitRed();
 		//Invoke("KillSelf",lifeTime);
-	}
-	
-	public void SetLifetime(float baselifetime){
-		lifetimeAccum = baselifetime;
 	}
 	
 	void InitBlue(){
