@@ -238,7 +238,7 @@ ParticleSystem:
     serializedVersion: 2
     enabled: 1
     type: 1
-    radius: 10
+    radius: 5
     angle: 0
     length: 5
     boxX: 1
@@ -278,7 +278,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
       minMaxState: 0
-    cnt0: 500
+    cnt0: 300
     cnt1: 2
     cnt2: 30
     cnt3: 30
@@ -299,15 +299,15 @@ ParticleSystem:
           inSlope: -2
           outSlope: -2
           tangentMode: 0
-        - time: .256709516
-          value: .528042853
-          inSlope: -.929467082
-          outSlope: -.929467082
-          tangentMode: 0
-        - time: .257142961
-          value: .0299401209
+        - time: .0815332085
+          value: .0168396793
           inSlope: 0
           outSlope: 0
+          tangentMode: 0
+        - time: .0908558667
+          value: 0
+          inSlope: -.929467082
+          outSlope: -.929467082
           tangentMode: 0
         m_PreInfinity: 2
         m_PostInfinity: 2

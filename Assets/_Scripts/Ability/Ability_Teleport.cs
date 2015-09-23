@@ -13,6 +13,8 @@ public class Ability_Teleport : Photon.MonoBehaviour {
 
 	public Material redMat;
 
+	public ParticleSystem teleportOut, teleportIn;
+
 	Vector3 teleportDirection;
 	bool offCooldown = true;
 
@@ -88,8 +90,11 @@ public class Ability_Teleport : Photon.MonoBehaviour {
 			{
 				transform.GetComponent<Char_AttributeScript>().energy -= energyCost;
 				Invoke("cooledDown",cooldown);
+				TeleoutEffect(transform.position);
 				GetComponent<Char_AttributeScript>().HUD.teleportIcon.ActivateCooldownGUI(cooldown);
 				offCooldown = false;
+
+
 				Invoke ("Teleport", 0.2f); //Delay for teleporting
 			}
 		}
@@ -105,6 +110,25 @@ public class Ability_Teleport : Photon.MonoBehaviour {
 		transform.Translate (teleportDirection * teleportDistance);
 		Camera.main.transform.Translate(teleportDirection * teleportDistance);
 		rigidbody.velocity = Vector3.zero;
+		TeleInEffect(transform.position);
+	}
+
+	[RPC] void TeleoutEffect(Vector3 position){
+		GameObject teleOut = Instantiate(teleportOut.gameObject,position,Quaternion.identity) as GameObject;
+		teleOut.GetComponent<ParticleSystem>().Play();
+		Destroy(teleOut,2f);
+
+		if (photonView.isMine)
+			photonView.RPC("TeleoutEffect",PhotonTargets.OthersBuffered, position);
+	}
+
+	[RPC] void TeleInEffect(Vector3 position){
+		GameObject teleIn = Instantiate(teleportIn.gameObject,position,Quaternion.identity) as GameObject;
+		teleIn.GetComponent<ParticleSystem>().Play();
+		Destroy(teleIn,2f);
+		
+		if (photonView.isMine)
+			photonView.RPC("TeleInEffect",PhotonTargets.OthersBuffered, position);
 	}
 	
 }

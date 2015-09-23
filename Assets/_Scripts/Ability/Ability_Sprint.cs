@@ -5,10 +5,13 @@ public class Ability_Sprint : Photon.MonoBehaviour {
 	public int energyCost = 1;
 	
 	bool startedSprint = false;
+	ParticleSystem[] sprintEffects;
 
 	// Use this for initialization
 	void Start () {
-	
+		try {
+			sprintEffects = GetComponentsInChildren<ParticleSystem>();
+		} catch (System.Exception e){}
 	}
 	// Update is called once per frame
 	void Update () {
@@ -19,12 +22,36 @@ public class Ability_Sprint : Photon.MonoBehaviour {
 					transform.GetComponent<Char_BasicMoveScript>().moveSpeed += 20;
 					transform.GetComponent<Char_AttributeScript>().buffs.Add("sprint");
 					startedSprint = true;
+					if (sprintEffects != null){
+						SprintEffect(true);
+					}
 				}
 			} else if (startedSprint){
 				startedSprint = false;
 				Debuff ();
+				if (sprintEffects != null){
+					SprintEffect(false);
+				}
 			}
 		}
+	}
+
+	[RPC] void SprintEffect(bool start){
+		if (start){
+			for (int i = 0; i < sprintEffects.Length; i++){
+				if (sprintEffects[i].CompareTag("Sprint")){
+					sprintEffects[i].Play();
+				}
+			}
+		} else {
+			for (int i = 0; i < sprintEffects.Length; i++){
+				if (sprintEffects[i].CompareTag("Sprint")){
+					sprintEffects[i].Stop();
+				}
+			}
+		}	
+		if (photonView.isMine)
+			photonView.RPC("SprintEffect",PhotonTargets.OthersBuffered, start);
 	}
 
 	void Debuff(){
