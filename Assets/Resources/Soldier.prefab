@@ -4954,7 +4954,7 @@ Animator:
   m_GameObject: {fileID: 164138}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: b2f30e1ee0faa3643801c27c00a72fb2, type: 3}
-  m_Controller: {fileID: 9100000, guid: 17b21ea224c28dc4fa8b0db2784fda69, type: 2}
+  m_Controller: {fileID: 9100000, guid: 060ce2a09b878a645b59aa5e8c98b50e, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -5309,6 +5309,12 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 1
     Name: Falling
+  - Type: 4
+    SynchronizeType: 0
+    Name: SecondaryWeapon
+  - Type: 4
+    SynchronizeType: 0
+    Name: Pistol
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
