@@ -12,6 +12,13 @@ public class HUD_AbilityIcon : MonoBehaviour {
 
 	// Buildings health
 	private float buildingHealth = 0f;
+	
+	private Level_GUIController gc;
+	// Use this for initialization
+	void Start () {
+		// initialize the GUI Controller object
+		gc = GameObject.Find ("GUI Controller").GetComponent<Level_GUIController> ();
+	}
 
 	void Update() {
 		// Used to set cooldown radial fill
@@ -30,13 +37,18 @@ public class HUD_AbilityIcon : MonoBehaviour {
 	// Used to activate the healthbar above buildings
 	public void ActivateBuildingHealth(float currentBuildingHealth) {
 		// Used to set health bar slider
-		if (currentBuildingHealth > 0f) {
-			healthBar.value = Mathf.Clamp01 (currentBuildingHealth/buildingHealth);
-		}
+		healthBar.value = Mathf.Clamp01 (currentBuildingHealth/buildingHealth);
 	}
 
 	// Used to set the initial buldings health
 	public void SetBuildingHealth(float health) {
 		this.buildingHealth = health;
+		healthBar.value = 1f;
+	}
+
+	// Used to reset the cooldown
+	public void ResetCooldown() {
+		cooldownProgress = 0f;
+		cooldownIcon.fillAmount = 0f;
 	}
 }
