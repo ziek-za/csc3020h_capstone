@@ -19,10 +19,15 @@ public class Ability_BuilderBooster : Photon.MonoBehaviour {
 	void Start () {
 		whoBuiltMe.currentBooster = this.gameObject;
 		transform.Rotate(25,0,0);
+
+		// Set HP on GUI for building
+		whoBuiltMe.GetComponent<Char_AttributeScript> ().HUD.boosterIcon.SetBuildingHealth (health);
 	}
 	
 	public void ChangeHP(int change){
 		health += change;
+		// Set HP on GUI for building
+		whoBuiltMe.GetComponent<Char_AttributeScript> ().HUD.boosterIcon.ActivateBuildingHealth (health);
 	}
 	
 	void Update(){
@@ -40,7 +45,7 @@ public class Ability_BuilderBooster : Photon.MonoBehaviour {
 
 		if (health <= 0){
 			KillSelf();
-		}
+		}		
 	}
 
 	void OnCollisionEnter(Collision collision){
