@@ -1,0 +1,22 @@
+MainController - put in all the public stuff that must be callable from anywhere or any script
+E.g. _MainController.ExampleLookupMethod().
+
+Level_NetworkController - Have to use PhotonNetwork. before everything
+
+Char_BasicMoveScript - inherits from Photon.MonoBehaviour, can delete all privates. Before getting user input, check if "isMine". [RPC] only synchronizes method after it is called instead of continuously.
+
+Menu_GUIController - Has methods for the buttons
+
+git branch Nic - Creates a branch called Nic, git branch lists branches
+git checkout Nic - Switches to branch called Nic
+git merge Nic - Synchronizes the Nic branch to master
+git branch -d Nic - to delete the branch Nic
+
+Jumping, moving etc all on one script. Need some public variables for health, speed etc. Cylinder prefab.
+Individual script for every weapon.
+Each prefab should have a lot of scripts attached to it.
+
+When instantiate object, create camera, position it on the gameobject
+
+When players in air (i.e. jumping or blown or ground), their movements using w,a,s,d should be restricted, 1/3 of normal?
+But then how is moving forward and jumping (holding down w and jump), w stays normal? but then w hold down jump turn back w hold down equals original place.

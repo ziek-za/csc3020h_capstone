@@ -128,6 +128,7 @@ MonoBehaviour:
   mode: 
   fuse: {fileID: 19851526}
   explosionEffect: {fileID: 19840422}
+  explosionPullEffect: {fileID: 0}
 --- !u!114 &11463164
 MonoBehaviour:
   m_ObjectHideFlags: 1

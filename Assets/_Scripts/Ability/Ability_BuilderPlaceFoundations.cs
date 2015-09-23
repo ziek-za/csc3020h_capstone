@@ -153,19 +153,19 @@ public class Ability_BuilderPlaceFoundations : Photon.MonoBehaviour {
 		}
 	}
 
-	[RPC] void DamageBuildingLink(int damage, int vID){
+	[RPC] public void DamageBuildingLink(int damage, int vID){
 		PhotonView.Find(vID).transform.GetComponent<Ability_BuilderLink>().ChangeHP(damage);
 		if (photonView.isMine)
 			photonView.RPC("DamageBuildingLink", PhotonTargets.OthersBuffered, damage, vID);
 	}
 	
-	[RPC] void DamageBuildingTurret(int damage, int vID){
+	[RPC] public void DamageBuildingTurret(int damage, int vID){
 		PhotonView.Find(vID).transform.GetComponent<Ability_BuilderTurret>().ChangeHP(damage);
 		if (photonView.isMine)
 			photonView.RPC("DamageBuildingTurret", PhotonTargets.OthersBuffered, damage, vID);
 	}
 	
-	[RPC] void DamageBuildingBooster(int damage, int vID){
+	[RPC] public void DamageBuildingBooster(int damage, int vID){
 		PhotonView.Find(vID).transform.GetComponent<Ability_BuilderBooster>().ChangeHP(damage);
 		if (photonView.isMine)
 			photonView.RPC("DamageBuildingBooster", PhotonTargets.OthersBuffered, damage, vID);

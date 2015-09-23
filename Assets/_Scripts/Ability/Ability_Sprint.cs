@@ -2,35 +2,27 @@
 using System.Collections;
 
 public class Ability_Sprint : Photon.MonoBehaviour {
-	public float duration = 5;
-	public int energyCost = 10;
-	public int cooldown = 10;
+	public int energyCost = 1;
 	
-	bool offCooldown = true;
+	bool startedSprint = false;
 
 	// Use this for initialization
 	void Start () {
 	
 	}
-
-	void cooledDown(){
-		offCooldown = true;
-	}
-	
 	// Update is called once per frame
 	void Update () {
 		if(photonView.isMine){
-			if(Input.GetButtonDown("Ability 2") && 
-			   !transform.GetComponent<Char_AttributeScript> ().buffs.Contains ("sprint") &&
-				transform.GetComponent<Char_AttributeScript>().energy >= energyCost &&
-			  	offCooldown)
-			{
-					transform.GetComponent<Char_AttributeScript>().energy -= energyCost;
-					transform.GetComponent<Char_AttributeScript>().speed += 50;
+			if (Input.GetButton("Ability 2") && transform.GetComponent<Char_AttributeScript>().energy >= energyCost){
+				transform.GetComponent<Char_AttributeScript>().energy -= energyCost;
+				if(!transform.GetComponent<Char_AttributeScript> ().buffs.Contains ("sprint")){
+					transform.GetComponent<Char_BasicMoveScript>().moveSpeed += 20;
 					transform.GetComponent<Char_AttributeScript>().buffs.Add("sprint");
-					Invoke ("Debuff",duration);
-					Invoke("cooledDown",cooldown);
-					offCooldown = false;
+					startedSprint = true;
+				}
+			} else if (startedSprint){
+				startedSprint = false;
+				Debuff ();
 			}
 		}
 	}
@@ -38,7 +30,7 @@ public class Ability_Sprint : Photon.MonoBehaviour {
 	void Debuff(){
 		if (transform.GetComponent<Char_AttributeScript> ().buffs.Contains ("sprint")) {
 			transform.GetComponent<Char_AttributeScript>().buffs.Remove("sprint");
-			transform.GetComponent<Char_AttributeScript>().speed-=50;
+			transform.GetComponent<Char_BasicMoveScript>().moveSpeed-=20;
 		}
 	}
 }
