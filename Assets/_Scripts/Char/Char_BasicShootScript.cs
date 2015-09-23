@@ -155,6 +155,12 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 					EnableHitCrosshair();
 					Invoke("DisableHitCrosshair",0.1f);
 
+					//Damaging builder 'boosters'
+				} else if (hit.transform.gameObject.GetComponent<Ability_BuilderTurret>()) {
+					DamageBuildingBooster(DamageAmount(),hit.transform.GetComponent<PhotonView>().viewID);
+					EnableHitCrosshair();
+					Invoke("DisableHitCrosshair",0.1f);
+
 				//Damaging buildings
 				} else if (hit.collider.GetComponentInParent<Map_DestructableObject>()) {
 					DamageDestructableObject(-1, hit.transform.GetComponentInParent<PhotonView>().viewID);
@@ -208,6 +214,12 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 		PhotonView.Find(vID).transform.GetComponent<Ability_BuilderTurret>().ChangeHP(damage);
 		if (photonView.isMine)
 			photonView.RPC("DamageBuildingTurret", PhotonTargets.OthersBuffered, damage, vID);
+	}
+
+	[RPC] protected void DamageBuildingBooster(int damage, int vID){
+		PhotonView.Find(vID).transform.GetComponent<Ability_BuilderBooster>().ChangeHP(damage);
+		if (photonView.isMine)
+			photonView.RPC("DamageBuildingBooster", PhotonTargets.OthersBuffered, damage, vID);
 	}
 
 	[RPC] protected void DamageDestructableObject(int damage, int vID){

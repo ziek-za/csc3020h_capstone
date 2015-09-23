@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 412792}
   - 33: {fileID: 3312792}
   - 23: {fileID: 2312792}
-  - 64: {fileID: 6433434}
+  - 135: {fileID: 13598414}
   m_Layer: 0
   m_Name: cone1
   m_TagString: Untagged
@@ -118,8 +118,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 112792}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .00999999978, y: .0900000036, z: -6.34000015}
-  m_LocalScale: {x: 3.50526166, y: 1.790295, z: 6.29355669}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 40, y: 40, z: 40}
   m_Children: []
   m_Father: {fileID: 430296}
   m_RootOrder: 1
@@ -156,7 +156,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 172148}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -48.4700012, y: .512000024, z: -18.4799995}
+  m_LocalPosition: {x: -35.1955452, y: 20.2758503, z: 67.4778519}
   m_LocalScale: {x: 1, y: 1.05205953, z: 1}
   m_Children:
   - {fileID: 430296}
@@ -194,7 +194,7 @@ Renderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 112792}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_LightmapIndex: 255
@@ -274,7 +274,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 112792}
-  m_Mesh: {fileID: 4300000, guid: 1bb3772eafdea2c4cb031adb8c0fa676, type: 3}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!33 &3330296
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -311,19 +311,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &6433434
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 112792}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_SmoothSphereCollisions: 0
-  m_Convex: 1
-  m_Mesh: {fileID: 4300000, guid: 1bb3772eafdea2c4cb031adb8c0fa676, type: 3}
 --- !u!65 &6525988
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -350,10 +337,10 @@ MonoBehaviour:
   currentTeam: 0
   health: 100
   muzzle: {fileID: 191012}
-  damage: 9
   muzzleFlash: {fileID: 19859870}
   tracerEffect: {fileID: 19859872}
   trackedEnemies: []
+  whoBuiltMe: {fileID: 0}
 --- !u!114 &11483746
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -464,6 +451,18 @@ MonoBehaviour:
     InterpolateOption: 0
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 0
+--- !u!135 &13598414
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 112792}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: .500000119
+  m_Center: {x: 5.96046448e-08, y: 5.96046448e-08, z: -8.94069672e-08}
 --- !u!198 &19830296
 ParticleSystem:
   m_ObjectHideFlags: 1

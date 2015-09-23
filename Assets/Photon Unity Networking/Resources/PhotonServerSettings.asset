@@ -70,5 +70,5 @@ MonoBehaviour:
   - DamageBuildingTurret
   - PlayExplosionParticleEffect
   - RecieveVortexRPC
-  - PlayExplosionPullParticleEffect
+  - DamageBuildingBooster
   DisableAutoOpenWizard: 0
