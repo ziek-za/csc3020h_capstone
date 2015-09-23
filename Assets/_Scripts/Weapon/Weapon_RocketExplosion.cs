@@ -81,7 +81,7 @@ public class Weapon_RocketExplosion : Photon.MonoBehaviour {
 
 							//Hit Builder Link
 							if (alreadyCollided[i].GetComponent<Ability_BuilderLink>()){
-								DamageBuildingLink(Mathf.RoundToInt(damage),alreadyCollided[i].GetComponent<PhotonView>().viewID);
+								DamageBuildingLink(Mathf.RoundToInt(damage-30),alreadyCollided[i].GetComponent<PhotonView>().viewID);
 								EnableHitCrosshair();
 								Invoke("DisableHitCrosshair",0.1f);
 							}
@@ -89,6 +89,13 @@ public class Weapon_RocketExplosion : Photon.MonoBehaviour {
 							//Hit Builder Turret
 							if (alreadyCollided[i].GetComponent<Ability_BuilderTurret>()){
 								DamageBuildingTurret(Mathf.RoundToInt(damage-30),alreadyCollided[i].GetComponent<PhotonView>().viewID);
+								EnableHitCrosshair();
+								Invoke("DisableHitCrosshair",0.1f);
+							}
+
+							//Hit Builder Booster
+							if (alreadyCollided[i].GetComponent<Ability_BuilderBooster>()){
+								DamageBuildingBooster(Mathf.RoundToInt(damage-30),alreadyCollided[i].GetComponent<PhotonView>().viewID);
 								EnableHitCrosshair();
 								Invoke("DisableHitCrosshair",0.1f);
 							}
@@ -128,6 +135,12 @@ public class Weapon_RocketExplosion : Photon.MonoBehaviour {
 		PhotonView.Find(vID).transform.GetComponent<Ability_BuilderTurret>().ChangeHP(damage);
 		if (photonView.isMine)
 			photonView.RPC("DamageBuildingTurret", PhotonTargets.OthersBuffered, damage, vID);
+	}
+
+	[RPC] void DamageBuildingBooster(int damage, int vID){
+		PhotonView.Find(vID).transform.GetComponent<Ability_BuilderBooster>().ChangeHP(damage);
+		if (photonView.isMine)
+			photonView.RPC("DamageBuildingBooster", PhotonTargets.OthersBuffered, damage, vID);
 	}
 	
 	[RPC] void DamageDestructableObject(int damage, int vID){
