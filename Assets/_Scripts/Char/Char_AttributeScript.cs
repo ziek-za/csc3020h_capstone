@@ -221,6 +221,18 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 					Camera.main.fieldOfView = 60;
 				} catch (System.Exception e) {}
 
+				try {
+					GetComponent<Ability_BuilderPlaceFoundations>().DamageBuildingLink(-1000,GetComponent<Ability_BuilderPlaceFoundations>().currentLink.GetComponent<PhotonView>().viewID);
+				} catch (System.Exception e){}
+
+				try {
+					GetComponent<Ability_BuilderPlaceFoundations>().DamageBuildingTurret(-1000,GetComponent<Ability_BuilderPlaceFoundations>().currentTurret.GetComponent<PhotonView>().viewID);
+				} catch (System.Exception e){}
+
+				try {
+					GetComponent<Ability_BuilderPlaceFoundations>().DamageBuildingBooster(-1000,GetComponent<Ability_BuilderPlaceFoundations>().currentBooster.GetComponent<PhotonView>().viewID);
+				} catch (System.Exception e){}
+
 
 				//Resets the link buttons to show correct colors
 				//HUD.SetUpLinkButtons();
