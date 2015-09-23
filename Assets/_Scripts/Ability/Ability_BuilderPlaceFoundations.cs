@@ -95,6 +95,7 @@ public class Ability_BuilderPlaceFoundations : Photon.MonoBehaviour {
 
 					transform.GetComponent<Char_AttributeScript>().energy -= placeLinkEnergyCost;
 					Invoke("linkCooledDown",placeLinkCD);
+					GetComponent<Char_AttributeScript>().HUD.linkIcon.ActivateCooldownGUI(placeLinkCD);
 					distanceIndicator.transform.GetComponent<MeshRenderer> ().enabled = false;
 					linkOffCooldown = false;
 					GameObject link = PhotonNetwork.Instantiate(linkFoundation.name,
@@ -115,6 +116,7 @@ public class Ability_BuilderPlaceFoundations : Photon.MonoBehaviour {
 
 					transform.GetComponent<Char_AttributeScript>().energy -= placeTurretEnergyCost;
 					Invoke("turretCooledDown",placeTurretCD);
+					GetComponent<Char_AttributeScript>().HUD.turretIcon.ActivateCooldownGUI(placeTurretCD);
 					distanceIndicator.transform.GetComponent<MeshRenderer> ().enabled = false;
 					turretOffCooldown = false;
 					GameObject turret = PhotonNetwork.Instantiate(turretFoundation.name,
@@ -138,6 +140,7 @@ public class Ability_BuilderPlaceFoundations : Photon.MonoBehaviour {
 
 					transform.GetComponent<Char_AttributeScript>().energy -= placeBoosterEnergyCost;
 					Invoke("boosterCooledDown",placeBoosterCD);
+					GetComponent<Char_AttributeScript>().HUD.boosterIcon.ActivateCooldownGUI(placeBoosterCD);
 					distanceIndicator.transform.GetComponent<MeshRenderer> ().enabled = false;
 					boosterOffCooldown = false;
 					GameObject booster = PhotonNetwork.Instantiate(boosterFoundation.name,

@@ -88,6 +88,7 @@ public class Ability_Teleport : Photon.MonoBehaviour {
 			{
 				transform.GetComponent<Char_AttributeScript>().energy -= energyCost;
 				Invoke("cooledDown",cooldown);
+				GetComponent<Char_AttributeScript>().HUD.teleportIcon.ActivateCooldownGUI(cooldown);
 				offCooldown = false;
 				Invoke ("Teleport", 0.2f); //Delay for teleporting
 			}
