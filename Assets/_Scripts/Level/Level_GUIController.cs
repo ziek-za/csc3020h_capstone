@@ -9,8 +9,21 @@ public class Level_GUIController : MonoBehaviour {
 	public enum classes {SOLDIER, THIEF, BUILDER, NONE};
 	public classes GUIClass = classes.NONE;
 
-	public GameObject shotIndicatorPivot;
-	public Image builderImage, thiefImage, soldierImage, shotIndicator;
+	public GameObject shotIndicatorPivot, HUDPivot;
+	public Image builderImage, thiefImage, soldierImage, shotIndicator,
+		// SOLDIER
+				soldierHUD, vortexIcon, explosionIcon,
+		// THIEF
+				thiefHUD,
+		// BUILDER
+				builderHUD;
+	public HUD_AbilityIcon
+		// SOLDIER
+				vortexAndExplosionIcon,
+		// THIEF
+				teleportIcon, sprintIcon,
+		// BUILDER
+				linkIcon, turretIcon, boosterIcon;
 	public Button linkButton;
 	public Text playerNameLabel, playerKilledLabel;
 

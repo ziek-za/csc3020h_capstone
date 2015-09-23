@@ -6,7 +6,7 @@ public class Ability_ForceGrenade: Photon.MonoBehaviour {
 	public Transform grenadePrefab;
 	public Transform grenadePosition;
 	public int energyCost = 30;
-	public int cooldown = 4;
+	public float cooldown;
 
 	GameObject cameraDirection;
 	
@@ -33,6 +33,8 @@ public class Ability_ForceGrenade: Photon.MonoBehaviour {
 				transform.GetComponent<Char_AttributeScript>().energy -= energyCost;
 				//Start cooldown timer
 				Invoke("cooledDown",cooldown);
+				GetComponent<Char_AttributeScript>().HUD.vortexAndExplosionIcon.ActivateCooldownGUI(cooldown);
+
 				offCooldown = false;
 				//Creates the actual grenade over the photon network
 				gr = PhotonNetwork.Instantiate(grenadePrefab.name, grenadePosition.position, Quaternion.identity, 0) as GameObject;
@@ -48,9 +50,13 @@ public class Ability_ForceGrenade: Photon.MonoBehaviour {
 			//Changing modes
 			if (Input.GetButtonDown("Ability 1")){
 				mode = "push";
+				GetComponent<Char_AttributeScript>().HUD.vortexIcon.enabled = false;
+				GetComponent<Char_AttributeScript>().HUD.explosionIcon.enabled = true;
 			}
 			if (Input.GetButtonDown("Ability 2")){
 				mode = "pull";
+				GetComponent<Char_AttributeScript>().HUD.vortexIcon.enabled = true;
+				GetComponent<Char_AttributeScript>().HUD.explosionIcon.enabled = false;
 			}
 
 		}				               				              
