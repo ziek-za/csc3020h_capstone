@@ -194,7 +194,7 @@ Renderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 112792}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_LightmapIndex: 255
@@ -340,6 +340,7 @@ MonoBehaviour:
   muzzleFlash: {fileID: 19859870}
   tracerEffect: {fileID: 19859872}
   trackedEnemies: []
+  whoBuiltMe: {fileID: 0}
 --- !u!114 &11483746
 MonoBehaviour:
   m_ObjectHideFlags: 1
