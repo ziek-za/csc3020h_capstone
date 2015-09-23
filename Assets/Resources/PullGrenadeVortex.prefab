@@ -44,6 +44,7 @@ MonoBehaviour:
   pullForce: 15
   duration: 2
   triggerCollider: {fileID: 13558802}
+  vortexParticles: {fileID: 19889970, guid: 38e34a86db9463e479fdb99d0ea74db8, type: 2}
 --- !u!114 &11471112
 MonoBehaviour:
   m_ObjectHideFlags: 1
