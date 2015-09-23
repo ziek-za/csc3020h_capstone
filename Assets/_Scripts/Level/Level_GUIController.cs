@@ -10,7 +10,9 @@ public class Level_GUIController : MonoBehaviour {
 	public classes GUIClass = classes.NONE;
 
 	public GameObject shotIndicatorPivot;
-	public Image builderImage, thiefImage, soldierImage, shotIndicator;
+	public Image builderImage, thiefImage, soldierImage, shotIndicator,
+		vortexIcon, explosionIcon;
+	public HUD_AbilityIcon vortexAndExplosionIcon;
 	public Button linkButton;
 	public Text playerNameLabel, playerKilledLabel;
 

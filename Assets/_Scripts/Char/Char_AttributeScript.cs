@@ -25,7 +25,7 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 	public GameObject secondaryMuzzleFlash, secondaryFPSMuzzle, thirdPersonPistol, thirdPersonSecondary; 
 	public GameObject builderGloveMuzzle, builderGloveFPSPos, thirdPersonBuilderGlove;
 
-	Level_GUIController HUD;
+	public Level_GUIController HUD;
 	Char_BasicMoveScript animInstance;
 	public SkinnedMeshRenderer armour;
 	public Char_SelectChar Respawner;
