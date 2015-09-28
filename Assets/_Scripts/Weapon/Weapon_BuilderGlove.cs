@@ -83,6 +83,44 @@ public class Weapon_BuilderGlove : Photon.MonoBehaviour {
 								}
 							}
 						}
+
+						//Repairing a turret
+						else if (hit.transform.GetComponent<Ability_BuilderTurret>() && 
+						         transform.GetComponentInParent<Char_AttributeScript>().energy > 0){
+							bRCounter++;
+							if (bRCounter > buildRate){
+								if (transform.GetComponentInParent<Char_AttributeScript>().team == 
+								    hit.transform.GetComponent<Ability_BuilderTurret>().currentTeam &&
+								    hit.transform.GetComponent<Ability_BuilderTurret>().health < 100)
+								{
+									buildCrosshair.GetComponent<RawImage>().enabled = true;
+									RepairTurret (2,hit.transform.GetComponent<PhotonView>().viewID);
+									transform.GetComponentInParent<Char_AttributeScript>().energy--;
+									bRCounter = 0;
+								} else {
+									buildCrosshair.GetComponent<RawImage>().enabled = false;
+								}
+							}
+						}
+
+						//Repairing a booster
+						else if (hit.transform.GetComponent<Ability_BuilderBooster>() && 
+						         transform.GetComponentInParent<Char_AttributeScript>().energy > 0){
+							bRCounter++;
+							if (bRCounter > buildRate){
+								if (transform.GetComponentInParent<Char_AttributeScript>().team == 
+								    hit.transform.GetComponent<Ability_BuilderBooster>().currentTeam &&
+								    hit.transform.GetComponent<Ability_BuilderBooster>().health < 100)
+								{
+									buildCrosshair.GetComponent<RawImage>().enabled = true;
+									RepairBooster (2,hit.transform.GetComponent<PhotonView>().viewID);
+									transform.GetComponentInParent<Char_AttributeScript>().energy--;
+									bRCounter = 0;
+								} else {
+									buildCrosshair.GetComponent<RawImage>().enabled = false;
+								}
+							}
+						}
 					} else {
 						onHit.startSize = 0f;
 					}
@@ -99,6 +137,18 @@ public class Weapon_BuilderGlove : Photon.MonoBehaviour {
 		PhotonView.Find(vID).GetComponent<Ability_BuilderLink>().ChangeHP(amount);
 		if (photonView.isMine)
 			photonView.RPC("RepairLink",PhotonTargets.OthersBuffered,amount,vID);
+	}
+
+	[RPC] void RepairBooster(int amount, int vID){
+		PhotonView.Find(vID).GetComponent<Ability_BuilderBooster>().ChangeHP(amount);
+		if (photonView.isMine)
+			photonView.RPC("RepairBooster",PhotonTargets.OthersBuffered,amount,vID);
+	}
+
+	[RPC] void RepairTurret(int amount, int vID){
+		PhotonView.Find(vID).GetComponent<Ability_BuilderTurret>().ChangeHP(amount);
+		if (photonView.isMine)
+			photonView.RPC("RepairTurret",PhotonTargets.OthersBuffered,amount,vID);
 	}
 
 	[RPC] void Build(int amount, int vID){

@@ -13,11 +13,19 @@ public class Ability_Sprint : Photon.MonoBehaviour {
 			sprintEffects = GetComponentsInChildren<ParticleSystem>();
 		} catch (System.Exception e){}
 	}
+
+	void FixedUpdate() {
+		if(photonView.isMine){
+			if (Input.GetButton("Ability 2") && transform.GetComponent<Char_AttributeScript>().energy >= energyCost){
+				transform.GetComponent<Char_AttributeScript>().energy -= energyCost;
+			}
+		}
+	}
+
 	// Update is called once per frame
 	void Update () {
 		if(photonView.isMine){
 			if (Input.GetButton("Ability 2") && transform.GetComponent<Char_AttributeScript>().energy >= energyCost){
-				transform.GetComponent<Char_AttributeScript>().energy -= energyCost;
 				if(!transform.GetComponent<Char_AttributeScript> ().buffs.Contains ("sprint")){
 					transform.GetComponent<Char_BasicMoveScript>().moveSpeed += 20;
 					transform.GetComponent<Char_AttributeScript>().buffs.Add("sprint");

@@ -17,7 +17,7 @@ public class Weapon_RocketLauncher : Char_BasicShootScript {
 			shotCooldown = Time.time + timeBetweenShots;
 			GameObject fired = PhotonNetwork.Instantiate(rocket.name,transform.position,transform.rotation,0) as GameObject;
 			fired.GetComponent<Weapon_Rocket>().whoFiredMe = GetComponentInParent<Char_AttributeScript>();
-			fired.rigidbody.AddForce(transform.up*200);
+			fired.rigidbody.AddForce(GetComponentInParent<Char_AttributeScript>().rigidbody.velocity + transform.up*200);
 		}
 	
 	}
