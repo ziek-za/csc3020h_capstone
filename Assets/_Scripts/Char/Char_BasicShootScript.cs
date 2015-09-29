@@ -156,7 +156,7 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 					Invoke("DisableHitCrosshair",0.1f);
 
 					//Damaging builder 'boosters'
-				} else if (hit.transform.gameObject.GetComponent<Ability_BuilderTurret>()) {
+				} else if (hit.transform.gameObject.GetComponent<Ability_BuilderBooster>()) {
 					DamageBuildingBooster(DamageAmount(),hit.transform.GetComponent<PhotonView>().viewID);
 					EnableHitCrosshair();
 					Invoke("DisableHitCrosshair",0.1f);
@@ -181,7 +181,7 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 					Destroy(hole,10f);
 
 				//Bullet holes only on static objects and terrain
-				} else {
+				} else if (!hit.collider.transform.CompareTag("MapEdge")) {
 					Vector3 bulletHolePosition = hit.point + hit.normal * 0.01f;
 					Quaternion bulletHoleRotation = Quaternion.FromToRotation(-Vector3.forward, hit.normal);
 					GameObject hole = Instantiate(bulletHolePrefab, bulletHolePosition, bulletHoleRotation) as GameObject;

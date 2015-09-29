@@ -8,6 +8,8 @@ public class Weapon_Vortex : Photon.MonoBehaviour {
 	public float duration = 2f;
 	public SphereCollider triggerCollider;
 
+	public ParticleSystem vortexParticles;
+
 	bool rocketInVortex = false;
 	//float rocketPullForce = 0f;
 
@@ -65,6 +67,9 @@ public class Weapon_Vortex : Photon.MonoBehaviour {
 		//Effect only starts when THIS client recieves an explosion
 		if (recievedExplosion){
 			if (!channeling){
+				GameObject vp = Instantiate(vortexParticles.gameObject,transform.position,Quaternion.identity) as GameObject;
+				vp.GetComponent<ParticleSystem>().Play();
+				Destroy(vp,5f);
 				Invoke ("ChannelingTime",duration);
 				channeling = true;
 			}

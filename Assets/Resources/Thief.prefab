@@ -2544,8 +2544,8 @@ GameObject:
   - 199: {fileID: 19941826}
   - 114: {fileID: 11443604}
   m_Layer: 0
-  m_Name: Testing
-  m_TagString: Untagged
+  m_Name: SprintParticleEffect
+  m_TagString: Sprint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2562,8 +2562,8 @@ GameObject:
   - 199: {fileID: 19941828}
   - 114: {fileID: 11443602}
   m_Layer: 0
-  m_Name: Testing
-  m_TagString: Untagged
+  m_Name: SprintParticleEffect
+  m_TagString: Sprint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4803,7 +4803,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 124516}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: .98299998, z: 2.28900003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 412324}
@@ -5445,6 +5445,7 @@ MonoBehaviour:
   builderGloveFPSPos: {fileID: 139666, guid: a7c2ddd915f6ee24a9d4bf59618f0b34, type: 2}
   thirdPersonBuilderGlove: {fileID: 139666, guid: a7c2ddd915f6ee24a9d4bf59618f0b34,
     type: 2}
+  HUD: {fileID: 0}
   armour: {fileID: 13712308}
   Respawner: {fileID: 0}
   currentLink: {fileID: 0}
@@ -5508,6 +5509,8 @@ MonoBehaviour:
   energyCost: 20
   cooldown: 1
   redMat: {fileID: 2100000, guid: c7cf1bb431b424a468eb880c591a6177, type: 2}
+  teleportOut: {fileID: 19809092, guid: e57acea205f8f274c926a45e78e7d472, type: 2}
+  teleportIn: {fileID: 19866132, guid: e4c99abc856020c44b4aa63cd94ddb4b, type: 2}
 --- !u!114 &11443602
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8515,7 +8518,7 @@ ParticleSystem:
   randomSeed: 0
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   moveWithTransform: 1
   InitialModule:
     enabled: 1
@@ -9547,7 +9550,7 @@ ParticleSystem:
   randomSeed: 0
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   moveWithTransform: 1
   InitialModule:
     enabled: 1
@@ -10529,7 +10532,7 @@ ParticleSystem:
   randomSeed: 0
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   moveWithTransform: 0
   InitialModule:
     enabled: 1
@@ -11481,7 +11484,7 @@ ParticleSystem:
   randomSeed: 0
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   moveWithTransform: 0
   InitialModule:
     enabled: 1
@@ -12433,7 +12436,7 @@ ParticleSystem:
   randomSeed: 0
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   moveWithTransform: 1
   InitialModule:
     enabled: 1
@@ -13415,7 +13418,7 @@ ParticleSystem:
   randomSeed: 0
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   moveWithTransform: 1
   InitialModule:
     enabled: 1

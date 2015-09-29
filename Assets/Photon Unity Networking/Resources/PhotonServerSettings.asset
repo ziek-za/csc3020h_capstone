@@ -71,4 +71,9 @@ MonoBehaviour:
   - PlayExplosionParticleEffect
   - RecieveVortexRPC
   - DamageBuildingBooster
+  - TeleInEffect
+  - TeleoutEffect
+  - SprintEffect
+  - RepairBooster
+  - RepairTurret
   DisableAutoOpenWizard: 0
