@@ -16,7 +16,9 @@ public class Level_GUIController : MonoBehaviour {
 		// THIEF
 				thiefHUD,
 		// BUILDER
-				builderHUD;
+				builderHUD,
+		// WEAPONS
+				shotgun, pistol, sniper, rocketLauncher, glove;
 	public HUD_AbilityIcon
 		// SOLDIER
 				vortexAndExplosionIcon,
@@ -125,6 +127,39 @@ public class Level_GUIController : MonoBehaviour {
 		thiefImage.GetComponent<Image>().enabled = false;
 		GUIClass = classes.SOLDIER;
 		Debug.Log ("Selecting Soldier");
+	}
+
+	// Used to set the weapon icons
+	public void SetWeaponIcon(Char_AttributeScript.Class player_class, int weapon_slot) {
+		// Set all weapons to false
+		pistol.gameObject.SetActive (false);
+		shotgun.gameObject.SetActive (false);
+		sniper.gameObject.SetActive (false);
+		rocketLauncher.gameObject.SetActive (false);
+		glove.gameObject.SetActive (false);
+		// Activate the desired weapon
+		switch (weapon_slot) {
+			// PRIMARY
+			case 1:
+				pistol.gameObject.SetActive(true);
+				break;
+			// SECONDARY
+			case 2:
+				if (player_class == Char_AttributeScript.Class.SOLDIER) {
+					rocketLauncher.gameObject.SetActive(true);
+				} else if (player_class == Char_AttributeScript.Class.THIEF) {
+					sniper.gameObject.SetActive(true);
+				} else if (player_class == Char_AttributeScript.Class.BUILDER) {
+					shotgun.gameObject.SetActive(true);
+				}
+				break;
+			// TERTIARY
+			case 3:
+				if (player_class == Char_AttributeScript.Class.BUILDER) {
+					glove.gameObject.SetActive(true);
+				}
+				break;
+		}
 	}
 
 	public void onThiefSelectButtonPress(){
