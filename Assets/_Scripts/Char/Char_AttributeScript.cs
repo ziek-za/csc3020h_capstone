@@ -21,6 +21,10 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 
 	public GameObject weapon1, weapon2, weapon3;
 
+	public enum Class {BUILDER, THIEF, SOLDIER};
+	public enum Weapon {PISTOL, SHOTGUN, RIFLE, ROCKETLAUNCHER, GLOVE};
+	public Class current_class;
+
 	public GameObject thirdPersonPlayer, pistolMuzzleFlash, pistolFPSMuzzle; 
 	public GameObject secondaryMuzzleFlash, secondaryFPSMuzzle, thirdPersonPistol, thirdPersonSecondary; 
 	public GameObject builderGloveMuzzle, builderGloveFPSPos, thirdPersonBuilderGlove;
@@ -31,7 +35,7 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 	public Char_SelectChar Respawner;
 
 	public Map_LinkScript currentLink;
-	
+
 	// Use this for initialization
 	void Start () {
 
@@ -138,11 +142,17 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 	void ChangeWeapons(){
 		if (Input.GetButtonDown("1")){
 			NetworkChangeWeapons(transform.GetComponent<PhotonView>().viewID,1);
+			// Change weapon
+			HUD.SetWeaponIcon(current_class, 1);
 		} else if (Input.GetButtonDown("2")){
 			NetworkChangeWeapons(transform.GetComponent<PhotonView>().viewID,2);
+			// Change weapon
+			HUD.SetWeaponIcon(current_class, 2);
 		} else if (Input.GetButton("3")){
 			if (weapon3.name.Equals("BuilderGlove"))
 			NetworkChangeWeapons(transform.GetComponent<PhotonView>().viewID,3);
+			// Change weapon
+			HUD.SetWeaponIcon(current_class, 3);
 		}
 	}
 
@@ -151,6 +161,7 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 			energy ++;
 		}
 	}
+	
 
 	/*void DisableKillHUD(){
 		HUD.playerKilledLabel.text = "";

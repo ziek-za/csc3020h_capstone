@@ -33,6 +33,8 @@ public class Char_SelectChar : Photon.MonoBehaviour {
 					gc.soldierHUD.gameObject.SetActive(true);
 					gc.thiefHUD.gameObject.SetActive(false);
 					gc.builderHUD.gameObject.SetActive(false);
+					// Set the current class in the char attribute script
+					sol.GetComponent<Char_AttributeScript>().current_class = Char_AttributeScript.Class.SOLDIER;
 				}
 				// THIEF
 				else if(classNo==1){
@@ -44,6 +46,8 @@ public class Char_SelectChar : Photon.MonoBehaviour {
 					gc.soldierHUD.gameObject.SetActive(false);
 					gc.thiefHUD.gameObject.SetActive(true);
 					gc.builderHUD.gameObject.SetActive(false);
+					// Set the current class in the char attribute script
+					thief.GetComponent<Char_AttributeScript>().current_class = Char_AttributeScript.Class.THIEF;
 				}
 				// BUILDER
 				else if(classNo==2){
@@ -55,6 +59,8 @@ public class Char_SelectChar : Photon.MonoBehaviour {
 					gc.soldierHUD.gameObject.SetActive(false);
 					gc.thiefHUD.gameObject.SetActive(false);
 					gc.builderHUD.gameObject.SetActive(true);
+					// Set the current class in the char attribute script
+					bul.GetComponent<Char_AttributeScript>().current_class = Char_AttributeScript.Class.BUILDER;
 				}
 				if(spawned){
 					Screen.lockCursor=true;
@@ -65,6 +71,8 @@ public class Char_SelectChar : Photon.MonoBehaviour {
 					// Turn the HUD on
 					gc.HUDPivot.SetActive(true);
 					gc.isDeadBool = false;
+					// Set active weapon
+					gc.SetWeaponIcon(0, 1);
 				} else {
 					// Turn the HUD off
 					gc.isDeadBool = true;
