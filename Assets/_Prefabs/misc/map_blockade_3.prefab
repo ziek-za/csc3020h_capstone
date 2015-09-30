@@ -127,9 +127,9 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 472768}
-  - 114: {fileID: 11472754}
   - 54: {fileID: 5472754}
   - 114: {fileID: 11472756}
+  - 114: {fileID: 11475494}
   m_Layer: 0
   m_Name: map_blockade_3
   m_TagString: Untagged
@@ -446,7 +446,24 @@ MeshCollider:
   m_SmoothSphereCollisions: 0
   m_Convex: 0
   m_Mesh: {fileID: 4300000, guid: 4090c56e815842e47b041fc86cf0a878, type: 3}
---- !u!114 &11472754
+--- !u!114 &11472756
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 172768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18d8c56c703498a479a76b22e59ba987, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 10
+  thresholds: 
+  HasThresholdMeshesBool: 1
+  HasParticleSystem: 1
+  DestroyFinal: 0
+  particleSystem: {fileID: 19872754}
+--- !u!114 &11475494
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -465,28 +482,12 @@ MonoBehaviour:
   onSerializeTransformOption: 3
   onSerializeRigidBodyOption: 2
   ownershipTransfer: 0
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 0}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
   instantiationId: -1
   isRuntimeInstantiated: 0
---- !u!114 &11472756
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 172768}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18d8c56c703498a479a76b22e59ba987, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 10
-  thresholds: 
-  HasThresholdMeshesBool: 1
-  HasParticleSystem: 1
-  DestroyFinal: 0
-  particleSystem: {fileID: 19872754}
 --- !u!198 &19872754
 ParticleSystem:
   m_ObjectHideFlags: 1

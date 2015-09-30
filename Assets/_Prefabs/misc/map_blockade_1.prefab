@@ -26,9 +26,9 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 491866}
-  - 114: {fileID: 11491878}
   - 54: {fileID: 5491880}
   - 114: {fileID: 11491880}
+  - 114: {fileID: 11434962}
   m_Layer: 0
   m_Name: map_blockade_1
   m_TagString: Untagged
@@ -446,7 +446,7 @@ MeshCollider:
   m_SmoothSphereCollisions: 0
   m_Convex: 0
   m_Mesh: {fileID: 4300000, guid: 8c3e6732a81bb5a488f56f60116d6e35, type: 3}
---- !u!114 &11491878
+--- !u!114 &11434962
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -465,7 +465,8 @@ MonoBehaviour:
   onSerializeTransformOption: 3
   onSerializeRigidBodyOption: 2
   ownershipTransfer: 0
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 0}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
   instantiationId: -1
