@@ -6,6 +6,10 @@ public class Map_LinkScript : Photon.MonoBehaviour {
 
 	//Set this value when initializing GameObject
 	public Slider linkSlider;
+	public Slider bluePoints;
+	public Slider redPoints;
+	public Text redCountText;
+	public Text blueCountText;
 	public Char_AttributeScript.Teams currentTeam;
 	float linkValue=50;
 	int redCounter=0;
@@ -18,6 +22,8 @@ public class Map_LinkScript : Photon.MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		redCountText.text = "1";
+		blueCountText.text = "1";
 		//linkSlider.gameObject.SetActive (false);
 		gui = GameObject.Find("GUI Controller").GetComponent<Level_GUIController>();
 		if (currentTeam == Char_AttributeScript.Teams.BLUE){
@@ -94,6 +100,8 @@ public class Map_LinkScript : Photon.MonoBehaviour {
 		neutralBeam.Stop();
 		redBeam.Play();
 		gui.SetUpLinkButtons();
+		redPoints.value += 20;
+		redCountText.text = ""+redPoints.value/20;
 
 		if (photonView.isMine)
 			photonView.RPC("RedTeamCapture", PhotonTargets.OthersBuffered);
@@ -107,6 +115,11 @@ public class Map_LinkScript : Photon.MonoBehaviour {
 		redBeam.Stop();
 		neutralBeam.Stop();
 		gui.SetUpLinkButtons();
+
+		//blueCountText.text = (""+captureLinkCount.value/5);
+
+		bluePoints.value += 20;
+		blueCountText.text = ""+bluePoints.value/20;
 		if (photonView.isMine)
 			photonView.RPC("BlueTeamCapture", PhotonTargets.OthersBuffered);
 	}
