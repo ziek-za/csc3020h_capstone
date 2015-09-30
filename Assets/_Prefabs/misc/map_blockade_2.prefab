@@ -109,9 +109,9 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 412472}
-  - 114: {fileID: 11412476}
   - 54: {fileID: 5412476}
   - 114: {fileID: 11412474}
+  - 114: {fileID: 11454120}
   m_Layer: 0
   m_Name: map_blockade_2
   m_TagString: Untagged
@@ -463,7 +463,7 @@ MonoBehaviour:
   HasParticleSystem: 1
   DestroyFinal: 0
   particleSystem: {fileID: 19812476}
---- !u!114 &11412476
+--- !u!114 &11454120
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -482,7 +482,8 @@ MonoBehaviour:
   onSerializeTransformOption: 3
   onSerializeRigidBodyOption: 2
   ownershipTransfer: 0
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 0}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
   instantiationId: -1
