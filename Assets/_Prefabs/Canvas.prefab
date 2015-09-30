@@ -3278,7 +3278,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Thief
+  m_Text: Sniper
 --- !u!114 &11452478
 MonoBehaviour:
   m_ObjectHideFlags: 1
