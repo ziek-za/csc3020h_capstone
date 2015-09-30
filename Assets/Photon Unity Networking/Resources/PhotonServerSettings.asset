@@ -13,10 +13,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HostType: 2
   Protocol: 0
-  ServerAddress: 192.168.1.107
+  ServerAddress: 196.24.181.236
   ServerPort: 5055
   PreferredRegion: 4
-  AppID: master
+  AppID: c2b9b548-0d03-4732-b4f6-afd2691390b4
   PingCloudServersOnAwake: 0
   RpcList:
   - Chat
