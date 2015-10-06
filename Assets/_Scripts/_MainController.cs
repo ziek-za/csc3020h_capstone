@@ -9,7 +9,7 @@ public class _MainController {
 	public static JSONNode MapObject;
 	public static bool ImportedMapObjectBool = false;
 	public static bool ImportedStringLookupBool = false;
-	public static string playerName, gameName;
+	public static string playerName, gameName, gameStats;
 
 	public static string ExampleLookupMethod(){
 		return "some info";

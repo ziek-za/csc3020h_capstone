@@ -27,7 +27,8 @@ public class Level_GUIController : MonoBehaviour {
 		// BUILDER
 				linkIcon, turretIcon, boosterIcon;
 	public Button linkButton;
-	public Text playerNameLabel, playerKilledLabel;
+	public Text playerNameLabel, playerKilledLabel, gameStatsText;
+	bool internetGame = false;
 
 	//Boolean for when the player is dead
 	public bool isDeadBool = false;
@@ -37,6 +38,12 @@ public class Level_GUIController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		SetUpLinkButtons();
+		if (_MainController.gameStats.Equals("ping")){
+			internetGame = true;
+		} else {
+			internetGame = false;
+			gameStatsText.text = "IP: " + _MainController.gameStats;
+		}
 	}
 
 	public void SetUpLinkButtons(){
@@ -101,6 +108,9 @@ public class Level_GUIController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		if (internetGame){
+			gameStatsText.text = "Ping: " + PhotonNetwork.GetPing().ToString();
+		}
 	}
 	// Used to reset all cooldowns
 	public void ResetIconsCooldown() {
