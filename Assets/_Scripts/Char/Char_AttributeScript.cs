@@ -333,14 +333,4 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 		if (photonView.isMine)
 			photonView.RPC("SetPlayerName", PhotonTargets.OthersBuffered, vID, pName);
 	}
-
-	[RPC] void LowerScore(int team){
-		if (((Teams)team) == Teams.BLUE){
-			HUD.bluePoints.value -= 5;
-		} else if (((Teams)team) == Teams.RED){
-			HUD.redPoints.value -= 5;
-		} 
-		if (photonView.isMine)
-			photonView.RPC("LowerScore", PhotonTargets.OthersBuffered,team);
-	}
 }

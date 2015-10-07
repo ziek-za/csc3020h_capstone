@@ -18,7 +18,7 @@ public class Weapon_Rocket : Photon.MonoBehaviour {
 		transform.Rotate(new Vector3(0,5,0));
 
 		Vector3 fwd = transform.TransformDirection(Vector3.up);
-		if (Physics.Raycast(transform.position, fwd,out hit, 2)) {
+		if (Physics.Raycast(transform.position, fwd,out hit, 1)) {
 			Explode(hit.transform.gameObject);
 		}
 	}

@@ -7,7 +7,7 @@ public class Ability_BuilderPlaceFoundations : Photon.MonoBehaviour {
 	public GameObject linkFoundation;
 	public GameObject turretFoundation;
 	public GameObject boosterFoundation;
-	public GameObject distanceIndicator;
+	public GameObject distanceIndicator, turretDistInd, linkDistInd, boosterDistInd;
 	public GameObject aimingPoint;
 
 	private float placeDistance;
@@ -29,9 +29,14 @@ public class Ability_BuilderPlaceFoundations : Photon.MonoBehaviour {
 	void Start () {
 		aimingPoint = Instantiate (aimingPoint, transform.position, Quaternion.identity) as GameObject;
 		distanceIndicator = Instantiate (distanceIndicator, transform.position, Quaternion.identity) as GameObject;
+		linkDistInd = Instantiate (linkDistInd, transform.position, linkDistInd.transform.localRotation) as GameObject;
 		aimingPoint.transform.parent = transform;
+
 		distanceIndicator.transform.parent = transform;
 		distanceIndicator.transform.GetComponent<MeshRenderer> ().enabled = false;
+
+		linkDistInd.transform.parent = transform;
+		linkDistInd.transform.GetComponent<MeshRenderer> ().enabled = false;
 	}
 
 	void linkCooledDown(){
@@ -46,7 +51,7 @@ public class Ability_BuilderPlaceFoundations : Photon.MonoBehaviour {
 		boosterOffCooldown = true;
 	}
 
-	void CastShadowBuildingRay(){
+	void CastShadowBuildingRay(GameObject dI){
 		placeDistance=maxDistance;
 		
 		aimingPoint.transform.parent = transform;
@@ -71,10 +76,10 @@ public class Ability_BuilderPlaceFoundations : Photon.MonoBehaviour {
 		Ray floorRay = new Ray(aimingPoint.transform.position, Vector3.down);
 		if(Physics.Raycast(floorRay, out floorHit, Mathf.Infinity)){
 			Debug.DrawRay(floorRay.origin, floorHit.point-floorRay.origin, Color.red);
-			distanceIndicator.transform.GetComponent<MeshRenderer> ().enabled = true;
+			dI.GetComponent<MeshRenderer> ().enabled = true;
 			Vector3 floorPosition = floorHit.point+new Vector3(0,0.5f,0)+floorHit.normal*0.01f;
 			//Quaternion floorRotation = Quaternion.FromToRotation(-Vector3.forward, floorHit.normal);
-			distanceIndicator.transform.position = floorPosition;
+			dI.transform.position = floorPosition;
 			Vector3 facingAway = transform.rotation.eulerAngles;
 			facingAway.y += 180;
 			distanceIndicator.transform.rotation=Quaternion.Euler(facingAway);
@@ -86,7 +91,7 @@ public class Ability_BuilderPlaceFoundations : Photon.MonoBehaviour {
 		if (photonView.isMine){
 			if (Input.GetButton("Building 1") && linkOffCooldown){
 
-				CastShadowBuildingRay();
+				CastShadowBuildingRay(linkDistInd);
 
 				if (Input.GetButtonDown("Fire2")
 				    && transform.GetComponent<Char_AttributeScript>().energy >= placeLinkEnergyCost && linkOffCooldown){
@@ -107,7 +112,7 @@ public class Ability_BuilderPlaceFoundations : Photon.MonoBehaviour {
 
 			} else if (Input.GetButton("Building 2") && turretOffCooldown){
 				
-				CastShadowBuildingRay();
+				CastShadowBuildingRay(distanceIndicator);
 				
 				if (Input.GetButtonDown("Fire2")
 				    && transform.GetComponent<Char_AttributeScript>().energy >= placeTurretEnergyCost && turretOffCooldown){
@@ -129,7 +134,7 @@ public class Ability_BuilderPlaceFoundations : Photon.MonoBehaviour {
 
 			else if (Input.GetButton("Building 3") && boosterOffCooldown){
 				
-				CastShadowBuildingRay();
+				CastShadowBuildingRay(distanceIndicator);
 				
 				if (Input.GetButtonDown("Fire2")
 				    && transform.GetComponent<Char_AttributeScript>().energy >= placeBoosterEnergyCost && boosterOffCooldown){
@@ -152,6 +157,7 @@ public class Ability_BuilderPlaceFoundations : Photon.MonoBehaviour {
 			}
 			else {
 				distanceIndicator.transform.GetComponent<MeshRenderer> ().enabled = false;
+				linkDistInd.transform.GetComponent<MeshRenderer> ().enabled = false;
 			}
 		}
 	}
