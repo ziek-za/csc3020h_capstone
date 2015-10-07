@@ -91,11 +91,16 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 		if (Physics.Raycast(transform.position, Vector3.down,out hit, 1.25f)) {
 			Debug.DrawLine(transform.position, hit.point, Color.red);
 			inAir = false;
+			anim.SetBool("Jumping",false);
 		} else {
 			//In air
 			inAir = true;
-		}
+			anim.SetBool("Jumping",true);
+			//anim.SetBool("Jumping",true);
+		};
 
+
+		Debug.Log (rigidbody.velocity.y);
 
 		if(Input.GetButtonDown("Jump") && inAir == false){
 			anim.SetBool("Jumping",true);
@@ -103,13 +108,13 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 			Vector3 v3 = rigidbody.velocity;
 			v3.y=jumpSpeed;
 			rigidbody.velocity=v3;
-		} else if (inAir && transform.rigidbody.velocity.y < -2f){//Assumed to be falling
+		} /*else if (inAir && transform.rigidbody.velocity.y < -4f){//Assumed to be falling
 			anim.SetBool("Falling",true);
 			//isJumping = true;
-			anim.SetBool("Jumping",false);
 		}else{
 			anim.SetBool("Falling",false);
-		}
+		}*/
+
 
 	}
 
