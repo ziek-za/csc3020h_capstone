@@ -7,7 +7,7 @@ public class Ability_BuilderPlaceFoundations : Photon.MonoBehaviour {
 	public GameObject linkFoundation;
 	public GameObject turretFoundation;
 	public GameObject boosterFoundation;
-	public GameObject distanceIndicator, turretDistInd, linkDistInd, boosterDistInd;
+	public GameObject distanceIndicator;
 	public GameObject aimingPoint;
 
 	private float placeDistance;
@@ -29,14 +29,10 @@ public class Ability_BuilderPlaceFoundations : Photon.MonoBehaviour {
 	void Start () {
 		aimingPoint = Instantiate (aimingPoint, transform.position, Quaternion.identity) as GameObject;
 		distanceIndicator = Instantiate (distanceIndicator, transform.position, Quaternion.identity) as GameObject;
-		linkDistInd = Instantiate (linkDistInd, transform.position, linkDistInd.transform.localRotation) as GameObject;
 		aimingPoint.transform.parent = transform;
 
 		distanceIndicator.transform.parent = transform;
 		distanceIndicator.transform.GetComponent<MeshRenderer> ().enabled = false;
-
-		linkDistInd.transform.parent = transform;
-		linkDistInd.transform.GetComponent<MeshRenderer> ().enabled = false;
 	}
 
 	void linkCooledDown(){
@@ -91,7 +87,7 @@ public class Ability_BuilderPlaceFoundations : Photon.MonoBehaviour {
 		if (photonView.isMine){
 			if (Input.GetButton("Building 1") && linkOffCooldown){
 
-				CastShadowBuildingRay(linkDistInd);
+				CastShadowBuildingRay(distanceIndicator);
 
 				if (Input.GetButtonDown("Fire2")
 				    && transform.GetComponent<Char_AttributeScript>().energy >= placeLinkEnergyCost && linkOffCooldown){
@@ -157,7 +153,6 @@ public class Ability_BuilderPlaceFoundations : Photon.MonoBehaviour {
 			}
 			else {
 				distanceIndicator.transform.GetComponent<MeshRenderer> ().enabled = false;
-				linkDistInd.transform.GetComponent<MeshRenderer> ().enabled = false;
 			}
 		}
 	}
