@@ -59,10 +59,10 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 			//secondaryMuzzleFlash.transform.parent.gameObject.SetActive(false);
 
 
-			/*SkinnedMeshRenderer[] meshes = thirdPersonPlayer.GetComponentsInChildren<SkinnedMeshRenderer>();
+			SkinnedMeshRenderer[] meshes = thirdPersonPlayer.GetComponentsInChildren<SkinnedMeshRenderer>();
 			for (int i = 0; i < meshes.Length; i++){
 				meshes[i].enabled = false;
-			}*/
+			}
 
 			SkinnedMeshRenderer[] fpWeapon1 = weapon1.GetComponentsInChildren<SkinnedMeshRenderer>();
 			for (int i = 0; i < fpWeapon1.Length; i++){
@@ -161,12 +161,6 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 			energy ++;
 		}
 	}
-	
-
-	/*void DisableKillHUD(){
-		HUD.playerKilledLabel.text = "";
-		HUD.playerKilledLabel.CrossFadeAlpha(1,0.1f,false);
-	}*/
 	
 	public void EnableKillHUD(string killedName){
 		HUD.playerKilledLabel.CrossFadeAlpha(1,0.000001f,false);

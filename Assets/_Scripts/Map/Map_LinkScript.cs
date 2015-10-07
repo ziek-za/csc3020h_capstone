@@ -11,6 +11,8 @@ public class Map_LinkScript : Photon.MonoBehaviour {
 	public Text redCountText;
 	public Text blueCountText;
 	public Char_AttributeScript.Teams currentTeam;
+	public MeshRenderer newLinkPart1, newLinkPart2;
+
 	float linkValue=50;
 	int redCounter=0;
 	int blueCounter=0;
@@ -77,12 +79,16 @@ public class Map_LinkScript : Photon.MonoBehaviour {
 	public void InitBlue(){
 		currentTeam = Char_AttributeScript.Teams.BLUE;
 		this.GetComponent<MeshRenderer>().materials[0].color =  Color.blue;
+		newLinkPart1.materials[0].color =  Color.blue;
+		newLinkPart2.materials[0].color =  Color.blue;
 		blueBeam.Play();
 	}
 
 	public void InitRed(){
 		currentTeam = Char_AttributeScript.Teams.RED;
 		this.GetComponent<MeshRenderer>().materials[0].color =  Color.red;
+		newLinkPart1.materials[0].color =  Color.red;
+		newLinkPart2.materials[0].color =  Color.red;
 		redBeam.Play();
 	}
 
@@ -96,6 +102,8 @@ public class Map_LinkScript : Photon.MonoBehaviour {
 		currentTeam = Char_AttributeScript.Teams.RED;
 		Debug.Log("Red Team Captures Link");
 		this.GetComponent<MeshRenderer>().materials[0].color =  Color.red;
+		newLinkPart1.materials[0].color =  Color.red;
+		newLinkPart2.materials[0].color =  Color.red;
 		blueBeam.Stop();
 		neutralBeam.Stop();
 		redBeam.Play();
@@ -111,6 +119,8 @@ public class Map_LinkScript : Photon.MonoBehaviour {
 		currentTeam = Char_AttributeScript.Teams.BLUE;
 		Debug.Log("Blue Team Captures Link");
 		this.GetComponent<MeshRenderer>().materials[0].color =  Color.blue;
+		newLinkPart1.materials[0].color =  Color.blue;
+		newLinkPart2.materials[0].color =  Color.blue;
 		blueBeam.Play();
 		redBeam.Stop();
 		neutralBeam.Stop();
@@ -128,6 +138,8 @@ public class Map_LinkScript : Photon.MonoBehaviour {
 		currentTeam = Char_AttributeScript.Teams.NONE;
 		Debug.Log("Link has been neutralized");
 		this.GetComponent<MeshRenderer>().materials[0].color =  Color.white;
+		newLinkPart1.materials[0].color =  Color.white;
+		newLinkPart2.materials[0].color =  Color.white;
 		neutralBeam.Play();
 		redBeam.Stop();
 		blueBeam.Stop();

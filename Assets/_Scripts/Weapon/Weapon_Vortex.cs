@@ -25,19 +25,24 @@ public class Weapon_Vortex : Photon.MonoBehaviour {
 		try {
 			for (int i = 0; i < alreadyCollided.Count; i++){
 				if (alreadyCollided[i].GetComponent<Weapon_Rocket>()){
-					alreadyCollided[i].GetComponent<Weapon_Rocket>().Explode(); //Blow up rocket at vortex end
+					alreadyCollided[i].GetComponent<Weapon_Rocket>().Explode(alreadyCollided[i]); //Blow up rocket at vortex end 
 				} else if (alreadyCollided[i].GetComponent<Rigidbody>() != null && 
 				           !alreadyCollided[i].GetComponent<Rigidbody>().isKinematic){
 					Vector3 forceDir =  alreadyCollided[i].transform.position - transform.position; //Shoot objects out at vortex end
 					alreadyCollided[i].transform.rigidbody.velocity = forceDir * pullForce * 0.1f;
+
 
 					if (alreadyCollided[i].GetComponent<Char_AttributeScript>()){
 						//Damage if rocket
 						if (rocketInVortex){
 							float damage = -40/((alreadyCollided[i].transform.position - transform.position).magnitude + 1);
 							DamagePlayer(Mathf.RoundToInt(damage),alreadyCollided[i].GetComponent<PhotonView>().viewID);
+							//if (alreadyCollided[i].GetComponent<Char_AttributeScript>().health <= 0){
+							//	transform.parent.parent.parent.GetComponent<Char_AttributeScript>().EnableKillHUD(hit.transform.GetComponent<Char_AttributeScript>().playerName);
+							//}
 						}
 					}
+
 				}
 			}
 		} catch (MissingReferenceException e){}

@@ -16,11 +16,12 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 	//public Transform currentPlayer;
 
 	float mouseSensitivity=2f;
-	bool isJumping=false;
+	bool isJumping=false, inAir = false;
 	float clampYAxis = 90.0f;
 
 	public bool inVortex = false;
 	float inVortexTime = 2;
+	private RaycastHit hit;
 
 	// Use this for initialization
 	void Start () {
@@ -86,16 +87,25 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 		}else{
 			anim.SetFloat ("Speed",0);
 		}
+		
+		if (Physics.Raycast(transform.position, Vector3.down,out hit, 1.25f)) {
+			Debug.DrawLine(transform.position, hit.point, Color.red);
+			inAir = false;
+		} else {
+			//In air
+			inAir = true;
+		}
 
-		if(Input.GetButtonDown("Jump") && isJumping==false){
+
+		if(Input.GetButtonDown("Jump") && inAir == false){
 			anim.SetBool("Jumping",true);
-			isJumping=true;
+			//isJumping=true;
 			Vector3 v3 = rigidbody.velocity;
 			v3.y=jumpSpeed;
 			rigidbody.velocity=v3;
-		} else if (transform.rigidbody.velocity.y < -2f){//Assumed to be falling
+		} else if (inAir && transform.rigidbody.velocity.y < -2f){//Assumed to be falling
 			anim.SetBool("Falling",true);
-			isJumping = true;
+			//isJumping = true;
 			anim.SetBool("Jumping",false);
 		}else{
 			anim.SetBool("Falling",false);
@@ -111,9 +121,10 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 		FPSCameraPos.transform.localRotation = Quaternion.Euler (mouseSensitivity + sniperRotationModifier, 0, 0);
 	}
 
+	/*
 	void OnCollisionEnter(Collision other){
 		if (Mathf.Abs(transform.rigidbody.velocity.y) < 1f){//Bottom of collider is colliding
 			isJumping = false;
 		}
-	}
+	}*/
 }
