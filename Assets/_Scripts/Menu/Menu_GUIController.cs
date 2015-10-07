@@ -170,6 +170,8 @@ public class Menu_GUIController : Photon.MonoBehaviour {
 		} catch (System.Exception e){};
 	}
 
+	const string alphaNum = "abcdefghijklmnopqrstuvwxyz0123456789";
+
 	public void HostGameButtonClick(){
 		loadingScreen.SetActive(true);
 
@@ -180,9 +182,15 @@ public class Menu_GUIController : Photon.MonoBehaviour {
 		
 		if (!gameNameInput.text.Equals(""))
 			_MainController.gameName = gameNameInput.text;
-		else
-			_MainController.gameName = "new game";
-
+		else {
+			string gameName = "";
+			for(int i = 0; i < 6; i++)
+			{
+				gameName += alphaNum[Random.Range(0, alphaNum.Length)];
+			}
+			_MainController.gameName = gameName;
+		}
+			
 		if (!internetGame) {
 			NetworkController.TryConnect(Network.player.ipAddress);
 		}

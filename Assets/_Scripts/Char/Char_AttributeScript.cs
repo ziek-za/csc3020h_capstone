@@ -162,12 +162,6 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 		}
 	}
 	
-
-	/*void DisableKillHUD(){
-		HUD.playerKilledLabel.text = "";
-		HUD.playerKilledLabel.CrossFadeAlpha(1,0.1f,false);
-	}*/
-	
 	public void EnableKillHUD(string killedName){
 		HUD.playerKilledLabel.CrossFadeAlpha(1,0.000001f,false);
 		HUD.playerKilledLabel.text = "YOU JUST KILLED " + killedName;

@@ -316,6 +316,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosion: {fileID: 127274, guid: 131e0a8013426c946a78b5807e06629f, type: 2}
+  whoFiredMe: {fileID: 0}
 --- !u!114 &11440554
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -331,9 +332,9 @@ MonoBehaviour:
     SynchronizeEnabled: 1
     TeleportEnabled: 1
     TeleportIfDistanceGreaterThan: 3
-    InterpolateOption: 1
+    InterpolateOption: 4
     InterpolateMoveTowardsSpeed: 10
-    InterpolateLerpSpeed: 1
+    InterpolateLerpSpeed: 40
     InterpolateMoveTowardsAcceleration: 2
     InterpolateMoveTowardsDeceleration: 2
     InterpolateSpeedCurve:

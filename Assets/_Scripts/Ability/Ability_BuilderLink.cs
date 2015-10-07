@@ -49,6 +49,8 @@ public class Ability_BuilderLink : Map_LinkScript {
 	void InitBlue(){
 		currentTeam = Char_AttributeScript.Teams.BLUE;
 		this.GetComponent<MeshRenderer>().materials[0].color =  Color.blue;
+		newLinkPart1.materials[0].color =  Color.blue;
+		newLinkPart2.materials[0].color =  Color.blue;
 		blueBeam.Play();
 	}
 
@@ -71,6 +73,8 @@ public class Ability_BuilderLink : Map_LinkScript {
 	void InitRed(){
 		currentTeam = Char_AttributeScript.Teams.RED;
 		this.GetComponent<MeshRenderer>().materials[0].color =  Color.red;
+		newLinkPart1.materials[0].color =  Color.red;
+		newLinkPart2.materials[0].color =  Color.red;
 		redBeam.Play();
 	}
 

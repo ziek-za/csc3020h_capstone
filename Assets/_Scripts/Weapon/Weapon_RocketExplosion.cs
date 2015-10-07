@@ -61,6 +61,7 @@ public class Weapon_RocketExplosion : Photon.MonoBehaviour {
 							//Hit Player
 							if (alreadyCollided[i].GetComponent<Char_AttributeScript>()){
 
+								//Less damage to self
 								if (alreadyCollided[i].GetComponent<PhotonView>().isMine){
 									DamagePlayer(-5,alreadyCollided[i].GetComponent<PhotonView>().viewID, transform.position);
 								} else {

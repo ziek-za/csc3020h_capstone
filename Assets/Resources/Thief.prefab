@@ -5434,6 +5434,7 @@ MonoBehaviour:
   weapon1: {fileID: 128340}
   weapon2: {fileID: 101338}
   weapon3: {fileID: 139666, guid: a7c2ddd915f6ee24a9d4bf59618f0b34, type: 2}
+  current_class: 0
   thirdPersonPlayer: {fileID: 112594}
   pistolMuzzleFlash: {fileID: 185646}
   pistolFPSMuzzle: {fileID: 148172}
@@ -5507,7 +5508,7 @@ MonoBehaviour:
   projection: {fileID: 130738, guid: 791e7f3ff3db4014cab368a34896bb0d, type: 2}
   distanceIndicator: {fileID: 110788, guid: 11ca0607ebe6c474f88d377f60d40e22, type: 2}
   energyCost: 20
-  cooldown: 1
+  cooldown: 10
   redMat: {fileID: 2100000, guid: c7cf1bb431b424a468eb880c591a6177, type: 2}
   teleportOut: {fileID: 19809092, guid: e57acea205f8f274c926a45e78e7d472, type: 2}
   teleportIn: {fileID: 19866132, guid: e4c99abc856020c44b4aa63cd94ddb4b, type: 2}
