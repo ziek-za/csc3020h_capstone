@@ -169,7 +169,9 @@ public class Ability_BuilderPlaceFoundations : Photon.MonoBehaviour {
 	}
 	
 	[RPC] public void DamageBuildingBooster(int damage, int vID){
-		PhotonView.Find(vID).transform.GetComponent<Ability_BuilderBooster>().ChangeHP(damage);
+		try {
+			PhotonView.Find(vID).transform.GetComponent<Ability_BuilderBooster>().ChangeHP(damage);
+		} catch (System.Exception e){}
 		if (photonView.isMine)
 			photonView.RPC("DamageBuildingBooster", PhotonTargets.OthersBuffered, damage, vID);
 	}

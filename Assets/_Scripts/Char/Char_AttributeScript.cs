@@ -40,10 +40,11 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 	void Start () {
 
 		animInstance = GetComponent<Char_BasicMoveScript> ();
+		HUD = GameObject.Find("GUI Controller").GetComponent<Level_GUIController>();
 
 		if (photonView.isMine){
 			buffs= new List<string>();
-			HUD = GameObject.Find("GUI Controller").GetComponent<Level_GUIController>();
+
 			animInstance.anim.SetBool("Pistol",true);
 			animInstance.anim.SetBool("SecondaryWeapon",false);
 
@@ -238,10 +239,6 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 					GetComponent<Ability_BuilderPlaceFoundations>().DamageBuildingBooster(-1000,GetComponent<Ability_BuilderPlaceFoundations>().currentBooster.GetComponent<PhotonView>().viewID);
 				} catch (System.Exception e){}
 
-
-				//Resets the link buttons to show correct colors
-				//HUD.SetUpLinkButtons();
-				
 			}
 
 			if (Input.GetKey(KeyCode.M)){
@@ -282,6 +279,13 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 	}
 
 	[RPC] void KillPlayer(int vID){
+		//Lower your team's score when you die
+		if (PhotonView.Find(vID).gameObject.GetComponent<Char_AttributeScript>().team == Teams.BLUE){
+			PhotonView.Find(vID).gameObject.GetComponent<Char_AttributeScript>().HUD.bluePoints.value -= 5;
+		} else if (PhotonView.Find(vID).gameObject.GetComponent<Char_AttributeScript>().team == Teams.RED){
+			PhotonView.Find(vID).gameObject.GetComponent<Char_AttributeScript>().HUD.redPoints.value -= 5;
+		} 
+
 		GameObject[] goList = GameObject.FindGameObjectsWithTag("Turret");
 		for (int i = 0; i < goList.Length; i++){
 			if (goList[i].GetComponent<Ability_BuilderTurret>().trackedEnemies.Contains(PhotonView.Find(vID).gameObject))
@@ -328,5 +332,15 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 		PhotonView.Find(vID).GetComponent<Char_AttributeScript>().playerName = pName;
 		if (photonView.isMine)
 			photonView.RPC("SetPlayerName", PhotonTargets.OthersBuffered, vID, pName);
+	}
+
+	[RPC] void LowerScore(int team){
+		if (((Teams)team) == Teams.BLUE){
+			HUD.bluePoints.value -= 5;
+		} else if (((Teams)team) == Teams.RED){
+			HUD.redPoints.value -= 5;
+		} 
+		if (photonView.isMine)
+			photonView.RPC("LowerScore", PhotonTargets.OthersBuffered,team);
 	}
 }

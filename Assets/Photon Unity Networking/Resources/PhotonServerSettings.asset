@@ -76,4 +76,5 @@ MonoBehaviour:
   - SprintEffect
   - RepairBooster
   - RepairTurret
+  - LowerScore
   DisableAutoOpenWizard: 0

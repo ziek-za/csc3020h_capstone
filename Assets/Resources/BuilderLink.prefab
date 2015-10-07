@@ -157,7 +157,7 @@ Transform:
   m_GameObject: {fileID: 159734}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 45.8699989, y: 24.1800003, z: 49.8400002}
-  m_LocalScale: {x: 1, y: 1.20000005, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 459732}
   - {fileID: 459730}
@@ -184,7 +184,7 @@ Transform:
   m_GameObject: {fileID: 193708}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -1.14999998, z: 0}
-  m_LocalScale: {x: 2, y: 1.60000002, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 493710}
   - {fileID: 493712}
@@ -388,10 +388,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   linkSlider: {fileID: 0}
-  bluePoints: {fileID: 0}
-  redPoints: {fileID: 0}
-  redCountText: {fileID: 0}
-  blueCountText: {fileID: 0}
   currentTeam: 2
   newLinkPart1: {fileID: 2393712}
   newLinkPart2: {fileID: 2393708}

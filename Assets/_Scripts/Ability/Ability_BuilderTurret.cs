@@ -28,13 +28,15 @@ public class Ability_BuilderTurret : Photon.MonoBehaviour {
 		rightPanEdge.eulerAngles = originalRotation.eulerAngles + new Vector3(0,-60f,0);
 		currentEdge = leftPanEdge;
 		// Set HP on GUI for building
-		whoBuiltMe.GetComponent<Char_AttributeScript> ().HUD.turretIcon.SetBuildingHealth (health);
+		if (photonView.isMine)
+			whoBuiltMe.GetComponent<Char_AttributeScript> ().HUD.turretIcon.SetBuildingHealth (health);
 	}
 	
 	public void ChangeHP(int change){
 		health += change;
 		// Set HP on GUI for building
-		whoBuiltMe.GetComponent<Char_AttributeScript> ().HUD.turretIcon.ActivateBuildingHealth (health);
+		if (photonView.isMine)
+			whoBuiltMe.GetComponent<Char_AttributeScript> ().HUD.turretIcon.ActivateBuildingHealth (health);
 	}
 
 	float ClampToDegrees(float input){
