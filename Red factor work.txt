@@ -1,0 +1,14 @@
+Moving up any gradient 
+Teleport rigidbody thing
+
+Make GUI and Blur GUI background 		Done?
+
+Particle effects:
+Vortex (wind going to center point)
+Pushing force 
+Sprinting 
+Teleporting in/out
+
+
+git branch -D "Branch to delete"
+git checkout -b "New Branch"

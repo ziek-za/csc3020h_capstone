@@ -1,0 +1,214 @@
+fileFormatVersion: 2
+guid: bb146cc5fbe3f1740a97179183c330fc
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: Box001
+    100002: Box001_Part_3
+    100004: map_blockade
+    100006: map_blockade001
+    100008: map_blockade_collider
+    100010: map_cable
+    100012: map_fence_large_fence
+    100014: map_fence_large_pole
+    100016: map_fence_large_pole 1
+    100018: map_fence_small_mesh
+    100020: map_fence_small_mesh 1
+    100022: map_fence_small_pole
+    100024: map_fence_small_pole 1
+    100026: map_gerdar
+    100028: map_rebar
+    100030: map_rebar 1
+    100032: map_rebar 2
+    100034: map_rock
+    100036: map_rock 1
+    100038: map_rock 2
+    100040: map_rock 3
+    100042: map_rock 4
+    100044: //RootNode
+    100046: map_spilt_cement
+    100048: map_tape
+    100050: scaffolding_platform_slice_1
+    100052: scaffolding_platform_slice_2
+    100054: scaffolding_pole002
+    100056: scaffolding_pole_big
+    100058: scaffolding_pole_regular
+    100060: scaffolding_structure
+    400000: Box001
+    400002: Box001_Part_3
+    400004: map_blockade
+    400006: map_blockade001
+    400008: map_blockade_collider
+    400010: map_cable
+    400012: map_fence_large_fence
+    400014: map_fence_large_pole
+    400016: map_fence_large_pole 1
+    400018: map_fence_small_mesh
+    400020: map_fence_small_mesh 1
+    400022: map_fence_small_pole
+    400024: map_fence_small_pole 1
+    400026: map_gerdar
+    400028: map_rebar
+    400030: map_rebar 1
+    400032: map_rebar 2
+    400034: map_rock
+    400036: map_rock 1
+    400038: map_rock 2
+    400040: map_rock 3
+    400042: map_rock 4
+    400044: //RootNode
+    400046: map_spilt_cement
+    400048: map_tape
+    400050: scaffolding_platform_slice_1
+    400052: scaffolding_platform_slice_2
+    400054: scaffolding_pole002
+    400056: scaffolding_pole_big
+    400058: scaffolding_pole_regular
+    400060: scaffolding_structure
+    2300000: Box001
+    2300002: Box001_Part_3
+    2300004: map_blockade
+    2300006: map_blockade001
+    2300008: map_blockade_collider
+    2300010: map_cable
+    2300012: map_fence_large_fence
+    2300014: map_fence_large_pole
+    2300016: map_fence_large_pole 1
+    2300018: map_fence_small_mesh
+    2300020: map_fence_small_mesh 1
+    2300022: map_fence_small_pole
+    2300024: map_fence_small_pole 1
+    2300026: map_gerdar
+    2300028: map_rebar
+    2300030: map_rebar 1
+    2300032: map_rebar 2
+    2300034: map_rock
+    2300036: map_rock 1
+    2300038: map_rock 2
+    2300040: map_rock 3
+    2300042: map_rock 4
+    2300044: map_spilt_cement
+    2300046: map_tape
+    2300048: scaffolding_platform_slice_1
+    2300050: scaffolding_platform_slice_2
+    2300052: scaffolding_pole002
+    2300054: scaffolding_pole_big
+    2300056: scaffolding_pole_regular
+    2300058: scaffolding_structure
+    2300060: //RootNode
+    3300000: Box001
+    3300002: Box001_Part_3
+    3300004: map_blockade
+    3300006: map_blockade001
+    3300008: map_blockade_collider
+    3300010: map_cable
+    3300012: map_fence_large_fence
+    3300014: map_fence_large_pole
+    3300016: map_fence_large_pole 1
+    3300018: map_fence_small_mesh
+    3300020: map_fence_small_mesh 1
+    3300022: map_fence_small_pole
+    3300024: map_fence_small_pole 1
+    3300026: map_gerdar
+    3300028: map_rebar
+    3300030: map_rebar 1
+    3300032: map_rebar 2
+    3300034: map_rock
+    3300036: map_rock 1
+    3300038: map_rock 2
+    3300040: map_rock 3
+    3300042: map_rock 4
+    3300044: map_spilt_cement
+    3300046: map_tape
+    3300048: scaffolding_platform_slice_1
+    3300050: scaffolding_platform_slice_2
+    3300052: scaffolding_pole002
+    3300054: scaffolding_pole_big
+    3300056: scaffolding_pole_regular
+    3300058: scaffolding_structure
+    3300060: //RootNode
+    4300000: scaffolding_structure
+    4300002: scaffolding_pole002
+    4300004: scaffolding_pole_big
+    4300006: scaffolding_pole_regular
+    4300008: scaffolding_platform_slice_1
+    4300010: scaffolding_platform_slice_2
+    4300012: map_fence_small_pole
+    4300014: map_fence_small_pole
+    4300016: map_fence_small_mesh
+    4300018: map_fence_small_mesh
+    4300020: map_rebar
+    4300022: map_rebar
+    4300024: map_rebar
+    4300026: map_tape
+    4300028: map_gerdar
+    4300030: map_cable
+    4300032: map_spilt_cement
+    4300034: map_fence_large_pole
+    4300036: map_fence_large_fence
+    4300038: map_fence_large_pole
+    4300040: map_blockade
+    4300042: map_blockade001
+    4300044: map_blockade_collider
+    4300046: Box001
+    4300048: Box001_Part_3
+    4300050: map_rock
+    4300052: map_rock
+    4300054: map_rock
+    4300056: map_rock
+    4300058: map_rock
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 

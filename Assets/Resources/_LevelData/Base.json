@@ -1,0 +1,21 @@
+{
+	"name": "",
+	"version": "",
+	"levelData": {
+		"path": "_LevelData/",
+		"name": "",
+	},	
+	"terrainRaw": {
+		"path": "_LevelData/terrainRaw/",
+		"name": ""
+	},
+	"level_objects": [],
+	"terrainFreeze": {
+		"path": "_LevelData/terrainFreeze/",
+		"name": ""
+	},
+	"terrainClamp": {
+		"path": "_LevelData/terrainClamp/",
+		"name": ""
+	}
+}
