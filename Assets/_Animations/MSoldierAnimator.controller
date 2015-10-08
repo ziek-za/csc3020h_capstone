@@ -5,7 +5,7 @@ AnimatorController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: MSniperAnimator
+  m_Name: MSoldierAnimator
   serializedVersion: 2
   m_AnimatorParameters:
   - m_Name: Speed
@@ -617,7 +617,7 @@ StateMachine:
   m_ObjectHideFlags: 3
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Rifle
+  m_Name: RocketLauncher
   m_DefaultState: {fileID: 110243334}
   m_States:
   - {fileID: 110243334}
@@ -626,13 +626,13 @@ StateMachine:
   m_ChildStateMachinePosition: []
   m_OrderedTransitions:
     data:
-      first: {fileID: 110243334}
-      second:
-      - {fileID: 110143334}
-    data:
       first: {fileID: 110243332}
       second:
       - {fileID: 110143332}
+    data:
+      first: {fileID: 110243334}
+      second:
+      - {fileID: 110143334}
   m_MotionSetCount: 3
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
@@ -654,30 +654,30 @@ StateMachine:
   - {x: 84, y: -72, z: 0}
   m_OrderedTransitions:
     data:
-      first: {fileID: 110233944}
-      second: []
-    data:
-      first: {fileID: 110243334}
+      first: {fileID: 0}
       second:
-      - {fileID: 110143334}
-      - {fileID: 110196650}
-    data:
-      first: {fileID: 110243332}
-      second:
-      - {fileID: 110143332}
-    data:
-      first: {fileID: 110282606}
-      second:
-      - {fileID: 110135010}
+      - {fileID: 110137248}
     data:
       first: {fileID: 110207210}
       second:
       - {fileID: 110169506}
       - {fileID: 110185926}
     data:
-      first: {fileID: 0}
+      first: {fileID: 110233944}
+      second: []
+    data:
+      first: {fileID: 110243332}
       second:
-      - {fileID: 110137248}
+      - {fileID: 110143332}
+    data:
+      first: {fileID: 110243334}
+      second:
+      - {fileID: 110143334}
+      - {fileID: 110196650}
+    data:
+      first: {fileID: 110282606}
+      second:
+      - {fileID: 110135010}
   m_MotionSetCount: 1
   m_AnyStatePosition: {x: -120, y: 0, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
@@ -715,13 +715,12 @@ StateMachine:
   m_ChildStateMachinePosition: []
   m_OrderedTransitions:
     data:
-      first: {fileID: 110282606}
-      second:
-      - {fileID: 0}
-    data:
       first: {fileID: 110207210}
       second:
       - {fileID: 110169506}
+    data:
+      first: {fileID: 110282606}
+      second: []
   m_MotionSetCount: 2
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
@@ -731,7 +730,7 @@ StateMachine:
   m_ObjectHideFlags: 3
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Rifle
+  m_Name: RocketLauncher
   m_DefaultState: {fileID: 110269644}
   m_States:
   - {fileID: 110269644}
@@ -740,10 +739,10 @@ StateMachine:
   m_ChildStateMachinePosition: []
   m_OrderedTransitions:
     data:
-      first: {fileID: 110269646}
+      first: {fileID: 110269644}
       second: []
     data:
-      first: {fileID: 110269644}
+      first: {fileID: 110269646}
       second: []
   m_MotionSetCount: 4
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
@@ -766,6 +765,10 @@ StateMachine:
   - {x: -108, y: -60, z: 0}
   m_OrderedTransitions:
     data:
+      first: {fileID: 0}
+      second:
+      - {fileID: 110103450}
+    data:
       first: {fileID: 110240262}
       second: []
     data:
@@ -773,18 +776,14 @@ StateMachine:
       second:
       - {fileID: 110180098}
     data:
-      first: {fileID: 110269646}
-      second:
-      - {fileID: 110169646}
-    data:
       first: {fileID: 110269644}
       second:
       - {fileID: 110169644}
       - {fileID: 110164598}
     data:
-      first: {fileID: 0}
+      first: {fileID: 110269646}
       second:
-      - {fileID: 110103450}
+      - {fileID: 110169646}
   m_MotionSetCount: 1
   m_AnyStatePosition: {x: -84, y: 24, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
