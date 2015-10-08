@@ -29,7 +29,7 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 	public GameObject secondaryMuzzleFlash, secondaryFPSMuzzle, thirdPersonPistol, thirdPersonSecondary; 
 	public GameObject builderGloveMuzzle, builderGloveFPSPos, thirdPersonBuilderGlove;
 
-	public GameObject gloveEmitter;
+	public GameObject gloveEmitter, pistolMuzzleEmitter;
 
 	public Level_GUIController HUD;
 	Char_BasicMoveScript animInstance;
@@ -55,6 +55,8 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 			pistolMuzzleFlash.transform.parent = weapon1.transform;
 			pistolMuzzleFlash.transform.position = pistolFPSMuzzle.transform.position;
 			pistolMuzzleFlash.transform.rotation = Quaternion.identity;
+
+			pistolMuzzleEmitter.transform.position = pistolFPSMuzzle.transform.position;
 
 			secondaryMuzzleFlash.transform.parent = weapon2.transform;
 			secondaryMuzzleFlash.transform.position = secondaryFPSMuzzle.transform.position;

@@ -100,7 +100,6 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 			//CameraShake(0.03f,0.01f);
 			shotCooldown = Time.time + timeBetweenShots;
 			PlayMuzzleFlash(photonView.viewID);
-			tracerEffect.Play();
 
 			//First cast a perfectly accurate ray to get the distance to target
 			Vector2 screenCenterPoint = new Vector2(Screen.width/2, Screen.height/2);
@@ -192,7 +191,8 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 	}
 
 	[RPC] protected void PlayMuzzleFlash(int vID){
-		PhotonView.Find(vID).transform.GetComponent<ParticleSystem>().Play();
+		PhotonView.Find(vID).transform.GetComponent<Char_BasicShootScript>().muzzleFlash.Play();
+		PhotonView.Find(vID).transform.GetComponent<Char_BasicShootScript>().tracerEffect.Play();
 		if (photonView.isMine)
 			photonView.RPC("PlayMuzzleFlash", PhotonTargets.OthersBuffered, vID);
 	}
