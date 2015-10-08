@@ -2465,7 +2465,7 @@ MonoBehaviour:
   maxDistance: 2
   linkFoundation: {fileID: 169046, guid: c4acc800200848d45aaaa554103b39fc, type: 2}
   turretFoundation: {fileID: 151350, guid: 31f7faf464cb31c4fabc8cf8cc5e72fc, type: 2}
-  boosterFoundation: {fileID: 160544, guid: 619fb80c16d955a4db4a148f3b902626, type: 2}
+  boosterFoundation: {fileID: 142728, guid: 2ad40585ba006204187a11572523fffb, type: 2}
   distanceIndicator: {fileID: 198366, guid: acc4bca2a9b2b9749afa793f7788e5c6, type: 2}
   aimingPoint: {fileID: 139666, guid: a7c2ddd915f6ee24a9d4bf59618f0b34, type: 2}
   placeLinkEnergyCost: 10
