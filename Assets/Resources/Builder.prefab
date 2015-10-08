@@ -35,6 +35,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &109252
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 409252}
+  - 114: {fileID: 11409254}
+  - 114: {fileID: 11409252}
+  m_Layer: 0
+  m_Name: SecondaryMuzzleOrigin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &117252
 GameObject:
   m_ObjectHideFlags: 1
@@ -1187,6 +1204,19 @@ Transform:
   - {fileID: 491426}
   m_Father: {fileID: 491424}
   m_RootOrder: 4
+--- !u!4 &409252
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 109252}
+  m_LocalRotation: {x: 0, y: .906307757, z: 0, w: -.42261833}
+  m_LocalPosition: {x: .123000003, y: -.194000006, z: .466000021}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 491428}
+  m_Father: {fileID: 491424}
+  m_RootOrder: 6
 --- !u!4 &417252
 Transform:
   m_ObjectHideFlags: 1
@@ -1272,8 +1302,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -.00700000022, y: .171000004, z: .305000007}
   m_LocalScale: {x: .0999999642, y: .0999999866, z: .199999973}
-  m_Children:
-  - {fileID: 491428}
+  m_Children: []
   m_Father: {fileID: 462846}
   m_RootOrder: 2
 --- !u!4 &446038
@@ -1994,6 +2023,7 @@ Transform:
   - {fileID: 496240}
   - {fileID: 403794}
   - {fileID: 468220}
+  - {fileID: 409252}
   m_Father: {fileID: 491422}
   m_RootOrder: 1
 --- !u!4 &491426
@@ -2015,11 +2045,11 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 191428}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .0599999987, y: .0599999987, z: 2.37299991}
-  m_LocalScale: {x: 1, y: 1.00000024, z: 1.00000024}
+  m_LocalRotation: {x: -.615416944, y: -.665382206, z: -.284099966, w: -.312755316}
+  m_LocalPosition: {x: .456999987, y: 0, z: -.49000001}
+  m_LocalScale: {x: .199999928, y: .199999973, z: .399999827}
   m_Children: []
-  m_Father: {fileID: 436190}
+  m_Father: {fileID: 409252}
   m_RootOrder: 0
 --- !u!4 &491430
 Transform:
@@ -2366,6 +2396,91 @@ MonoBehaviour:
     InterpolateOption: 0
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 0
+--- !u!114 &11409252
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 109252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PositionModel:
+    SynchronizeEnabled: 0
+    TeleportEnabled: 1
+    TeleportIfDistanceGreaterThan: 3
+    InterpolateOption: 2
+    InterpolateMoveTowardsSpeed: 1
+    InterpolateLerpSpeed: 1
+    InterpolateMoveTowardsAcceleration: 2
+    InterpolateMoveTowardsDeceleration: 2
+    InterpolateSpeedCurve:
+      serializedVersion: 2
+      m_Curve:
+      - time: -1
+        value: 0
+        inSlope: 0
+        outSlope: Infinity
+        tangentMode: 0
+      - time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 1
+        tangentMode: 0
+      - time: 4
+        value: 4
+        inSlope: 1
+        outSlope: 0
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    ExtrapolateOption: 0
+    ExtrapolateSpeed: 1
+    ExtrapolateIncludingRoundTripTime: 1
+    ExtrapolateNumberOfStoredPositions: 1
+    DrawErrorGizmo: 1
+  m_RotationModel:
+    SynchronizeEnabled: 1
+    InterpolateOption: 1
+    InterpolateRotateTowardsSpeed: 180
+    InterpolateLerpSpeed: 5
+  m_ScaleModel:
+    SynchronizeEnabled: 0
+    InterpolateOption: 0
+    InterpolateMoveTowardsSpeed: 1
+    InterpolateLerpSpeed: 0
+--- !u!114 &11409254
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 109252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ownerId: 0
+  group: 0
+  prefixBackup: -1
+  observed: {fileID: 0}
+  synchronization: 3
+  onSerializeTransformOption: 3
+  onSerializeRigidBodyOption: 2
+  ownershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 11409252}
+  ObservedComponentsFoldoutOpen: 1
+  viewIdField: 0
+  instantiationId: -1
+  isRuntimeInstantiated: 0
 --- !u!114 &11409340
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2805,6 +2920,7 @@ MonoBehaviour:
   thirdPersonBuilderGlove: {fileID: 122916}
   gloveEmitter: {fileID: 103794}
   pistolMuzzleEmitter: {fileID: 168220}
+  secondaryMuzzleEmitter: {fileID: 109252}
   HUD: {fileID: 0}
   armour: {fileID: 13780544}
   Respawner: {fileID: 0}
