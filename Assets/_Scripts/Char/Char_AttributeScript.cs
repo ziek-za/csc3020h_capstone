@@ -29,6 +29,8 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 	public GameObject secondaryMuzzleFlash, secondaryFPSMuzzle, thirdPersonPistol, thirdPersonSecondary; 
 	public GameObject builderGloveMuzzle, builderGloveFPSPos, thirdPersonBuilderGlove;
 
+	public GameObject gloveEmitter;
+
 	public Level_GUIController HUD;
 	Char_BasicMoveScript animInstance;
 	public SkinnedMeshRenderer armour;
@@ -58,12 +60,15 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 			secondaryMuzzleFlash.transform.position = secondaryFPSMuzzle.transform.position;
 			secondaryMuzzleFlash.transform.localRotation = Quaternion.identity;
 
-			if (builderGloveMuzzle && builderGloveMuzzle.transform.GetComponentInChildren<ParticleSystem>()){
+			if (builderGloveMuzzle){
 				builderGloveMuzzle.transform.parent = weapon3.transform;
 				builderGloveMuzzle.transform.position = builderGloveFPSPos.transform.position;
 				//builderGloveMuzzle.transform.localRotation = Quaternion.identity;
 				builderGloveMuzzle.transform.localRotation = Quaternion.Euler(new Vector3(15,60,290));
-				builderGloveMuzzle.transform.GetComponentInChildren<ParticleSystem>().transform.localPosition = Vector3.zero;
+				//builderGloveMuzzle.transform.GetComponentInChildren<ParticleSystem>().transform.localPosition = Vector3.zero;
+
+				gloveEmitter.transform.localPosition = new Vector3(0.3810017f, -0.261f, 1.086f);
+				//gloveEmitter.GetComponentInChildren<ParticleSystem>().Play();
 			}
 				
 
@@ -95,9 +100,9 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 				skfpWeapon2[i].enabled = true;
 			}
 			
-			SkinnedMeshRenderer[] skfpBuilderGlove = weapon3.GetComponentsInChildren<SkinnedMeshRenderer>();
-			for (int i = 0; i < skfpBuilderGlove.Length; i++){
-				skfpBuilderGlove[i].enabled = true;
+			MeshRenderer[] fpBuilderGlove = weapon3.GetComponentsInChildren<MeshRenderer>();
+			for (int i = 0; i < fpBuilderGlove.Length; i++){
+				fpBuilderGlove[i].enabled = true;
 			}
 
 			if(team == Teams.RED){

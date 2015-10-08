@@ -38,14 +38,13 @@ public class Weapon_BuilderGlove : Photon.MonoBehaviour {
 		if (photonView.isMine){
 			if (Input.GetButtonDown("Fire1")){
 				transform.GetComponentInParent<Char_BasicMoveScript>().anim.SetBool("Shooting",true);
-				PlayLaser(transform.GetComponent<PhotonView>().viewID);
-				charMesh.transform.Rotate(new Vector3(0,-30,0));
+				PlayLaser(transform.GetComponent<PhotonView>().viewID, new Vector3(0,-30,0));
+				Debug.Log("rotate");
 				//laserSystem.Play();
 
 			} else if (Input.GetButtonUp("Fire1")){
 				transform.GetComponentInParent<Char_BasicMoveScript>().anim.SetBool("Shooting",false);
-				StopLaser(transform.GetComponent<PhotonView>().viewID);
-				charMesh.transform.Rotate(new Vector3(0,30,0));
+				StopLaser(transform.GetComponent<PhotonView>().viewID, new Vector3(0,30,0));
 				//laserSystem.Stop();
 			}
 
@@ -172,15 +171,18 @@ public class Weapon_BuilderGlove : Photon.MonoBehaviour {
 			photonView.RPC("Build",PhotonTargets.OthersBuffered,amount,vID);
 	}
 
-	[RPC] void PlayLaser(int vID){
-		PhotonView.Find(vID).transform.GetComponentInChildren<ParticleSystem>().Play();
+	[RPC] void PlayLaser(int vID, Vector3 rot){
+		PhotonView.Find(vID).GetComponent<Weapon_BuilderGlove>().laserSystem.Play();
+		PhotonView.Find(vID).GetComponent<Weapon_BuilderGlove>().charMesh.transform.Rotate(rot);
 		if (photonView.isMine)
-			photonView.RPC("PlayLaser", PhotonTargets.OthersBuffered, vID);
+			photonView.RPC("PlayLaser", PhotonTargets.OthersBuffered, vID, rot);
 	}
 
-	[RPC] void StopLaser(int vID){
-		PhotonView.Find(vID).transform.GetComponentInChildren<ParticleSystem>().Stop();
+	[RPC] void StopLaser(int vID, Vector3 rot){
+		PhotonView.Find(vID).GetComponent<Weapon_BuilderGlove>().laserSystem.Stop();
+		PhotonView.Find(vID).GetComponent<Weapon_BuilderGlove>().charMesh.transform.Rotate(rot);
 		if (photonView.isMine)
-			photonView.RPC("StopLaser", PhotonTargets.OthersBuffered, vID);
+			photonView.RPC("StopLaser", PhotonTargets.OthersBuffered, vID, rot);
 	}
+
 }
