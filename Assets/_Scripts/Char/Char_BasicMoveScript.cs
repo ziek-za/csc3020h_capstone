@@ -99,9 +99,6 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 			//anim.SetBool("Jumping",true);
 		};
 
-
-		Debug.Log (rigidbody.velocity.y);
-
 		if(Input.GetButtonDown("Jump") && inAir == false){
 			anim.SetBool("Jumping",true);
 			//isJumping=true;

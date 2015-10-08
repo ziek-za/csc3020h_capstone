@@ -65,6 +65,7 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 				meshes[i].enabled = false;
 			}
 
+
 			SkinnedMeshRenderer[] fpWeapon1 = weapon1.GetComponentsInChildren<SkinnedMeshRenderer>();
 			for (int i = 0; i < fpWeapon1.Length; i++){
 				fpWeapon1[i].enabled = true;
@@ -114,6 +115,11 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 			//Debug.LogError(GetComponent<PhotonView>().viewID+" Pistol beforehand: "+animInstance.anim.GetBool("Pistol"));
 			animInstance.anim.SetBool("Pistol",true);
 			animInstance.anim.SetBool("SecondaryWeapon",false);
+
+			if (weapon2.name.Equals("RocketLauncher")){
+				secondaryMuzzleFlash.GetComponent<Weapon_RocketLauncher>().RotateForRocketLauncher(false);
+			}
+
 			//Debug.LogError(GetComponent<PhotonView>().viewID+" Pistol afterwards: "+animInstance.anim.GetBool("Pistol"));
 		} else if (weapon == 2){
 			weapon1.SetActive(false);
@@ -126,6 +132,10 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 			animInstance.anim.SetBool("Pistol",false);
 			animInstance.anim.SetBool("SecondaryWeapon",true);
 			//Debug.LogError(GetComponent<PhotonView>().viewID+" Secondary bafterhand: "+animInstance.anim.GetBool("SecondaryWeapon"));
+
+			if (weapon2.name.Equals("RocketLauncher")){
+				secondaryMuzzleFlash.GetComponent<Weapon_RocketLauncher>().RotateForRocketLauncher(true);
+			}
 
 		} else if (weapon == 3){
 			weapon1.SetActive(false);
