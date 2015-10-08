@@ -9,7 +9,8 @@ public class Weapon_RocketLauncher : Char_BasicShootScript {
 	// Use this for initialization
 	void Start () {
 		//timeBetweenShots = 1f;
-		hitCrosshair = GameObject.Find ("EnemyHitCrosshair");
+		base.Start();
+		//hitCrosshair = GameObject.Find ("EnemyHitCrosshair");
 	}
 
 	public void RotateForRocketLauncher(bool forwards){
@@ -42,6 +43,14 @@ public class Weapon_RocketLauncher : Char_BasicShootScript {
 			charMesh.transform.Rotate(new Vector3(0,70,0));
 		}
 		*/
+
+		if(photonView.isMine) {
+			if(Input.GetButton("Fire1")){
+				base.animInstance.anim.SetBool("Shooting", true);
+			} else {
+				base.animInstance.anim.SetBool("Shooting",false);
+			}
+		}
 
 		if(photonView.isMine && Time.time >= shotCooldown && Input.GetButton("Fire1")) {
 			shotCooldown = Time.time + timeBetweenShots;

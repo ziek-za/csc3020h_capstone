@@ -11,6 +11,7 @@ public class Weapon_BuilderGlove : Photon.MonoBehaviour {
 	public float range = 7;
 
 	public GameObject buildCrosshair;
+	public GameObject charMesh;
 
 	int buildRate = 3;
 	int bRCounter = 0;
@@ -23,16 +24,28 @@ public class Weapon_BuilderGlove : Photon.MonoBehaviour {
 			laserSystem.startColor = Color.blue;
 		}
 	}
+
+	public void RotateForGlove(bool forwards){
+		if (forwards){
+			charMesh.transform.Rotate(new Vector3(0,-40,0));
+		} else {
+			charMesh.transform.Rotate(new Vector3(0,40,0));
+		}
+	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (photonView.isMine){
 			if (Input.GetButtonDown("Fire1")){
+				transform.GetComponentInParent<Char_BasicMoveScript>().anim.SetBool("Shooting",true);
 				PlayLaser(transform.GetComponent<PhotonView>().viewID);
+				charMesh.transform.Rotate(new Vector3(0,-30,0));
 				//laserSystem.Play();
 
 			} else if (Input.GetButtonUp("Fire1")){
+				transform.GetComponentInParent<Char_BasicMoveScript>().anim.SetBool("Shooting",false);
 				StopLaser(transform.GetComponent<PhotonView>().viewID);
+				charMesh.transform.Rotate(new Vector3(0,30,0));
 				//laserSystem.Stop();
 			}
 

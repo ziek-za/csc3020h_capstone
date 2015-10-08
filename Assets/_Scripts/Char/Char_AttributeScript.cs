@@ -36,6 +36,8 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 
 	public Map_LinkScript currentLink;
 
+	bool prevWeaponGlove = false, prevWeaponRL = false;
+
 	// Use this for initialization
 	void Start () {
 
@@ -56,29 +58,44 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 			secondaryMuzzleFlash.transform.position = secondaryFPSMuzzle.transform.position;
 			secondaryMuzzleFlash.transform.localRotation = Quaternion.identity;
 
+			builderGloveMuzzle.transform.parent = weapon3.transform;
+			builderGloveMuzzle.transform.position = builderGloveFPSPos.transform.position;
+			//builderGloveMuzzle.transform.localRotation = Quaternion.identity;
+			builderGloveMuzzle.transform.localRotation = Quaternion.Euler(new Vector3(15,60,290));
+
+			builderGloveMuzzle.transform.GetComponentInChildren<ParticleSystem>().transform.localPosition = Vector3.zero;
+
 			//thirdPersonSecondary.SetActive(false);
 			//secondaryMuzzleFlash.transform.parent.gameObject.SetActive(false);
 
-
-			SkinnedMeshRenderer[] meshes = thirdPersonPlayer.GetComponentsInChildren<SkinnedMeshRenderer>();
-			for (int i = 0; i < meshes.Length; i++){
-				meshes[i].enabled = false;
-			}
-
-
-			SkinnedMeshRenderer[] fpWeapon1 = weapon1.GetComponentsInChildren<SkinnedMeshRenderer>();
-			for (int i = 0; i < fpWeapon1.Length; i++){
-				fpWeapon1[i].enabled = true;
-			}
-
-			SkinnedMeshRenderer[] fpWeapon2 = weapon2.GetComponentsInChildren<SkinnedMeshRenderer>();
+			MeshRenderer[] fpWeapon2 = weapon2.GetComponentsInChildren<MeshRenderer>();
 			for (int i = 0; i < fpWeapon2.Length; i++){
 				fpWeapon2[i].enabled = true;
 			}
 
-			SkinnedMeshRenderer[] fpBuilderGlove = weapon3.GetComponentsInChildren<SkinnedMeshRenderer>();
-			for (int i = 0; i < fpBuilderGlove.Length; i++){
-				fpBuilderGlove[i].enabled = true;
+			MeshRenderer[] meshes = thirdPersonPlayer.GetComponentsInChildren<MeshRenderer>();
+			for (int i = 0; i < meshes.Length; i++){
+				meshes[i].enabled = false;
+			}
+
+			SkinnedMeshRenderer[] skMeshes = thirdPersonPlayer.GetComponentsInChildren<SkinnedMeshRenderer>();
+			for (int i = 0; i < skMeshes.Length; i++){
+				skMeshes[i].enabled = false;
+			}
+			
+			SkinnedMeshRenderer[] skfpWeapon1 = weapon1.GetComponentsInChildren<SkinnedMeshRenderer>();
+			for (int i = 0; i < skfpWeapon1.Length; i++){
+				skfpWeapon1[i].enabled = true;
+			}
+			
+			SkinnedMeshRenderer[] skfpWeapon2 = weapon2.GetComponentsInChildren<SkinnedMeshRenderer>();
+			for (int i = 0; i < skfpWeapon2.Length; i++){
+				skfpWeapon2[i].enabled = true;
+			}
+			
+			SkinnedMeshRenderer[] skfpBuilderGlove = weapon3.GetComponentsInChildren<SkinnedMeshRenderer>();
+			for (int i = 0; i < skfpBuilderGlove.Length; i++){
+				skfpBuilderGlove[i].enabled = true;
 			}
 
 			if(team == Teams.RED){
@@ -115,9 +132,16 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 			//Debug.LogError(GetComponent<PhotonView>().viewID+" Pistol beforehand: "+animInstance.anim.GetBool("Pistol"));
 			animInstance.anim.SetBool("Pistol",true);
 			animInstance.anim.SetBool("SecondaryWeapon",false);
+			animInstance.anim.SetBool("Glove",false);
 
-			if (weapon2.name.Equals("RocketLauncher")){
+			if (weapon2.name.Equals("RocketLauncher") && prevWeaponRL){
 				secondaryMuzzleFlash.GetComponent<Weapon_RocketLauncher>().RotateForRocketLauncher(false);
+				prevWeaponRL = false;
+			}
+
+			if (weapon3.name.Equals("Builder_FP_glove") && prevWeaponGlove){
+				builderGloveMuzzle.GetComponent<Weapon_BuilderGlove>().RotateForGlove(false);
+				prevWeaponGlove = false;
 			}
 
 			//Debug.LogError(GetComponent<PhotonView>().viewID+" Pistol afterwards: "+animInstance.anim.GetBool("Pistol"));
@@ -131,19 +155,37 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 			//Debug.LogError(GetComponent<PhotonView>().viewID+" Secondary beforehand: "+animInstance.anim.GetBool("SecondaryWeapon"));
 			animInstance.anim.SetBool("Pistol",false);
 			animInstance.anim.SetBool("SecondaryWeapon",true);
+			animInstance.anim.SetBool("Glove",false);
 			//Debug.LogError(GetComponent<PhotonView>().viewID+" Secondary bafterhand: "+animInstance.anim.GetBool("SecondaryWeapon"));
 
-			if (weapon2.name.Equals("RocketLauncher")){
+			if (weapon2.name.Equals("RocketLauncher") && !prevWeaponRL){
 				secondaryMuzzleFlash.GetComponent<Weapon_RocketLauncher>().RotateForRocketLauncher(true);
+				prevWeaponRL = true;
+			}
+
+			if (weapon3.name.Equals("Builder_FP_glove") && prevWeaponGlove){
+				builderGloveMuzzle.GetComponent<Weapon_BuilderGlove>().RotateForGlove(false);
+				prevWeaponGlove = false;
 			}
 
 		} else if (weapon == 3){
+
+			Debug.Log("weapon 3");
+
 			weapon1.SetActive(false);
 			weapon2.SetActive(false);
 			weapon3.SetActive(true);
 			thirdPersonPistol.SetActive(false);
 			thirdPersonSecondary.SetActive(false);
 			thirdPersonBuilderGlove.SetActive(true);
+			animInstance.anim.SetBool("Pistol",false);
+			animInstance.anim.SetBool("SecondaryWeapon",false);
+			animInstance.anim.SetBool("Glove",true);
+
+			if (weapon3.name.Equals("Builder_FP_glove") && !prevWeaponGlove){
+				builderGloveMuzzle.GetComponent<Weapon_BuilderGlove>().RotateForGlove(true);
+				prevWeaponGlove = true;
+			}
 		}
 
 		if (photonView.isMine)
@@ -160,10 +202,11 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 			// Change weapon
 			HUD.SetWeaponIcon(current_class, 2);
 		} else if (Input.GetButton("3")){
-			if (weapon3.name.Equals("BuilderGlove"))
-			NetworkChangeWeapons(transform.GetComponent<PhotonView>().viewID,3);
-			// Change weapon
-			HUD.SetWeaponIcon(current_class, 3);
+			if (weapon3.name.Equals("Builder_FP_glove")){
+				NetworkChangeWeapons(transform.GetComponent<PhotonView>().viewID,3);
+				// Change weapon
+				HUD.SetWeaponIcon(current_class, 3);
+			}
 		}
 	}
 
