@@ -58,12 +58,14 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 			secondaryMuzzleFlash.transform.position = secondaryFPSMuzzle.transform.position;
 			secondaryMuzzleFlash.transform.localRotation = Quaternion.identity;
 
-			builderGloveMuzzle.transform.parent = weapon3.transform;
-			builderGloveMuzzle.transform.position = builderGloveFPSPos.transform.position;
-			//builderGloveMuzzle.transform.localRotation = Quaternion.identity;
-			builderGloveMuzzle.transform.localRotation = Quaternion.Euler(new Vector3(15,60,290));
-
-			builderGloveMuzzle.transform.GetComponentInChildren<ParticleSystem>().transform.localPosition = Vector3.zero;
+			if (builderGloveMuzzle && builderGloveMuzzle.transform.GetComponentInChildren<ParticleSystem>()){
+				builderGloveMuzzle.transform.parent = weapon3.transform;
+				builderGloveMuzzle.transform.position = builderGloveFPSPos.transform.position;
+				//builderGloveMuzzle.transform.localRotation = Quaternion.identity;
+				builderGloveMuzzle.transform.localRotation = Quaternion.Euler(new Vector3(15,60,290));
+				builderGloveMuzzle.transform.GetComponentInChildren<ParticleSystem>().transform.localPosition = Vector3.zero;
+			}
+				
 
 			//thirdPersonSecondary.SetActive(false);
 			//secondaryMuzzleFlash.transform.parent.gameObject.SetActive(false);
