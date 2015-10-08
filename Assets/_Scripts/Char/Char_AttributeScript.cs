@@ -64,7 +64,7 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 
 			secondaryMuzzleEmitter.transform.position = secondaryFPSMuzzle.transform.position;
 
-			if (builderGloveMuzzle){
+			if (builderGloveMuzzle && !builderGloveMuzzle.transform.name.Equals("EmptyGameObject")){
 				builderGloveMuzzle.transform.parent = weapon3.transform;
 				builderGloveMuzzle.transform.position = builderGloveFPSPos.transform.position;
 				//builderGloveMuzzle.transform.localRotation = Quaternion.identity;

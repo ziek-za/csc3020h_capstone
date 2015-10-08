@@ -18,7 +18,7 @@ AnimatorController:
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
-    m_DefaultBool: 0
+    m_DefaultBool: 1
     m_Controller: {fileID: 9100000}
   - m_Name: Jumping
     m_Type: 4
@@ -36,7 +36,7 @@ AnimatorController:
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
-    m_DefaultBool: 0
+    m_DefaultBool: 1
     m_Controller: {fileID: 9100000}
   - m_Name: Pistol
     m_Type: 4
@@ -654,6 +654,15 @@ StateMachine:
   - {x: 84, y: -72, z: 0}
   m_OrderedTransitions:
     data:
+      first: {fileID: 0}
+      second:
+      - {fileID: 110137248}
+    data:
+      first: {fileID: 110207210}
+      second:
+      - {fileID: 110169506}
+      - {fileID: 110185926}
+    data:
       first: {fileID: 110233944}
       second: []
     data:
@@ -669,15 +678,6 @@ StateMachine:
       first: {fileID: 110282606}
       second:
       - {fileID: 110135010}
-    data:
-      first: {fileID: 110207210}
-      second:
-      - {fileID: 110169506}
-      - {fileID: 110185926}
-    data:
-      first: {fileID: 0}
-      second:
-      - {fileID: 110137248}
   m_MotionSetCount: 1
   m_AnyStatePosition: {x: -120, y: 0, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
@@ -715,13 +715,12 @@ StateMachine:
   m_ChildStateMachinePosition: []
   m_OrderedTransitions:
     data:
-      first: {fileID: 110282606}
-      second:
-      - {fileID: 0}
-    data:
       first: {fileID: 110207210}
       second:
       - {fileID: 110169506}
+    data:
+      first: {fileID: 110282606}
+      second: []
   m_MotionSetCount: 2
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
@@ -766,12 +765,16 @@ StateMachine:
   - {x: -108, y: -60, z: 0}
   m_OrderedTransitions:
     data:
-      first: {fileID: 110240262}
-      second: []
+      first: {fileID: 0}
+      second:
+      - {fileID: 110103450}
     data:
       first: {fileID: 110259146}
       second:
       - {fileID: 110180098}
+    data:
+      first: {fileID: 110240262}
+      second: []
     data:
       first: {fileID: 110269646}
       second:
@@ -781,10 +784,6 @@ StateMachine:
       second:
       - {fileID: 110169644}
       - {fileID: 110164598}
-    data:
-      first: {fileID: 0}
-      second:
-      - {fileID: 110103450}
   m_MotionSetCount: 1
   m_AnyStatePosition: {x: -84, y: 24, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
