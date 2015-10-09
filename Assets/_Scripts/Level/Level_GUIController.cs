@@ -146,9 +146,8 @@ public class Level_GUIController : MonoBehaviour {
 			scoreboard.anchoredPosition = new Vector2(0.0f,
 			                                  0.0f);
 		} else {
-			scoreboard.anchoredPosition = new Vector2(-210.0f,
+			scoreboard.anchoredPosition = new Vector2(-245.0f,
 			                                          0.0f);
-			//scoreboard.Translate
 		}
 	}
 	// Used to reset all cooldowns
