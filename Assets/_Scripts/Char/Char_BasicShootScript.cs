@@ -24,6 +24,8 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 	protected Quaternion originRotation;
 	protected float shake_decay;
 	protected float shake_intensity;
+	public AudioClip firePistol;
+	AudioSource audio;
 	
 	//Weapon accuracy is a public variable that can be changed in Unity
 	// 100 ~ perfect accuracy
@@ -40,6 +42,7 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 		animInstance = GetComponentInParent<Char_BasicMoveScript> ();
 		hitCrosshair = GameObject.Find ("EnemyHitCrosshair");
 		headshotCrosshair = GameObject.Find ("EnemyHeadshotCrosshair");
+		audio = GetComponent<AudioSource> ();
 	}
 
 	protected void DisableHitCrosshair(){
@@ -100,6 +103,7 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 			//CameraShake(0.03f,0.01f);
 			shotCooldown = Time.time + timeBetweenShots;
 			PlayMuzzleFlash(photonView.viewID);
+			audio.PlayOneShot(firePistol);
 			tracerEffect.Play();
 
 			//First cast a perfectly accurate ray to get the distance to target
