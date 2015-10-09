@@ -76,7 +76,7 @@ public class Map_LinkScript : Photon.MonoBehaviour {
 		this.GetComponent<MeshRenderer>().materials[0].color =  Color.blue;
 		newLinkPart1.materials[0].color =  Color.blue;
 		newLinkPart2.materials[0].color =  Color.blue;
-		blueBeam.Play();
+		blueBeam.Play(true);
 	}
 
 	public void InitRed(){
@@ -84,13 +84,13 @@ public class Map_LinkScript : Photon.MonoBehaviour {
 		this.GetComponent<MeshRenderer>().materials[0].color =  Color.red;
 		newLinkPart1.materials[0].color =  Color.red;
 		newLinkPart2.materials[0].color =  Color.red;
-		redBeam.Play();
+		redBeam.Play(true);
 	}
 
 	public void InitNeutral(){
 		currentTeam = Char_AttributeScript.Teams.NONE;
 		this.GetComponent<MeshRenderer>().materials[0].color =  Color.white;
-		neutralBeam.Play();
+		neutralBeam.Play(true);
 	}
 	
 	[RPC] void RedTeamCapture(){
@@ -99,9 +99,9 @@ public class Map_LinkScript : Photon.MonoBehaviour {
 		this.GetComponent<MeshRenderer>().materials[0].color =  Color.red;
 		newLinkPart1.materials[0].color =  Color.red;
 		newLinkPart2.materials[0].color =  Color.red;
-		blueBeam.Stop();
-		neutralBeam.Stop();
-		redBeam.Play();
+		blueBeam.Stop(true);
+		neutralBeam.Stop(true);
+		redBeam.Play(true);
 		gui.SetUpLinkButtons();
 
 		if (photonView.isMine)
@@ -114,9 +114,9 @@ public class Map_LinkScript : Photon.MonoBehaviour {
 		this.GetComponent<MeshRenderer>().materials[0].color =  Color.blue;
 		newLinkPart1.materials[0].color =  Color.blue;
 		newLinkPart2.materials[0].color =  Color.blue;
-		blueBeam.Play();
-		redBeam.Stop();
-		neutralBeam.Stop();
+		blueBeam.Play(true);
+		redBeam.Stop(true);
+		neutralBeam.Stop(true);
 		gui.SetUpLinkButtons();
 
 		if (photonView.isMine)
@@ -129,9 +129,9 @@ public class Map_LinkScript : Photon.MonoBehaviour {
 		this.GetComponent<MeshRenderer>().materials[0].color =  Color.white;
 		newLinkPart1.materials[0].color =  Color.white;
 		newLinkPart2.materials[0].color =  Color.white;
-		neutralBeam.Play();
-		redBeam.Stop();
-		blueBeam.Stop();
+		neutralBeam.Play(true);
+		redBeam.Stop(true);
+		blueBeam.Stop(true);
 		gui.SetUpLinkButtons();
 
 		if (photonView.isMine)
