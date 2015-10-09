@@ -279,6 +279,7 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 
 				Screen.lockCursor=false;
 				GameObject.Find("CharacterSelectionGUI").transform.localScale=new Vector3(10,5,5);
+				HUD.spawnPreviewCamera.gameObject.SetActive(true);
 				Camera.main.GetComponent<BlurEffect>().enabled=true;
 				gameObject.GetComponent<Char_BasicMoveScript>().inVortex=true;
 				animInstance.anim.SetBool ("Dead", true);

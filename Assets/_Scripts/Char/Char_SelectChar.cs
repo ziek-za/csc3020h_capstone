@@ -21,7 +21,6 @@ public class Char_SelectChar : Photon.MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(photonView.isMine){
-			//Debug.Log("HELLO, is it me you're looking for?");
 			if(!spawned){
 				// SOLDIER
 				if(classNo==0){
@@ -33,6 +32,7 @@ public class Char_SelectChar : Photon.MonoBehaviour {
 					gc.soldierHUD.gameObject.SetActive(true);
 					gc.thiefHUD.gameObject.SetActive(false);
 					gc.builderHUD.gameObject.SetActive(false);
+
 					// Set the current class in the char attribute script
 					sol.GetComponent<Char_AttributeScript>().current_class = Char_AttributeScript.Class.SOLDIER;
 				}
@@ -46,6 +46,7 @@ public class Char_SelectChar : Photon.MonoBehaviour {
 					gc.soldierHUD.gameObject.SetActive(false);
 					gc.thiefHUD.gameObject.SetActive(true);
 					gc.builderHUD.gameObject.SetActive(false);
+
 					// Set the current class in the char attribute script
 					thief.GetComponent<Char_AttributeScript>().current_class = Char_AttributeScript.Class.THIEF;
 				}
@@ -59,6 +60,8 @@ public class Char_SelectChar : Photon.MonoBehaviour {
 					gc.soldierHUD.gameObject.SetActive(false);
 					gc.thiefHUD.gameObject.SetActive(false);
 					gc.builderHUD.gameObject.SetActive(true);
+
+
 					// Set the current class in the char attribute script
 					bul.GetComponent<Char_AttributeScript>().current_class = Char_AttributeScript.Class.BUILDER;
 				}
@@ -68,6 +71,10 @@ public class Char_SelectChar : Photon.MonoBehaviour {
 						//Debug.Log("blur here");
 					Camera.main.GetComponent<BlurEffect>().enabled=false;
 					GameObject.Find("CharacterSelectionGUI").transform.localScale=new Vector3(0,0,0);
+
+					//Turn off second camera
+					gc.spawnPreviewCamera.gameObject.SetActive(false);
+
 					// Turn the HUD on
 					gc.HUDPivot.SetActive(true);
 					gc.isDeadBool = false;

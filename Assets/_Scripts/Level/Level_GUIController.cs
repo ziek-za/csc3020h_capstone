@@ -5,6 +5,9 @@ using UnityEngine.EventSystems;
 
 public class Level_GUIController : MonoBehaviour {
 
+	public Level_NetworkController NetworkController;
+	public Char_AttributeScript.Teams localPlayerTeam = Char_AttributeScript.Teams.NONE;
+
 	public Text healthText, energyText;
 	public enum classes {SOLDIER, THIEF, BUILDER, NONE};
 	public classes GUIClass = classes.NONE;
@@ -12,6 +15,9 @@ public class Level_GUIController : MonoBehaviour {
 	public Slider bluePoints;
 	public Slider redPoints;
 	private float decTimer = 0f;
+
+	public Camera spawnPreviewCamera;
+	public Transform spawnPreviewSoldierCameraPos, spawnPreviewSniperCameraPos, spawnPreviewBuilderCameraPos;
 
 	public Text redCountText;
 	public Text blueCountText;
@@ -92,21 +98,35 @@ public class Level_GUIController : MonoBehaviour {
 				blueColors.normalColor = Color.blue;
 				blueColors.highlightedColor = Color.blue;
 				blueColors.pressedColor = Color.cyan;
+				blueColors.disabledColor = new Color(0f,0f,0.5f);
 				blueColors.colorMultiplier = 1;
 				tempButton.GetComponent<Button>().colors = blueColors;
-				tempButton.interactable = true;
+
+				if (localPlayerTeam == Char_AttributeScript.Teams.BLUE)
+					tempButton.interactable = true;
+				else
+					tempButton.interactable = false;
+
 				if (!links[i].GetComponent<Ability_BuilderLink>())
 					blueCountText.text = (int.Parse(blueCountText.text) + 1).ToString();
+
 			} else if (linkTeam == Char_AttributeScript.Teams.RED){
 				ColorBlock redColors = new ColorBlock();
 				redColors.normalColor = Color.red;
 				redColors.highlightedColor = Color.red;
 				redColors.pressedColor = new Color(0.6f,0f,0f);
+				redColors.disabledColor = new Color(0.5f,0f,0f);
 				redColors.colorMultiplier = 1;
 				tempButton.GetComponent<Button>().colors = redColors;
-				tempButton.interactable = true;
+
+				if (localPlayerTeam == Char_AttributeScript.Teams.RED )
+					tempButton.interactable = true;
+				else
+					tempButton.interactable = false;
+
 				if (!links[i].GetComponent<Ability_BuilderLink>())
 					redCountText.text = (int.Parse(redCountText.text) + 1).ToString();
+
 			} else {
 				ColorBlock neutColors = new ColorBlock();
 				neutColors.normalColor = Color.black;
@@ -168,15 +188,6 @@ public class Level_GUIController : MonoBehaviour {
 		energyText.text = energy.ToString();
 	}
 
-	public void onSoldierSelectButtonPress(){
-		//Char_SelectChar.classNo = 0;
-		soldierImage.GetComponent<Image>().enabled = true;
-		builderImage.GetComponent<Image>().enabled = false;
-		thiefImage.GetComponent<Image>().enabled = false;
-		GUIClass = classes.SOLDIER;
-		Debug.Log ("Selecting Soldier");
-	}
-
 	// Used to set the weapon icons
 	public void SetWeaponIcon(Char_AttributeScript.Class player_class, int weapon_slot) {
 		// Set all weapons to false
@@ -210,12 +221,25 @@ public class Level_GUIController : MonoBehaviour {
 		}
 	}
 
+	public void onSoldierSelectButtonPress(){
+		//Char_SelectChar.classNo = 0;
+		soldierImage.GetComponent<Image>().enabled = true;
+		builderImage.GetComponent<Image>().enabled = false;
+		thiefImage.GetComponent<Image>().enabled = false;
+		GUIClass = classes.SOLDIER;
+		spawnPreviewCamera.gameObject.SetActive(true);
+		spawnPreviewCamera.transform.localPosition = spawnPreviewSoldierCameraPos.localPosition;
+		Debug.Log ("Selecting Soldier");
+	}
+
 	public void onThiefSelectButtonPress(){
 		//Char_SelectChar.classNo = 1;
 		soldierImage.GetComponent<Image>().enabled = false;
 		builderImage.GetComponent<Image>().enabled = false;
 		thiefImage.GetComponent<Image>().enabled = true;
 		GUIClass = classes.THIEF;
+		spawnPreviewCamera.gameObject.SetActive(true);
+		spawnPreviewCamera.transform.localPosition = spawnPreviewSniperCameraPos.localPosition;
 		Debug.Log ("Selecting Thief");
 	}
 
@@ -225,8 +249,64 @@ public class Level_GUIController : MonoBehaviour {
 		builderImage.GetComponent<Image>().enabled = true;
 		thiefImage.GetComponent<Image>().enabled = false;
 		GUIClass = classes.BUILDER;
+		spawnPreviewCamera.gameObject.SetActive(true);
+		spawnPreviewCamera.transform.localPosition = spawnPreviewBuilderCameraPos.localPosition;
 		Debug.Log ("Selecting Builder");
 	}
+
+	public void onRedTeamButtonPress(){
+		localPlayerTeam = Char_AttributeScript.Teams.RED;
+		spawnPreviewCamera.gameObject.SetActive(true);
+		GameObject.Find("CharacterSelectionGUI").transform.localScale=new Vector3(10,5,5);
+		GameObject.Find("PickATeam").gameObject.SetActive(false);
+		SetUpLinkButtons();
+		/*
+		for (int i = 0; i < NetworkController.neutPlayers.Count; i++){
+			if (NetworkController.neutPlayers[i].name == _MainController.playerName){
+				ChangePlayerTeamList(NetworkController.neutPlayers[i].respawnerID);
+				NetworkController.neutPlayers[i].team = Char_AttributeScript.Teams.RED;
+				NetworkController.neutPlayers.Add(NetworkController.neutPlayers[i]);
+				NetworkController.neutPlayers.Remove(NetworkController.neutPlayers[i]);
+			}
+		}*/
+
+		Debug.Log("Red Press");
+	}
+
+	public void onBlueTeamButtonPress(){
+		localPlayerTeam = Char_AttributeScript.Teams.BLUE;
+		GameObject.Find("CharacterSelectionGUI").transform.localScale=new Vector3(10,5,5);
+		spawnPreviewCamera.gameObject.SetActive(true);
+		GameObject.Find("PickATeam").gameObject.SetActive(false);
+		SetUpLinkButtons();
+		/*
+		for (int i = 0; i < NetworkController.neutPlayers.Count; i++){
+			if (PhotonView.Find(NetworkController.neutPlayers[i].respawnerID).isMine){
+				NetworkController.neutPlayers[i].team = Char_AttributeScript.Teams.RED;
+				NetworkController.neutPlayers.Add(NetworkController.neutPlayers[i]);
+				NetworkController.neutPlayers.Remove(NetworkController.neutPlayers[i]);
+			}
+		}
+		*/
+		Debug.Log("Blue Press");
+	}
+
+	/*
+	[RPC] void ChangePlayerTeamList(int vID, int team, string name){
+
+		for (int i = 0; i < NetworkController.neutPlayers.Count; i++){
+			if (NetworkController.neutPlayers[i].respawnerID == vID){
+				NetworkController.neutPlayers[i].team = (Char_AttributeScript.Teams) team;
+				NetworkController.neutPlayers[i].name = name;
+				NetworkController.neutPlayers.Add(NetworkController.neutPlayers[i]);
+				NetworkController.neutPlayers.Remove(NetworkController.neutPlayers[i]);
+				break;
+			}
+		}
+
+		if (PhotonView.Find(vID).GetComponent<PhotonView>().isMine)
+			photonView.RPC("SetPlayerName", PhotonTargets.OthersBuffered, vID, pName);
+	}*/
 
 	void LinkSpawn(Vector3 spawnLoc, Char_AttributeScript.Teams team){
 

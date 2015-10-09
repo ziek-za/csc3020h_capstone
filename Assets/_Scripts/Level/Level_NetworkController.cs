@@ -1,10 +1,28 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+
+public struct PlayerInfo {
+	public PlayerInfo(string newName, int newRespID){
+		name = newName;
+		kills = 0;
+		deaths = 0;
+		team = Char_AttributeScript.Teams.NONE;
+		ping = 0;
+		respawnerID = newRespID;
+	}
+	public string name;
+	public int ping, kills, deaths;
+	public Char_AttributeScript.Teams team;
+	public int respawnerID;
+}
 
 public class Level_NetworkController : Photon.MonoBehaviour {
 
 	public Transform mapController;
 	public Transform respawner;
+
+	public List<PlayerInfo> bluePlayers, redPlayers, neutPlayers;
 
 	public static bool firstPlayer = false;
 
@@ -12,6 +30,9 @@ public class Level_NetworkController : Photon.MonoBehaviour {
 	void Start () {
 		//PhotonNetwork.ConnectUsingSettings("0.1");
 		//QualitySettings.vSyncCount = 1;
+		bluePlayers = new List<PlayerInfo>();
+		redPlayers = new List<PlayerInfo>();
+		neutPlayers = new List<PlayerInfo>();
 	}
 	
 	// Update is called once per frame
@@ -22,6 +43,8 @@ public class Level_NetworkController : Photon.MonoBehaviour {
 	{
 		Debug.Log("Connected to Room");
 		PhotonNetwork.Instantiate(respawner.name,Vector3.zero,Quaternion.identity,0);
+		PlayerInfo newPlayer = new PlayerInfo(_MainController.playerName, this.GetComponent<PhotonView>().viewID);
+		neutPlayers.Add(newPlayer);
 		
 		Map_TerrainController tc = Terrain.activeTerrain.GetComponent<Map_TerrainController>();
 		tc.SetTerrainHeightMap();
