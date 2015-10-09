@@ -24,7 +24,21 @@ public class Char_SelectChar : Photon.MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+		//End game - blue loses
+		if (gc.bluePoints.value <= 0){
+			EndGameRPC((int)Char_AttributeScript.Teams.RED);
+		}
+
+		//End game - red loses
+		if (gc.redPoints.value <= 0){
+			EndGameRPC((int)Char_AttributeScript.Teams.BLUE);
+		}
+
 		if(photonView.isMine){
+			//if (Input.GetKeyDown(KeyCode.Escape)){
+			//	Application.LoadLevel("Menu");
+			//}
 			if(!spawned){
 				// SOLDIER
 				if(classNo==0){
@@ -96,6 +110,31 @@ public class Char_SelectChar : Photon.MonoBehaviour {
 				}
 			}
 		}
+	}
+
+	[RPC] void EndGameRPC(int winningTeam){
+
+		gc.gameOverPanel.SetActive(true);
+		GameObject.Find("CharacterSelectionGUI").transform.localScale=new Vector3(0,0,0);
+		GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+		for (int i = 0; i < players.Length; i++){
+			Destroy(players[i]);
+		}
+		gc.scoreboard.anchoredPosition = new Vector2(0.0f,0.0f);
+		Screen.lockCursor = false;
+
+		if ((Char_AttributeScript.Teams)winningTeam == Char_AttributeScript.Teams.BLUE){
+			gc.redPoints.value = 0;
+			gc.winnerText.GetComponent<Text>().text = "BLUE TEAM WINS";
+			gc.winnerText.GetComponent<Text>().color = Color.blue;
+		} else {
+			gc.bluePoints.value = 0;
+			gc.winnerText.GetComponent<Text>().text = "RED TEAM WINS";
+			gc.winnerText.GetComponent<Text>().color = Color.red;
+		}
+
+		if (photonView.isMine)
+			photonView.RPC("EndGameRPC", PhotonTargets.OthersBuffered, winningTeam);
 	}
 
 	[RPC] void MovePlayerTeamList(string pName, int newTeam){

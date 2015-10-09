@@ -80,4 +80,5 @@ MonoBehaviour:
   - RotateLaserNetwork
   - MovePlayerTeamList
   - UpdateScoreboardKills
+  - EndGameRPC
   DisableAutoOpenWizard: 0

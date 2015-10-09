@@ -28,6 +28,9 @@ public class Level_GUIController : MonoBehaviour {
 			playersRed, playersBlue,
 			scoreBoardPlayerItem;
 
+		//GAME OVER MESSAGE
+	public GameObject gameOverPanel, winnerText;
+
 	public Image builderImage, thiefImage, soldierImage, shotIndicator,
 		// SOLDIER
 				soldierHUD, vortexIcon, explosionIcon,
@@ -190,6 +193,7 @@ public class Level_GUIController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+
 		if (internetGame){
 			gameStatsText.text = "Ping: " + PhotonNetwork.GetPing().ToString();
 		}
@@ -315,6 +319,10 @@ public class Level_GUIController : MonoBehaviour {
 		spawnPreviewCamera.gameObject.SetActive(true);
 		GameObject.Find("PickATeam").gameObject.SetActive(false);
 		SetUpLinkButtons();
+	}
+
+	public void onReturnToMenuButtonPress(){
+		Application.LoadLevel("Menu");
 	}
 
 	void LinkSpawn(Vector3 spawnLoc, Char_AttributeScript.Teams team){

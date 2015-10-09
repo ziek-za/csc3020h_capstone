@@ -386,9 +386,9 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 	[RPC] void KillPlayer(int vID){
 		//Lower your team's score when you die
 		if (PhotonView.Find(vID).gameObject.GetComponent<Char_AttributeScript>().team == Teams.BLUE){
-			PhotonView.Find(vID).gameObject.GetComponent<Char_AttributeScript>().HUD.bluePoints.value -= 5;
+			PhotonView.Find(vID).gameObject.GetComponent<Char_AttributeScript>().HUD.bluePoints.value -= 10;
 		} else if (PhotonView.Find(vID).gameObject.GetComponent<Char_AttributeScript>().team == Teams.RED){
-			PhotonView.Find(vID).gameObject.GetComponent<Char_AttributeScript>().HUD.redPoints.value -= 5;
+			PhotonView.Find(vID).gameObject.GetComponent<Char_AttributeScript>().HUD.redPoints.value -= 10;
 		} 
 
 		GameObject[] goList = GameObject.FindGameObjectsWithTag("Turret");
