@@ -77,7 +77,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 482654}
   - 54: {fileID: 5482654}
-  - 114: {fileID: 11482654}
   - 65: {fileID: 6582654}
   m_Layer: 0
   m_Name: map_rock_pile_2
@@ -141,7 +140,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 182654}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.15999997, y: 1.35000002, z: -43.0699997}
+  m_LocalPosition: {x: 72.9499969, y: 29.4699993, z: 18.4099998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 482646}
@@ -285,30 +284,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.62460136, y: 1, z: 3.48005295}
   m_Center: {x: .334400177, y: 0, z: -.556182861}
---- !u!114 &11482654
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 182654}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ownerId: 0
-  group: 0
-  prefixBackup: -1
-  observed: {fileID: 0}
-  synchronization: 0
-  onSerializeTransformOption: 3
-  onSerializeRigidBodyOption: 2
-  ownershipTransfer: 0
-  ObservedComponents: []
-  ObservedComponentsFoldoutOpen: 1
-  viewIdField: 0
-  instantiationId: -1
-  isRuntimeInstantiated: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
