@@ -22,6 +22,8 @@ public class Menu_GUIController : Photon.MonoBehaviour {
 
 	public bool internetGame = false; //Used when deciding whether to show the LAN/Online UI
 
+	const string alphaNum = "abcdefghijklmnopqrstuvwxyz0123456789";
+
 	//Used for cloud games
 	bool joinedLobby = false;
 
@@ -98,8 +100,13 @@ public class Menu_GUIController : Photon.MonoBehaviour {
 
 		if (!playerNameInput.text.Equals(""))
 			_MainController.playerName = playerNameInput.text;
-		else
-			_MainController.playerName = "default";
+		else {
+			_MainController.playerName = "default_";
+			for(int i = 0; i < 4; i++)
+			{
+				_MainController.playerName += alphaNum[Random.Range(0, alphaNum.Length)];
+			}
+		}
 
 		serverToJoin = serverName;
 		StopCoroutine(NetworkController.CheckLocalForPhoton());
@@ -114,9 +121,13 @@ public class Menu_GUIController : Photon.MonoBehaviour {
 
 		if (!playerNameInput.text.Equals(""))
 			_MainController.playerName = playerNameInput.text;
-		else
-			_MainController.playerName = "default";
-
+		else {
+			_MainController.playerName = "default_";
+			for(int i = 0; i < 4; i++)
+			{
+				_MainController.playerName += alphaNum[Random.Range(0, alphaNum.Length)];
+			}
+		}
 		serverToJoin = serverName;
 		JoinGameButtonClicked = true;
 	}
@@ -170,15 +181,18 @@ public class Menu_GUIController : Photon.MonoBehaviour {
 		} catch (System.Exception e){};
 	}
 
-	const string alphaNum = "abcdefghijklmnopqrstuvwxyz0123456789";
-
 	public void HostGameButtonClick(){
 		loadingScreen.SetActive(true);
 
 		if (!playerNameInput.text.Equals(""))
 			_MainController.playerName = playerNameInput.text;
-		else
-			_MainController.playerName = "default";
+		else {
+			_MainController.playerName = "default_";
+			for(int i = 0; i < 4; i++)
+			{
+				_MainController.playerName += alphaNum[Random.Range(0, alphaNum.Length)];
+			}
+		}
 		
 		if (!gameNameInput.text.Equals(""))
 			_MainController.gameName = gameNameInput.text;
@@ -204,8 +218,13 @@ public class Menu_GUIController : Photon.MonoBehaviour {
 
 			if (!playerNameInput.text.Equals(""))
 				_MainController.playerName = playerNameInput.text;
-			else
-				_MainController.playerName = "default";
+			else {
+				_MainController.playerName = "default_";
+				for(int i = 0; i < 4; i++)
+				{
+					_MainController.playerName += alphaNum[Random.Range(0, alphaNum.Length)];
+				}
+			}
 
 			StopCoroutine(NetworkController.CheckLocalForPhoton());
 			PhotonNetwork.Disconnect();

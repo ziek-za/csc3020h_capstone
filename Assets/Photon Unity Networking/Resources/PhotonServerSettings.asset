@@ -78,4 +78,6 @@ MonoBehaviour:
   - RepairTurret
   - LowerScore
   - RotateLaserNetwork
+  - MovePlayerTeamList
+  - UpdateScoreboardKills
   DisableAutoOpenWizard: 0

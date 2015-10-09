@@ -232,6 +232,7 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 		HUD.playerKilledLabel.text = "YOU JUST KILLED " + killedName;
 		//Invoke("DisableKillHUD",2f);
 		HUD.playerKilledLabel.CrossFadeAlpha(0,2,false);
+		UpdateScoreboardKills(playerName,killedName);
 	} 
 
 	// Update is called once per frame
@@ -309,6 +310,45 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 			if (Input.GetKey(KeyCode.M)){
 				Screen.lockCursor = true;
 			}
+		}
+	}
+
+	void KillCountTimeout(){
+		prevKillsToUpdate = "";
+		prevDeathsToUpdate = "";
+	}
+
+	string prevKillsToUpdate = "", prevDeathsToUpdate = "";
+	[RPC] void UpdateScoreboardKills(string killsToUpdate, string deathsToUpdate){
+		if (!(prevKillsToUpdate == prevKillsToUpdate && prevDeathsToUpdate == deathsToUpdate)) {
+			prevKillsToUpdate = killsToUpdate;
+			prevDeathsToUpdate = deathsToUpdate;
+			Invoke("KillCountTimeout",1f);
+			Level_NetworkController nc = HUD.NetworkController;
+			for (int i = 0; i < nc.redPlayers.Count; i++){
+				if (nc.redPlayers[i].name.Equals(killsToUpdate)){
+					nc.redPlayers[i].increaseKills();
+					Debug.Log("Kill update R " + killsToUpdate + " " + nc.redPlayers[i].kills);
+				}
+				if (nc.redPlayers[i].name.Equals(deathsToUpdate)){
+					nc.redPlayers[i].increaseDeaths();
+					Debug.Log("Kill death R " + deathsToUpdate + " " + nc.redPlayers[i].deaths);
+				} 
+			}
+			for (int i = 0; i < nc.bluePlayers.Count; i++){
+				if (nc.bluePlayers[i].name.Equals(killsToUpdate)){
+					nc.bluePlayers[i].increaseKills();
+					Debug.Log("Kill update B " + killsToUpdate + " " + nc.bluePlayers[i].kills);
+				}
+				if (nc.bluePlayers[i].name.Equals(deathsToUpdate)){
+					nc.bluePlayers[i].increaseDeaths();
+					Debug.Log("Kill death B " + deathsToUpdate + " " + nc.bluePlayers[i].deaths);
+				}
+			}
+			HUD.SetUpScoreboard();
+
+			if (photonView.isMine)
+				photonView.RPC("UpdateScoreboardKills", PhotonTargets.OthersBuffered, killsToUpdate, deathsToUpdate);
 		}
 	}
 
@@ -395,6 +435,7 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 
 	[RPC] void SetPlayerName(int vID, string pName){
 		PhotonView.Find(vID).GetComponent<Char_AttributeScript>().playerName = pName;
+
 		if (photonView.isMine)
 			photonView.RPC("SetPlayerName", PhotonTargets.OthersBuffered, vID, pName);
 	}

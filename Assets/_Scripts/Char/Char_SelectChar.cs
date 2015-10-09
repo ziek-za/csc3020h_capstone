@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class Char_SelectChar : Photon.MonoBehaviour {
@@ -12,10 +13,13 @@ public class Char_SelectChar : Photon.MonoBehaviour {
 	public static Vector3 spawnLocation = Vector3.zero;
 
 	private Level_GUIController gc;
+	private Level_NetworkController nc;
 	// Use this for initialization
 	void Start () {
 		// initialize the GUI Controller object
 		gc = GameObject.Find ("GUI Controller").GetComponent<Level_GUIController> ();
+		// initialize the Network Controller object
+		nc = GameObject.Find ("Network Controller").GetComponent<Level_NetworkController> ();
 	}
 	
 	// Update is called once per frame
@@ -80,6 +84,10 @@ public class Char_SelectChar : Photon.MonoBehaviour {
 					gc.isDeadBool = false;
 					// Set active weapon
 					gc.SetWeaponIcon(0, 1);
+
+					//Send RPC telling other clients to move us in their Lists of players
+					MovePlayerTeamList(_MainController.playerName, (int) currentTeam);
+
 				} else {
 					// Turn the HUD off
 					gc.isDeadBool = true;
@@ -89,4 +97,41 @@ public class Char_SelectChar : Photon.MonoBehaviour {
 			}
 		}
 	}
+
+	[RPC] void MovePlayerTeamList(string pName, int newTeam){
+
+		nc = GameObject.Find ("Network Controller").GetComponent<Level_NetworkController> ();
+		gc = GameObject.Find ("GUI Controller").GetComponent<Level_GUIController> ();
+		//If we join after other players
+		if (nc.neutPlayers == null) {
+			nc.neutPlayers = new List<PlayerInfo>();
+			for (int i = 0; i < PhotonNetwork.playerList.Length - 1; i++){
+				PlayerInfo newPlayer = new PlayerInfo("blank_name");
+				nc.neutPlayers.Add(newPlayer);
+			}
+		}
+
+		Debug.Log(pName + " " + newTeam.ToString());
+		for (int i = 0; i < nc.neutPlayers.Count; i++){
+			if (nc.neutPlayers[i].name == _MainController.playerName || nc.neutPlayers[i].name == "blank_name"){
+				PlayerInfo pi = nc.neutPlayers[i];
+				nc.neutPlayers.Remove(pi);
+				pi.team = (Char_AttributeScript.Teams)newTeam;
+				pi.name = pName;
+				//pi.photonPlayerName = pName;
+				if (pi.team == Char_AttributeScript.Teams.BLUE)
+					nc.bluePlayers.Add(pi);
+				else
+					nc.redPlayers.Add(pi);
+				break;
+			}
+		}
+
+		gc.SetUpScoreboard();
+		
+		if (photonView.isMine)
+			photonView.RPC("MovePlayerTeamList", PhotonTargets.OthersBuffered, pName, newTeam);
+	}
+
+
 }
