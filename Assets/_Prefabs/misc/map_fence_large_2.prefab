@@ -59,7 +59,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 403762}
-  - 114: {fileID: 11403764}
   - 54: {fileID: 5403764}
   - 65: {fileID: 6503764}
   m_Layer: 0
@@ -111,8 +110,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 103762}
-  m_LocalRotation: {x: 0, y: .998941481, z: 0, w: -.0460002422}
-  m_LocalPosition: {x: -34.3400002, y: 1.44000006, z: 2.72000003}
+  m_LocalRotation: {x: 0, y: .858487189, z: 0, w: -.512835145}
+  m_LocalPosition: {x: 9.60000038, y: 1.39999998, z: 53.9000015}
   m_LocalScale: {x: .371244967, y: .371244997, z: .371245027}
   m_Children:
   - {fileID: 403760}
@@ -228,30 +227,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 11.9899998, y: 6.69999981, z: .270000011}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &11403764
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 103762}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ownerId: 0
-  group: 0
-  prefixBackup: -1
-  observed: {fileID: 0}
-  synchronization: 0
-  onSerializeTransformOption: 3
-  onSerializeRigidBodyOption: 2
-  ownershipTransfer: 0
-  ObservedComponents: []
-  ObservedComponentsFoldoutOpen: 1
-  viewIdField: 0
-  instantiationId: -1
-  isRuntimeInstantiated: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
