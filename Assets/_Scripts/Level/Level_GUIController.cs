@@ -8,7 +8,7 @@ public class Level_GUIController : MonoBehaviour {
 	public Text healthText, energyText;
 	public enum classes {SOLDIER, THIEF, BUILDER, NONE};
 	public classes GUIClass = classes.NONE;
-
+	public RectTransform scoreboard;
 	public Slider bluePoints;
 	public Slider redPoints;
 	private float decTimer = 0f;
@@ -16,7 +16,9 @@ public class Level_GUIController : MonoBehaviour {
 	public Text redCountText;
 	public Text blueCountText;
 
-	public GameObject shotIndicatorPivot, HUDPivot;
+	public GameObject shotIndicatorPivot, HUDPivot,
+		// SCOREBOARD
+				playersRed, playersBlue;
 	public Image builderImage, thiefImage, soldierImage, shotIndicator,
 		// SOLDIER
 				soldierHUD, vortexIcon, explosionIcon,
@@ -138,6 +140,14 @@ public class Level_GUIController : MonoBehaviour {
 				redPoints.value = redPoints.value - (int.Parse(blueCountText.text) - int.Parse(redCountText.text));
 				decTimer -= 1;
 			}
+		}
+		// Show scoreboard
+		if (Input.GetKey(KeyCode.Tab)) {
+			scoreboard.anchoredPosition = new Vector2(0.0f,
+			                                  0.0f);
+		} else {
+			scoreboard.anchoredPosition = new Vector2(-245.0f,
+			                                          0.0f);
 		}
 	}
 	// Used to reset all cooldowns
