@@ -343,7 +343,8 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 	[RPC] void TurnOffColliders(int vID){
 		PhotonView.Find(vID).GetComponent<CapsuleCollider>().enabled = false;
 		PhotonView.Find(vID).GetComponentInChildren<SphereCollider>().enabled = false;
-		PhotonView.Find(vID).transform.position = new Vector3(-1000,-1000,-1000);
+		PhotonView.Find(vID).rigidbody.isKinematic = true;
+		//PhotonView.Find(vID).transform.position = new Vector3(-1000,-1000,-1000);
 		if (photonView.isMine)
 			photonView.RPC("TurnOffColliders", PhotonTargets.OthersBuffered, vID);
 	}
