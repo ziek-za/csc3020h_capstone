@@ -39,6 +39,7 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 	public Map_LinkScript currentLink;
 
 	bool prevWeaponGlove = false, prevWeaponRL = false;
+	float respawnTimer = -10f;
 
 	// Use this for initialization
 	void Start () {
@@ -204,19 +205,21 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 	}
 
 	void ChangeWeapons(){
-		if (Input.GetButtonDown("1")){
-			NetworkChangeWeapons(transform.GetComponent<PhotonView>().viewID,1);
-			// Change weapon
-			HUD.SetWeaponIcon(current_class, 1);
-		} else if (Input.GetButtonDown("2")){
-			NetworkChangeWeapons(transform.GetComponent<PhotonView>().viewID,2);
-			// Change weapon
-			HUD.SetWeaponIcon(current_class, 2);
-		} else if (Input.GetButton("3")){
-			if (weapon3.name.Equals("Builder_FP_glove")){
-				NetworkChangeWeapons(transform.GetComponent<PhotonView>().viewID,3);
+		if (!gameObject.GetComponent<Char_BasicMoveScript>().respawning){
+			if (Input.GetButtonDown("1")){
+				NetworkChangeWeapons(transform.GetComponent<PhotonView>().viewID,1);
 				// Change weapon
-				HUD.SetWeaponIcon(current_class, 3);
+				HUD.SetWeaponIcon(current_class, 1);
+			} else if (Input.GetButtonDown("2")){
+				NetworkChangeWeapons(transform.GetComponent<PhotonView>().viewID,2);
+				// Change weapon
+				HUD.SetWeaponIcon(current_class, 2);
+			} else if (Input.GetButton("3")){
+				if (weapon3.name.Equals("Builder_FP_glove")){
+					NetworkChangeWeapons(transform.GetComponent<PhotonView>().viewID,3);
+					// Change weapon
+					HUD.SetWeaponIcon(current_class, 3);
+				}
 			}
 		}
 	}
@@ -266,6 +269,7 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 			HUD.UpdateHUDEnergy(energy);
 			ChangeWeapons();
 			if (health <= 0 || Input.GetKey(KeyCode.P)){
+				respawnTimer = 5f;
 				if (currentLink != null){
 					ReduceCounter(currentLink.GetComponent<PhotonView>().viewID);
 				}
@@ -278,13 +282,13 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 					GetComponentInChildren<Weapon_BuilderGlove>().buildCrosshair.GetComponent<RawImage>().enabled = false;
 				} catch (System.NullReferenceException e){}
 
-				Screen.lockCursor=false;
-				GameObject.Find("CharacterSelectionGUI").transform.localScale=new Vector3(10,5,5);
-				HUD.spawnPreviewCamera.gameObject.SetActive(true);
-				Camera.main.GetComponent<BlurEffect>().enabled=true;
 				gameObject.GetComponent<Char_BasicMoveScript>().inVortex=true;
+				gameObject.GetComponent<Char_BasicMoveScript>().respawning=true;
+				weapon1.SetActive(false);
+				weapon2.SetActive(false);
+				weapon3.SetActive(false);
 				animInstance.anim.SetBool ("Dead", true);
-				StartCoroutine("KillPlayerWait",this.gameObject.GetComponent<PhotonView>().viewID);
+
 				//KillPlayer(this.gameObject.GetComponent<PhotonView>().viewID);
 				Char_SelectChar.classNo=10;
 				Respawner.spawned=false;
@@ -305,6 +309,22 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 					GetComponent<Ability_BuilderPlaceFoundations>().DamageBuildingBooster(-1000,GetComponent<Ability_BuilderPlaceFoundations>().currentBooster.GetComponent<PhotonView>().viewID);
 				} catch (System.Exception e){}
 
+			}
+
+			if (respawnTimer > 0){
+				respawnTimer -= Time.deltaTime;
+				HUD.respawnTimerText.gameObject.SetActive(true);
+				int seconds = Mathf.RoundToInt(respawnTimer);
+				if (seconds > 0)
+					HUD.respawnTimerText.text = seconds.ToString();
+			} else if (respawnTimer < 0 && respawnTimer != -10) {
+				GameObject.Find("CharacterSelectionGUI").transform.localScale=new Vector3(10,5,5);
+				HUD.spawnPreviewCamera.gameObject.SetActive(true);
+				Camera.main.GetComponent<BlurEffect>().enabled=true;
+				Screen.lockCursor=false;
+				StartCoroutine("KillPlayerWait",this.gameObject.GetComponent<PhotonView>().viewID);
+				respawnTimer = -10;
+				HUD.respawnTimerText.gameObject.SetActive(false);
 			}
 
 			if (Input.GetKey(KeyCode.M)){

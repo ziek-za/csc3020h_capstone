@@ -19,7 +19,7 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 	bool isJumping=false, inAir = false;
 	float clampYAxis = 90.0f;
 
-	public bool inVortex = false;
+	public bool inVortex = false, respawning = false;
 	float inVortexTime = 2;
 	private RaycastHit hit;
 
@@ -43,14 +43,17 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 		//Debug.Log(PhotonNetwork.networkingPeer.RoundTripTime);
 		if (photonView.isMine)
 		{
-			if (!inVortex)
-				InputMovement();
-			else if (!IsInvoking("EnableKeys"))
-				Invoke ("EnableKeys",inVortexTime);
-			//InputColorChange();
-			MouseView();
+			if (!respawning){
+				if (!inVortex)
+					InputMovement();
+				else if (!IsInvoking("EnableKeys"))
+					Invoke ("EnableKeys",inVortexTime);
+				//InputColorChange();
 
-			UpdateCameraPos();
+				MouseView();
+
+				UpdateCameraPos();
+			}
 			//SetSynchronizedValues
 		}
 

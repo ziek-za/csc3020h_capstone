@@ -2989,6 +2989,7 @@ MonoBehaviour:
   FPSCameraPos: {fileID: 429342}
   sniperRotationModifier: 0
   inVortex: 0
+  respawning: 0
 --- !u!114 &11450394
 MonoBehaviour:
   m_ObjectHideFlags: 1

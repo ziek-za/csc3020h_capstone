@@ -2381,7 +2381,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &124520
 GameObject:
   m_ObjectHideFlags: 1
@@ -6617,6 +6617,7 @@ MonoBehaviour:
   FPSCameraPos: {fileID: 409324}
   sniperRotationModifier: 0
   inVortex: 0
+  respawning: 0
 --- !u!114 &11424522
 MonoBehaviour:
   m_ObjectHideFlags: 1

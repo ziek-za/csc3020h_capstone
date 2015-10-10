@@ -9,7 +9,7 @@ public class Level_GUIController : MonoBehaviour {
 	public Level_NetworkController NetworkController;
 	public Char_AttributeScript.Teams localPlayerTeam = Char_AttributeScript.Teams.NONE;
 
-	public Text healthText, energyText;
+	public Text healthText, energyText, respawnTimerText;
 	public enum classes {SOLDIER, THIEF, BUILDER, NONE};
 	public classes GUIClass = classes.NONE;
 	public RectTransform scoreboard;
