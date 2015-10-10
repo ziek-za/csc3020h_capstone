@@ -29,10 +29,16 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 	public GameObject secondaryMuzzleFlash, secondaryFPSMuzzle, thirdPersonPistol, thirdPersonSecondary; 
 	public GameObject builderGloveMuzzle, builderGloveFPSPos, thirdPersonBuilderGlove;
 
+	public GameObject gloveEmitter, pistolMuzzleEmitter, secondaryMuzzleEmitter;
+
 	public Level_GUIController HUD;
 	Char_BasicMoveScript animInstance;
 	public SkinnedMeshRenderer armour;
 	public Char_SelectChar Respawner;
+	public AudioClip pain1, pain2, pain3;
+	bool hurtThreshold1,hurtThreshold2,hurtThreshold3,hurtThreshold4=false;
+	//public AudioSource audioAttrib;
+	public AudioSource audio;
 
 	public Map_LinkScript currentLink;
 
@@ -42,6 +48,7 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 	void Start () {
 
 		animInstance = GetComponent<Char_BasicMoveScript> ();
+		//audio = GetComponent<AudioSource> ();
 		HUD = GameObject.Find("GUI Controller").GetComponent<Level_GUIController>();
 
 		if (photonView.isMine){
@@ -54,16 +61,23 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 			pistolMuzzleFlash.transform.position = pistolFPSMuzzle.transform.position;
 			pistolMuzzleFlash.transform.rotation = Quaternion.identity;
 
+			pistolMuzzleEmitter.transform.position = pistolFPSMuzzle.transform.position;
+
 			secondaryMuzzleFlash.transform.parent = weapon2.transform;
 			secondaryMuzzleFlash.transform.position = secondaryFPSMuzzle.transform.position;
 			secondaryMuzzleFlash.transform.localRotation = Quaternion.identity;
 
-			if (builderGloveMuzzle && builderGloveMuzzle.transform.GetComponentInChildren<ParticleSystem>()){
+			secondaryMuzzleEmitter.transform.position = secondaryFPSMuzzle.transform.position;
+
+			if (builderGloveMuzzle && !builderGloveMuzzle.transform.name.Equals("EmptyGameObject")){
 				builderGloveMuzzle.transform.parent = weapon3.transform;
 				builderGloveMuzzle.transform.position = builderGloveFPSPos.transform.position;
 				//builderGloveMuzzle.transform.localRotation = Quaternion.identity;
 				builderGloveMuzzle.transform.localRotation = Quaternion.Euler(new Vector3(15,60,290));
-				builderGloveMuzzle.transform.GetComponentInChildren<ParticleSystem>().transform.localPosition = Vector3.zero;
+				//builderGloveMuzzle.transform.GetComponentInChildren<ParticleSystem>().transform.localPosition = Vector3.zero;
+
+				gloveEmitter.transform.localPosition = new Vector3(0.3810017f, -0.261f, 1.086f);
+				//gloveEmitter.GetComponentInChildren<ParticleSystem>().Play();
 			}
 				
 
@@ -95,9 +109,9 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 				skfpWeapon2[i].enabled = true;
 			}
 			
-			SkinnedMeshRenderer[] skfpBuilderGlove = weapon3.GetComponentsInChildren<SkinnedMeshRenderer>();
-			for (int i = 0; i < skfpBuilderGlove.Length; i++){
-				skfpBuilderGlove[i].enabled = true;
+			MeshRenderer[] fpBuilderGlove = weapon3.GetComponentsInChildren<MeshRenderer>();
+			for (int i = 0; i < fpBuilderGlove.Length; i++){
+				fpBuilderGlove[i].enabled = true;
 			}
 
 			if(team == Teams.RED){
@@ -255,6 +269,21 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 			HUD.UpdateHUDHealth(health);
 			HUD.UpdateHUDEnergy(energy);
 			ChangeWeapons();
+			//Determining when to play hurt sounds
+			/*if(health > 100 && health <125 && !hurtThreshold1){
+				playHurtSound();
+				hurtThreshold1=true;
+			}else if(health > 75 && !hurtThreshold2){
+				playHurtSound();
+				hurtThreshold2=true;
+			}else if(health > 40 && !hurtThreshold3){
+				playHurtSound();
+				hurtThreshold3=true;
+			}else if(health > 20 && !hurtThreshold4){
+				playHurtSound();
+				hurtThreshold4=true;
+			}*/
+
 			if (health <= 0 || Input.GetKey(KeyCode.P)){
 				if (currentLink != null){
 					ReduceCounter(currentLink.GetComponent<PhotonView>().viewID);
@@ -301,6 +330,29 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 			}
 		}
 	}
+
+	void playHurtSound(){
+		int randomChance = Random.Range (1, 4);
+		if(randomChance==1){
+			int randomSound = Random.Range (1, 3);
+			if (randomSound == 1) {
+				//GameObject hurtSound = AudioSource.PlayClipAtPoint(pain1,transform.position) as GameObject;
+				audio.PlayOneShot(pain1);
+				//hurtSound.transform.SetParent(transform);
+			}
+			else if(randomSound==2){
+				//GameObject hurtSound = AudioSource.PlayClipAtPoint(pain2,transform.position) as GameObject;
+				//hurtSound.transform.SetParent(transform);
+				audio.PlayOneShot(pain2);
+			}
+			else if(randomSound==3){
+				//GameObject hurtSound = AudioSource.PlayClipAtPoint(pain3,transform.position) as GameObject;
+				//hurtSound.transform.SetParent(transform);
+				audio.PlayOneShot(pain3);
+			}
+		}
+	}
+
 
 	[RPC] void ReduceCounter(int linkID){
 		PhotonView.Find(linkID).GetComponent<Map_LinkScript>().PlayerDeathMethod(collider);
@@ -353,6 +405,7 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 	}
 
 	public void ChangeHP(int amount, Vector3 shooterPos){
+		playHurtSound ();
 		health += amount;
 
 		if (photonView.isMine){

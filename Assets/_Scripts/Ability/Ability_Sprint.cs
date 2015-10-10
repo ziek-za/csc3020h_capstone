@@ -3,12 +3,17 @@ using System.Collections;
 
 public class Ability_Sprint : Photon.MonoBehaviour {
 	public int energyCost = 1;
+	public AudioClip footsteps_sprint;
+	AudioSource audio;
 	
 	bool startedSprint = false;
 	ParticleSystem[] sprintEffects;
 
 	// Use this for initialization
 	void Start () {
+
+		audio = GetComponent<AudioSource> ();
+		audio.clip = footsteps_sprint;
 		try {
 			sprintEffects = GetComponentsInChildren<ParticleSystem>();
 		} catch (System.Exception e){}
@@ -27,6 +32,7 @@ public class Ability_Sprint : Photon.MonoBehaviour {
 		if(photonView.isMine){
 			if (Input.GetButton("Ability 2") && transform.GetComponent<Char_AttributeScript>().energy >= energyCost){
 				if(!transform.GetComponent<Char_AttributeScript> ().buffs.Contains ("sprint")){
+					transform.GetComponent<Char_BasicMoveScript>().sprint= true;
 					transform.GetComponent<Char_BasicMoveScript>().moveSpeed += 20;
 					transform.GetComponent<Char_AttributeScript>().buffs.Add("sprint");
 					startedSprint = true;
@@ -66,6 +72,7 @@ public class Ability_Sprint : Photon.MonoBehaviour {
 		if (transform.GetComponent<Char_AttributeScript> ().buffs.Contains ("sprint")) {
 			transform.GetComponent<Char_AttributeScript>().buffs.Remove("sprint");
 			transform.GetComponent<Char_BasicMoveScript>().moveSpeed-=20;
+			transform.GetComponent<Char_BasicMoveScript>().sprint= false;
 		}
 	}
 }

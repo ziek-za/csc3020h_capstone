@@ -145,7 +145,8 @@ public class Ability_BuilderPlaceFoundations : Photon.MonoBehaviour {
 					distanceIndicator.transform.GetComponent<MeshRenderer> ().enabled = false;
 					boosterOffCooldown = false;
 					GameObject booster = PhotonNetwork.Instantiate(boosterFoundation.name,
-					                                              distanceIndicator.transform.position,distanceIndicator.transform.rotation,0);
+					                                               distanceIndicator.transform.position + distanceIndicator.transform.forward
+					                                               ,distanceIndicator.transform.rotation,0);
 					SetBoxTeam (booster.GetComponent<PhotonView>().viewID,gameObject.GetComponent<PhotonView>().viewID,(int)transform.GetComponent<Char_AttributeScript>().team);
 				}
 				//GameObject link = PhotonNetwork.Instantiate(linkFoundation.name,transform.position,Quaternion.identity,0);

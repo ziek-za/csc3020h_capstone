@@ -24,26 +24,6 @@ public class Weapon_RocketLauncher : Char_BasicShootScript {
 	// Update is called once per frame
 	void Update () {
 
-		/*
-		if(photonView.isMine && Input.GetButtonDown("Fire1")){
-			Debug.Log("Rotate");
-
-			Quaternion rotToTarget = Quaternion.Euler(new Vector3(0,-60,0) + charMesh.transform.rotation.eulerAngles);
-			charMesh.transform.rotation = Quaternion.Slerp(charMesh.transform.rotation, 
-			                                                    rotToTarget, 1f * Time.deltaTime);
-
-			charMesh.transform.Rotate(new Vector3(0,-70,0));
-		} else if(photonView.isMine && Input.GetButtonUp("Fire1")){
-			Debug.Log("Rotate back");
-
-			Quaternion rotToTarget = Quaternion.Euler(new Vector3(0,60,0) + charMesh.transform.rotation.eulerAngles);
-			charMesh.transform.rotation = Quaternion.Slerp(charMesh.transform.rotation, 
-			                                                    rotToTarget, 1f * Time.deltaTime);
-
-			charMesh.transform.Rotate(new Vector3(0,70,0));
-		}
-		*/
-
 		if(photonView.isMine) {
 			if(Input.GetButton("Fire1")){
 				base.animInstance.anim.SetBool("Shooting", true);

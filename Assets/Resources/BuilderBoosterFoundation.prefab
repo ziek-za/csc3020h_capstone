@@ -126,8 +126,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   required: 30
-  completedBuilding: {fileID: 115706, guid: b227f386c460072418dcd64c66d8148a, type: 2}
+  completedBuilding: {fileID: 158772, guid: 188bb7c961607224e9c37401ae9ea7ec, type: 2}
   currentTeam: 0
+  whoBuiltMe: {fileID: 0}
 --- !u!198 &19860544
 ParticleSystem:
   m_ObjectHideFlags: 1

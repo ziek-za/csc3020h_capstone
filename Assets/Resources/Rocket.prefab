@@ -33,6 +33,7 @@ GameObject:
   - 114: {fileID: 11415802}
   - 114: {fileID: 11440554}
   - 114: {fileID: 11443868}
+  - 82: {fileID: 8234526}
   m_Layer: 0
   m_Name: Rocket
   m_TagString: Untagged
@@ -278,6 +279,64 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!82 &8234526
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 152258}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 3.5170002
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!114 &11415802
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -317,6 +376,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosion: {fileID: 127274, guid: 131e0a8013426c946a78b5807e06629f, type: 2}
   whoFiredMe: {fileID: 0}
+  fire_rocket: {fileID: 8300000, guid: 6645527d61e153843b6f5d2f2024dc89, type: 3}
+  fire_rocketTrail: {fileID: 8300000, guid: 8a4bce7e5e8ad6c4a9845ca9ab7d1928, type: 3}
 --- !u!114 &11440554
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -331,10 +392,10 @@ MonoBehaviour:
   m_PositionModel:
     SynchronizeEnabled: 1
     TeleportEnabled: 1
-    TeleportIfDistanceGreaterThan: 3
+    TeleportIfDistanceGreaterThan: 10
     InterpolateOption: 4
     InterpolateMoveTowardsSpeed: 10
-    InterpolateLerpSpeed: 40
+    InterpolateLerpSpeed: 50
     InterpolateMoveTowardsAcceleration: 2
     InterpolateMoveTowardsDeceleration: 2
     InterpolateSpeedCurve:

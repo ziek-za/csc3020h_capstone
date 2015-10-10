@@ -93,7 +93,8 @@ public class Level_GUIController : MonoBehaviour {
 				blueColors.colorMultiplier = 1;
 				tempButton.GetComponent<Button>().colors = blueColors;
 				tempButton.interactable = true;
-				blueCountText.text = (int.Parse(blueCountText.text) + 1).ToString();
+				if (!links[i].GetComponent<Ability_BuilderLink>())
+					blueCountText.text = (int.Parse(blueCountText.text) + 1).ToString();
 			} else if (linkTeam == Char_AttributeScript.Teams.RED){
 				ColorBlock redColors = new ColorBlock();
 				redColors.normalColor = Color.red;
@@ -102,7 +103,8 @@ public class Level_GUIController : MonoBehaviour {
 				redColors.colorMultiplier = 1;
 				tempButton.GetComponent<Button>().colors = redColors;
 				tempButton.interactable = true;
-				redCountText.text = (int.Parse(redCountText.text) + 1).ToString();
+				if (!links[i].GetComponent<Ability_BuilderLink>())
+					redCountText.text = (int.Parse(redCountText.text) + 1).ToString();
 			} else {
 				ColorBlock neutColors = new ColorBlock();
 				neutColors.normalColor = Color.black;
@@ -128,14 +130,12 @@ public class Level_GUIController : MonoBehaviour {
 			decTimer += Time.deltaTime;
 			if (decTimer > 1){
 				bluePoints.value = bluePoints.value - (int.Parse(redCountText.text) - int.Parse(blueCountText.text));
-				Debug.Log((int.Parse(redCountText.text) - int.Parse(blueCountText.text)));
 				decTimer -= 1;
 			}
 		} else if (int.Parse(redCountText.text) < int.Parse(blueCountText.text)){
 			decTimer += Time.deltaTime;
 			if (decTimer > 1){
 				redPoints.value = redPoints.value - (int.Parse(blueCountText.text) - int.Parse(redCountText.text));
-				Debug.Log((int.Parse(blueCountText.text) - int.Parse(redCountText.text)));
 				decTimer -= 1;
 			}
 		}

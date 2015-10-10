@@ -7,18 +7,16 @@ public class Ability_BuilderBooster : Photon.MonoBehaviour {
 	public Char_AttributeScript.Teams currentTeam;
 	public int health = 100;
 	public Ability_BuilderPlaceFoundations whoBuiltMe;
+	public GameObject[] partsToColour;
 
 	float boostCooldown = 1f;
 	float boostCooldownTimer = 1f;
 
 	Rigidbody currentBoost;
-
-	//Level_GUIController gui;
 	
 	// Use this for initialization
 	void Start () {
 		whoBuiltMe.currentBooster = this.gameObject;
-		transform.Rotate(25,0,0);
 
 		// Set HP on GUI for building
 		if (photonView.isMine)
@@ -66,12 +64,18 @@ public class Ability_BuilderBooster : Photon.MonoBehaviour {
 	
 	void InitBlue(){
 		currentTeam = Char_AttributeScript.Teams.BLUE;
-		this.GetComponent<MeshRenderer>().materials[0].color =  Color.blue;
+		//this.GetComponent<MeshRenderer>().materials[0].color =  Color.blue;
+		for (int i = 0; i < partsToColour.Length; i++){
+			partsToColour[i].GetComponent<MeshRenderer>().materials[0].color = Color.blue;
+		}
 	}
 	
 	void InitRed(){
 		currentTeam = Char_AttributeScript.Teams.RED;
-		this.GetComponent<MeshRenderer>().materials[0].color =  Color.red;
+		//this.GetComponent<MeshRenderer>().materials[0].color =  Color.red;
+		for (int i = 0; i < partsToColour.Length; i++){
+			partsToColour[i].GetComponent<MeshRenderer>().materials[0].color = Color.red;
+		}
 	}
 	
 	void KillSelf(){

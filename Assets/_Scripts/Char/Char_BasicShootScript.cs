@@ -12,20 +12,25 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 	public int damage = 10;
 
 	protected Char_BasicMoveScript animInstance;
+	protected Char_AttributeScript attribInstance;
 
 	public GameObject bulletHolePrefab;
 	public ParticleSystem muzzleFlash;
 	public ParticleSystem tracerEffect;
 	public float timeBetweenShots = 0.333333f;
 	public float weaponAccuracy = 1f; //Higher values = more accurate
+	public AudioClip fire_pistol;
+	public AudioClip fire_shotgun;
+	public AudioClip fire_rifle;
+	public AudioClip fire_glove;
+
+	public AudioSource audio;
 
 	//Variables for Camera Shake
 	protected Vector3 originPosition;
 	protected Quaternion originRotation;
 	protected float shake_decay;
 	protected float shake_intensity;
-	public AudioClip firePistol;
-	AudioSource audio;
 	
 	//Weapon accuracy is a public variable that can be changed in Unity
 	// 100 ~ perfect accuracy
@@ -40,9 +45,10 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 
 	protected void Start(){
 		animInstance = GetComponentInParent<Char_BasicMoveScript> ();
+		attribInstance = GetComponentInParent<Char_AttributeScript> ();
 		hitCrosshair = GameObject.Find ("EnemyHitCrosshair");
 		headshotCrosshair = GameObject.Find ("EnemyHeadshotCrosshair");
-		audio = GetComponent<AudioSource> ();
+		//audio = GetComponent<AudioSource>();
 	}
 
 	protected void DisableHitCrosshair(){
@@ -90,7 +96,12 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 				shake_intensity -= shake_decay;
 			}
 		}*/
-
+		/*Debug.Log (this.GetComponentInParent<Char_AttributeScript>().playerName);
+		if (Time.time >= shotCooldown && Input.GetButton ("Fire1")) {
+						audio.PlayOneShot (fire_pistol);
+			Debug.Log("Playing pistol fire sound");
+				}
+*/
 		if(photonView.isMine) {
 			if(Input.GetButton("Fire1")){
 				animInstance.anim.SetBool("Shooting", true);
@@ -99,12 +110,32 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 			}
 		}
 
+
 		if(photonView.isMine && Time.time >= shotCooldown && Input.GetButton("Fire1")) {
 			//CameraShake(0.03f,0.01f);
+			// Determining sound is played:
+			Debug.Log(attribInstance.current_class + " " +attribInstance.weapon1.GetActive() + " "+attribInstance.weapon2.GetActive() + " " +attribInstance.weapon3.GetActive());
+			if(attribInstance.weapon1.GetActive()){//If pistol
+				AudioSource.PlayClipAtPoint(fire_pistol,transform.position);
+			}
+			else if(attribInstance.weapon2.GetActive()){//If secondary weapon
+				if(attribInstance.current_class == Char_AttributeScript.Class.BUILDER){//If it is builder
+					AudioSource.PlayClipAtPoint(fire_shotgun,transform.position);
+				}
+				else if(attribInstance.current_class == Char_AttributeScript.Class.SOLDIER){//If it is soldier
+					//Handled by itself seperately
+				}
+				else if(attribInstance.current_class == Char_AttributeScript.Class.THIEF){//If it is thief
+					AudioSource.PlayClipAtPoint(fire_rifle,transform.position);
+				}
+			}
+			else if(attribInstance.weapon3.GetActive()){//If glove (only builder)
+				if(attribInstance.current_class == Char_AttributeScript.Class.BUILDER){//Only builder has 3rd weapon
+					AudioSource.PlayClipAtPoint(fire_glove,transform.position);
+				}
+			}
 			shotCooldown = Time.time + timeBetweenShots;
 			PlayMuzzleFlash(photonView.viewID);
-			audio.PlayOneShot(firePistol);
-			tracerEffect.Play();
 
 			//First cast a perfectly accurate ray to get the distance to target
 			Vector2 screenCenterPoint = new Vector2(Screen.width/2, Screen.height/2);
@@ -196,7 +227,10 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 	}
 
 	[RPC] protected void PlayMuzzleFlash(int vID){
-		PhotonView.Find(vID).transform.GetComponent<ParticleSystem>().Play();
+		Char_BasicShootScript bss = PhotonView.Find (vID).transform.GetComponent<Char_BasicShootScript> ();
+		//bss.audio.PlayOneShot(bss.fire_pistol);
+		bss.muzzleFlash.Play();
+		bss.tracerEffect.Play();
 		if (photonView.isMine)
 			photonView.RPC("PlayMuzzleFlash", PhotonTargets.OthersBuffered, vID);
 	}

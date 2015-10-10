@@ -10,12 +10,15 @@ public class Ability_BuilderTurret : Photon.MonoBehaviour {
 	float timeBetweenShots = 0.1f;
 	float shotCooldown;	
 
-	int damage = 9;
+	int damage = 5;
+	int localTargetID = -1;
+	string localTargetName = "";
 
 	public ParticleSystem muzzleFlash, tracerEffect;
 	
 	public List<GameObject> trackedEnemies;
 	public Ability_BuilderPlaceFoundations whoBuiltMe;
+	public GameObject[] partsToColour;
 
 	Quaternion originalRotation, leftPanEdge, rightPanEdge, currentEdge;
 
@@ -95,18 +98,23 @@ public class Ability_BuilderTurret : Photon.MonoBehaviour {
 			KillSelf();
 		}
 
+		if (!PhotonView.Find(localTargetID) && 
+		    whoBuiltMe.GetComponent<PhotonView>().isMine &&
+		    localTargetID != -1){
+			whoBuiltMe.GetComponent<Char_AttributeScript>().EnableKillHUD(localTargetName);
+			localTargetID = -1;
+		}
+
 		if (trackedEnemies.Count > 0){
 			for (int i = 0; i < trackedEnemies.Count; i++){
 				RaycastHit hit;
 				Ray enemyTrackingRay = new Ray(transform.position, trackedEnemies[i].transform.position-transform.position);
 				if(Physics.Raycast(enemyTrackingRay, out hit, 100f)){
-					Debug.Log(hit.transform.name);
-
 					if (hit.transform.GetComponent<Char_AttributeScript>()){ //If we have a target player
 						Vector3 offsetPos = transform.position - trackedEnemies[i].transform.position;
 						Quaternion rotToTarget = Quaternion.LookRotation(offsetPos);
 						float amountToRotate = Quaternion.Angle( transform.rotation, rotToTarget );
-						transform.rotation = Quaternion.Slerp( ClampRotation(transform.rotation), rotToTarget, 5f * Time.deltaTime);
+						transform.rotation = Quaternion.Slerp( ClampRotation(transform.rotation), rotToTarget, 20f * Time.deltaTime);
 
 						if (Time.time >= shotCooldown){
 							shotCooldown = Time.time + timeBetweenShots;
@@ -115,6 +123,20 @@ public class Ability_BuilderTurret : Photon.MonoBehaviour {
 							                                                     5f);
 							PlayMuzzleFlash(photonView.viewID);
 							DamagePlayer(-damage, hit.transform.GetComponent<PhotonView>().viewID, transform.position);
+
+							if (localTargetID != hit.transform.GetComponent<PhotonView>().viewID){
+								localTargetID = hit.transform.GetComponent<PhotonView>().viewID;
+								localTargetName = hit.transform.GetComponent<Char_AttributeScript>().playerName;
+							}
+
+							//Debug.Log(hit.transform.gameObject.GetComponent<Char_AttributeScript>().health);
+
+							/*
+							if (hit.transform.gameObject.GetComponent<Char_AttributeScript>().health <= 60 && whoBuiltMe.GetComponent<PhotonView>().isMine){
+								Debug.Log("Kill message");
+								localTargetID *= -1;
+								whoBuiltMe.GetComponent<Char_AttributeScript>().EnableKillHUD(hit.transform.GetComponent<Char_AttributeScript>().playerName);
+							}*/
 						}
 						break; //Turret must only have a single target at a time
 						
@@ -161,11 +183,17 @@ public class Ability_BuilderTurret : Photon.MonoBehaviour {
 	void InitBlue(){
 		currentTeam = Char_AttributeScript.Teams.BLUE;
 		this.GetComponent<MeshRenderer>().materials[0].color =  Color.blue;
+		for (int i = 0; i < partsToColour.Length; i++){
+			partsToColour[i].GetComponent<MeshRenderer>().materials[0].color = Color.blue;
+		}
 	}
 
 	void InitRed(){
 		currentTeam = Char_AttributeScript.Teams.RED;
-		this.GetComponent<MeshRenderer>().materials[0].color =  Color.red;
+		this.GetComponent<MeshRenderer>().materials[0].color = Color.red;
+		for (int i = 0; i < partsToColour.Length; i++){
+			partsToColour[i].GetComponent<MeshRenderer>().materials[0].color =  Color.red;
+		}
 	}
 
 	

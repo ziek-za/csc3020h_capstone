@@ -14,6 +14,8 @@ public class Ability_Teleport : Photon.MonoBehaviour {
 	public Material redMat;
 
 	public ParticleSystem teleportOut, teleportIn;
+	public AudioSource audio;
+	public AudioClip teleport;
 
 	Vector3 teleportDirection;
 	bool offCooldown = true;
@@ -114,6 +116,7 @@ public class Ability_Teleport : Photon.MonoBehaviour {
 	}
 
 	[RPC] void TeleoutEffect(Vector3 position){
+		audio.PlayOneShot (teleport);
 		GameObject teleOut = Instantiate(teleportOut.gameObject,position,Quaternion.identity) as GameObject;
 		teleOut.GetComponent<ParticleSystem>().Play();
 		Destroy(teleOut,2f);

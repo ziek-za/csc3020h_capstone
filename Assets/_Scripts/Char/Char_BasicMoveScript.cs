@@ -8,10 +8,16 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 	//float decreaseFactor = 10.0f;
 	public Animator anim;
 	public float moveSpeed = 10.0f;
+	public bool sprint=false;
 	public float mouseSpeed = 3.0f;
 	public float jumpSpeed=5.0f;
 	public Transform FPSCameraPos;
 	public float sniperRotationModifier = 0f;
+	public AudioClip footsteps;
+	public AudioClip footsteps_sprint;
+	public AudioClip jump;
+	public AudioSource jumpAudio;
+	AudioSource audio;
 
 	//public Transform currentPlayer;
 
@@ -25,6 +31,10 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		audio = GetComponent<AudioSource> ();
+		audio.clip = footsteps;
+
+
 		anim=GetComponentInChildren<Animator>();
 		if (photonView.isMine) {
 
@@ -74,7 +84,7 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 		if (photonView.isMine)
 			photonView.RPC("ChangeColorTo", PhotonTargets.OthersBuffered, color);
 	}
-
+	
 	void InputMovement()
 	{	
 		float h = Input.GetAxis ("Horizontal");
@@ -87,7 +97,7 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 		}else{
 			anim.SetFloat ("Speed",0);
 		}
-		
+
 		if (Physics.Raycast(transform.position, Vector3.down,out hit, 1.25f)) {
 			Debug.DrawLine(transform.position, hit.point, Color.red);
 			inAir = false;
@@ -96,23 +106,38 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 			//In air
 			inAir = true;
 			anim.SetBool("Jumping",true);
-			//anim.SetBool("Jumping",true);
-		};
+		}
 
 		if(Input.GetButtonDown("Jump") && inAir == false){
+			jumpAudio.PlayOneShot(jump);
 			anim.SetBool("Jumping",true);
 			//isJumping=true;
 			Vector3 v3 = rigidbody.velocity;
 			v3.y=jumpSpeed;
 			rigidbody.velocity=v3;
-		} /*else if (inAir && transform.rigidbody.velocity.y < -4f){//Assumed to be falling
-			anim.SetBool("Falling",true);
-			//isJumping = true;
-		}else{
-			anim.SetBool("Falling",false);
-		}*/
+		} 
 
-
+		//Determining footsteps sound
+		if(audio.isPlaying==false){
+			audio.Play ();
+		}
+		//Debug.Log(audio.isPlaying+" "+audio.pitch+" "+audio.clip);
+		if (anim.GetBool("Jumping")==true) {
+			audio.pitch=0;
+		}
+		else if(anim.GetFloat ("Speed")>=0.05f){
+			audio.pitch=1;
+			if(sprint){
+				audio.clip=footsteps_sprint;
+				//audio.pitch=0;
+			}else{
+				//audio.pitch=1;
+				audio.clip=footsteps;
+			}
+		}
+		else if(anim.GetFloat("Speed")<=0.05f){
+			audio.pitch=0;
+		}
 	}
 
 	void MouseView(){

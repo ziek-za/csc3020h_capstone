@@ -2,7 +2,16 @@ fileFormatVersion: 2
 guid: 98c885136e314544580f8c69057aee38
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - hitCrosshair: {instanceID: 0}
+  - headshotCrosshair: {instanceID: 0}
+  - bulletHolePrefab: {instanceID: 0}
+  - muzzleFlash: {instanceID: 0}
+  - tracerEffect: {instanceID: 0}
+  - fire_pistol: {fileID: 8300000, guid: 799ed54a4962c574485752a74b551a41, type: 3}
+  - fire_shotgun: {fileID: 8300000, guid: f0689737d98a20a4e99ca1c10375fbee, type: 3}
+  - fire_rifle: {fileID: 8300000, guid: 0334302d7774d8043949c382e27ddc29, type: 3}
+  - fire_glove: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -447,7 +447,7 @@ Transition:
   m_Name: 
   m_SrcState: {fileID: 110219294}
   m_DstState: {fileID: 110231182}
-  m_TransitionDuration: .077922076
+  m_TransitionDuration: .0889943019
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 1
@@ -888,7 +888,7 @@ State:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Shooting
-  m_Speed: 1
+  m_Speed: 10
   m_CycleOffset: 0
   m_Motions:
   - {fileID: 7400000, guid: dd5462c460c06784c85c50dc4c21e5e3, type: 3}
@@ -1128,16 +1128,6 @@ StateMachine:
   - {x: -36, y: -156, z: 0}
   m_OrderedTransitions:
     data:
-      first: {fileID: 110249958}
-      second:
-      - {fileID: 110149960}
-    data:
-      first: {fileID: 110249960}
-      second:
-      - {fileID: 110149958}
-      - {fileID: 110166736}
-      - {fileID: 110155100}
-    data:
       first: {fileID: 0}
       second:
       - {fileID: 110137248}
@@ -1150,6 +1140,16 @@ StateMachine:
     data:
       first: {fileID: 110233944}
       second: []
+    data:
+      first: {fileID: 110249958}
+      second:
+      - {fileID: 110149960}
+    data:
+      first: {fileID: 110249960}
+      second:
+      - {fileID: 110149958}
+      - {fileID: 110166736}
+      - {fileID: 110155100}
     data:
       first: {fileID: 110243332}
       second:
@@ -1279,6 +1279,18 @@ StateMachine:
   - {x: 24, y: -168, z: 0}
   m_OrderedTransitions:
     data:
+      first: {fileID: 0}
+      second:
+      - {fileID: 110103450}
+    data:
+      first: {fileID: 110259146}
+      second:
+      - {fileID: 110180098}
+      - {fileID: 110187302}
+    data:
+      first: {fileID: 110240262}
+      second: []
+    data:
       first: {fileID: 110231182}
       second:
       - {fileID: 110179710}
@@ -1288,18 +1300,6 @@ StateMachine:
       - {fileID: 110181692}
       - {fileID: 110180782}
       - {fileID: 110151470}
-    data:
-      first: {fileID: 0}
-      second:
-      - {fileID: 110103450}
-    data:
-      first: {fileID: 110240262}
-      second: []
-    data:
-      first: {fileID: 110259146}
-      second:
-      - {fileID: 110180098}
-      - {fileID: 110187302}
     data:
       first: {fileID: 110269644}
       second:
