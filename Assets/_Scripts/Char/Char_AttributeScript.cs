@@ -241,7 +241,7 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (photonView.isMine){
-
+			Debug.Log(respawnTimer);
 			HUD.playerNameLabel.text = "";
 			//Get playerName
 			Vector2 screenCenterPoint = new Vector2(Screen.width/2, Screen.height/2);
@@ -268,7 +268,7 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 			HUD.UpdateHUDHealth(health);
 			HUD.UpdateHUDEnergy(energy);
 			ChangeWeapons();
-			if (health <= 0 || Input.GetKey(KeyCode.P)){
+			if ((health <= 0 || Input.GetKey(KeyCode.P))&&respawnTimer == -10){
 				respawnTimer = 5f;
 				if (currentLink != null){
 					ReduceCounter(currentLink.GetComponent<PhotonView>().viewID);
@@ -288,6 +288,7 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 				weapon2.SetActive(false);
 				weapon3.SetActive(false);
 				animInstance.anim.SetBool ("Dead", true);
+				TurnOffColliders(GetComponent<PhotonView>().viewID);
 
 				//KillPlayer(this.gameObject.GetComponent<PhotonView>().viewID);
 				Char_SelectChar.classNo=10;
@@ -318,13 +319,14 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 				if (seconds > 0)
 					HUD.respawnTimerText.text = seconds.ToString();
 			} else if (respawnTimer < 0 && respawnTimer != -10) {
+				HUD.respawnTimerText.gameObject.SetActive(false);
 				GameObject.Find("CharacterSelectionGUI").transform.localScale=new Vector3(10,5,5);
 				HUD.spawnPreviewCamera.gameObject.SetActive(true);
 				Camera.main.GetComponent<BlurEffect>().enabled=true;
 				Screen.lockCursor=false;
 				StartCoroutine("KillPlayerWait",this.gameObject.GetComponent<PhotonView>().viewID);
-				respawnTimer = -10;
-				HUD.respawnTimerText.gameObject.SetActive(false);
+				respawnTimer = -1;
+
 			}
 
 			if (Input.GetKey(KeyCode.M)){
@@ -336,6 +338,14 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 	void KillCountTimeout(){
 		prevKillsToUpdate = "";
 		prevDeathsToUpdate = "";
+	}
+
+	[RPC] void TurnOffColliders(int vID){
+		PhotonView.Find(vID).GetComponent<CapsuleCollider>().enabled = false;
+		PhotonView.Find(vID).GetComponentInChildren<SphereCollider>().enabled = false;
+		PhotonView.Find(vID).transform.position = new Vector3(-1000,-1000,-1000);
+		if (photonView.isMine)
+			photonView.RPC("TurnOffColliders", PhotonTargets.OthersBuffered, vID);
 	}
 
 	string prevKillsToUpdate = "", prevDeathsToUpdate = "";

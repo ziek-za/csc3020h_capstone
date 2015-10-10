@@ -81,4 +81,5 @@ MonoBehaviour:
   - MovePlayerTeamList
   - UpdateScoreboardKills
   - EndGameRPC
+  - TurnOffColliders
   DisableAutoOpenWizard: 0
