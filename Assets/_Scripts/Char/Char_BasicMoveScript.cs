@@ -12,6 +12,18 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 	public float jumpSpeed=5.0f;
 	public Transform FPSCameraPos;
 	public float sniperRotationModifier = 0f;
+	public AudioClip[] footstepsCement;
+	public AudioClip[] footstepsWood;
+	public AudioClip[] footstepsSand;
+	public AudioClip[] footstepsMetal;
+	public AudioClip jump;
+	public AudioClip moveFast;
+	public AudioSource jumpAudio;
+	bool step = true;
+	string terrainBelowTag;
+	AudioSource audio;
+	float audioLength;
+	AudioReverbZone[] reverbzones;
 
 	//public Transform currentPlayer;
 
@@ -25,6 +37,13 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		reverbzones = GetComponentsInChildren<AudioReverbZone> ();
+		for (int i = 0; i < reverbzones.Length; i++) {
+			reverbzones[i].gameObject.SetActive(false);
+				}
+		audio = GetComponent<AudioSource> ();
+
+
 		anim=GetComponentInChildren<Animator>();
 		if (photonView.isMine) {
 
@@ -77,7 +96,7 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 		if (photonView.isMine)
 			photonView.RPC("ChangeColorTo", PhotonTargets.OthersBuffered, color);
 	}
-
+	
 	void InputMovement()
 	{	
 		float h = Input.GetAxis ("Horizontal");
@@ -90,32 +109,72 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 		}else{
 			anim.SetFloat ("Speed",0);
 		}
-		
+
 		if (Physics.Raycast(transform.position, Vector3.down,out hit, 1.25f)) {
 			Debug.DrawLine(transform.position, hit.point, Color.red);
+			terrainBelowTag=hit.transform.tag;
 			inAir = false;
 			anim.SetBool("Jumping",false);
 		} else {
 			//In air
 			inAir = true;
 			anim.SetBool("Jumping",true);
-			//anim.SetBool("Jumping",true);
-		};
+		}
 
 		if(Input.GetButtonDown("Jump") && inAir == false){
+			jumpAudio.PlayOneShot(jump);
 			anim.SetBool("Jumping",true);
 			//isJumping=true;
 			Vector3 v3 = rigidbody.velocity;
 			v3.y=jumpSpeed;
 			rigidbody.velocity=v3;
-		} /*else if (inAir && transform.rigidbody.velocity.y < -4f){//Assumed to be falling
-			anim.SetBool("Falling",true);
-			//isJumping = true;
-		}else{
-			anim.SetBool("Falling",false);
-		}*/
+		} 
 
+		//Determining footsteps sound
 
+	if(anim.GetFloat ("Speed")>=0.05f && !anim.GetBool("Jumping") && step==true){
+			generateFootstep(terrainBelowTag);
+		}
+	}
+
+	IEnumerator waitFootsteps(){
+		yield return new WaitForSeconds (0.33f);
+		//yield return new WaitForSeconds (audio.clip.length);
+		step=true;
+		}
+
+	void generateFootstep(string terrainType){
+		audio.volume = 1;
+
+		if (terrainType == "Wood" && step==true) {
+			//Debug.Log("Wood");
+			step=false;
+			audio.clip=footstepsWood[Random.Range(0,footstepsWood.Length)];
+			audio.Play();
+			StartCoroutine (waitFootsteps ());
+		}
+		else if (terrainType == "Sand" && step==true) {
+			//Debug.Log("Cement");
+			Debug.Log (Time.time +" " + terrainType+" "+audio.clip);
+			step=false;
+			audio.clip=footstepsSand[Random.Range(0,footstepsSand.Length)];
+			audio.Play();
+			StartCoroutine (waitFootsteps ());
+		}
+		else if (terrainType == "Metal" && step==true) {
+			//Debug.Log("Metal");
+			step=false;
+			audio.clip=footstepsMetal[Random.Range(0,footstepsMetal.Length)];
+			audio.Play();
+			StartCoroutine (waitFootsteps ());
+		}
+		else{//Cement or untagged
+			step=false;
+			audio.clip=footstepsCement[Random.Range(0,footstepsCement.Length)];
+			audio.Play();
+			StartCoroutine (waitFootsteps ());
+		}
+		audioLength = audio.clip.length;
 	}
 
 	void MouseView(){
@@ -125,6 +184,69 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 
 		FPSCameraPos.transform.localRotation = Quaternion.Euler (mouseSensitivity + sniperRotationModifier, 0, 0);
 	}
+
+	void OnTriggerEnter(Collider other){
+		if (other.name == "reverbCave") {
+			for(int i = 0; i < reverbzones.Length;i++){
+				if(reverbzones[i].name=="CaveZone"){
+					reverbzones[i].gameObject.SetActive(true);
+				}
+			}
+		}
+			else if(other.name == "reverbBuilding"){
+				for(int i = 0; i < reverbzones.Length;i++){
+					if(reverbzones[i].name=="BuildingZone"){
+						reverbzones[i].gameObject.SetActive(true);
+					}
+				}
+			}
+		else if(other.name == "reverbRoom"){
+			for(int i = 0; i < reverbzones.Length;i++){
+				if(reverbzones[i].name=="RoomZone"){
+					reverbzones[i].gameObject.SetActive(true);
+				}
+			}
+		}
+		else if(other.name == "reverbCrane"){
+			for(int i = 0; i < reverbzones.Length;i++){
+				if(reverbzones[i].name=="MountainZone"){
+					reverbzones[i].gameObject.SetActive(true);
+				}
+			}
+		}
+		Debug.Log (other.name);
+	}
+
+	void OnTriggerExit(Collider other){
+		if (other.name == "reverbCave") {
+			for(int i = 0; i < reverbzones.Length;i++){
+				if(reverbzones[i].name=="CaveZone"){
+					reverbzones[i].gameObject.SetActive(false);
+				}
+			}
+		}
+		else if(other.name == "reverbBuilding"){
+			for(int i = 0; i < reverbzones.Length;i++){
+				if(reverbzones[i].name=="BuildingZone"){
+					reverbzones[i].gameObject.SetActive(false);
+				}
+			}
+		}
+		else if(other.name == "reverbRoom"){
+			for(int i = 0; i < reverbzones.Length;i++){
+				if(reverbzones[i].name=="RoomZone"){
+					reverbzones[i].gameObject.SetActive(false);
+				}
+			}
+		}
+		else if(other.name == "reverbCrane"){
+			for(int i = 0; i < reverbzones.Length;i++){
+				if(reverbzones[i].name=="MountainZone"){
+					reverbzones[i].gameObject.SetActive(false);
+				}
+			}
+		}
+		}
 
 	/*
 	void OnCollisionEnter(Collision other){

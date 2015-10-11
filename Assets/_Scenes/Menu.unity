@@ -1873,6 +1873,7 @@ MonoBehaviour:
   HasParticleSystem: 1
   DestroyFinal: 0
   particleSystem: {fileID: 2005227668}
+  explosion: {fileID: 0}
 --- !u!114 &25281918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4445,6 +4446,7 @@ MonoBehaviour:
   HasParticleSystem: 1
   DestroyFinal: 0
   particleSystem: {fileID: 1998911614}
+  explosion: {fileID: 0}
 --- !u!114 &37361970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7924,7 +7926,7 @@ GameObject:
   - 23: {fileID: 82725069}
   m_Layer: 0
   m_Name: Box005
-  m_TagString: Untagged
+  m_TagString: Crane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8174,7 +8176,7 @@ GameObject:
   - 23: {fileID: 92198903}
   m_Layer: 0
   m_Name: Box003
-  m_TagString: Untagged
+  m_TagString: Crane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10380,7 +10382,7 @@ GameObject:
   - 23: {fileID: 135000666}
   m_Layer: 0
   m_Name: Box010
-  m_TagString: Untagged
+  m_TagString: Crane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14095,7 +14097,7 @@ GameObject:
   - 23: {fileID: 192252029}
   m_Layer: 0
   m_Name: Box011
-  m_TagString: Untagged
+  m_TagString: Crane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15513,7 +15515,7 @@ GameObject:
   - 65: {fileID: 199824308}
   m_Layer: 0
   m_Name: map_fence_small_2
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15859,7 +15861,7 @@ GameObject:
   - 23: {fileID: 218251781}
   m_Layer: 0
   m_Name: Box016
-  m_TagString: Untagged
+  m_TagString: Crane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16346,7 +16348,7 @@ GameObject:
   - 23: {fileID: 233645746}
   m_Layer: 0
   m_Name: Box005
-  m_TagString: Untagged
+  m_TagString: Crane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19581,7 +19583,7 @@ GameObject:
   - 114: {fileID: 255496942}
   m_Layer: 0
   m_Name: map_blockade_1
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19659,6 +19661,7 @@ MonoBehaviour:
   HasParticleSystem: 1
   DestroyFinal: 0
   particleSystem: {fileID: 2139111513}
+  explosion: {fileID: 8300000, guid: 928477d1839d93d49b6bb59d39beac42, type: 3}
 --- !u!54 &255496945
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -20243,7 +20246,7 @@ GameObject:
   - 65: {fileID: 285938671}
   m_Layer: 0
   m_Name: map_fence_small_2
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -20665,7 +20668,7 @@ GameObject:
   - 23: {fileID: 293104643}
   m_Layer: 0
   m_Name: Box009
-  m_TagString: Untagged
+  m_TagString: Crane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -21084,6 +21087,7 @@ MonoBehaviour:
   HasParticleSystem: 1
   DestroyFinal: 0
   particleSystem: {fileID: 392890747}
+  explosion: {fileID: 0}
 --- !u!114 &309474628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21228,7 +21232,7 @@ GameObject:
   - 23: {fileID: 312287518}
   m_Layer: 0
   m_Name: Box006
-  m_TagString: Untagged
+  m_TagString: Crane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -21454,7 +21458,7 @@ GameObject:
   - 23: {fileID: 319173261}
   m_Layer: 0
   m_Name: Box018
-  m_TagString: Untagged
+  m_TagString: Crane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -21552,6 +21556,7 @@ MonoBehaviour:
   HasParticleSystem: 1
   DestroyFinal: 0
   particleSystem: {fileID: 355713627}
+  explosion: {fileID: 0}
 --- !u!114 &323995724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22137,6 +22142,7 @@ MonoBehaviour:
   HasParticleSystem: 1
   DestroyFinal: 0
   particleSystem: {fileID: 35416772}
+  explosion: {fileID: 0}
 --- !u!114 &339505668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22191,7 +22197,7 @@ GameObject:
   - 23: {fileID: 339556464}
   m_Layer: 0
   m_Name: Box020
-  m_TagString: Untagged
+  m_TagString: Crane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26334,7 +26340,7 @@ GameObject:
   - 65: {fileID: 364711170}
   m_Layer: 0
   m_Name: map_fence_small_2
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27870,7 +27876,7 @@ GameObject:
   - 23: {fileID: 385426228}
   m_Layer: 0
   m_Name: Box010
-  m_TagString: Untagged
+  m_TagString: Crane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31747,7 +31753,7 @@ GameObject:
   - 65: {fileID: 409247807}
   m_Layer: 0
   m_Name: map_fence_small_2
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33213,6 +33219,7 @@ MonoBehaviour:
   HasParticleSystem: 1
   DestroyFinal: 0
   particleSystem: {fileID: 449057721}
+  explosion: {fileID: 0}
 --- !u!114 &431791917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35143,7 +35150,7 @@ GameObject:
   - 65: {fileID: 461127286}
   m_Layer: 0
   m_Name: map_rock_pile_2
-  m_TagString: Untagged
+  m_TagString: Cement
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35205,7 +35212,7 @@ GameObject:
   - 65: {fileID: 461215309}
   m_Layer: 0
   m_Name: map_rock_pile_2
-  m_TagString: Untagged
+  m_TagString: Cement
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35475,6 +35482,7 @@ MonoBehaviour:
   HasParticleSystem: 1
   DestroyFinal: 0
   particleSystem: {fileID: 1634978267}
+  explosion: {fileID: 0}
 --- !u!114 &467308368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35569,6 +35577,7 @@ MonoBehaviour:
   HasParticleSystem: 1
   DestroyFinal: 0
   particleSystem: {fileID: 2088870289}
+  explosion: {fileID: 0}
 --- !u!114 &467564910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36533,6 +36542,7 @@ MonoBehaviour:
   HasParticleSystem: 1
   DestroyFinal: 0
   particleSystem: {fileID: 1236379672}
+  explosion: {fileID: 0}
 --- !u!114 &521110146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36645,7 +36655,7 @@ GameObject:
   - 23: {fileID: 526057289}
   m_Layer: 0
   m_Name: Box015
-  m_TagString: Untagged
+  m_TagString: Crane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38597,7 +38607,7 @@ GameObject:
   - 95: {fileID: 551015030}
   m_Layer: 0
   m_Name: map_crain_1
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39834,6 +39844,7 @@ MonoBehaviour:
   HasParticleSystem: 1
   DestroyFinal: 0
   particleSystem: {fileID: 68828578}
+  explosion: {fileID: 0}
 --- !u!114 &562394808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40060,7 +40071,7 @@ GameObject:
   - 23: {fileID: 567436820}
   m_Layer: 0
   m_Name: Box004
-  m_TagString: Untagged
+  m_TagString: Crane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40158,6 +40169,7 @@ MonoBehaviour:
   HasParticleSystem: 1
   DestroyFinal: 0
   particleSystem: {fileID: 1365947699}
+  explosion: {fileID: 0}
 --- !u!114 &568389858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40400,7 +40412,7 @@ GameObject:
   - 114: {fileID: 578213789}
   m_Layer: 0
   m_Name: map_blockade_1
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40478,6 +40490,7 @@ MonoBehaviour:
   HasParticleSystem: 1
   DestroyFinal: 0
   particleSystem: {fileID: 601715155}
+  explosion: {fileID: 8300000, guid: 928477d1839d93d49b6bb59d39beac42, type: 3}
 --- !u!54 &578213792
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -43239,7 +43252,7 @@ GameObject:
   - 65: {fileID: 613247643}
   m_Layer: 2
   m_Name: main_shaft
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43466,6 +43479,7 @@ MonoBehaviour:
   HasParticleSystem: 1
   DestroyFinal: 0
   particleSystem: {fileID: 600735021}
+  explosion: {fileID: 0}
 --- !u!114 &621013849
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43835,7 +43849,7 @@ GameObject:
   - 23: {fileID: 636620118}
   m_Layer: 0
   m_Name: Box009
-  m_TagString: Untagged
+  m_TagString: Crane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45815,7 +45829,7 @@ GameObject:
   - 23: {fileID: 678875240}
   m_Layer: 0
   m_Name: Box008
-  m_TagString: Untagged
+  m_TagString: Crane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48058,7 +48072,7 @@ GameObject:
   - 23: {fileID: 716790524}
   m_Layer: 0
   m_Name: Box015
-  m_TagString: Untagged
+  m_TagString: Crane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48328,6 +48342,7 @@ MonoBehaviour:
   HasParticleSystem: 1
   DestroyFinal: 0
   particleSystem: {fileID: 677134176}
+  explosion: {fileID: 0}
 --- !u!114 &722808994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48552,6 +48567,7 @@ MonoBehaviour:
   HasParticleSystem: 1
   DestroyFinal: 0
   particleSystem: {fileID: 35432892}
+  explosion: {fileID: 0}
 --- !u!114 &726685781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51454,7 +51470,7 @@ GameObject:
   - 114: {fileID: 754536662}
   m_Layer: 0
   m_Name: map_crate_regular
-  m_TagString: Untagged
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -55030,7 +55046,7 @@ GameObject:
   - 65: {fileID: 773957512}
   m_Layer: 0
   m_Name: map_rock_pile_2
-  m_TagString: Untagged
+  m_TagString: Cement
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -55092,7 +55108,7 @@ GameObject:
   - 23: {fileID: 780275364}
   m_Layer: 0
   m_Name: Box011
-  m_TagString: Untagged
+  m_TagString: Crane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -56693,6 +56709,7 @@ MonoBehaviour:
   HasParticleSystem: 1
   DestroyFinal: 0
   particleSystem: {fileID: 248451181}
+  explosion: {fileID: 0}
 --- !u!114 &797454424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61731,7 +61748,7 @@ GameObject:
   - 23: {fileID: 860568592}
   m_Layer: 0
   m_Name: Box013
-  m_TagString: Untagged
+  m_TagString: Crane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -66344,7 +66361,7 @@ GameObject:
   - 23: {fileID: 910255076}
   m_Layer: 0
   m_Name: Box019
-  m_TagString: Untagged
+  m_TagString: Crane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -66793,7 +66810,7 @@ GameObject:
   - 23: {fileID: 926400983}
   m_Layer: 0
   m_Name: Box012
-  m_TagString: Untagged
+  m_TagString: Crane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -66851,7 +66868,7 @@ GameObject:
   - 23: {fileID: 926434336}
   m_Layer: 0
   m_Name: Box015
-  m_TagString: Untagged
+  m_TagString: Crane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -67526,7 +67543,7 @@ GameObject:
   - 23: {fileID: 947084072}
   m_Layer: 0
   m_Name: Box014
-  m_TagString: Untagged
+  m_TagString: Crane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -67585,7 +67602,7 @@ GameObject:
   - 65: {fileID: 947278803}
   m_Layer: 0
   m_Name: map_fence_small_2
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -69415,7 +69432,7 @@ GameObject:
   - 114: {fileID: 967658216}
   m_Layer: 0
   m_Name: map_blockade_2
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -69493,6 +69510,7 @@ MonoBehaviour:
   HasParticleSystem: 1
   DestroyFinal: 0
   particleSystem: {fileID: 1432262835}
+  explosion: {fileID: 8300000, guid: 928477d1839d93d49b6bb59d39beac42, type: 3}
 --- !u!54 &967658219
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -70820,7 +70838,7 @@ GameObject:
   - 23: {fileID: 985501973}
   m_Layer: 0
   m_Name: Box013
-  m_TagString: Untagged
+  m_TagString: Crane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -71661,7 +71679,7 @@ GameObject:
   - 114: {fileID: 1023161612}
   m_Layer: 0
   m_Name: map_crate_regular
-  m_TagString: Untagged
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -71823,7 +71841,7 @@ GameObject:
   - 23: {fileID: 1024033457}
   m_Layer: 0
   m_Name: Box013
-  m_TagString: Untagged
+  m_TagString: Crane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -72028,7 +72046,7 @@ GameObject:
   - 23: {fileID: 1030476026}
   m_Layer: 0
   m_Name: Box017
-  m_TagString: Untagged
+  m_TagString: Crane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -76830,6 +76848,7 @@ MonoBehaviour:
   HasParticleSystem: 1
   DestroyFinal: 0
   particleSystem: {fileID: 1378278316}
+  explosion: {fileID: 0}
 --- !u!114 &1078280249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77527,7 +77546,7 @@ GameObject:
   - 65: {fileID: 1091508059}
   m_Layer: 0
   m_Name: map_fence_small_2
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -77669,7 +77688,7 @@ GameObject:
   - 23: {fileID: 1094698714}
   m_Layer: 0
   m_Name: Box007
-  m_TagString: Untagged
+  m_TagString: Crane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -79135,6 +79154,7 @@ MonoBehaviour:
   HasParticleSystem: 1
   DestroyFinal: 1
   particleSystem: {fileID: 1216300671}
+  explosion: {fileID: 8300000, guid: 081f39b2fecef484a906d0df3d1a86d0, type: 3}
 --- !u!1 &1110749805
 GameObject:
   m_ObjectHideFlags: 0
@@ -79277,7 +79297,7 @@ GameObject:
   - 54: {fileID: 1111020961}
   m_Layer: 0
   m_Name: map_building_crate_2
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -79458,7 +79478,7 @@ GameObject:
   - 23: {fileID: 1113604766}
   m_Layer: 0
   m_Name: Box018
-  m_TagString: Untagged
+  m_TagString: Crane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -81074,6 +81094,7 @@ MonoBehaviour:
   HasParticleSystem: 1
   DestroyFinal: 0
   particleSystem: {fileID: 1661791311}
+  explosion: {fileID: 0}
 --- !u!114 &1131914999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82794,7 +82815,7 @@ GameObject:
   - 23: {fileID: 1148754253}
   m_Layer: 0
   m_Name: Box008
-  m_TagString: Untagged
+  m_TagString: Crane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -83382,7 +83403,7 @@ GameObject:
   - 114: {fileID: 1171857424}
   m_Layer: 0
   m_Name: map_crate_large
-  m_TagString: Untagged
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -84250,6 +84271,7 @@ MonoBehaviour:
   HasParticleSystem: 1
   DestroyFinal: 1
   particleSystem: {fileID: 561761546}
+  explosion: {fileID: 8300000, guid: 081f39b2fecef484a906d0df3d1a86d0, type: 3}
 --- !u!1001 &1205759731
 Prefab:
   m_ObjectHideFlags: 0
@@ -85874,7 +85896,7 @@ GameObject:
   - 64: {fileID: 1233678488}
   m_Layer: 0
   m_Name: map_spilled_cement_3
-  m_TagString: Untagged
+  m_TagString: Cement
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -87167,7 +87189,7 @@ GameObject:
   - 65: {fileID: 1244950199}
   m_Layer: 0
   m_Name: main_shaft
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -87537,7 +87559,7 @@ GameObject:
   - 23: {fileID: 1260168829}
   m_Layer: 0
   m_Name: Box011
-  m_TagString: Untagged
+  m_TagString: Crane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -87950,6 +87972,7 @@ MonoBehaviour:
   HasParticleSystem: 1
   DestroyFinal: 0
   particleSystem: {fileID: 791797175}
+  explosion: {fileID: 0}
 --- !u!114 &1274025521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -88067,6 +88090,7 @@ MonoBehaviour:
   HasParticleSystem: 1
   DestroyFinal: 1
   particleSystem: {fileID: 1460867179}
+  explosion: {fileID: 8300000, guid: 081f39b2fecef484a906d0df3d1a86d0, type: 3}
 --- !u!1 &1276997275
 GameObject:
   m_ObjectHideFlags: 0
@@ -90816,6 +90840,7 @@ MonoBehaviour:
   HasParticleSystem: 1
   DestroyFinal: 0
   particleSystem: {fileID: 1467628809}
+  explosion: {fileID: 0}
 --- !u!114 &1326518563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90984,6 +91009,7 @@ MonoBehaviour:
   HasParticleSystem: 1
   DestroyFinal: 0
   particleSystem: {fileID: 405134692}
+  explosion: {fileID: 0}
 --- !u!114 &1331250559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -91038,7 +91064,7 @@ GameObject:
   - 65: {fileID: 1337666390}
   m_Layer: 0
   m_Name: map_rock_pile_2
-  m_TagString: Untagged
+  m_TagString: Cement
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -91140,6 +91166,7 @@ MonoBehaviour:
   HasParticleSystem: 1
   DestroyFinal: 0
   particleSystem: {fileID: 1999687776}
+  explosion: {fileID: 0}
 --- !u!114 &1347859851
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -91234,6 +91261,7 @@ MonoBehaviour:
   HasParticleSystem: 1
   DestroyFinal: 0
   particleSystem: {fileID: 1146301367}
+  explosion: {fileID: 0}
 --- !u!114 &1348131277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -91678,7 +91706,7 @@ GameObject:
   - 114: {fileID: 1363066031}
   m_Layer: 0
   m_Name: map_building_rect_large_4
-  m_TagString: Untagged
+  m_TagString: Cement
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -91764,7 +91792,8 @@ MonoBehaviour:
   onSerializeTransformOption: 3
   onSerializeRigidBodyOption: 2
   ownershipTransfer: 0
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 0}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 38
   instantiationId: 38
@@ -97898,7 +97927,7 @@ GameObject:
   - 23: {fileID: 1437851220}
   m_Layer: 0
   m_Name: Box007
-  m_TagString: Untagged
+  m_TagString: Crane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -104249,7 +104278,7 @@ GameObject:
   - 114: {fileID: 1506636053}
   m_Layer: 0
   m_Name: map_blockade_1
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -104327,6 +104356,7 @@ MonoBehaviour:
   HasParticleSystem: 1
   DestroyFinal: 0
   particleSystem: {fileID: 75265101}
+  explosion: {fileID: 8300000, guid: 928477d1839d93d49b6bb59d39beac42, type: 3}
 --- !u!54 &1506636056
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -104867,7 +104897,7 @@ GameObject:
   - 23: {fileID: 1524057633}
   m_Layer: 0
   m_Name: Box018
-  m_TagString: Untagged
+  m_TagString: Crane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -108116,6 +108146,7 @@ MonoBehaviour:
   loadingScreen: {fileID: 335166364}
   NetworkController: {fileID: 2080610233}
   serverToJoin: 
+  button_click: {fileID: 8300000, guid: 8c9ecc14856dc4d4885e24eb6825a253, type: 3}
   internetGame: 0
 --- !u!1001 &1562383794
 Prefab:
@@ -108185,7 +108216,7 @@ GameObject:
   - 23: {fileID: 1563307321}
   m_Layer: 0
   m_Name: Box017
-  m_TagString: Untagged
+  m_TagString: Crane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -108246,7 +108277,7 @@ GameObject:
   - 114: {fileID: 1564560766}
   m_Layer: 0
   m_Name: map_crate_regular
-  m_TagString: Untagged
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -108917,7 +108948,7 @@ GameObject:
   - 114: {fileID: 1584785567}
   m_Layer: 0
   m_Name: map_building_rect_large_4
-  m_TagString: Untagged
+  m_TagString: Cement
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -109003,7 +109034,8 @@ MonoBehaviour:
   onSerializeTransformOption: 3
   onSerializeRigidBodyOption: 2
   ownershipTransfer: 0
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 0}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 33
   instantiationId: 33
@@ -110058,7 +110090,7 @@ GameObject:
   - 114: {fileID: 1614101066}
   m_Layer: 0
   m_Name: map_blockade_1
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -110136,6 +110168,7 @@ MonoBehaviour:
   HasParticleSystem: 1
   DestroyFinal: 0
   particleSystem: {fileID: 897764249}
+  explosion: {fileID: 8300000, guid: 928477d1839d93d49b6bb59d39beac42, type: 3}
 --- !u!54 &1614101069
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -110553,7 +110586,7 @@ GameObject:
   - 23: {fileID: 1622152213}
   m_Layer: 0
   m_Name: Box012
-  m_TagString: Untagged
+  m_TagString: Crane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -112081,7 +112114,7 @@ GameObject:
   - 23: {fileID: 1644810384}
   m_Layer: 0
   m_Name: Box004
-  m_TagString: Untagged
+  m_TagString: Crane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -112396,7 +112429,7 @@ GameObject:
   - 65: {fileID: 1650266949}
   m_Layer: 0
   m_Name: map_rock_pile_1
-  m_TagString: Untagged
+  m_TagString: Cement
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -112583,7 +112616,7 @@ GameObject:
   - 4: {fileID: 1656556938}
   m_Layer: 0
   m_Name: main_shaft
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -114600,7 +114633,7 @@ GameObject:
   - 23: {fileID: 1689247542}
   m_Layer: 0
   m_Name: Box004
-  m_TagString: Untagged
+  m_TagString: Crane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -114935,7 +114968,7 @@ GameObject:
   - 65: {fileID: 1704512065}
   m_Layer: 0
   m_Name: map_rock_pile_2
-  m_TagString: Untagged
+  m_TagString: Cement
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -115252,7 +115285,7 @@ GameObject:
   - 23: {fileID: 1708937358}
   m_Layer: 0
   m_Name: Box017
-  m_TagString: Untagged
+  m_TagString: Crane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -115743,7 +115776,7 @@ GameObject:
   - 114: {fileID: 1727333655}
   m_Layer: 0
   m_Name: map_blockade_3
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -115821,6 +115854,7 @@ MonoBehaviour:
   HasParticleSystem: 1
   DestroyFinal: 0
   particleSystem: {fileID: 111483975}
+  explosion: {fileID: 8300000, guid: e64faa9f257ea224aa0ce5e8d4fde864, type: 3}
 --- !u!54 &1727333658
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -115849,7 +115883,7 @@ GameObject:
   - 23: {fileID: 1728076291}
   m_Layer: 0
   m_Name: Box019
-  m_TagString: Untagged
+  m_TagString: Crane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -117387,7 +117421,7 @@ GameObject:
   - 23: {fileID: 1751830327}
   m_Layer: 0
   m_Name: Box006
-  m_TagString: Untagged
+  m_TagString: Crane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -117633,7 +117667,7 @@ GameObject:
   - 23: {fileID: 1759032239}
   m_Layer: 0
   m_Name: Box016
-  m_TagString: Untagged
+  m_TagString: Crane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -121140,7 +121174,7 @@ GameObject:
   - 114: {fileID: 1768854261}
   m_Layer: 0
   m_Name: map_building_rect_large_4
-  m_TagString: Untagged
+  m_TagString: Cement
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -121226,7 +121260,8 @@ MonoBehaviour:
   onSerializeTransformOption: 3
   onSerializeRigidBodyOption: 2
   ownershipTransfer: 0
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 0}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 24
   instantiationId: 24
@@ -122950,6 +122985,7 @@ MonoBehaviour:
   HasParticleSystem: 1
   DestroyFinal: 0
   particleSystem: {fileID: 1731521881}
+  explosion: {fileID: 0}
 --- !u!114 &1788054470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123004,7 +123040,7 @@ GameObject:
   - 23: {fileID: 1789504986}
   m_Layer: 0
   m_Name: Box003
-  m_TagString: Untagged
+  m_TagString: Crane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -125391,7 +125427,7 @@ GameObject:
   - 23: {fileID: 1849680627}
   m_Layer: 0
   m_Name: Box014
-  m_TagString: Untagged
+  m_TagString: Crane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -125712,7 +125748,7 @@ GameObject:
   - 23: {fileID: 1859570706}
   m_Layer: 0
   m_Name: Box006
-  m_TagString: Untagged
+  m_TagString: Crane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -126205,7 +126241,7 @@ GameObject:
   - 65: {fileID: 1876532289}
   m_Layer: 0
   m_Name: Box020
-  m_TagString: Untagged
+  m_TagString: Crane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -126656,7 +126692,7 @@ GameObject:
   - 23: {fileID: 1886070863}
   m_Layer: 0
   m_Name: Box012
-  m_TagString: Untagged
+  m_TagString: Crane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -128520,7 +128556,7 @@ GameObject:
   - 65: {fileID: 1921047164}
   m_Layer: 0
   m_Name: map_rock_pile_2
-  m_TagString: Untagged
+  m_TagString: Cement
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -128785,7 +128821,7 @@ GameObject:
   - 23: {fileID: 1926386393}
   m_Layer: 0
   m_Name: Box003
-  m_TagString: Untagged
+  m_TagString: Crane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -129065,7 +129101,7 @@ GameObject:
   - 23: {fileID: 1928973123}
   m_Layer: 0
   m_Name: Box008
-  m_TagString: Untagged
+  m_TagString: Crane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -129458,6 +129494,7 @@ MonoBehaviour:
   HasParticleSystem: 1
   DestroyFinal: 0
   particleSystem: {fileID: 538672395}
+  explosion: {fileID: 0}
 --- !u!114 &1941518242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129883,6 +129920,7 @@ MonoBehaviour:
   HasParticleSystem: 1
   DestroyFinal: 0
   particleSystem: {fileID: 1443655055}
+  explosion: {fileID: 0}
 --- !u!114 &1957858713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129995,7 +130033,7 @@ GameObject:
   - 23: {fileID: 1958358332}
   m_Layer: 0
   m_Name: Box019
-  m_TagString: Untagged
+  m_TagString: Crane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -130165,6 +130203,7 @@ MonoBehaviour:
   HasParticleSystem: 1
   DestroyFinal: 0
   particleSystem: {fileID: 1098934908}
+  explosion: {fileID: 0}
 --- !u!114 &1962328606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130405,6 +130444,7 @@ MonoBehaviour:
   HasParticleSystem: 1
   DestroyFinal: 0
   particleSystem: {fileID: 734516742}
+  explosion: {fileID: 0}
 --- !u!114 &1973979627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130604,7 +130644,7 @@ GameObject:
   - 23: {fileID: 1978221657}
   m_Layer: 0
   m_Name: Box007
-  m_TagString: Untagged
+  m_TagString: Crane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -138329,6 +138369,7 @@ MonoBehaviour:
   HasParticleSystem: 1
   DestroyFinal: 1
   particleSystem: {fileID: 1765742176}
+  explosion: {fileID: 8300000, guid: 081f39b2fecef484a906d0df3d1a86d0, type: 3}
 --- !u!1 &2067423362
 GameObject:
   m_ObjectHideFlags: 0
@@ -139908,7 +139949,7 @@ GameObject:
   - 23: {fileID: 2082561144}
   m_Layer: 0
   m_Name: Box014
-  m_TagString: Untagged
+  m_TagString: Crane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -140283,7 +140324,7 @@ GameObject:
   - 23: {fileID: 2087115361}
   m_Layer: 0
   m_Name: Box016
-  m_TagString: Untagged
+  m_TagString: Crane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -141862,7 +141903,7 @@ GameObject:
   - 23: {fileID: 2097772712}
   m_Layer: 0
   m_Name: Box009
-  m_TagString: Untagged
+  m_TagString: Crane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -142600,6 +142641,7 @@ MonoBehaviour:
   HasParticleSystem: 1
   DestroyFinal: 0
   particleSystem: {fileID: 735077550}
+  explosion: {fileID: 0}
 --- !u!114 &2113162043
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143807,7 +143849,7 @@ GameObject:
   - 23: {fileID: 2114362196}
   m_Layer: 0
   m_Name: Box005
-  m_TagString: Untagged
+  m_TagString: Crane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -143923,7 +143965,7 @@ GameObject:
   - 23: {fileID: 2117789422}
   m_Layer: 0
   m_Name: Box010
-  m_TagString: Untagged
+  m_TagString: Crane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -143981,7 +144023,7 @@ GameObject:
   - 114: {fileID: 2118252221}
   m_Layer: 0
   m_Name: map_building_rect_large_4
-  m_TagString: Untagged
+  m_TagString: Cement
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -144067,7 +144109,8 @@ MonoBehaviour:
   onSerializeTransformOption: 3
   onSerializeRigidBodyOption: 2
   ownershipTransfer: 0
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 0}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 51
   instantiationId: 51
@@ -144475,7 +144518,7 @@ GameObject:
   - 65: {fileID: 2131781159}
   m_Layer: 0
   m_Name: map_fence_small_1
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

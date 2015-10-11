@@ -13,6 +13,9 @@ public class Weapon_BuilderGlove : Photon.MonoBehaviour {
 	public GameObject buildCrosshair;
 	public GameObject charMesh;
 
+	public AudioClip fire_glove;
+	AudioSource	audio;
+
 	int buildRate = 3;
 	int bRCounter = 0;
 
@@ -23,6 +26,8 @@ public class Weapon_BuilderGlove : Photon.MonoBehaviour {
 			onHit.startColor = Color.blue;
 			laserSystem.startColor = Color.blue;
 		}
+		audio = GetComponent<AudioSource> ();
+		audio.clip = fire_glove;
 	}
 
 	public void RotateForGlove(bool forwards){
@@ -45,6 +50,7 @@ public class Weapon_BuilderGlove : Photon.MonoBehaviour {
 			} else if (Input.GetButtonUp("Fire1")){
 				transform.GetComponentInParent<Char_BasicMoveScript>().anim.SetBool("Shooting",false);
 				StopLaser(transform.GetComponent<PhotonView>().viewID, new Vector3(0,30,0));
+				audio.Stop();
 				//laserSystem.Stop();
 			}
 
@@ -172,6 +178,7 @@ public class Weapon_BuilderGlove : Photon.MonoBehaviour {
 	}
 
 	[RPC] void PlayLaser(int vID, Vector3 rot){
+		audio.Play ();
 		PhotonView.Find(vID).GetComponent<Weapon_BuilderGlove>().laserSystem.Play();
 		PhotonView.Find(vID).GetComponent<Weapon_BuilderGlove>().charMesh.transform.Rotate(rot);
 		if (photonView.isMine)

@@ -15,6 +15,8 @@ public class Weapon_ForceGrenade : Photon.MonoBehaviour {
 	List<GameObject> alreadyCollided;
 	public string mode;
 
+	//public AudioSource audio;
+	public AudioClip pushGrenade;
 	public ParticleSystem fuse, explosionEffect;
 	bool detonated = false;
 	bool madeVortex = false;
@@ -138,6 +140,7 @@ public class Weapon_ForceGrenade : Photon.MonoBehaviour {
 
 	[RPC] void PlayExplosionParticleEffect(){
 		explosionEffect.Play();
+		AudioSource.PlayClipAtPoint(pushGrenade, transform.position);
 		if (photonView.isMine)
 			photonView.RPC("PlayExplosionParticleEffect", PhotonTargets.OthersBuffered);
 	}

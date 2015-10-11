@@ -5,12 +5,18 @@ public class Weapon_Rocket : Photon.MonoBehaviour {
 
 	public GameObject explosion;
 	public Char_AttributeScript whoFiredMe;
+	public AudioClip fire_rocket;
+	public AudioClip fire_rocketTrail;
+	AudioSource audio;
 	
 	private RaycastHit hit;
 
 	// Use this for initialization
 	void Start () {
 		Destroy(gameObject,5f);
+		audio = GetComponent<AudioSource> ();
+		audio.PlayOneShot (fire_rocketTrail);
+		AudioSource.PlayClipAtPoint (fire_rocket, transform.position);
 	}
 	
 	// Update is called once per frame

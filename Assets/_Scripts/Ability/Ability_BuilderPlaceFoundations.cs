@@ -24,6 +24,7 @@ public class Ability_BuilderPlaceFoundations : Photon.MonoBehaviour {
 	Vector3 teleportDirection;
 	bool linkOffCooldown = true, turretOffCooldown = true, boosterOffCooldown = true;
 	public GameObject currentLink, currentTurret, currentBooster;
+	public AudioClip build_foundation;
 	 
 	// Use this for initialization
 	void Start () {
@@ -94,6 +95,7 @@ public class Ability_BuilderPlaceFoundations : Photon.MonoBehaviour {
 					if (currentLink)
 						DamageBuildingLink(-1000,currentLink.GetComponent<PhotonView>().viewID);
 
+					AudioSource.PlayClipAtPoint(build_foundation,transform.position);
 					transform.GetComponent<Char_AttributeScript>().energy -= placeLinkEnergyCost;
 					Invoke("linkCooledDown",placeLinkCD);
 					GetComponent<Char_AttributeScript>().HUD.linkIcon.ActivateCooldownGUI(placeLinkCD);
@@ -115,6 +117,7 @@ public class Ability_BuilderPlaceFoundations : Photon.MonoBehaviour {
 					if (currentTurret)
 						DamageBuildingTurret(-1000,currentTurret.GetComponent<PhotonView>().viewID);
 
+					AudioSource.PlayClipAtPoint(build_foundation,transform.position);
 					transform.GetComponent<Char_AttributeScript>().energy -= placeTurretEnergyCost;
 					Invoke("turretCooledDown",placeTurretCD);
 					GetComponent<Char_AttributeScript>().HUD.turretIcon.ActivateCooldownGUI(placeTurretCD);
@@ -139,6 +142,7 @@ public class Ability_BuilderPlaceFoundations : Photon.MonoBehaviour {
 						DamageBuildingBooster(-1000,currentBooster.GetComponent<PhotonView>().viewID);
 					}
 
+					AudioSource.PlayClipAtPoint(build_foundation,transform.position);
 					transform.GetComponent<Char_AttributeScript>().energy -= placeBoosterEnergyCost;
 					Invoke("boosterCooledDown",placeBoosterCD);
 					GetComponent<Char_AttributeScript>().HUD.boosterIcon.ActivateCooldownGUI(placeBoosterCD);

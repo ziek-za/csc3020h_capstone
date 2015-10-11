@@ -47,7 +47,7 @@ GameObject:
   - 114: {fileID: 11459892}
   m_Layer: 0
   m_Name: map_building_wall_small_2
-  m_TagString: Untagged
+  m_TagString: Cement
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -322,7 +322,8 @@ MonoBehaviour:
   onSerializeTransformOption: 3
   onSerializeRigidBodyOption: 2
   ownershipTransfer: 0
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 0}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
   instantiationId: -1
@@ -344,6 +345,7 @@ MonoBehaviour:
   HasParticleSystem: 1
   DestroyFinal: 0
   particleSystem: {fileID: 19859892}
+  explosion: {fileID: 8300000, guid: 6fad0e0c8358eea438ad08816e7db857, type: 3}
 --- !u!198 &19859890
 ParticleSystem:
   m_ObjectHideFlags: 1

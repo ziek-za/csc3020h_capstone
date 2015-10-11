@@ -63,7 +63,7 @@ GameObject:
   - 65: {fileID: 6503764}
   m_Layer: 0
   m_Name: map_fence_large_2
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

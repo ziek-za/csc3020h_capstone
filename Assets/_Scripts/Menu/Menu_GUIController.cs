@@ -19,6 +19,7 @@ public class Menu_GUIController : Photon.MonoBehaviour {
 	public List<OnlineGameInfo> listOfOnlineButtons;
 	int buttonCount = 0, buttonYPos = 95;
 	public string serverToJoin = "";
+	public AudioClip button_click;
 
 	public bool internetGame = false; //Used when deciding whether to show the LAN/Online UI
 
@@ -96,6 +97,7 @@ public class Menu_GUIController : Photon.MonoBehaviour {
 	}
 
 	void OnLANGameClick(string ip, string serverName){
+		AudioSource.PlayClipAtPoint(button_click,GameObject.Find("Main Camera").transform.position);
 		loadingScreen.SetActive(true);
 
 		if (!playerNameInput.text.Equals(""))
@@ -117,6 +119,7 @@ public class Menu_GUIController : Photon.MonoBehaviour {
 	}
 
 	void OnOnlineGameClick(string serverName){
+		AudioSource.PlayClipAtPoint(button_click,GameObject.Find("Main Camera").transform.position);
 		loadingScreen.SetActive(true);
 
 		if (!playerNameInput.text.Equals(""))
@@ -141,6 +144,7 @@ public class Menu_GUIController : Photon.MonoBehaviour {
 	}
 
 	public void InternetGameButtonClick(){
+		AudioSource.PlayClipAtPoint(button_click,GameObject.Find("Main Camera").transform.position);
 		SetMenuButtonsActive(false);
 		GameListHeadings.text = "	Name						Host						Players						Ping						Region";
 		internetGame = true;
@@ -150,6 +154,7 @@ public class Menu_GUIController : Photon.MonoBehaviour {
 	}
 
 	public void LANGameButtonClick(){
+		AudioSource.PlayClipAtPoint(button_click,GameObject.Find("Main Camera").transform.position);
 		SetMenuButtonsActive(false);
 		JoinGamePanel.gameObject.SetActive(true);
 		GameListHeadings.text = "	Name						Host						Players						Ping						IP";
@@ -164,6 +169,7 @@ public class Menu_GUIController : Photon.MonoBehaviour {
 	}
 
 	public void BackButtonClick(){
+		AudioSource.PlayClipAtPoint(button_click,GameObject.Find("Main Camera").transform.position);
 		SetMenuButtonsActive(true);
 		buttonCount = 0;
 		buttonYPos = 95;
@@ -182,6 +188,7 @@ public class Menu_GUIController : Photon.MonoBehaviour {
 	}
 
 	public void HostGameButtonClick(){
+		AudioSource.PlayClipAtPoint(button_click,GameObject.Find("Main Camera").transform.position);
 		loadingScreen.SetActive(true);
 
 		if (!playerNameInput.text.Equals(""))
@@ -214,6 +221,7 @@ public class Menu_GUIController : Photon.MonoBehaviour {
 
 
 	public void DirectConnectButtonClick(){
+		AudioSource.PlayClipAtPoint(button_click,GameObject.Find("Main Camera").transform.position);
 		if (!hostIpInput.text.Equals("")){
 
 			if (!playerNameInput.text.Equals(""))

@@ -8,6 +8,7 @@ public class Ability_BuilderBooster : Photon.MonoBehaviour {
 	public int health = 100;
 	public Ability_BuilderPlaceFoundations whoBuiltMe;
 	public GameObject[] partsToColour;
+	public AudioClip build_booster, rampSound;
 
 	float boostCooldown = 1f;
 	float boostCooldownTimer = 1f;
@@ -17,7 +18,7 @@ public class Ability_BuilderBooster : Photon.MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		whoBuiltMe.currentBooster = this.gameObject;
-
+		AudioSource.PlayClipAtPoint (build_booster, transform.position);
 		// Set HP on GUI for building
 		if (photonView.isMine)
 			whoBuiltMe.GetComponent<Char_AttributeScript> ().HUD.boosterIcon.SetBuildingHealth (health);
@@ -50,6 +51,7 @@ public class Ability_BuilderBooster : Photon.MonoBehaviour {
 
 	void OnCollisionEnter(Collision collision){
 		if (collision.gameObject.GetComponent<Char_AttributeScript>() && collision.gameObject.GetComponent<Char_AttributeScript>().team == currentTeam) {
+			AudioSource.PlayClipAtPoint (rampSound, transform.position);
 			currentBoost = collision.rigidbody;
 		}
 	}

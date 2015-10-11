@@ -32,7 +32,7 @@ GameObject:
   - 114: {fileID: 11468760}
   m_Layer: 0
   m_Name: map_blockade_1
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -502,6 +502,7 @@ MonoBehaviour:
   HasParticleSystem: 1
   DestroyFinal: 0
   particleSystem: {fileID: 19891878}
+  explosion: {fileID: 8300000, guid: 928477d1839d93d49b6bb59d39beac42, type: 3}
 --- !u!198 &19891878
 ParticleSystem:
   m_ObjectHideFlags: 1

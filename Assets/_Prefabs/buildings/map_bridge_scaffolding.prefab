@@ -83,7 +83,7 @@ GameObject:
   - 114: {fileID: 11474490}
   m_Layer: 0
   m_Name: map_bridge_scaffolding
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -264,7 +264,8 @@ MonoBehaviour:
   onSerializeTransformOption: 3
   onSerializeRigidBodyOption: 2
   ownershipTransfer: 0
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 0}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
   instantiationId: -1
@@ -286,6 +287,7 @@ MonoBehaviour:
   HasParticleSystem: 1
   DestroyFinal: 0
   particleSystem: {fileID: 19830780}
+  explosion: {fileID: 8300000, guid: e64faa9f257ea224aa0ce5e8d4fde864, type: 3}
 --- !u!198 &19830778
 ParticleSystem:
   m_ObjectHideFlags: 1
