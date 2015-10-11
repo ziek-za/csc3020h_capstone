@@ -16,6 +16,7 @@ public class Map_LinkScript : Photon.MonoBehaviour {
 	float defaultCaptureSpeed=10f;
 	float captureSpeed=0;
 	public ParticleSystem redBeam, blueBeam, neutralBeam;
+	public AudioClip captureSound;
 
 	protected Level_GUIController gui;
 
@@ -103,6 +104,7 @@ public class Map_LinkScript : Photon.MonoBehaviour {
 		neutralBeam.Stop(true);
 		redBeam.Play(true);
 		gui.SetUpLinkButtons();
+		AudioSource.PlayClipAtPoint (captureSound, transform.position);
 
 		if (photonView.isMine)
 			photonView.RPC("RedTeamCapture", PhotonTargets.OthersBuffered);
@@ -118,6 +120,7 @@ public class Map_LinkScript : Photon.MonoBehaviour {
 		redBeam.Stop(true);
 		neutralBeam.Stop(true);
 		gui.SetUpLinkButtons();
+		AudioSource.PlayClipAtPoint (captureSound, transform.position);
 
 		if (photonView.isMine)
 			photonView.RPC("BlueTeamCapture", PhotonTargets.OthersBuffered);

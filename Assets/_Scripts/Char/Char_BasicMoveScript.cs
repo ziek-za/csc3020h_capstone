@@ -8,7 +8,6 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 	//float decreaseFactor = 10.0f;
 	public Animator anim;
 	public float moveSpeed = 10.0f;
-	public bool sprint=false;
 	public float mouseSpeed = 3.0f;
 	public float jumpSpeed=5.0f;
 	public Transform FPSCameraPos;
@@ -18,6 +17,7 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 	public AudioClip[] footstepsSand;
 	public AudioClip[] footstepsMetal;
 	public AudioClip jump;
+	public AudioClip moveFast;
 	public AudioSource jumpAudio;
 	bool step = true;
 	string terrainBelowTag;
@@ -132,7 +132,7 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 
 		//Determining footsteps sound
 
-		if(anim.GetFloat ("Speed")>=0.05f && !anim.GetBool("Jumping") && step==true){
+	if(anim.GetFloat ("Speed")>=0.05f && !anim.GetBool("Jumping") && step==true){
 			generateFootstep(terrainBelowTag);
 		}
 	}
@@ -192,8 +192,29 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 					reverbzones[i].gameObject.SetActive(true);
 				}
 			}
-			Debug.Log("In reverb cave");
+		}
+			else if(other.name == "reverbBuilding"){
+				for(int i = 0; i < reverbzones.Length;i++){
+					if(reverbzones[i].name=="BuildingZone"){
+						reverbzones[i].gameObject.SetActive(true);
+					}
 				}
+			}
+		else if(other.name == "reverbRoom"){
+			for(int i = 0; i < reverbzones.Length;i++){
+				if(reverbzones[i].name=="RoomZone"){
+					reverbzones[i].gameObject.SetActive(true);
+				}
+			}
+		}
+		else if(other.name == "reverbCrane"){
+			for(int i = 0; i < reverbzones.Length;i++){
+				if(reverbzones[i].name=="MountainZone"){
+					reverbzones[i].gameObject.SetActive(true);
+				}
+			}
+		}
+		Debug.Log (other.name);
 	}
 
 	void OnTriggerExit(Collider other){
@@ -203,8 +224,28 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 					reverbzones[i].gameObject.SetActive(false);
 				}
 			}
-			Debug.Log("Left reverbCave");
+		}
+		else if(other.name == "reverbBuilding"){
+			for(int i = 0; i < reverbzones.Length;i++){
+				if(reverbzones[i].name=="BuildingZone"){
+					reverbzones[i].gameObject.SetActive(false);
 				}
+			}
+		}
+		else if(other.name == "reverbRoom"){
+			for(int i = 0; i < reverbzones.Length;i++){
+				if(reverbzones[i].name=="RoomZone"){
+					reverbzones[i].gameObject.SetActive(false);
+				}
+			}
+		}
+		else if(other.name == "reverbCrane"){
+			for(int i = 0; i < reverbzones.Length;i++){
+				if(reverbzones[i].name=="MountainZone"){
+					reverbzones[i].gameObject.SetActive(false);
+				}
+			}
+		}
 		}
 
 	/*

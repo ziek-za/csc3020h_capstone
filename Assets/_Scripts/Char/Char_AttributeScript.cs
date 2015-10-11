@@ -41,6 +41,7 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 	//public AudioSource audioAttrib;
 	public AudioSource audio;
 	public AudioSource healSource;
+	public AudioSource deathSource;
 
 	public Map_LinkScript currentLink;
 
@@ -281,6 +282,7 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 			HUD.UpdateHUDEnergy(energy);
 			ChangeWeapons();
 			if ((health <= 0 || Input.GetKey(KeyCode.P))&&respawnTimer == -10){
+				deathSource.Play ();
 				respawnTimer = 5f;
 				if (currentLink != null){
 					ReduceCounter(currentLink.GetComponent<PhotonView>().viewID);

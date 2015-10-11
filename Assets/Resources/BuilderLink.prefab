@@ -516,6 +516,7 @@ MonoBehaviour:
   redBeam: {fileID: 19896878}
   blueBeam: {fileID: 19896882}
   neutralBeam: {fileID: 0}
+  captureSound: {fileID: 8300000, guid: a1e5205b93a3b02419466df0825f55d5, type: 3}
   health: 100
   whoBuiltMe: {fileID: 0}
   build_link: {fileID: 8300000, guid: 5046bf4dc1af5d5479159d701eca18d9, type: 3}
