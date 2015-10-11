@@ -40,6 +40,9 @@ public class Char_SelectChar : Photon.MonoBehaviour {
 			//	Application.LoadLevel("Menu");
 			//}
 			if(!spawned){
+				// Disable sniper scope regardless
+				Camera.main.fieldOfView = 60;
+				gc.sniperScope.enabled = false;
 				// SOLDIER
 				if(classNo==0){
 					spawned=true;
