@@ -19,12 +19,15 @@ public class Ability_BuilderTurret : Photon.MonoBehaviour {
 	public List<GameObject> trackedEnemies;
 	public Ability_BuilderPlaceFoundations whoBuiltMe;
 	public GameObject[] partsToColour;
+	public AudioClip build_turret;
+	public AudioClip shoot_turret;
 
 	Quaternion originalRotation, leftPanEdge, rightPanEdge, currentEdge;
 
 	// Use this for initialization
 	void Start () {
 		whoBuiltMe.currentTurret = this.gameObject;
+		AudioSource.PlayClipAtPoint (build_turret, transform.position);
 		trackedEnemies = new List<GameObject>();
 		originalRotation = transform.rotation;
 		leftPanEdge.eulerAngles = originalRotation.eulerAngles + new Vector3(0,60f,0);
@@ -155,6 +158,7 @@ public class Ability_BuilderTurret : Photon.MonoBehaviour {
 	[RPC] void PlayMuzzleFlash(int vID){
 		PhotonView.Find(vID).transform.GetComponent<Ability_BuilderTurret>().muzzleFlash.Play();
 		PhotonView.Find(vID).transform.GetComponent<Ability_BuilderTurret>().tracerEffect.Play();
+		AudioSource.PlayClipAtPoint (shoot_turret, transform.position);
 		if (photonView.isMine)
 			photonView.RPC("PlayMuzzleFlash", PhotonTargets.OthersBuffered, vID);
 	}

@@ -29,9 +29,10 @@ GameObject:
   - 54: {fileID: 5491880}
   - 114: {fileID: 11491880}
   - 114: {fileID: 11434962}
+  - 114: {fileID: 11468760}
   m_Layer: 0
   m_Name: map_blockade_1
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -172,8 +173,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 191866}
-  m_LocalRotation: {x: -.576809466, y: -.409012228, z: -.409012169, w: .576809347}
-  m_LocalPosition: {x: -49.5, y: .699999988, z: -20.3299999}
+  m_LocalRotation: {x: -.0430601686, y: -.705794513, z: -.705794454, w: .0430601649}
+  m_LocalPosition: {x: -43.9500008, y: .699999988, z: -61.6199989}
   m_LocalScale: {x: .852321029, y: .688381016, z: .688381016}
   m_Children:
   - {fileID: 491878}
@@ -415,8 +416,8 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: .0500000007
-  m_UseGravity: 0
-  m_IsKinematic: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -431,7 +432,7 @@ MeshCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_SmoothSphereCollisions: 0
-  m_Convex: 0
+  m_Convex: 1
   m_Mesh: {fileID: 4300000, guid: 4090c56e815842e47b041fc86cf0a878, type: 3}
 --- !u!64 &6491880
 MeshCollider:
@@ -444,7 +445,7 @@ MeshCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_SmoothSphereCollisions: 0
-  m_Convex: 0
+  m_Convex: 1
   m_Mesh: {fileID: 4300000, guid: 8c3e6732a81bb5a488f56f60116d6e35, type: 3}
 --- !u!114 &11434962
 MonoBehaviour:
@@ -461,16 +462,29 @@ MonoBehaviour:
   group: 0
   prefixBackup: -1
   observed: {fileID: 0}
-  synchronization: 0
+  synchronization: 3
   onSerializeTransformOption: 3
   onSerializeRigidBodyOption: 2
   ownershipTransfer: 0
   ObservedComponents:
-  - {fileID: 0}
+  - {fileID: 11468760}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
   instantiationId: -1
   isRuntimeInstantiated: 0
+--- !u!114 &11468760
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 191866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 1
 --- !u!114 &11491880
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -488,6 +502,7 @@ MonoBehaviour:
   HasParticleSystem: 1
   DestroyFinal: 0
   particleSystem: {fileID: 19891878}
+  explosion: {fileID: 8300000, guid: 928477d1839d93d49b6bb59d39beac42, type: 3}
 --- !u!198 &19891878
 ParticleSystem:
   m_ObjectHideFlags: 1

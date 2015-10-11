@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 
@@ -24,6 +24,7 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 	public AudioClip fire_rifle;
 	public AudioClip fire_glove;
 
+
 	public AudioSource audio;
 
 	//Variables for Camera Shake
@@ -46,6 +47,7 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 	protected void Start(){
 		animInstance = GetComponentInParent<Char_BasicMoveScript> ();
 		attribInstance = GetComponentInParent<Char_AttributeScript> ();
+
 		hitCrosshair = GameObject.Find ("EnemyHitCrosshair");
 		headshotCrosshair = GameObject.Find ("EnemyHeadshotCrosshair");
 		//audio = GetComponent<AudioSource>();

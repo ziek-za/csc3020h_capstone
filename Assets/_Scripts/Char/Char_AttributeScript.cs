@@ -36,13 +36,16 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 	public SkinnedMeshRenderer armour;
 	public Char_SelectChar Respawner;
 	public AudioClip pain1, pain2, pain3;
+	public AudioClip healEnergy;
 	bool hurtThreshold1,hurtThreshold2,hurtThreshold3,hurtThreshold4=false;
 	//public AudioSource audioAttrib;
 	public AudioSource audio;
+	public AudioSource healSource;
 
 	public Map_LinkScript currentLink;
 
 	bool prevWeaponGlove = false, prevWeaponRL = false;
+	float respawnTimer = -10f;
 
 	// Use this for initialization
 	void Start () {
@@ -209,19 +212,21 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 	}
 
 	void ChangeWeapons(){
-		if (Input.GetButtonDown("1")){
-			NetworkChangeWeapons(transform.GetComponent<PhotonView>().viewID,1);
-			// Change weapon
-			HUD.SetWeaponIcon(current_class, 1);
-		} else if (Input.GetButtonDown("2")){
-			NetworkChangeWeapons(transform.GetComponent<PhotonView>().viewID,2);
-			// Change weapon
-			HUD.SetWeaponIcon(current_class, 2);
-		} else if (Input.GetButton("3")){
-			if (weapon3.name.Equals("Builder_FP_glove")){
-				NetworkChangeWeapons(transform.GetComponent<PhotonView>().viewID,3);
+		if (!gameObject.GetComponent<Char_BasicMoveScript>().respawning){
+			if (Input.GetButtonDown("1")){
+				NetworkChangeWeapons(transform.GetComponent<PhotonView>().viewID,1);
 				// Change weapon
-				HUD.SetWeaponIcon(current_class, 3);
+				HUD.SetWeaponIcon(current_class, 1);
+			} else if (Input.GetButtonDown("2")){
+				NetworkChangeWeapons(transform.GetComponent<PhotonView>().viewID,2);
+				// Change weapon
+				HUD.SetWeaponIcon(current_class, 2);
+			} else if (Input.GetButton("3")){
+				if (weapon3.name.Equals("Builder_FP_glove")){
+					NetworkChangeWeapons(transform.GetComponent<PhotonView>().viewID,3);
+					// Change weapon
+					HUD.SetWeaponIcon(current_class, 3);
+				}
 			}
 		}
 	}
@@ -237,12 +242,12 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 		HUD.playerKilledLabel.text = "YOU JUST KILLED " + killedName;
 		//Invoke("DisableKillHUD",2f);
 		HUD.playerKilledLabel.CrossFadeAlpha(0,2,false);
+		UpdateScoreboardKills(playerName,killedName);
 	} 
 
 	// Update is called once per frame
 	void Update () {
 		if (photonView.isMine){
-
 			HUD.playerNameLabel.text = "";
 			//Get playerName
 			Vector2 screenCenterPoint = new Vector2(Screen.width/2, Screen.height/2);
@@ -261,30 +266,22 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 				linkRateCounter += Time.deltaTime;
 				if (linkRateCounter >= enegryRegenRate){
 					linkRateCounter -= enegryRegenRate;
+					audio.Play();
 					LinkRegenEnergy();
+					if(!healSource.isPlaying && energy!=100){
+						healSource.Play();//OneShot(healEnergy);
+					}
 				}
 			} else {
+				healSource.Stop();
 				linkRateCounter = enegryRegenRate;
+				audio.Stop();
 			}
 			HUD.UpdateHUDHealth(health);
 			HUD.UpdateHUDEnergy(energy);
 			ChangeWeapons();
-			//Determining when to play hurt sounds
-			/*if(health > 100 && health <125 && !hurtThreshold1){
-				playHurtSound();
-				hurtThreshold1=true;
-			}else if(health > 75 && !hurtThreshold2){
-				playHurtSound();
-				hurtThreshold2=true;
-			}else if(health > 40 && !hurtThreshold3){
-				playHurtSound();
-				hurtThreshold3=true;
-			}else if(health > 20 && !hurtThreshold4){
-				playHurtSound();
-				hurtThreshold4=true;
-			}*/
-
-			if (health <= 0 || Input.GetKey(KeyCode.P)){
+			if ((health <= 0 || Input.GetKey(KeyCode.P))&&respawnTimer == -10){
+				respawnTimer = 5f;
 				if (currentLink != null){
 					ReduceCounter(currentLink.GetComponent<PhotonView>().viewID);
 				}
@@ -297,12 +294,14 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 					GetComponentInChildren<Weapon_BuilderGlove>().buildCrosshair.GetComponent<RawImage>().enabled = false;
 				} catch (System.NullReferenceException e){}
 
-				Screen.lockCursor=false;
-				GameObject.Find("CharacterSelectionGUI").transform.localScale=new Vector3(10,5,5);
-				Camera.main.GetComponent<BlurEffect>().enabled=true;
 				gameObject.GetComponent<Char_BasicMoveScript>().inVortex=true;
+				gameObject.GetComponent<Char_BasicMoveScript>().respawning=true;
+				weapon1.SetActive(false);
+				weapon2.SetActive(false);
+				weapon3.SetActive(false);
 				animInstance.anim.SetBool ("Dead", true);
-				StartCoroutine("KillPlayerWait",this.gameObject.GetComponent<PhotonView>().viewID);
+				TurnOffColliders(GetComponent<PhotonView>().viewID);
+
 				//KillPlayer(this.gameObject.GetComponent<PhotonView>().viewID);
 				Char_SelectChar.classNo=10;
 				Respawner.spawned=false;
@@ -322,6 +321,23 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 				try {
 					GetComponent<Ability_BuilderPlaceFoundations>().DamageBuildingBooster(-1000,GetComponent<Ability_BuilderPlaceFoundations>().currentBooster.GetComponent<PhotonView>().viewID);
 				} catch (System.Exception e){}
+
+			}
+
+			if (respawnTimer > 0){
+				respawnTimer -= Time.deltaTime;
+				HUD.respawnTimerText.gameObject.SetActive(true);
+				int seconds = Mathf.RoundToInt(respawnTimer);
+				if (seconds > 0)
+					HUD.respawnTimerText.text = seconds.ToString();
+			} else if (respawnTimer < 0 && respawnTimer != -10) {
+				HUD.respawnTimerText.gameObject.SetActive(false);
+				GameObject.Find("CharacterSelectionGUI").transform.localScale=new Vector3(10,5,5);
+				HUD.spawnPreviewCamera.gameObject.SetActive(true);
+				Camera.main.GetComponent<BlurEffect>().enabled=true;
+				Screen.lockCursor=false;
+				StartCoroutine("KillPlayerWait",this.gameObject.GetComponent<PhotonView>().viewID);
+				respawnTimer = -1;
 
 			}
 
@@ -353,6 +369,54 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 		}
 	}
 
+
+	void KillCountTimeout(){
+		prevKillsToUpdate = "";
+		prevDeathsToUpdate = "";
+	}
+
+	[RPC] void TurnOffColliders(int vID){
+		PhotonView.Find(vID).GetComponent<CapsuleCollider>().enabled = false;
+		PhotonView.Find(vID).GetComponentInChildren<SphereCollider>().enabled = false;
+		PhotonView.Find(vID).rigidbody.isKinematic = true;
+		//PhotonView.Find(vID).transform.position = new Vector3(-1000,-1000,-1000);
+		if (photonView.isMine)
+			photonView.RPC("TurnOffColliders", PhotonTargets.OthersBuffered, vID);
+	}
+
+	string prevKillsToUpdate = "", prevDeathsToUpdate = "";
+	[RPC] void UpdateScoreboardKills(string killsToUpdate, string deathsToUpdate){
+		if (!(prevKillsToUpdate == prevKillsToUpdate && prevDeathsToUpdate == deathsToUpdate)) {
+			prevKillsToUpdate = killsToUpdate;
+			prevDeathsToUpdate = deathsToUpdate;
+			Invoke("KillCountTimeout",1f);
+			Level_NetworkController nc = HUD.NetworkController;
+			for (int i = 0; i < nc.redPlayers.Count; i++){
+				if (nc.redPlayers[i].name.Equals(killsToUpdate)){
+					nc.redPlayers[i].increaseKills();
+					Debug.Log("Kill update R " + killsToUpdate + " " + nc.redPlayers[i].kills);
+				}
+				if (nc.redPlayers[i].name.Equals(deathsToUpdate)){
+					nc.redPlayers[i].increaseDeaths();
+					Debug.Log("Kill death R " + deathsToUpdate + " " + nc.redPlayers[i].deaths);
+				} 
+			}
+			for (int i = 0; i < nc.bluePlayers.Count; i++){
+				if (nc.bluePlayers[i].name.Equals(killsToUpdate)){
+					nc.bluePlayers[i].increaseKills();
+					Debug.Log("Kill update B " + killsToUpdate + " " + nc.bluePlayers[i].kills);
+				}
+				if (nc.bluePlayers[i].name.Equals(deathsToUpdate)){
+					nc.bluePlayers[i].increaseDeaths();
+					Debug.Log("Kill death B " + deathsToUpdate + " " + nc.bluePlayers[i].deaths);
+				}
+			}
+			HUD.SetUpScoreboard();
+
+			if (photonView.isMine)
+				photonView.RPC("UpdateScoreboardKills", PhotonTargets.OthersBuffered, killsToUpdate, deathsToUpdate);
+		}
+	}
 
 	[RPC] void ReduceCounter(int linkID){
 		PhotonView.Find(linkID).GetComponent<Map_LinkScript>().PlayerDeathMethod(collider);
@@ -388,9 +452,9 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 	[RPC] void KillPlayer(int vID){
 		//Lower your team's score when you die
 		if (PhotonView.Find(vID).gameObject.GetComponent<Char_AttributeScript>().team == Teams.BLUE){
-			PhotonView.Find(vID).gameObject.GetComponent<Char_AttributeScript>().HUD.bluePoints.value -= 5;
+			PhotonView.Find(vID).gameObject.GetComponent<Char_AttributeScript>().HUD.bluePoints.value -= 10;
 		} else if (PhotonView.Find(vID).gameObject.GetComponent<Char_AttributeScript>().team == Teams.RED){
-			PhotonView.Find(vID).gameObject.GetComponent<Char_AttributeScript>().HUD.redPoints.value -= 5;
+			PhotonView.Find(vID).gameObject.GetComponent<Char_AttributeScript>().HUD.redPoints.value -= 10;
 		} 
 
 		GameObject[] goList = GameObject.FindGameObjectsWithTag("Turret");
@@ -438,6 +502,7 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 
 	[RPC] void SetPlayerName(int vID, string pName){
 		PhotonView.Find(vID).GetComponent<Char_AttributeScript>().playerName = pName;
+
 		if (photonView.isMine)
 			photonView.RPC("SetPlayerName", PhotonTargets.OthersBuffered, vID, pName);
 	}

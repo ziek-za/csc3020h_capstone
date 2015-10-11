@@ -10,12 +10,11 @@ GameObject:
   - 4: {fileID: 406010}
   - 33: {fileID: 3306010}
   - 23: {fileID: 2306010}
-  - 114: {fileID: 11406010}
   - 54: {fileID: 5406010}
   - 65: {fileID: 6506010}
   m_Layer: 0
   m_Name: map_spilled_cement_1
-  m_TagString: Untagged
+  m_TagString: Cement
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26,9 +25,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 106010}
-  m_LocalRotation: {x: -.707106829, y: 0, z: -0, w: .707106829}
-  m_LocalPosition: {x: -.449999988, y: -.109999999, z: 9.56999969}
-  m_LocalScale: {x: .32705158, y: .327051848, z: .327051848}
+  m_LocalRotation: {x: -.579784155, y: -.404784411, z: -.404784322, w: .579784155}
+  m_LocalPosition: {x: .890900016, y: -.119489998, z: 6.98969984}
+  m_LocalScale: {x: .367765754, y: .367766082, z: .367766082}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -86,30 +85,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 53.7748489, y: 34.8125191, z: .699999988}
   m_Center: {x: 9.42297788e-07, y: -.0234537106, z: .233119607}
---- !u!114 &11406010
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 106010}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ownerId: 0
-  group: 0
-  prefixBackup: -1
-  observed: {fileID: 0}
-  synchronization: 0
-  onSerializeTransformOption: 3
-  onSerializeRigidBodyOption: 2
-  ownershipTransfer: 0
-  ObservedComponents: []
-  ObservedComponentsFoldoutOpen: 1
-  viewIdField: 0
-  instantiationId: -1
-  isRuntimeInstantiated: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

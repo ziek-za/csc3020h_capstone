@@ -2,7 +2,10 @@ fileFormatVersion: 2
 guid: 18d8c56c703498a479a76b22e59ba987
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - particleSystem: {instanceID: 0}
+  - explode_tile: {instanceID: 0}
+  - explode_wall: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

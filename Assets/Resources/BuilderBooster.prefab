@@ -128,6 +128,8 @@ MonoBehaviour:
   currentTeam: 0
   health: 100
   whoBuiltMe: {fileID: 0}
+  partsToColour: []
+  build_booster: {fileID: 8300000, guid: 5046bf4dc1af5d5479159d701eca18d9, type: 3}
 --- !u!198 &19815706
 ParticleSystem:
   m_ObjectHideFlags: 1

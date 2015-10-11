@@ -8,12 +8,11 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 474460}
-  - 114: {fileID: 11474460}
   - 54: {fileID: 5474460}
   - 65: {fileID: 6574460}
   m_Layer: 0
   m_Name: map_rock_pile_1
-  m_TagString: Untagged
+  m_TagString: Cement
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -75,9 +74,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 174460}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .670000017, y: 0, z: -46.4500008}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: .918363035, y: -.213025108, z: -.126119107, w: -.308745295}
+  m_LocalPosition: {x: 74.9319992, y: 28.4799995, z: 14.6739998}
+  m_LocalScale: {x: .890011668, y: .890011668, z: .89001137}
   m_Children:
   - {fileID: 474466}
   - {fileID: 474464}
@@ -228,30 +227,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.76308799, y: 2.05016994, z: 2.52856016}
   m_Center: {x: -.267237306, y: .0130467415, z: -.764278412}
---- !u!114 &11474460
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 174460}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ownerId: 0
-  group: 0
-  prefixBackup: -1
-  observed: {fileID: 0}
-  synchronization: 0
-  onSerializeTransformOption: 3
-  onSerializeRigidBodyOption: 2
-  ownershipTransfer: 0
-  ObservedComponents: []
-  ObservedComponentsFoldoutOpen: 1
-  viewIdField: 0
-  instantiationId: -1
-  isRuntimeInstantiated: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

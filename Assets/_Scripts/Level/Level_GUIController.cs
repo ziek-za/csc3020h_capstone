@@ -2,21 +2,35 @@
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System.Linq;
 
 public class Level_GUIController : MonoBehaviour {
 
-	public Text healthText, energyText;
+	public Level_NetworkController NetworkController;
+	public Char_AttributeScript.Teams localPlayerTeam = Char_AttributeScript.Teams.NONE;
+
+	public Text healthText, energyText, respawnTimerText;
 	public enum classes {SOLDIER, THIEF, BUILDER, NONE};
 	public classes GUIClass = classes.NONE;
-
+	public RectTransform scoreboard;
 	public Slider bluePoints;
 	public Slider redPoints;
 	private float decTimer = 0f;
 
+	public Camera spawnPreviewCamera;
+	public Transform spawnPreviewSoldierCameraPos, spawnPreviewSniperCameraPos, spawnPreviewBuilderCameraPos;
+
 	public Text redCountText;
 	public Text blueCountText;
 
-	public GameObject shotIndicatorPivot, HUDPivot;
+	public GameObject shotIndicatorPivot, HUDPivot,
+		// SCOREBOARD
+			playersRed, playersBlue,
+			scoreBoardPlayerItem;
+
+		//GAME OVER MESSAGE
+	public GameObject gameOverPanel, winnerText;
+
 	public Image builderImage, thiefImage, soldierImage, shotIndicator,
 		// SOLDIER
 				soldierHUD, vortexIcon, explosionIcon,
@@ -81,8 +95,6 @@ public class Level_GUIController : MonoBehaviour {
 			tempButton.transform.localScale = new Vector3(1,1,1);
 			//yPos -= 16;
 
-			Debug.Log(tempButton.transform.lossyScale);
-
 			//Set up text and colour
 			//tempButton.GetComponentInChildren<Text>().text = "Link " + i;
 			if (linkTeam == Char_AttributeScript.Teams.BLUE) {
@@ -90,21 +102,35 @@ public class Level_GUIController : MonoBehaviour {
 				blueColors.normalColor = Color.blue;
 				blueColors.highlightedColor = Color.blue;
 				blueColors.pressedColor = Color.cyan;
+				blueColors.disabledColor = new Color(0f,0f,0.5f);
 				blueColors.colorMultiplier = 1;
 				tempButton.GetComponent<Button>().colors = blueColors;
-				tempButton.interactable = true;
+
+				if (localPlayerTeam == Char_AttributeScript.Teams.BLUE)
+					tempButton.interactable = true;
+				else
+					tempButton.interactable = false;
+
 				if (!links[i].GetComponent<Ability_BuilderLink>())
 					blueCountText.text = (int.Parse(blueCountText.text) + 1).ToString();
+
 			} else if (linkTeam == Char_AttributeScript.Teams.RED){
 				ColorBlock redColors = new ColorBlock();
 				redColors.normalColor = Color.red;
 				redColors.highlightedColor = Color.red;
 				redColors.pressedColor = new Color(0.6f,0f,0f);
+				redColors.disabledColor = new Color(0.5f,0f,0f);
 				redColors.colorMultiplier = 1;
 				tempButton.GetComponent<Button>().colors = redColors;
-				tempButton.interactable = true;
+
+				if (localPlayerTeam == Char_AttributeScript.Teams.RED )
+					tempButton.interactable = true;
+				else
+					tempButton.interactable = false;
+
 				if (!links[i].GetComponent<Ability_BuilderLink>())
 					redCountText.text = (int.Parse(redCountText.text) + 1).ToString();
+
 			} else {
 				ColorBlock neutColors = new ColorBlock();
 				neutColors.normalColor = Color.black;
@@ -119,8 +145,55 @@ public class Level_GUIController : MonoBehaviour {
 		}
 	}
 
+	public void SetUpScoreboard(){
+		//Clear existing text
+		foreach (Transform child in playersBlue.transform) {
+			GameObject.Destroy(child.gameObject);
+		} 
+
+		foreach (Transform child in playersRed.transform) {
+			GameObject.Destroy(child.gameObject);
+		}
+
+		int yShift = 0;
+
+		NetworkController.redPlayers.Sort((a,b) => -1*a.kills.CompareTo(b.kills));
+		for (int i = 0; i < NetworkController.redPlayers.Count; i++){
+			GameObject tempLabel = Instantiate(scoreBoardPlayerItem,Vector3.zero, Quaternion.identity) as GameObject;
+			tempLabel.transform.SetParent(playersRed.transform);
+			Vector3 labelPos = new Vector3(0,yShift,0);
+			yShift -= 34;
+			tempLabel.transform.localPosition = labelPos;
+			tempLabel.transform.localScale = new Vector3(1,1,1);
+			tempLabel.GetComponent<RectTransform>().sizeDelta = new Vector2(0,32);
+			tempLabel.transform.FindChild("Name").GetComponent<Text>().text = NetworkController.redPlayers[i].name;
+			tempLabel.transform.FindChild("K").GetComponent<Text>().text = NetworkController.redPlayers[i].kills.ToString();
+			tempLabel.transform.FindChild("D").GetComponent<Text>().text = NetworkController.redPlayers[i].deaths.ToString();
+			tempLabel.transform.FindChild("Ping").GetComponent<Text>().text = "";
+		}
+
+		yShift = 0;
+
+		NetworkController.bluePlayers.Sort((a,b) => -1*a.kills.CompareTo(b.kills));
+		for (int i = 0; i < NetworkController.bluePlayers.Count; i++){
+			GameObject tempLabel = Instantiate(scoreBoardPlayerItem,Vector3.zero, Quaternion.identity) as GameObject;
+			tempLabel.transform.SetParent(playersBlue.transform);
+			Vector3 labelPos = new Vector3(0,yShift,0);
+			yShift -= 34;
+			tempLabel.transform.localPosition = labelPos;
+			tempLabel.transform.localScale = new Vector3(1,1,1);
+			tempLabel.GetComponent<RectTransform>().sizeDelta = new Vector2(0,32);
+			tempLabel.transform.FindChild("Name").GetComponent<Text>().text = NetworkController.bluePlayers[i].name;
+			tempLabel.transform.FindChild("K").GetComponent<Text>().text = NetworkController.bluePlayers[i].kills.ToString();
+			tempLabel.transform.FindChild("D").GetComponent<Text>().text = NetworkController.bluePlayers[i].deaths.ToString();
+			tempLabel.transform.FindChild("Ping").GetComponent<Text>().text = "";
+		}
+
+	}
+
 	// Update is called once per frame
 	void Update () {
+
 		if (internetGame){
 			gameStatsText.text = "Ping: " + PhotonNetwork.GetPing().ToString();
 		}
@@ -139,6 +212,14 @@ public class Level_GUIController : MonoBehaviour {
 				decTimer -= 1;
 			}
 		}
+		// Show scoreboard
+		if (Input.GetKey(KeyCode.Tab)) {
+			scoreboard.anchoredPosition = new Vector2(0.0f,
+			                                  0.0f);
+		} else {
+			scoreboard.anchoredPosition = new Vector2(-245.0f,
+			                                          0.0f);
+		}
 	}
 	// Used to reset all cooldowns
 	public void ResetIconsCooldown() {
@@ -156,15 +237,6 @@ public class Level_GUIController : MonoBehaviour {
 
 	public void UpdateHUDEnergy(int energy){
 		energyText.text = energy.ToString();
-	}
-
-	public void onSoldierSelectButtonPress(){
-		//Char_SelectChar.classNo = 0;
-		soldierImage.GetComponent<Image>().enabled = true;
-		builderImage.GetComponent<Image>().enabled = false;
-		thiefImage.GetComponent<Image>().enabled = false;
-		GUIClass = classes.SOLDIER;
-		Debug.Log ("Selecting Soldier");
 	}
 
 	// Used to set the weapon icons
@@ -200,12 +272,25 @@ public class Level_GUIController : MonoBehaviour {
 		}
 	}
 
+	public void onSoldierSelectButtonPress(){
+		//Char_SelectChar.classNo = 0;
+		soldierImage.GetComponent<Image>().enabled = true;
+		builderImage.GetComponent<Image>().enabled = false;
+		thiefImage.GetComponent<Image>().enabled = false;
+		GUIClass = classes.SOLDIER;
+		spawnPreviewCamera.gameObject.SetActive(true);
+		spawnPreviewCamera.transform.localPosition = spawnPreviewSoldierCameraPos.localPosition;
+		Debug.Log ("Selecting Soldier");
+	}
+
 	public void onThiefSelectButtonPress(){
 		//Char_SelectChar.classNo = 1;
 		soldierImage.GetComponent<Image>().enabled = false;
 		builderImage.GetComponent<Image>().enabled = false;
 		thiefImage.GetComponent<Image>().enabled = true;
 		GUIClass = classes.THIEF;
+		spawnPreviewCamera.gameObject.SetActive(true);
+		spawnPreviewCamera.transform.localPosition = spawnPreviewSniperCameraPos.localPosition;
 		Debug.Log ("Selecting Thief");
 	}
 
@@ -215,7 +300,29 @@ public class Level_GUIController : MonoBehaviour {
 		builderImage.GetComponent<Image>().enabled = true;
 		thiefImage.GetComponent<Image>().enabled = false;
 		GUIClass = classes.BUILDER;
+		spawnPreviewCamera.gameObject.SetActive(true);
+		spawnPreviewCamera.transform.localPosition = spawnPreviewBuilderCameraPos.localPosition;
 		Debug.Log ("Selecting Builder");
+	}
+
+	public void onRedTeamButtonPress(){
+		localPlayerTeam = Char_AttributeScript.Teams.RED;
+		spawnPreviewCamera.gameObject.SetActive(true);
+		GameObject.Find("CharacterSelectionGUI").transform.localScale=new Vector3(10,5,5);
+		GameObject.Find("PickATeam").gameObject.SetActive(false);
+		SetUpLinkButtons();
+	}
+
+	public void onBlueTeamButtonPress(){
+		localPlayerTeam = Char_AttributeScript.Teams.BLUE;
+		GameObject.Find("CharacterSelectionGUI").transform.localScale=new Vector3(10,5,5);
+		spawnPreviewCamera.gameObject.SetActive(true);
+		GameObject.Find("PickATeam").gameObject.SetActive(false);
+		SetUpLinkButtons();
+	}
+
+	public void onReturnToMenuButtonPress(){
+		Application.LoadLevel("Menu");
 	}
 
 	void LinkSpawn(Vector3 spawnLoc, Char_AttributeScript.Teams team){

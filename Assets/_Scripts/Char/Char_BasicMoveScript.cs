@@ -13,11 +13,17 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 	public float jumpSpeed=5.0f;
 	public Transform FPSCameraPos;
 	public float sniperRotationModifier = 0f;
-	public AudioClip footsteps;
-	public AudioClip footsteps_sprint;
+	public AudioClip[] footstepsCement;
+	public AudioClip[] footstepsWood;
+	public AudioClip[] footstepsSand;
+	public AudioClip[] footstepsMetal;
 	public AudioClip jump;
 	public AudioSource jumpAudio;
+	bool step = true;
+	string terrainBelowTag;
 	AudioSource audio;
+	float audioLength;
+	AudioReverbZone[] reverbzones;
 
 	//public Transform currentPlayer;
 
@@ -25,14 +31,17 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 	bool isJumping=false, inAir = false;
 	float clampYAxis = 90.0f;
 
-	public bool inVortex = false;
+	public bool inVortex = false, respawning = false;
 	float inVortexTime = 2;
 	private RaycastHit hit;
 
 	// Use this for initialization
 	void Start () {
+		reverbzones = GetComponentsInChildren<AudioReverbZone> ();
+		for (int i = 0; i < reverbzones.Length; i++) {
+			reverbzones[i].gameObject.SetActive(false);
+				}
 		audio = GetComponent<AudioSource> ();
-		audio.clip = footsteps;
 
 
 		anim=GetComponentInChildren<Animator>();
@@ -53,14 +62,17 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 		//Debug.Log(PhotonNetwork.networkingPeer.RoundTripTime);
 		if (photonView.isMine)
 		{
-			if (!inVortex)
-				InputMovement();
-			else if (!IsInvoking("EnableKeys"))
-				Invoke ("EnableKeys",inVortexTime);
-			//InputColorChange();
-			MouseView();
+			if (!respawning){
+				if (!inVortex)
+					InputMovement();
+				else if (!IsInvoking("EnableKeys"))
+					Invoke ("EnableKeys",inVortexTime);
+				//InputColorChange();
 
-			UpdateCameraPos();
+				MouseView();
+
+				UpdateCameraPos();
+			}
 			//SetSynchronizedValues
 		}
 
@@ -100,6 +112,7 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 
 		if (Physics.Raycast(transform.position, Vector3.down,out hit, 1.25f)) {
 			Debug.DrawLine(transform.position, hit.point, Color.red);
+			terrainBelowTag=hit.transform.tag;
 			inAir = false;
 			anim.SetBool("Jumping",false);
 		} else {
@@ -118,26 +131,50 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 		} 
 
 		//Determining footsteps sound
-		if(audio.isPlaying==false){
-			audio.Play ();
+
+		if(anim.GetFloat ("Speed")>=0.05f && !anim.GetBool("Jumping") && step==true){
+			generateFootstep(terrainBelowTag);
 		}
-		//Debug.Log(audio.isPlaying+" "+audio.pitch+" "+audio.clip);
-		if (anim.GetBool("Jumping")==true) {
-			audio.pitch=0;
+	}
+
+	IEnumerator waitFootsteps(){
+		yield return new WaitForSeconds (0.33f);
+		//yield return new WaitForSeconds (audio.clip.length);
+		step=true;
 		}
-		else if(anim.GetFloat ("Speed")>=0.05f){
-			audio.pitch=1;
-			if(sprint){
-				audio.clip=footsteps_sprint;
-				//audio.pitch=0;
-			}else{
-				//audio.pitch=1;
-				audio.clip=footsteps;
-			}
+
+	void generateFootstep(string terrainType){
+		audio.volume = 1;
+
+		if (terrainType == "Wood" && step==true) {
+			//Debug.Log("Wood");
+			step=false;
+			audio.clip=footstepsWood[Random.Range(0,footstepsWood.Length)];
+			audio.Play();
+			StartCoroutine (waitFootsteps ());
 		}
-		else if(anim.GetFloat("Speed")<=0.05f){
-			audio.pitch=0;
+		else if (terrainType == "Sand" && step==true) {
+			//Debug.Log("Cement");
+			Debug.Log (Time.time +" " + terrainType+" "+audio.clip);
+			step=false;
+			audio.clip=footstepsSand[Random.Range(0,footstepsSand.Length)];
+			audio.Play();
+			StartCoroutine (waitFootsteps ());
 		}
+		else if (terrainType == "Metal" && step==true) {
+			//Debug.Log("Metal");
+			step=false;
+			audio.clip=footstepsMetal[Random.Range(0,footstepsMetal.Length)];
+			audio.Play();
+			StartCoroutine (waitFootsteps ());
+		}
+		else{//Cement or untagged
+			step=false;
+			audio.clip=footstepsCement[Random.Range(0,footstepsCement.Length)];
+			audio.Play();
+			StartCoroutine (waitFootsteps ());
+		}
+		audioLength = audio.clip.length;
 	}
 
 	void MouseView(){
@@ -147,6 +184,28 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 
 		FPSCameraPos.transform.localRotation = Quaternion.Euler (mouseSensitivity + sniperRotationModifier, 0, 0);
 	}
+
+	void OnTriggerEnter(Collider other){
+		if (other.name == "reverbCave") {
+			for(int i = 0; i < reverbzones.Length;i++){
+				if(reverbzones[i].name=="CaveZone"){
+					reverbzones[i].gameObject.SetActive(true);
+				}
+			}
+			Debug.Log("In reverb cave");
+				}
+	}
+
+	void OnTriggerExit(Collider other){
+		if (other.name == "reverbCave") {
+			for(int i = 0; i < reverbzones.Length;i++){
+				if(reverbzones[i].name=="CaveZone"){
+					reverbzones[i].gameObject.SetActive(false);
+				}
+			}
+			Debug.Log("Left reverbCave");
+				}
+		}
 
 	/*
 	void OnCollisionEnter(Collision other){
