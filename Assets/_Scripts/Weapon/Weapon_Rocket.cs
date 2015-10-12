@@ -31,10 +31,11 @@ public class Weapon_Rocket : Photon.MonoBehaviour {
 	}
 
 	public void Explode(GameObject other){
+		//ExplosionAtPoint (transform.position);
 		GameObject expl = PhotonNetwork.Instantiate (explosion.name,transform.position,Quaternion.identity,0) as GameObject;
 		expl.GetComponent<Weapon_RocketExplosion>().whoFiredMe = whoFiredMe;
 
-		if (other.GetComponent<Char_AttributeScript>()){
+		if (other.GetComponent<Char_AttributeScript>()) {
 			DamagePlayer(-20,other.gameObject.GetComponent<PhotonView>().viewID);
 			try {
 				if (other.GetComponent<Char_AttributeScript>().health <= 0 && 
@@ -53,6 +54,16 @@ public class Weapon_Rocket : Photon.MonoBehaviour {
 
 	void OnCollisionEnter(Collision other){
 		Explode(other.gameObject);
+	}
+
+	[RPC] void ExplosionAtPoint(Vector3 pos) {
+		GameObject expl = Instantiate (explosion,
+		                               pos,
+		                               Quaternion.identity) as GameObject;
+		Destroy (expl, 1f);
+		
+		if (photonView.isMine)
+			photonView.RPC ("ExplosionAtPoint", PhotonTargets.OthersBuffered, pos);
 	}
 
 	[RPC] void DamagePlayer(int damage, int vID){
