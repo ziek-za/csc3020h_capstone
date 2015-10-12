@@ -20,6 +20,7 @@ public class Char_SelectChar : Photon.MonoBehaviour {
 		gc = GameObject.Find ("GUI Controller").GetComponent<Level_GUIController> ();
 		// initialize the Network Controller object
 		nc = GameObject.Find ("Network Controller").GetComponent<Level_NetworkController> ();
+		classNo=9;
 	}
 	
 	// Update is called once per frame

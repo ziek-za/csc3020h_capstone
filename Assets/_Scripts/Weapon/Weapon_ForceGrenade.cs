@@ -102,23 +102,26 @@ public class Weapon_ForceGrenade : Photon.MonoBehaviour {
 				}
 			} catch (System.Exception e){}
 				
-			if (mode.Equals("push") &&
-			    alreadyCollided[i].GetComponent<Rigidbody>() != null &&
-			    !alreadyCollided[i].GetComponent<Rigidbody>().isKinematic){
-				try {
-					Vector3 forceDir = alreadyCollided[i].transform.position - transform.position;
-					int vID = alreadyCollided[i].GetComponent<PhotonView>().viewID;
-					PushForceExplosion(vID, Vector3.Normalize(forceDir) * pushForce);
-					// Deal damage
-					DamagePlayer(pushDamage, vID, transform.position);
-				} catch (System.NullReferenceException e){
-					Debug.LogError("Null Ref on: " + alreadyCollided[i].name);
+			try {
+				if (mode.Equals("push") &&
+				    alreadyCollided[i].GetComponent<Rigidbody>() != null &&
+				    !alreadyCollided[i].GetComponent<Rigidbody>().isKinematic){
+					try {
+						Vector3 forceDir = alreadyCollided[i].transform.position - transform.position;
+						int vID = alreadyCollided[i].GetComponent<PhotonView>().viewID;
+						PushForceExplosion(vID, Vector3.Normalize(forceDir) * pushForce);
+						// Deal damage
+						DamagePlayer(pushDamage, vID, transform.position);
+					} catch (System.NullReferenceException e){
+						Debug.LogError("Null Ref on: " + alreadyCollided[i].name);
+					}
 				}
-			}
-			else if (mode.Equals("pull") && !madeVortex){
-				PhotonNetwork.Instantiate(vortex.name, transform.position, Quaternion.identity, 0);
-				madeVortex = true; //Break because only want to create one vortex
-			}
+				else if (mode.Equals("pull") && !madeVortex){
+					PhotonNetwork.Instantiate(vortex.name, transform.position, Quaternion.identity, 0);
+					madeVortex = true; //Break because only want to create one vortex
+				}
+			} catch (MissingReferenceException e){}
+				
 		}
 	}
 

@@ -20,6 +20,7 @@ public class Weapon_Vortex : Photon.MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		RecieveVortexRPC(transform.position, true);
+		Destroy(gameObject,duration);
 	}
 
 	void ChannelingTime(){

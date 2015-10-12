@@ -16,7 +16,7 @@ public class Weapon_BuilderGlove : Photon.MonoBehaviour {
 	public AudioClip fire_glove;
 	AudioSource	audio;
 
-	int buildRate = 3;
+	float buildRate = 0.2f;
 	int bRCounter = 0;
 
 	// Use this for initialization
