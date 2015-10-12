@@ -123,11 +123,11 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 			SetPlayerName(GetComponent<PhotonView>().viewID, _MainController.playerName);
 
 			if(team == Teams.RED){
-				joinTeam(new Vector3(Color.red.r, Color.red.g, Color.red.b), 0, playerName + " joined RED");
+				joinTeam(new Vector3(Color.red.r, Color.red.g, Color.red.b), 0, playerName + " spawned as RED");
 				playerColor = Color.red;
 			}
 			else if(team == Teams.BLUE){
-				joinTeam(new Vector3(Color.blue.r, Color.blue.g, Color.blue.b), 1, playerName + " joined BLUE");
+				joinTeam(new Vector3(Color.blue.r, Color.blue.g, Color.blue.b), 1, playerName + " spawned as BLUE");
 				playerColor = Color.blue;
 			}
 
@@ -221,6 +221,10 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 		if (!gameObject.GetComponent<Char_BasicMoveScript>().respawning){
 			if (Input.GetButtonDown("1")){
 				NetworkChangeWeapons(transform.GetComponent<PhotonView>().viewID,1);
+				try {
+					GetComponentInChildren<WeaponSniperScript>().sniperCrosshair.GetComponent<RawImage>().enabled = false;
+					Camera.main.fieldOfView = 60;
+				} catch (System.Exception e) {}
 				// Change weapon
 				HUD.SetWeaponIcon(current_class, 1);
 			} else if (Input.GetButtonDown("2")){

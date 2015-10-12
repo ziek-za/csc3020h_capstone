@@ -83,4 +83,5 @@ MonoBehaviour:
   - EndGameRPC
   - TurnOffColliders
   - SendScrollingKillMessage
+  - GenerateSniperTrail
   DisableAutoOpenWizard: 0
