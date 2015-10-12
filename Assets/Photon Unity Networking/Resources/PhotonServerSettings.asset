@@ -84,4 +84,7 @@ MonoBehaviour:
   - TurnOffColliders
   - SendScrollingKillMessage
   - GenerateSniperTrail
+  - SendFootstepSound
+  - SendJumpSound
+  - SendShootSound
   DisableAutoOpenWizard: 0

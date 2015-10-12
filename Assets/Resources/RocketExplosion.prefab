@@ -105,7 +105,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &427274
 Transform:
   m_ObjectHideFlags: 1
@@ -345,6 +345,7 @@ MonoBehaviour:
   pushForce: 350
   whoFiredMe: {fileID: 0}
   ps: {fileID: 19859510}
+  buildingAffectRadius: 4
 --- !u!135 &13531346
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -355,7 +356,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 6
+  m_Radius: 1.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!198 &19831284
 ParticleSystem:
