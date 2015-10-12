@@ -8,6 +8,7 @@ public class Weapon_ForceGrenade : Photon.MonoBehaviour {
 	public float pushForce = 700f;
 	public Transform vortex;
 	public float fuseTime = 5;
+	public int pushDamage = -45;
 
 	private Terrain terrain;
 	private Map_TerrainController MTC;
@@ -102,7 +103,10 @@ public class Weapon_ForceGrenade : Photon.MonoBehaviour {
 			    !alreadyCollided[i].GetComponent<Rigidbody>().isKinematic){
 				try {
 					Vector3 forceDir = alreadyCollided[i].transform.position - transform.position;
-					PushForceExplosion(alreadyCollided[i].GetComponent<PhotonView>().viewID, Vector3.Normalize(forceDir) * pushForce);
+					int vID = alreadyCollided[i].GetComponent<PhotonView>().viewID;
+					PushForceExplosion(vID, Vector3.Normalize(forceDir) * pushForce);
+					// Deal damage
+					DamagePlayer(pushDamage, vID, transform.position);
 				} catch (System.NullReferenceException e){
 					Debug.LogError("Null Ref on: " + alreadyCollided[i].name);
 				}
@@ -156,5 +160,15 @@ public class Weapon_ForceGrenade : Photon.MonoBehaviour {
 		PhotonView.Find(vID).transform.GetComponent<Map_DestructableObject>().Hit(damage);
 		if (photonView.isMine)
 			photonView.RPC("DamageDestructableObject", PhotonTargets.OthersBuffered, damage, vID);
+	}
+
+	// Used to deal damage to the player
+	[RPC] void DamagePlayer(int damage, int vID, Vector3 grenadePos) {
+		try {
+			Char_AttributeScript cas = PhotonView.Find(vID).transform.GetComponent<Char_AttributeScript>();
+			cas.ChangeHP(damage, grenadePos);
+			if (photonView.isMine)
+				photonView.RPC("DamagePlayer", PhotonTargets.OthersBuffered, damage, vID, grenadePos);
+		} catch (System.Exception e){}
 	}
 }
