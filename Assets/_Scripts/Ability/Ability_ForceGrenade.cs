@@ -41,6 +41,7 @@ public class Ability_ForceGrenade: Photon.MonoBehaviour {
 				gr.rigidbody.velocity = (cameraDirection.transform.forward * initialForwardVelocity) + 
 										(cameraDirection.transform.up * initialUpwardsVelocity);
 				gr.GetComponent<Weapon_ForceGrenade>().mode = mode;
+				gr.GetComponent<Weapon_ForceGrenade>().whoThrewMe = GetComponentInParent<Char_AttributeScript>();
 				gr.rigidbody.angularVelocity = transform.right*1000;
 			} 
 			else if (Input.GetButtonDown("Fire2") && gr){

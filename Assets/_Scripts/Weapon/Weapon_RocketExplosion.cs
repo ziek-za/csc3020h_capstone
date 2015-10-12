@@ -43,9 +43,11 @@ public class Weapon_RocketExplosion : Photon.MonoBehaviour {
 
 	//All objects in the area of effect live in alreadyCollided
 	void OnTriggerEnter(Collider other){
-		if (!alreadyCollided.Contains(other.gameObject)){
-			alreadyCollided.Add(other.gameObject);
-		}
+		try {
+			if (!alreadyCollided.Contains(other.gameObject)){
+				alreadyCollided.Add(other.gameObject);
+			}
+		} catch (System.Exception e){}
 	}
 	
 	void DisableHitCrosshair(){

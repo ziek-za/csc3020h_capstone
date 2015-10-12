@@ -376,6 +376,7 @@ public class Level_GUIController : MonoBehaviour {
 
 	public void onReturnToMenuButtonPress(){
 		Application.LoadLevel("Menu");
+		PhotonNetwork.Disconnect();
 	}
 
 	void LinkSpawn(Vector3 spawnLoc, Char_AttributeScript.Teams team){
