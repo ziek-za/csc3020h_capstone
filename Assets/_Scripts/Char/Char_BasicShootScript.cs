@@ -86,24 +86,6 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 
 	protected void Update()
 	{
-		/*if (photonView.isMine){
-			//Screen Shake
-			if (shake_intensity > 0){
-				animInstance.FPSCameraPos.localPosition = originPosition + Random.insideUnitSphere * shake_intensity;
-				animInstance.FPSCameraPos.localRotation = new Quaternion(
-					originRotation.x + Random.Range (-shake_intensity,shake_intensity) * .2f,
-					originRotation.y + Random.Range (-shake_intensity,shake_intensity) * .2f,
-					originRotation.z + Random.Range (-shake_intensity,shake_intensity) * .2f,
-					originRotation.w + Random.Range (-shake_intensity,shake_intensity) * .2f);
-				shake_intensity -= shake_decay;
-			}
-		}*/
-		/*Debug.Log (this.GetComponentInParent<Char_AttributeScript>().playerName);
-		if (Time.time >= shotCooldown && Input.GetButton ("Fire1")) {
-						audio.PlayOneShot (fire_pistol);
-			Debug.Log("Playing pistol fire sound");
-				}
-*/
 		if(photonView.isMine) {
 			if(Input.GetButton("Fire1")){
 				animInstance.anim.SetBool("Shooting", true);
@@ -113,29 +95,35 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 		}
 
 
+
+
 		if(photonView.isMine && Time.time >= shotCooldown && Input.GetButton("Fire1")) {
 			//CameraShake(0.03f,0.01f);
 			// Determining sound is played:
-			Debug.Log(attribInstance.current_class + " " +attribInstance.weapon1.GetActive() + " "+attribInstance.weapon2.GetActive() + " " +attribInstance.weapon3.GetActive());
 			if(attribInstance.weapon1.GetActive()){//If pistol
-				AudioSource.PlayClipAtPoint(fire_pistol,transform.position);
+				//AudioSource.PlayClipAtPoint(fire_pistol,transform.position);
+				SendShootSound(GetComponentInParent<PhotonView>().viewID, transform.position, 1);
 			}
 			else if(attribInstance.weapon2.GetActive()){//If secondary weapon
 				if(attribInstance.current_class == Char_AttributeScript.Class.BUILDER){//If it is builder
-					AudioSource.PlayClipAtPoint(fire_shotgun,transform.position);
+					//AudioSource.PlayClipAtPoint(fire_shotgun,transform.position, 3);
+					SendShootSound(GetComponentInParent<PhotonView>().viewID, transform.position, 3);
 				}
 				else if(attribInstance.current_class == Char_AttributeScript.Class.SOLDIER){//If it is soldier
 					//Handled by itself seperately
 				}
 				else if(attribInstance.current_class == Char_AttributeScript.Class.THIEF){//If it is thief
-					AudioSource.PlayClipAtPoint(fire_rifle,transform.position);
+					//AudioSource.PlayClipAtPoint(fire_rifle,transform.position, 2);
+					SendShootSound(GetComponentInParent<PhotonView>().viewID, transform.position, 2);
 				}
 			}
 			else if(attribInstance.weapon3.GetActive()){//If glove (only builder)
 				if(attribInstance.current_class == Char_AttributeScript.Class.BUILDER){//Only builder has 3rd weapon
-					AudioSource.PlayClipAtPoint(fire_glove,transform.position);
+					//AudioSource.PlayClipAtPoint(fire_glove,transform.position, 4);
+					SendShootSound(GetComponentInParent<PhotonView>().viewID, transform.position, 4);
 				}
 			}
+
 			shotCooldown = Time.time + timeBetweenShots;
 			PlayMuzzleFlash(photonView.viewID);
 
@@ -268,5 +256,21 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 		} catch (System.Exception e) {}
 		if (photonView.isMine)
 			photonView.RPC("DamageDestructableObject", PhotonTargets.OthersBuffered, damage, vID);
+	}
+
+	[RPC]protected void SendShootSound(int vID, Vector3 soundPos, int soundNum){
+		if(soundNum==1){
+			AudioSource.PlayClipAtPoint(fire_pistol,soundPos);
+		}else if(soundNum==2){
+			AudioSource.PlayClipAtPoint(fire_rifle,soundPos);
+		}else if(soundNum==3){
+			AudioSource.PlayClipAtPoint(fire_shotgun,soundPos);
+		}else if(soundNum==4){
+			AudioSource.PlayClipAtPoint(fire_glove,soundPos);
+		}
+		if(photonView.isMine){
+			photonView.RPC("SendShootSound", PhotonTargets.OthersBuffered, vID, soundPos, soundNum);
+			//photonView.RPC("TeleoutEffect",PhotonTargets.OthersBuffered, position);
+		}
 	}
 }

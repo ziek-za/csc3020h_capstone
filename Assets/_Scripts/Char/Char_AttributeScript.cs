@@ -267,7 +267,6 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 				linkRateCounter += Time.deltaTime;
 				if (linkRateCounter >= enegryRegenRate){
 					linkRateCounter -= enegryRegenRate;
-					audio.Play();
 					LinkRegenEnergy();
 					if(!healSource.isPlaying && energy!=100){
 						healSource.Play();//OneShot(healEnergy);
@@ -276,7 +275,6 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 			} else {
 				healSource.Stop();
 				linkRateCounter = enegryRegenRate;
-				audio.Stop();
 			}
 			HUD.UpdateHUDHealth(health);
 			HUD.UpdateHUDEnergy(energy);
@@ -352,24 +350,31 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 	}
 
 	void playHurtSound(){
+		Debug.Log ("Hurt sound ");
 		int randomChance = Random.Range (1, 4);
 		if(randomChance==1){
-			int randomSound = Random.Range (1, 3);
+			int randomSound = Random.Range (1, 4);
+
 			if (randomSound == 1) {
 				//GameObject hurtSound = AudioSource.PlayClipAtPoint(pain1,transform.position) as GameObject;
-				audio.PlayOneShot(pain1);
+			audio.clip = pain1;
+				//audio.PlayOneShot(pain1);
 				//hurtSound.transform.SetParent(transform);
 			}
 			else if(randomSound==2){
 				//GameObject hurtSound = AudioSource.PlayClipAtPoint(pain2,transform.position) as GameObject;
 				//hurtSound.transform.SetParent(transform);
-				audio.PlayOneShot(pain2);
+			audio.clip=pain2;
+		//		audio.PlayOneShot(pain2);
 			}
 			else if(randomSound==3){
+			audio.clip=pain3;
 				//GameObject hurtSound = AudioSource.PlayClipAtPoint(pain3,transform.position) as GameObject;
 				//hurtSound.transform.SetParent(transform);
-				audio.PlayOneShot(pain3);
+				//audio.PlayOneShot(pain3);
 			}
+		Debug.Log (audio.clip);
+			audio.Play ();
 		}
 	}
 

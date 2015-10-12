@@ -25,7 +25,29 @@ public class Weapon_ShotgunScript : Char_BasicShootScript {
 
 			shotCooldown = Time.time + timeBetweenShots;
 			PlayMuzzleFlash(photonView.viewID);
-			AudioSource.PlayClipAtPoint(fire_shotgun,transform.position);
+			if(attribInstance.weapon1.GetActive()){//If pistol
+				//AudioSource.PlayClipAtPoint(fire_pistol,transform.position);
+				SendShootSound(GetComponentInParent<PhotonView>().viewID, transform.position, 1);
+			}
+			else if(attribInstance.weapon2.GetActive()){//If secondary weapon
+				if(attribInstance.current_class == Char_AttributeScript.Class.BUILDER){//If it is builder
+					//AudioSource.PlayClipAtPoint(fire_shotgun,transform.position, 3);
+					SendShootSound(GetComponentInParent<PhotonView>().viewID, transform.position, 3);
+				}
+				else if(attribInstance.current_class == Char_AttributeScript.Class.SOLDIER){//If it is soldier
+					//Handled by itself seperately
+				}
+				else if(attribInstance.current_class == Char_AttributeScript.Class.THIEF){//If it is thief
+					//AudioSource.PlayClipAtPoint(fire_rifle,transform.position, 2);
+					SendShootSound(GetComponentInParent<PhotonView>().viewID, transform.position, 2);
+				}
+			}
+			else if(attribInstance.weapon3.GetActive()){//If glove (only builder)
+				if(attribInstance.current_class == Char_AttributeScript.Class.BUILDER){//Only builder has 3rd weapon
+					//AudioSource.PlayClipAtPoint(fire_glove,transform.position, 4);
+					SendShootSound(GetComponentInParent<PhotonView>().viewID, transform.position, 4);
+				}
+			}
 			tracerEffect.Play();
 
 			for (int i = 0; i < 5; i++){

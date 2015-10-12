@@ -12,12 +12,14 @@ public class Ambience : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Debug.Log (thisSource.clip + " " + thisSource.isPlaying +" "+thisSource.clip.length);
+		//Debug.Log (thisSource.clip + " " + thisSource.isPlaying +" "+thisSource.clip.length);
 		if (play) {
 			play=false;
 			generateAmbientSound();
-			thisSource.PlayOneShot (thisSource.clip);
+			//thisSource.PlayOneShot (thisSource.clip);
+			thisSource.Play ();
 			StartCoroutine(waitRandomTime());
+			//Invoke("waitRandomTime",thisSource.clip.length+Random.Range(2,5));
 		}
 	}
 

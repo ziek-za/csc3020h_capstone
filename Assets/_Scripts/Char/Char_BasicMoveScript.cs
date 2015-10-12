@@ -76,6 +76,7 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 			//SetSynchronizedValues
 		}
 
+
 	}
 
 	void UpdateCameraPos(){
@@ -122,7 +123,7 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 		}
 
 		if(Input.GetButtonDown("Jump") && inAir == false){
-			jumpAudio.PlayOneShot(jump);
+			SendJumpSound(GetComponent<PhotonView>().viewID);
 			anim.SetBool("Jumping",true);
 			//isJumping=true;
 			Vector3 v3 = rigidbody.velocity;
@@ -131,9 +132,8 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 		} 
 
 		//Determining footsteps sound
-
-	if(anim.GetFloat ("Speed")>=0.05f && !anim.GetBool("Jumping") && step==true){
-			generateFootstep(terrainBelowTag);
+		if(anim.GetFloat ("Speed")>=0.05f && !anim.GetBool("Jumping") && step==true){
+			SendFootstepSound(GetComponent<PhotonView>().viewID, terrainBelowTag);
 		}
 	}
 
@@ -144,7 +144,8 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 		}
 
 	void generateFootstep(string terrainType){
-		audio.volume = 1;
+		float oldVolume = audio.volume;
+		audio.volume *= 5;
 
 		if (terrainType == "Wood" && step==true) {
 			//Debug.Log("Wood");
@@ -175,6 +176,7 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 			StartCoroutine (waitFootsteps ());
 		}
 		audioLength = audio.clip.length;
+		audio.volume = oldVolume;
 	}
 
 	void MouseView(){
@@ -248,10 +250,19 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 		}
 		}
 
-	/*
-	void OnCollisionEnter(Collision other){
-		if (Mathf.Abs(transform.rigidbody.velocity.y) < 1f){//Bottom of collider is colliding
-			isJumping = false;
+	[RPC] void SendFootstepSound(int vID, string terrainType){
+		PhotonView.Find (vID).GetComponent<Char_BasicMoveScript> ().generateFootstep (terrainType);
+		if(photonView.isMine){
+			photonView.RPC("SendFootstepSound", PhotonTargets.OthersBuffered, vID, terrainType);
+			//photonView.RPC("TeleoutEffect",PhotonTargets.OthersBuffered, position);
 		}
-	}*/
+	}
+
+	[RPC] void SendJumpSound(int vID){
+		PhotonView.Find (vID).GetComponent<Char_BasicMoveScript> ().jumpAudio.PlayOneShot(jump);;
+		if(photonView.isMine){
+			photonView.RPC("SendJumpSound", PhotonTargets.OthersBuffered, vID);
+			//photonView.RPC("TeleoutEffect",PhotonTargets.OthersBuffered, position);
+		}
+	}
 }

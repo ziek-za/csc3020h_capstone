@@ -6676,15 +6676,10 @@ AudioSource:
   rolloffCustomCurve:
     serializedVersion: 2
     m_Curve:
-    - time: 0
+    - time: .00200000009
       value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
+      inSlope: -500.200928
+      outSlope: -500.200928
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -7065,7 +7060,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 3
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -7903,10 +7898,10 @@ MonoBehaviour:
   tracerEffect: {fileID: 19824524}
   timeBetweenShots: 1
   weaponAccuracy: 1
-  fire_pistol: {fileID: 0}
-  fire_shotgun: {fileID: 0}
+  fire_pistol: {fileID: 8300000, guid: 799ed54a4962c574485752a74b551a41, type: 3}
+  fire_shotgun: {fileID: 8300000, guid: f0689737d98a20a4e99ca1c10375fbee, type: 3}
   fire_rifle: {fileID: 8300000, guid: 0334302d7774d8043949c382e27ddc29, type: 3}
-  fire_glove: {fileID: 0}
+  fire_glove: {fileID: 8300000, guid: e9d8fcb9c20006649bab6ab168e766d6, type: 3}
   audio: {fileID: 0}
   sniperCrosshair: {fileID: 0}
   actualCameraPosition: {fileID: 109324}
@@ -7970,9 +7965,9 @@ MonoBehaviour:
   timeBetweenShots: .333330005
   weaponAccuracy: 10
   fire_pistol: {fileID: 8300000, guid: 799ed54a4962c574485752a74b551a41, type: 3}
-  fire_shotgun: {fileID: 0}
-  fire_rifle: {fileID: 0}
-  fire_glove: {fileID: 0}
+  fire_shotgun: {fileID: 8300000, guid: f0689737d98a20a4e99ca1c10375fbee, type: 3}
+  fire_rifle: {fileID: 8300000, guid: 0334302d7774d8043949c382e27ddc29, type: 3}
+  fire_glove: {fileID: 8300000, guid: e9d8fcb9c20006649bab6ab168e766d6, type: 3}
   audio: {fileID: 0}
 --- !u!135 &13527338
 SphereCollider:

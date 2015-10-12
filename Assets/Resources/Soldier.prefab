@@ -3235,7 +3235,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 3
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -3521,7 +3521,7 @@ MonoBehaviour:
   pain1: {fileID: 8300000, guid: f482e01936b46834dba24e4edaf0b09d, type: 3}
   pain2: {fileID: 8300000, guid: 51f0a9e3a246bb544ad64c8b36399edb, type: 3}
   pain3: {fileID: 8300000, guid: 34e9c91686f0d4a4e9c6b95a1fef1e94, type: 3}
-  healEnergy: {fileID: 0}
+  healEnergy: {fileID: 8300000, guid: 743919398a38a8340b75d055f1bd1b00, type: 3}
   audio: {fileID: 8252046}
   healSource: {fileID: 8227712}
   deathSource: {fileID: 8240084}
@@ -3687,7 +3687,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 1a6e8fb6933b35d4d8e4e7a707246e8e, type: 3}
   - {fileID: 8300000, guid: 69bb7991b4b0ebc4aa03d0791a1c851c, type: 3}
   jump: {fileID: 8300000, guid: 09bcc8baf305c5242bf9c6b9756c8c5b, type: 3}
-  moveFast: {fileID: 0}
+  moveFast: {fileID: 8300000, guid: 0c0a97924c806a0439b24e5330d65833, type: 3}
   jumpAudio: {fileID: 8243412}
   inVortex: 0
   respawning: 0
@@ -3810,10 +3810,10 @@ MonoBehaviour:
   tracerEffect: {fileID: 19820516, guid: 32ce1bbf65cf6db4aaff7b299000905b, type: 2}
   timeBetweenShots: 2
   weaponAccuracy: 1
-  fire_pistol: {fileID: 0}
-  fire_shotgun: {fileID: 0}
-  fire_rifle: {fileID: 0}
-  fire_glove: {fileID: 0}
+  fire_pistol: {fileID: 8300000, guid: 799ed54a4962c574485752a74b551a41, type: 3}
+  fire_shotgun: {fileID: 8300000, guid: f0689737d98a20a4e99ca1c10375fbee, type: 3}
+  fire_rifle: {fileID: 8300000, guid: 0334302d7774d8043949c382e27ddc29, type: 3}
+  fire_glove: {fileID: 8300000, guid: e9d8fcb9c20006649bab6ab168e766d6, type: 3}
   audio: {fileID: 0}
   rocket: {fileID: 152258, guid: cc73a4ac3d664c747bfc4fe4436fd12f, type: 2}
   charMesh: {fileID: 189080}
@@ -3837,9 +3837,9 @@ MonoBehaviour:
   timeBetweenShots: .333330005
   weaponAccuracy: 10
   fire_pistol: {fileID: 8300000, guid: 799ed54a4962c574485752a74b551a41, type: 3}
-  fire_shotgun: {fileID: 0}
-  fire_rifle: {fileID: 0}
-  fire_glove: {fileID: 0}
+  fire_shotgun: {fileID: 8300000, guid: f0689737d98a20a4e99ca1c10375fbee, type: 3}
+  fire_rifle: {fileID: 8300000, guid: 0334302d7774d8043949c382e27ddc29, type: 3}
+  fire_glove: {fileID: 8300000, guid: e9d8fcb9c20006649bab6ab168e766d6, type: 3}
   audio: {fileID: 0}
 --- !u!114 &11489024
 MonoBehaviour:

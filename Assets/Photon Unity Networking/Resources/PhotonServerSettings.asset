@@ -82,4 +82,7 @@ MonoBehaviour:
   - UpdateScoreboardKills
   - EndGameRPC
   - TurnOffColliders
+  - SendFootstepSound
+  - SendJumpSound
+  - SendShootSound
   DisableAutoOpenWizard: 0

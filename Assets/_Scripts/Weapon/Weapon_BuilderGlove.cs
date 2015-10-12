@@ -186,6 +186,9 @@ public class Weapon_BuilderGlove : Photon.MonoBehaviour {
 	}
 
 	[RPC] void StopLaser(int vID, Vector3 rot){
+		if (audio.isPlaying) {
+			audio.Stop ();
+		}
 		PhotonView.Find(vID).GetComponent<Weapon_BuilderGlove>().laserSystem.Stop();
 		PhotonView.Find(vID).GetComponent<Weapon_BuilderGlove>().charMesh.transform.Rotate(rot);
 		if (photonView.isMine)

@@ -402,22 +402,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &166650
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 466650}
-  - 82: {fileID: 8266650}
-  m_Layer: 0
-  m_Name: HealAudioSource
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &168220
 GameObject:
   m_ObjectHideFlags: 1
@@ -449,6 +433,22 @@ GameObject:
   - 198: {fileID: 19894082}
   m_Layer: 0
   m_Name: GunMuzzle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &175714
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 475714}
+  - 82: {fileID: 8275714}
+  m_Layer: 0
+  m_Name: HealAudioSource
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1448,7 +1448,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 440990}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!4 &436190
 Transform:
   m_ObjectHideFlags: 1
@@ -1471,9 +1471,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: .659999967}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 475714}
   - {fileID: 440992}
   - {fileID: 429000}
-  - {fileID: 466650}
   - {fileID: 441680}
   m_Father: {fileID: 491422}
   m_RootOrder: 2
@@ -1488,7 +1488,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 440990}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!4 &441680
 Transform:
   m_ObjectHideFlags: 1
@@ -1641,18 +1641,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 462846}
   m_RootOrder: 1
---- !u!4 &466650
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 166650}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 440990}
-  m_RootOrder: 2
 --- !u!4 &468220
 Transform:
   m_ObjectHideFlags: 1
@@ -1678,6 +1666,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 480618}
   m_RootOrder: 2
+--- !u!4 &475714
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 175714}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 440990}
+  m_RootOrder: 0
 --- !u!4 &480542
 Transform:
   m_ObjectHideFlags: 1
@@ -2506,7 +2506,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 3
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
@@ -2516,7 +2516,7 @@ AudioSource:
   MinDistance: 1
   MaxDistance: 500
   Pan2D: 0
-  rolloffMode: 1
+  rolloffMode: 0
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -2683,14 +2683,14 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
   Pan2D: 0
-  rolloffMode: 1
+  rolloffMode: 0
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -2738,7 +2738,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 3
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -2845,12 +2845,12 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
---- !u!82 &8266650
+--- !u!82 &8275714
 AudioSource:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 166650}
+  m_GameObject: {fileID: 175714}
   m_Enabled: 1
   serializedVersion: 3
   m_audioClip: {fileID: 8300000, guid: 743919398a38a8340b75d055f1bd1b00, type: 3}
@@ -3194,10 +3194,10 @@ MonoBehaviour:
   tracerEffect: {fileID: 19891424}
   timeBetweenShots: 1
   weaponAccuracy: .5
-  fire_pistol: {fileID: 0}
+  fire_pistol: {fileID: 8300000, guid: 799ed54a4962c574485752a74b551a41, type: 3}
   fire_shotgun: {fileID: 8300000, guid: f0689737d98a20a4e99ca1c10375fbee, type: 3}
-  fire_rifle: {fileID: 0}
-  fire_glove: {fileID: 0}
+  fire_rifle: {fileID: 8300000, guid: 0334302d7774d8043949c382e27ddc29, type: 3}
+  fire_glove: {fileID: 8300000, guid: e9d8fcb9c20006649bab6ab168e766d6, type: 3}
   audio: {fileID: 0}
 --- !u!114 &11434354
 MonoBehaviour:
@@ -3438,9 +3438,9 @@ MonoBehaviour:
   timeBetweenShots: .333330005
   weaponAccuracy: 10
   fire_pistol: {fileID: 8300000, guid: 799ed54a4962c574485752a74b551a41, type: 3}
-  fire_shotgun: {fileID: 0}
-  fire_rifle: {fileID: 0}
-  fire_glove: {fileID: 0}
+  fire_shotgun: {fileID: 8300000, guid: f0689737d98a20a4e99ca1c10375fbee, type: 3}
+  fire_rifle: {fileID: 8300000, guid: 0334302d7774d8043949c382e27ddc29, type: 3}
+  fire_glove: {fileID: 8300000, guid: e9d8fcb9c20006649bab6ab168e766d6, type: 3}
   audio: {fileID: 0}
 --- !u!114 &11480548
 MonoBehaviour:
@@ -3606,9 +3606,9 @@ MonoBehaviour:
   pain1: {fileID: 8300000, guid: f482e01936b46834dba24e4edaf0b09d, type: 3}
   pain2: {fileID: 8300000, guid: 51f0a9e3a246bb544ad64c8b36399edb, type: 3}
   pain3: {fileID: 8300000, guid: 34e9c91686f0d4a4e9c6b95a1fef1e94, type: 3}
-  healEnergy: {fileID: 0}
+  healEnergy: {fileID: 8300000, guid: 743919398a38a8340b75d055f1bd1b00, type: 3}
   audio: {fileID: 8240992}
-  healSource: {fileID: 8266650}
+  healSource: {fileID: 8275714}
   deathSource: {fileID: 8241690}
   currentLink: {fileID: 0}
 --- !u!114 &11491430
@@ -3636,8 +3636,8 @@ MonoBehaviour:
   footstepsWood:
   - {fileID: 8300000, guid: be1d9ec3716959d48b2e67610891c75f, type: 3}
   - {fileID: 8300000, guid: 221e47816d18fee41965c2e1cee628f5, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: 2de732b1b2726c940a901502011fe91e, type: 3}
+  - {fileID: 8300000, guid: 3389b7e1ac0b9254181dfc6c0805c65b, type: 3}
   footstepsSand:
   - {fileID: 8300000, guid: f681035d5257f0c47998447ae71661b4, type: 3}
   - {fileID: 8300000, guid: 3c035b0d43981ba41816e285c63cf528, type: 3}
@@ -3649,7 +3649,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 1a6e8fb6933b35d4d8e4e7a707246e8e, type: 3}
   - {fileID: 8300000, guid: 69bb7991b4b0ebc4aa03d0791a1c851c, type: 3}
   jump: {fileID: 8300000, guid: 09bcc8baf305c5242bf9c6b9756c8c5b, type: 3}
-  moveFast: {fileID: 0}
+  moveFast: {fileID: 8300000, guid: 0c0a97924c806a0439b24e5330d65833, type: 3}
   jumpAudio: {fileID: 8229000}
   inVortex: 0
   respawning: 0

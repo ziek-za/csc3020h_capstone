@@ -17,12 +17,14 @@ public class Weapon_ForceGrenade : Photon.MonoBehaviour {
 
 	//public AudioSource audio;
 	public AudioClip pushGrenade;
+	AudioSource audio;
 	public ParticleSystem fuse, explosionEffect;
 	bool detonated = false;
 	bool madeVortex = false;
 
 	// Use this for initialization
 	void Start () {	
+		audio = transform.GetComponent<AudioSource> ();;
 		terrain = Terrain.activeTerrain;
 		alreadyCollided = new List<GameObject>();
 		MTC = terrain.GetComponent<Map_TerrainController>();
@@ -64,7 +66,7 @@ public class Weapon_ForceGrenade : Photon.MonoBehaviour {
 			if (mode.Equals("push"))
 				PlayExplosionParticleEffect();
 			mode = newMode; //Mode (push/pull) is recieved when this method is called
-			Invoke("KillGODelay",0.5f); //Slight delay when removing the grenade to make sure forces have time to be applied
+			Invoke("KillGODelay",1.2f); //Slight delay when removing the grenade to make sure forces have time to be applied
 		}
 	}
 
@@ -140,7 +142,7 @@ public class Weapon_ForceGrenade : Photon.MonoBehaviour {
 
 	[RPC] void PlayExplosionParticleEffect(){
 		explosionEffect.Play();
-		AudioSource.PlayClipAtPoint(pushGrenade, transform.position);
+		audio.Play ();
 		if (photonView.isMine)
 			photonView.RPC("PlayExplosionParticleEffect", PhotonTargets.OthersBuffered);
 	}
