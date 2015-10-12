@@ -14,6 +14,8 @@ public class Weapon_RocketExplosion : Photon.MonoBehaviour {
 	public ParticleSystem ps;
 	//public AudioClip explode;
 	AudioSource audio;
+
+	public float buildingAffectRadius = 4f;
 	// Use this for initialization
 	void Start () {	
 		audio = GetComponent<AudioSource> ();
@@ -27,7 +29,7 @@ public class Weapon_RocketExplosion : Photon.MonoBehaviour {
 		// Set particle system parent to null and destroy 2.5 seconds later
 		// set particle system parent to null
 		ps.gameObject.transform.SetParent(null);
-		Destroy (ps.gameObject, 2.5f);
+		Destroy (ps.gameObject, 2.5f);		
 	}
 
 	// Update is called once per frame
@@ -121,9 +123,13 @@ public class Weapon_RocketExplosion : Photon.MonoBehaviour {
 					
 					//Hit destructible object
 					if (alreadyCollided[i].GetComponentInParent<Map_DestructableObject>()){
-						DamageDestructableObject(-10,alreadyCollided[i].GetComponentInParent<PhotonView>().viewID);
+						if (Vector3.Distance(alreadyCollided[i].transform.position, transform.position) <= buildingAffectRadius) {
+							DamageDestructableObject(-10,alreadyCollided[i].GetComponentInParent<PhotonView>().viewID);
+						}
 					} else if (alreadyCollided[i].GetComponent<Map_DestructableObject>()){
-						DamageDestructableObject(-10,alreadyCollided[i].GetComponent<PhotonView>().viewID);
+						if (Vector3.Distance(alreadyCollided[i].transform.position, transform.position) <= buildingAffectRadius) {
+							DamageDestructableObject(-10,alreadyCollided[i].GetComponent<PhotonView>().viewID);
+						}
 					} 
 
 				} catch (System.Exception e){}

@@ -781,7 +781,7 @@ ParticleSystem:
   SizeModule:
     enabled: 1
     curve:
-      scalar: 2
+      scalar: .800000012
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -854,10 +854,10 @@ ParticleSystem:
       maxGradient:
         key0:
           serializedVersion: 2
-          rgba: 3254779903
+          rgba: 2013265919
         key1:
           serializedVersion: 2
-          rgba: 2164260863
+          rgba: 1409286143
         key2:
           serializedVersion: 2
           rgba: 369098751
@@ -885,7 +885,7 @@ ParticleSystem:
         ctime6: 0
         ctime7: 0
         atime0: 0
-        atime1: 7710
+        atime1: 8288
         atime2: 64957
         atime3: 64764
         atime4: 0
