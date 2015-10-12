@@ -50,6 +50,9 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 	Color playerColor;
 	float ScrollingMessageTimeout = 1f;
 
+	//Used for player follow cam when dead
+	Transform followCamPos;
+
 	// Use this for initialization
 	void Start () {
 
@@ -293,13 +296,24 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 			HUD.UpdateHUDHealth(health);
 			HUD.UpdateHUDEnergy(energy);
 			ChangeWeapons();
+
+			//Everything that needs to be done when a player dies
 			if ((health <= 0 || Input.GetKey(KeyCode.P))&&respawnTimer == -10){
 				try {
 					deathSource.Play ();
 				} catch {}
-				respawnTimer = 5f;
+				respawnTimer = 8f;
 				if (currentLink != null){
 					ReduceCounter(currentLink.GetComponent<PhotonView>().viewID);
+				}
+
+				GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+				for (int i = 0; i < players.Length; i++){
+					if (players[i].GetComponent<Char_AttributeScript>() != this &&
+					    players[i].GetComponent<Char_AttributeScript>().team == team){
+						followCamPos = players[i].transform;
+						break;
+					}
 				}
 
 				//Disabling various crosshairs
@@ -318,7 +332,6 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 				animInstance.anim.SetBool ("Dead", true);
 				TurnOffColliders(GetComponent<PhotonView>().viewID);
 
-				//KillPlayer(this.gameObject.GetComponent<PhotonView>().viewID);
 				Char_SelectChar.classNo=10;
 				Respawner.spawned=false;
 				try {
@@ -340,9 +353,18 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 
 			}
 
+			//Count down respawn timer
 			if (respawnTimer > 0){
 				respawnTimer -= Time.deltaTime;
 				HUD.respawnTimerText.gameObject.SetActive(true);
+
+				//Follow an ally while we respawn
+				if (followCamPos){
+					Camera.main.transform.position = followCamPos.position + Vector3.right*5 + Vector3.up;
+					Camera.main.transform.LookAt(followCamPos.position);
+					HUD.playerNameLabel.text = followCamPos.GetComponent<Char_AttributeScript>().playerName;
+				}
+
 				int seconds = Mathf.RoundToInt(respawnTimer);
 				if (seconds > 0)
 					HUD.respawnTimerText.text = seconds.ToString();
