@@ -125,6 +125,7 @@ MonoBehaviour:
   pushForce: 700
   vortex: {fileID: 458802, guid: 6ba8bef0bc3339441a0225bc03d5d011, type: 2}
   fuseTime: 5
+  pushDamage: -45
   mode: 
   pushGrenade: {fileID: 8300000, guid: a5f3a160bf71b2147b8aa62ddef7fbdc, type: 3}
   fuse: {fileID: 19851526}
@@ -238,7 +239,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 13
+  m_Radius: 20
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &13692444
 CapsuleCollider:

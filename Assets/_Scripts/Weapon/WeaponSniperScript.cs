@@ -12,7 +12,6 @@ public class WeaponSniperScript : Char_BasicShootScript {
 
 	float originalSensitivity;
 	Char_BasicMoveScript moveScript;
-
 	bool zoomed = false;
 
 	// Use this for initialization
@@ -55,7 +54,9 @@ public class WeaponSniperScript : Char_BasicShootScript {
 					zoomed = true;
 					base.weaponAccuracy = zoomedAccuracy;
 					moveScript.mouseSpeed = moveScript.mouseSpeed/5;
-					tracerEffect.enableEmission = false;
+					try {
+						tracerEffect.enableEmission = false;
+					} catch {}
 					muzzleFlash.enableEmission = false;
 				} else {
 					sniperCrosshair.GetComponent<RawImage>().enabled = false;
@@ -67,7 +68,9 @@ public class WeaponSniperScript : Char_BasicShootScript {
 					}
 					base.weaponAccuracy = originalAccuracy;
 					moveScript.mouseSpeed = originalSensitivity;
-					tracerEffect.enableEmission = true;
+					try {
+						tracerEffect.enableEmission = true;
+					} catch {}
 					muzzleFlash.enableEmission = true;
 					shake_intensity = 0;
 				}
@@ -76,6 +79,8 @@ public class WeaponSniperScript : Char_BasicShootScript {
 				if(zoomed){
 					SniperRecoil(7f,0.2f);
 				}
+				// line renderer
+				base.GenerateSniperTrail(gameObject.transform.position, hit.point);
 			}
 		}
 

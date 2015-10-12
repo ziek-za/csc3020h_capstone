@@ -7900,7 +7900,7 @@ MonoBehaviour:
   damage: 65
   bulletHolePrefab: {fileID: 185902, guid: dea55ba2cdbead54ba3497383c460581, type: 2}
   muzzleFlash: {fileID: 19824522}
-  tracerEffect: {fileID: 19824524}
+  tracerEffect: {fileID: 0}
   timeBetweenShots: 1
   weaponAccuracy: 1
   fire_pistol: {fileID: 0}
@@ -7910,6 +7910,7 @@ MonoBehaviour:
   audio: {fileID: 0}
   sniperCrosshair: {fileID: 0}
   actualCameraPosition: {fileID: 109324}
+  SniperTrail: {fileID: 163518, guid: 52941504cef0645499346f6c7c62af7f, type: 2}
   zoomedAccuracy: 100
 --- !u!114 &11476876
 MonoBehaviour:
