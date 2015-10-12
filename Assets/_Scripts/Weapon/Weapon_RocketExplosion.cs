@@ -11,18 +11,25 @@ public class Weapon_RocketExplosion : Photon.MonoBehaviour {
 
 	public float pushForce = 10f;
 	public Char_AttributeScript whoFiredMe;
+	public ParticleSystem ps;
 	//public AudioClip explode;
 	AudioSource audio;
+
+	public float buildingAffectRadius = 4f;
 	// Use this for initialization
 	void Start () {	
 		audio = GetComponent<AudioSource> ();
 		audio.Play ();
 		hitCrosshair = GameObject.Find ("EnemyHitCrosshair");
 		alreadyCollided = new List<GameObject>();
-		particleSystem.Play();
+		//particleSystem.Play();
 		//AudioSource.PlayClipAtPoint (explode, transform.position);
 		Invoke ("TriggerForce",0.1f);
 		Invoke("DeathMethod",1.0f);
+		// Set particle system parent to null and destroy 2.5 seconds later
+		// set particle system parent to null
+		ps.gameObject.transform.SetParent(null);
+		Destroy (ps.gameObject, 2.5f);		
 	}
 
 	// Update is called once per frame
@@ -104,20 +111,39 @@ public class Weapon_RocketExplosion : Photon.MonoBehaviour {
 								EnableHitCrosshair();
 								Invoke("DisableHitCrosshair",0.1f);
 							}
+
 						} catch (System.NullReferenceException e){
 							//Debug.LogError("Null Ref on: " + alreadyCollided[i].name);
 						}
 					}
-
+					//Hit terrain
+					if (alreadyCollided[i].name.Equals("TerrainObject")) {
+						PushTerrain(transform.position);
+					}
+					
 					//Hit destructible object
 					if (alreadyCollided[i].GetComponentInParent<Map_DestructableObject>()){
-						DamageDestructableObject(-10,alreadyCollided[i].GetComponentInParent<PhotonView>().viewID);
+						if (Vector3.Distance(alreadyCollided[i].transform.position, transform.position) <= buildingAffectRadius) {
+							DamageDestructableObject(-10,alreadyCollided[i].GetComponentInParent<PhotonView>().viewID);
+						}
 					} else if (alreadyCollided[i].GetComponent<Map_DestructableObject>()){
-						DamageDestructableObject(-10,alreadyCollided[i].GetComponent<PhotonView>().viewID);
+						if (Vector3.Distance(alreadyCollided[i].transform.position, transform.position) <= buildingAffectRadius) {
+							DamageDestructableObject(-10,alreadyCollided[i].GetComponent<PhotonView>().viewID);
+						}
 					} 
 
 				} catch (System.Exception e){}
 			}
+		}
+	}
+
+	//Used to modify the terrain on PUSH only
+	[RPC] void PushTerrain(Vector3 explosion_pos){		
+		//2 1.1
+		Map_TerrainController mtc = Terrain.activeTerrain.GetComponent<Map_TerrainController> ();
+		mtc.ManipulateTerrain(explosion_pos, 5f, "push", 30f, 2f, 2f);
+		if (photonView.isMine) {
+			photonView.RPC("PushTerrain",PhotonTargets.OthersBuffered, explosion_pos);
 		}
 	}
 

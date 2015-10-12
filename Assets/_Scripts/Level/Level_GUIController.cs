@@ -28,6 +28,10 @@ public class Level_GUIController : MonoBehaviour {
 			playersRed, playersBlue,
 			scoreBoardPlayerItem;
 
+		// SCROLLING RECORD
+	public Text[] slots;
+	float[] slotTimers = new float[4];
+
 		//GAME OVER MESSAGE
 	public GameObject gameOverPanel, winnerText;
 	// Raw image for the sniper scope
@@ -60,6 +64,12 @@ public class Level_GUIController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		SetUpLinkButtons();
+
+		for (int i = 0; i < 4; i++){
+			slotTimers[i] = 0;
+			slots[i].text = "";
+		}
+
 		if (_MainController.gameStats.Equals("ping")){
 			internetGame = true;
 		} else {
@@ -192,8 +202,50 @@ public class Level_GUIController : MonoBehaviour {
 
 	}
 
+	public void AddItemToScrollingList(string item, Color textColour){
+		int countFullSlots = 0;
+		for (int i = 0; i < 4; i++){
+			if (slotTimers[i] <= 0){
+				slots[i].CrossFadeAlpha(1,0.000001f,false);
+				slots[i].text = item;
+				slots[i].color = textColour;
+				slotTimers[i] = 10f;
+				slots[i].CrossFadeAlpha(0,10,false);
+				break;
+			} else {
+				countFullSlots++;
+			}
+		}
+
+		if (countFullSlots >= 4){
+			for (int i = 0; i < 3; i++){
+				slots[i].text = slots[i+1].text;
+				slots[i].color = slots[i+1].color;
+				slotTimers[i] = slotTimers[i+1];
+			}
+
+			slots[3].CrossFadeAlpha(1,0.000001f,false);
+			slots[3].text = item;
+			slots[3].color = textColour;
+			slotTimers[3] = 10f;
+			slots[3].CrossFadeAlpha(0,10,false);
+		}
+	}
+
 	// Update is called once per frame
 	void Update () {
+		//Handle to removing of old messages in the scrolling list
+		for (int i = 0; i < 4; i++){
+			if (slotTimers[i] >= 0){
+				slotTimers[i] -= Time.deltaTime;
+			} else {
+				try {
+					slots[i].text = slots[i+1].text;
+					slots[i].color = slots[i+1].color;
+					slotTimers[i] = slotTimers[i+1];
+				} catch (System.Exception e){}
+			}
+		}
 
 		if (internetGame){
 			gameStatsText.text = "Ping: " + PhotonNetwork.GetPing().ToString();

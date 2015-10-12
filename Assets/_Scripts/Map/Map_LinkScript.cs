@@ -19,6 +19,7 @@ public class Map_LinkScript : Photon.MonoBehaviour {
 	public AudioClip captureSound;
 
 	protected Level_GUIController gui;
+	float ScrollingMessageTimeout = 1f;
 
 	// Use this for initialization
 	void Start () {
@@ -38,6 +39,7 @@ public class Map_LinkScript : Photon.MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		ScrollingMessageTimeout -= Time.deltaTime;
 		if (blueCounter < 0)
 			blueCounter = 0;
 		if (redCounter < 0)
@@ -105,6 +107,10 @@ public class Map_LinkScript : Photon.MonoBehaviour {
 		redBeam.Play(true);
 		gui.SetUpLinkButtons();
 		AudioSource.PlayClipAtPoint (captureSound, transform.position);
+		if (ScrollingMessageTimeout < 0){
+			gui.AddItemToScrollingList("Red team captures link",Color.red);
+			ScrollingMessageTimeout = 1f;
+		}
 
 		if (photonView.isMine)
 			photonView.RPC("RedTeamCapture", PhotonTargets.OthersBuffered);
@@ -121,6 +127,10 @@ public class Map_LinkScript : Photon.MonoBehaviour {
 		neutralBeam.Stop(true);
 		gui.SetUpLinkButtons();
 		AudioSource.PlayClipAtPoint (captureSound, transform.position);
+		if (ScrollingMessageTimeout < 0){
+			gui.AddItemToScrollingList("Blue team captures link",Color.blue);
+			ScrollingMessageTimeout = 1f;
+		}
 
 		if (photonView.isMine)
 			photonView.RPC("BlueTeamCapture", PhotonTargets.OthersBuffered);

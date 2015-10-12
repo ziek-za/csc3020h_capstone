@@ -4,9 +4,10 @@ using UnityEngine.UI;
 
 public class Char_BasicShootScript : Photon.MonoBehaviour {
 
-	private RaycastHit hit;
-	private Ray ray;
-	protected float shotCooldown;	
+	protected RaycastHit hit;
+	protected Ray ray;
+	protected float shotCooldown;
+	public GameObject SniperTrail;
 
 	public GameObject hitCrosshair, headshotCrosshair;
 	public int damage = 10;
@@ -220,7 +221,10 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 		Char_BasicShootScript bss = PhotonView.Find (vID).transform.GetComponent<Char_BasicShootScript> ();
 		//bss.audio.PlayOneShot(bss.fire_pistol);
 		bss.muzzleFlash.Play();
-		bss.tracerEffect.Play();
+		// Surrounded in try/catch for sniper without particle tracer
+		try {
+			bss.tracerEffect.Play();
+		} catch {}
 		if (photonView.isMine)
 			photonView.RPC("PlayMuzzleFlash", PhotonTargets.OthersBuffered, vID);
 	}
@@ -272,5 +276,19 @@ public class Char_BasicShootScript : Photon.MonoBehaviour {
 			photonView.RPC("SendShootSound", PhotonTargets.OthersBuffered, vID, soundPos, soundNum);
 			//photonView.RPC("TeleoutEffect",PhotonTargets.OthersBuffered, position);
 		}
+	}
+	// Unique to sniper
+	
+	[RPC] protected void GenerateSniperTrail(Vector3 start, Vector3 end) {
+		GameObject lr_object = Instantiate (SniperTrail,
+		                                    Vector3.zero,
+		                                    Quaternion.identity) as GameObject;
+		Destroy (lr_object, 2f);
+		LineRenderer lr = lr_object.GetComponent<LineRenderer> ();
+		lr.SetPosition (0, start);
+		lr.SetPosition (1, end);
+
+		if (photonView.isMine)
+			photonView.RPC ("GenerateSniperTrail", PhotonTargets.OthersBuffered, start, end);
 	}
 }
