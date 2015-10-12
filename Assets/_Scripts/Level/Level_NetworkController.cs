@@ -32,6 +32,7 @@ public class Level_NetworkController : Photon.MonoBehaviour {
 	public List<PlayerInfo> bluePlayers, redPlayers, neutPlayers;
 
 	public static bool firstPlayer = false;
+	public Level_GUIController GUIController;
 
 	// Use this for initialization
 	void Start () {

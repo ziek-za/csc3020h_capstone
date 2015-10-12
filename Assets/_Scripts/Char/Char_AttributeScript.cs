@@ -47,6 +47,8 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 
 	bool prevWeaponGlove = false, prevWeaponRL = false;
 	float respawnTimer = -10f;
+	Color playerColor;
+	float ScrollingMessageTimeout = 1f;
 
 	// Use this for initialization
 	void Start () {
@@ -118,17 +120,20 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 				fpBuilderGlove[i].enabled = true;
 			}
 
+			SetPlayerName(GetComponent<PhotonView>().viewID, _MainController.playerName);
+
 			if(team == Teams.RED){
-				joinTeam(new Vector3(Color.red.r, Color.red.g, Color.red.b), 0);
+				joinTeam(new Vector3(Color.red.r, Color.red.g, Color.red.b), 0, playerName + " joined RED");
+				playerColor = Color.red;
 			}
 			else if(team == Teams.BLUE){
-				joinTeam(new Vector3(Color.blue.r, Color.blue.g, Color.blue.b), 1);
+				joinTeam(new Vector3(Color.blue.r, Color.blue.g, Color.blue.b), 1, playerName + " joined BLUE");
+				playerColor = Color.blue;
 			}
-
-			SetPlayerName(GetComponent<PhotonView>().viewID, _MainController.playerName);
 
 			InvokeRepeating("energyTrickle",energyTrickeRate,energyTrickeRate);
 		}
+
 		weapon2.SetActive(false);
 		thirdPersonSecondary.SetActive (false);
 		weapon3.SetActive(false);
@@ -243,11 +248,16 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 		HUD.playerKilledLabel.text = "YOU JUST KILLED " + killedName;
 		//Invoke("DisableKillHUD",2f);
 		HUD.playerKilledLabel.CrossFadeAlpha(0,2,false);
+		if (ScrollingMessageTimeout < 0){
+			SendScrollingKillMessage(playerName + " just killed " + killedName, new Vector3(playerColor.r,playerColor.g,playerColor.b));
+			ScrollingMessageTimeout = 1f;
+		}
 		UpdateScoreboardKills(playerName,killedName);
 	} 
 
 	// Update is called once per frame
 	void Update () {
+		ScrollingMessageTimeout -= Time.deltaTime;
 		if (photonView.isMine){
 			HUD.playerNameLabel.text = "";
 			//Get playerName
@@ -422,6 +432,14 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 		}
 	}
 
+	[RPC] void SendScrollingKillMessage(string message, Vector3 messageColor){
+		Color c = new Color(messageColor.x, messageColor.y, messageColor.z);
+		HUD.AddItemToScrollingList(message, c);
+		if (photonView.isMine){
+			photonView.RPC("SendScrollingKillMessage", PhotonTargets.OthersBuffered, message, messageColor);
+		}
+	}
+
 	[RPC] void ReduceCounter(int linkID){
 		PhotonView.Find(linkID).GetComponent<Map_LinkScript>().PlayerDeathMethod(collider);
 		if (photonView.isMine)
@@ -495,13 +513,15 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 		}
 	}
 
-	[RPC] void joinTeam(Vector3 color, int myTeam)
+	[RPC] void joinTeam(Vector3 color, int myTeam, string message)
 	{
 		renderer.material.color = new Color(color.x, color.y, color.z, 1f);
 		armour.material.color = new Color(color.x, color.y, color.z, 1f);
+		HUD = GameObject.Find("GUI Controller").GetComponent<Level_GUIController>();
+		HUD.AddItemToScrollingList(message,  new Color(color.x, color.y, color.z, 1f));
 		team = (Teams)myTeam;
 		if (photonView.isMine)
-			photonView.RPC("joinTeam", PhotonTargets.OthersBuffered, color, myTeam);
+			photonView.RPC("joinTeam", PhotonTargets.OthersBuffered, color, myTeam, message);
 	}
 
 	[RPC] void SetPlayerName(int vID, string pName){

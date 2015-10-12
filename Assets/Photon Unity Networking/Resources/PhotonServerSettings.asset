@@ -82,4 +82,5 @@ MonoBehaviour:
   - UpdateScoreboardKills
   - EndGameRPC
   - TurnOffColliders
+  - SendScrollingKillMessage
   DisableAutoOpenWizard: 0
