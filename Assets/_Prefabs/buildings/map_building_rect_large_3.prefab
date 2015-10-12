@@ -353,7 +353,7 @@ GameObject:
   - 114: {fileID: 11457312}
   m_Layer: 0
   m_Name: map_building_rect_large_3
-  m_TagString: Untagged
+  m_TagString: Cement
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1983,6 +1983,7 @@ MonoBehaviour:
   HasParticleSystem: 1
   DestroyFinal: 1
   particleSystem: {fileID: 19835718}
+  explosion: {fileID: 8300000, guid: 081f39b2fecef484a906d0df3d1a86d0, type: 3}
 --- !u!114 &11457312
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2002,7 +2003,8 @@ MonoBehaviour:
   onSerializeTransformOption: 3
   onSerializeRigidBodyOption: 2
   ownershipTransfer: 0
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 0}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
   instantiationId: -1
@@ -2026,7 +2028,8 @@ MonoBehaviour:
   onSerializeTransformOption: 3
   onSerializeRigidBodyOption: 2
   ownershipTransfer: 0
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 0}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
   instantiationId: -1
@@ -2048,6 +2051,7 @@ MonoBehaviour:
   HasParticleSystem: 1
   DestroyFinal: 1
   particleSystem: {fileID: 19883854}
+  explosion: {fileID: 8300000, guid: 081f39b2fecef484a906d0df3d1a86d0, type: 3}
 --- !u!114 &11483854
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2067,7 +2071,8 @@ MonoBehaviour:
   onSerializeTransformOption: 3
   onSerializeRigidBodyOption: 2
   ownershipTransfer: 0
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 0}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
   instantiationId: -1

@@ -318,7 +318,7 @@ GameObject:
   - 114: {fileID: 11403654}
   m_Layer: 0
   m_Name: map_building_rect_large_4
-  m_TagString: Untagged
+  m_TagString: Cement
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5459,7 +5459,8 @@ MonoBehaviour:
   onSerializeTransformOption: 3
   onSerializeRigidBodyOption: 2
   ownershipTransfer: 0
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 0}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
   instantiationId: -1
@@ -5506,6 +5507,7 @@ MonoBehaviour:
   HasParticleSystem: 1
   DestroyFinal: 0
   particleSystem: {fileID: 19805408}
+  explosion: {fileID: 0}
 --- !u!114 &11405340
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5548,6 +5550,7 @@ MonoBehaviour:
   HasParticleSystem: 1
   DestroyFinal: 0
   particleSystem: {fileID: 19805414}
+  explosion: {fileID: 0}
 --- !u!114 &11405352
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5590,6 +5593,7 @@ MonoBehaviour:
   HasParticleSystem: 1
   DestroyFinal: 0
   particleSystem: {fileID: 19805402}
+  explosion: {fileID: 0}
 --- !u!114 &11405356
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5632,6 +5636,7 @@ MonoBehaviour:
   HasParticleSystem: 1
   DestroyFinal: 0
   particleSystem: {fileID: 19805392}
+  explosion: {fileID: 0}
 --- !u!114 &11405360
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5674,6 +5679,7 @@ MonoBehaviour:
   HasParticleSystem: 1
   DestroyFinal: 0
   particleSystem: {fileID: 19805406}
+  explosion: {fileID: 0}
 --- !u!114 &11405364
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5716,6 +5722,7 @@ MonoBehaviour:
   HasParticleSystem: 1
   DestroyFinal: 0
   particleSystem: {fileID: 19805396}
+  explosion: {fileID: 0}
 --- !u!114 &11405368
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5758,6 +5765,7 @@ MonoBehaviour:
   HasParticleSystem: 1
   DestroyFinal: 0
   particleSystem: {fileID: 19805398}
+  explosion: {fileID: 0}
 --- !u!114 &11421422
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5800,6 +5808,7 @@ MonoBehaviour:
   HasParticleSystem: 1
   DestroyFinal: 1
   particleSystem: {fileID: 19846274}
+  explosion: {fileID: 8300000, guid: 081f39b2fecef484a906d0df3d1a86d0, type: 3}
 --- !u!198 &19805392
 ParticleSystem:
   m_ObjectHideFlags: 1

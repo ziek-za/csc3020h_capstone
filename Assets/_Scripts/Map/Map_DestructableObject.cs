@@ -13,6 +13,10 @@ public class Map_DestructableObject : MonoBehaviour {
 	// Initialised to the current gameObject
 	private int currentIndex = -1;
 	public ParticleSystem particleSystem;
+	public AudioClip explosion;
+	//public AudioClip explode_tile;
+	//public AudioClip explode_wall;
+
 
 	void Start() {
 		// Add the default value to the end
@@ -53,7 +57,18 @@ public class Map_DestructableObject : MonoBehaviour {
 						if (!particleSystem.isPlaying) {
 							particleSystem.Clear ();
 						}
-						if (currentIndex != i) { particleSystem.Play (); }
+						if (currentIndex != i) { particleSystem.Play (); 
+							Debug.Log(particleSystem.name);
+							//if(particleSystem.name=="wall_explosion"){
+								//AudioSource.PlayClipAtPoint(explode_wall,transform.position);
+							//	Debug.Log ("Wall explosion play");
+							//}else if(particleSystem.name=="tile_explosion"){
+								//AudioSource.PlayClipAtPoint(explode_tile,transform.position);
+							//	Debug.Log ("Wall explosion play");
+							//}
+							AudioSource.PlayClipAtPoint(explosion,transform.position);
+							//AudioSource.PlayClipAtPoint();
+						}
 					}
 					currentIndex = i;
 					break;

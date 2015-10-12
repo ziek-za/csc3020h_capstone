@@ -11,14 +11,18 @@ public class Weapon_RocketExplosion : Photon.MonoBehaviour {
 
 	public float pushForce = 10f;
 	public Char_AttributeScript whoFiredMe;
-	
+	//public AudioClip explode;
+	AudioSource audio;
 	// Use this for initialization
 	void Start () {	
+		audio = GetComponent<AudioSource> ();
+		audio.Play ();
 		hitCrosshair = GameObject.Find ("EnemyHitCrosshair");
 		alreadyCollided = new List<GameObject>();
 		particleSystem.Play();
+		//AudioSource.PlayClipAtPoint (explode, transform.position);
 		Invoke ("TriggerForce",0.1f);
-		Invoke("DeathMethod",0.5f);
+		Invoke("DeathMethod",1.0f);
 	}
 
 	// Update is called once per frame

@@ -25,6 +25,7 @@ public class Weapon_ShotgunScript : Char_BasicShootScript {
 
 			shotCooldown = Time.time + timeBetweenShots;
 			PlayMuzzleFlash(photonView.viewID);
+			AudioSource.PlayClipAtPoint(fire_shotgun,transform.position);
 			tracerEffect.Play();
 
 			for (int i = 0; i < 5; i++){

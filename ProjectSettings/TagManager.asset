@@ -9,6 +9,12 @@ TagManager:
   - Background
   - Sprint
   - MapEdge
+  - Sand
+  - Cement
+  - Metal
+  - Wood
+  - Tile
+  - Crane
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

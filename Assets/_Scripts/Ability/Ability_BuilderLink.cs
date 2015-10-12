@@ -11,12 +11,14 @@ public class Ability_BuilderLink : Map_LinkScript {
 
 	public int health = 100;
 	public Ability_BuilderPlaceFoundations whoBuiltMe;
+	public AudioClip build_link;
 
 	//Level_GUIController gui;
 
 	// Use this for initialization
 	void Start () {
 		whoBuiltMe.currentLink = this.gameObject;
+		AudioSource.PlayClipAtPoint (build_link, transform.position);
 		// Set HP on GUI for building
 		if (photonView.isMine)
 			whoBuiltMe.GetComponent<Char_AttributeScript> ().HUD.linkIcon.SetBuildingHealth (health);

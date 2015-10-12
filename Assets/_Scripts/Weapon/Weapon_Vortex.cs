@@ -10,6 +10,7 @@ public class Weapon_Vortex : Photon.MonoBehaviour {
 
 	public ParticleSystem vortexParticles;
 
+
 	bool rocketInVortex = false;
 	//float rocketPullForce = 0f;
 
@@ -74,6 +75,7 @@ public class Weapon_Vortex : Photon.MonoBehaviour {
 			if (!channeling){
 				GameObject vp = Instantiate(vortexParticles.gameObject,transform.position,Quaternion.identity) as GameObject;
 				vp.GetComponent<ParticleSystem>().Play();
+				vp.GetComponent<AudioSource>().Play();
 				Destroy(vp,5f);
 				Invoke ("ChannelingTime",duration);
 				channeling = true;

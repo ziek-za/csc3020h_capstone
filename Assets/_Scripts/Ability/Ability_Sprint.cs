@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Ability_Sprint : Photon.MonoBehaviour {
 	public int energyCost = 1;
+	public AudioSource thiefSource;
+	public AudioClip sprintSound;
 	
 	bool startedSprint = false;
 	ParticleSystem[] sprintEffects;
@@ -30,11 +32,13 @@ public class Ability_Sprint : Photon.MonoBehaviour {
 					transform.GetComponent<Char_BasicMoveScript>().moveSpeed += 20;
 					transform.GetComponent<Char_AttributeScript>().buffs.Add("sprint");
 					startedSprint = true;
+					thiefSource.PlayOneShot(sprintSound);
 					if (sprintEffects != null){
 						SprintEffect(true);
 					}
 				}
 			} else if (startedSprint){
+				thiefSource.Stop ();
 				startedSprint = false;
 				Debuff ();
 				if (sprintEffects != null){

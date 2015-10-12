@@ -35,6 +35,13 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 	Char_BasicMoveScript animInstance;
 	public SkinnedMeshRenderer armour;
 	public Char_SelectChar Respawner;
+	public AudioClip pain1, pain2, pain3;
+	public AudioClip healEnergy;
+	bool hurtThreshold1,hurtThreshold2,hurtThreshold3,hurtThreshold4=false;
+	//public AudioSource audioAttrib;
+	public AudioSource audio;
+	public AudioSource healSource;
+	public AudioSource deathSource;
 
 	public Map_LinkScript currentLink;
 
@@ -45,6 +52,7 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 	void Start () {
 
 		animInstance = GetComponent<Char_BasicMoveScript> ();
+		//audio = GetComponent<AudioSource> ();
 		HUD = GameObject.Find("GUI Controller").GetComponent<Level_GUIController>();
 
 		if (photonView.isMine){
@@ -241,7 +249,6 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (photonView.isMine){
-			Debug.Log(respawnTimer);
 			HUD.playerNameLabel.text = "";
 			//Get playerName
 			Vector2 screenCenterPoint = new Vector2(Screen.width/2, Screen.height/2);
@@ -260,15 +267,24 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 				linkRateCounter += Time.deltaTime;
 				if (linkRateCounter >= enegryRegenRate){
 					linkRateCounter -= enegryRegenRate;
+					audio.Play();
 					LinkRegenEnergy();
+					if(!healSource.isPlaying && energy!=100){
+						healSource.Play();//OneShot(healEnergy);
+					}
 				}
 			} else {
+				healSource.Stop();
 				linkRateCounter = enegryRegenRate;
+				audio.Stop();
 			}
 			HUD.UpdateHUDHealth(health);
 			HUD.UpdateHUDEnergy(energy);
 			ChangeWeapons();
 			if ((health <= 0 || Input.GetKey(KeyCode.P))&&respawnTimer == -10){
+				try {
+					deathSource.Play ();
+				} catch {}
 				respawnTimer = 5f;
 				if (currentLink != null){
 					ReduceCounter(currentLink.GetComponent<PhotonView>().viewID);
@@ -334,6 +350,29 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 			}
 		}
 	}
+
+	void playHurtSound(){
+		int randomChance = Random.Range (1, 4);
+		if(randomChance==1){
+			int randomSound = Random.Range (1, 3);
+			if (randomSound == 1) {
+				//GameObject hurtSound = AudioSource.PlayClipAtPoint(pain1,transform.position) as GameObject;
+				audio.PlayOneShot(pain1);
+				//hurtSound.transform.SetParent(transform);
+			}
+			else if(randomSound==2){
+				//GameObject hurtSound = AudioSource.PlayClipAtPoint(pain2,transform.position) as GameObject;
+				//hurtSound.transform.SetParent(transform);
+				audio.PlayOneShot(pain2);
+			}
+			else if(randomSound==3){
+				//GameObject hurtSound = AudioSource.PlayClipAtPoint(pain3,transform.position) as GameObject;
+				//hurtSound.transform.SetParent(transform);
+				audio.PlayOneShot(pain3);
+			}
+		}
+	}
+
 
 	void KillCountTimeout(){
 		prevKillsToUpdate = "";
@@ -434,6 +473,7 @@ public class Char_AttributeScript : Photon.MonoBehaviour {
 	}
 
 	public void ChangeHP(int amount, Vector3 shooterPos){
+		playHurtSound ();
 		health += amount;
 
 		if (photonView.isMine){

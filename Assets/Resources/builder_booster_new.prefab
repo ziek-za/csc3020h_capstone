@@ -391,6 +391,8 @@ MonoBehaviour:
   whoBuiltMe: {fileID: 0}
   partsToColour:
   - {fileID: 158774}
+  build_booster: {fileID: 8300000, guid: 5046bf4dc1af5d5479159d701eca18d9, type: 3}
+  rampSound: {fileID: 8300000, guid: 276215e4e5cb077458e3685dce7fb370, type: 3}
 --- !u!114 &11458784
 MonoBehaviour:
   m_ObjectHideFlags: 1

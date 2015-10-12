@@ -15,6 +15,7 @@ GameObject:
   - 135: {fileID: 13531346}
   - 54: {fileID: 5434484}
   - 114: {fileID: 11425790}
+  - 82: {fileID: 8224208}
   m_Layer: 0
   m_Name: RocketExplosion
   m_TagString: Untagged
@@ -139,6 +140,89 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!82 &8224208
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 127274}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 8300000, guid: fb8115b19cc681d489e5fb23105ca365, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 100
+  Pan2D: 0
+  rolloffMode: 2
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: .00999999978
+      value: .964285731
+      inSlope: -25.0099621
+      outSlope: -25.0099621
+      tangentMode: 0
+    - time: .0399999991
+      value: .852678597
+      inSlope: -6.25249052
+      outSlope: -6.25249052
+      tangentMode: 0
+    - time: .0599999949
+      value: .767857134
+      inSlope: -1.56312263
+      outSlope: -1.56312263
+      tangentMode: 0
+    - time: .109999992
+      value: .6875
+      inSlope: -.390780658
+      outSlope: -.390780658
+      tangentMode: 0
+    - time: .203333348
+      value: .53125
+      inSlope: -.0976951644
+      outSlope: -.0976951644
+      tangentMode: 0
+    - time: .693333328
+      value: .104910716
+      inSlope: -.0244237911
+      outSlope: -.0244237911
+      tangentMode: 0
+    - time: 1
+      value: .0992857143
+      inSlope: -.0100039924
+      outSlope: -.0100039924
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!114 &11425790
 MonoBehaviour:
   m_ObjectHideFlags: 1

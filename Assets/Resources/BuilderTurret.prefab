@@ -686,6 +686,8 @@ MonoBehaviour:
   - {fileID: 158318}
   - {fileID: 158316}
   - {fileID: 158310}
+  build_turret: {fileID: 8300000, guid: 5046bf4dc1af5d5479159d701eca18d9, type: 3}
+  shoot_turret: {fileID: 8300000, guid: 7caa12331de1dfe45be1f86bc26dac1c, type: 3}
 --- !u!114 &11483746
 MonoBehaviour:
   m_ObjectHideFlags: 1

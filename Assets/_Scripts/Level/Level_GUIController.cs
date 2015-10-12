@@ -30,7 +30,8 @@ public class Level_GUIController : MonoBehaviour {
 
 		//GAME OVER MESSAGE
 	public GameObject gameOverPanel, winnerText;
-
+	// Raw image for the sniper scope
+	public RawImage sniperScope;
 	public Image builderImage, thiefImage, soldierImage, shotIndicator,
 		// SOLDIER
 				soldierHUD, vortexIcon, explosionIcon,

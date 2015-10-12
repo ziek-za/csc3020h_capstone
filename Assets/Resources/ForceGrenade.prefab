@@ -126,6 +126,7 @@ MonoBehaviour:
   vortex: {fileID: 458802, guid: 6ba8bef0bc3339441a0225bc03d5d011, type: 2}
   fuseTime: 5
   mode: 
+  pushGrenade: {fileID: 8300000, guid: a5f3a160bf71b2147b8aa62ddef7fbdc, type: 3}
   fuse: {fileID: 19851526}
   explosionEffect: {fileID: 19840422}
 --- !u!114 &11463164
