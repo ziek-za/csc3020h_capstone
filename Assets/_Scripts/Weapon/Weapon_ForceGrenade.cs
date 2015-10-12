@@ -89,14 +89,16 @@ public class Weapon_ForceGrenade : Photon.MonoBehaviour {
 				} 
 			} catch (System.Exception e){}
 
-			if (alreadyCollided[i].name.Equals("TerrainObject")){
-				if (mode.Equals("push")){
-					PushTerrain(transform.position);
+			try {
+				if (alreadyCollided[i].name.Equals("TerrainObject")){
+					if (mode.Equals("push")){
+						PushTerrain(transform.position);
+					}
+					else if (mode.Equals("pull")){
+						PullTerrain(transform.position);
+					}
 				}
-				else if (mode.Equals("pull")){
-					PullTerrain(transform.position);
-				}
-			}
+			} catch (System.Exception e){}
 				
 			if (mode.Equals("push") &&
 			    alreadyCollided[i].GetComponent<Rigidbody>() != null &&
