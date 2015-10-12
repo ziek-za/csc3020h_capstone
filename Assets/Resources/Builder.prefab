@@ -3609,7 +3609,7 @@ MonoBehaviour:
   healEnergy: {fileID: 0}
   audio: {fileID: 8240992}
   healSource: {fileID: 8266650}
-  deathSource: {fileID: 0}
+  deathSource: {fileID: 8241690}
   currentLink: {fileID: 0}
 --- !u!114 &11491430
 MonoBehaviour:
