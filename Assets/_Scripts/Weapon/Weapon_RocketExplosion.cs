@@ -20,7 +20,7 @@ public class Weapon_RocketExplosion : Photon.MonoBehaviour {
 		audio.Play ();
 		hitCrosshair = GameObject.Find ("EnemyHitCrosshair");
 		alreadyCollided = new List<GameObject>();
-		particleSystem.Play();
+		//particleSystem.Play();
 		//AudioSource.PlayClipAtPoint (explode, transform.position);
 		Invoke ("TriggerForce",0.1f);
 		Invoke("DeathMethod",1.0f);
@@ -65,7 +65,7 @@ public class Weapon_RocketExplosion : Photon.MonoBehaviour {
 								PushForce(alreadyCollided[i].GetComponent<PhotonView>().viewID, Vector3.Normalize(forceDir) * pushForce);
 							}
 
-							float damage = -60;///((alreadyCollided[i].transform.position - transform.position).magnitude + 1);
+							float damage = -60/((alreadyCollided[i].transform.position - transform.position).magnitude + 1);
 
 							//Hit Player
 							if (alreadyCollided[i].GetComponent<Char_AttributeScript>()){
@@ -109,11 +109,16 @@ public class Weapon_RocketExplosion : Photon.MonoBehaviour {
 								EnableHitCrosshair();
 								Invoke("DisableHitCrosshair",0.1f);
 							}
+
 						} catch (System.NullReferenceException e){
 							//Debug.LogError("Null Ref on: " + alreadyCollided[i].name);
 						}
 					}
-
+					//Hit terrain
+					if (alreadyCollided[i].name.Equals("TerrainObject")) {
+						PushTerrain(transform.position);
+					}
+					
 					//Hit destructible object
 					if (alreadyCollided[i].GetComponentInParent<Map_DestructableObject>()){
 						DamageDestructableObject(-10,alreadyCollided[i].GetComponentInParent<PhotonView>().viewID);
@@ -123,6 +128,16 @@ public class Weapon_RocketExplosion : Photon.MonoBehaviour {
 
 				} catch (System.Exception e){}
 			}
+		}
+	}
+
+	//Used to modify the terrain on PUSH only
+	[RPC] void PushTerrain(Vector3 explosion_pos){		
+		//2 1.1
+		Map_TerrainController mtc = Terrain.activeTerrain.GetComponent<Map_TerrainController> ();
+		mtc.ManipulateTerrain(explosion_pos, 5f, "push", 30f, 2f, 2f);
+		if (photonView.isMine) {
+			photonView.RPC("PushTerrain",PhotonTargets.OthersBuffered, explosion_pos);
 		}
 	}
 

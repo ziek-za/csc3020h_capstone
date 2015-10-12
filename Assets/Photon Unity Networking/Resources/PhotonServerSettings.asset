@@ -82,4 +82,5 @@ MonoBehaviour:
   - UpdateScoreboardKills
   - EndGameRPC
   - TurnOffColliders
+  - GenerateSniperTrail
   DisableAutoOpenWizard: 0
