@@ -7,6 +7,7 @@ public class Weapon_Rocket : Photon.MonoBehaviour {
 	public Char_AttributeScript whoFiredMe;
 	public AudioClip fire_rocket;
 	public AudioClip fire_rocketTrail;
+	public ParticleSystem ps;
 	AudioSource audio;
 	
 	private RaycastHit hit;
@@ -43,7 +44,10 @@ public class Weapon_Rocket : Photon.MonoBehaviour {
 			} catch (System.NullReferenceException e){}
 
 		}
-
+		// set particle system parent to null
+		ps.gameObject.transform.SetParent(null);
+		ps.Stop (true);
+		Destroy (ps.gameObject, 5f);
 		Destroy(gameObject);
 	}
 

@@ -11,6 +11,7 @@ public class Weapon_RocketExplosion : Photon.MonoBehaviour {
 
 	public float pushForce = 10f;
 	public Char_AttributeScript whoFiredMe;
+	public ParticleSystem ps;
 	//public AudioClip explode;
 	AudioSource audio;
 	// Use this for initialization
@@ -23,6 +24,10 @@ public class Weapon_RocketExplosion : Photon.MonoBehaviour {
 		//AudioSource.PlayClipAtPoint (explode, transform.position);
 		Invoke ("TriggerForce",0.1f);
 		Invoke("DeathMethod",1.0f);
+		// Set particle system parent to null and destroy 2.5 seconds later
+		// set particle system parent to null
+		ps.gameObject.transform.SetParent(null);
+		Destroy (ps.gameObject, 2.5f);
 	}
 
 	// Update is called once per frame
@@ -60,7 +65,7 @@ public class Weapon_RocketExplosion : Photon.MonoBehaviour {
 								PushForce(alreadyCollided[i].GetComponent<PhotonView>().viewID, Vector3.Normalize(forceDir) * pushForce);
 							}
 
-							float damage = -60/((alreadyCollided[i].transform.position - transform.position).magnitude + 1);
+							float damage = -60;///((alreadyCollided[i].transform.position - transform.position).magnitude + 1);
 
 							//Hit Player
 							if (alreadyCollided[i].GetComponent<Char_AttributeScript>()){
