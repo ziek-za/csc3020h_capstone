@@ -5,6 +5,7 @@ public class Ability_Sprint : Photon.MonoBehaviour {
 	public int energyCost = 1;
 	public AudioSource thiefSource;
 	public AudioClip sprintSound;
+	public SphereCollider sprintCollider;
 	
 	bool startedSprint = false;
 	ParticleSystem[] sprintEffects;
@@ -36,6 +37,7 @@ public class Ability_Sprint : Photon.MonoBehaviour {
 					if (sprintEffects != null){
 						SprintEffect(true);
 					}
+					sprintCollider.gameObject.SetActive(true);
 				}
 			} else if (startedSprint){
 				thiefSource.Stop ();
@@ -44,6 +46,7 @@ public class Ability_Sprint : Photon.MonoBehaviour {
 				if (sprintEffects != null){
 					SprintEffect(false);
 				}
+				sprintCollider.gameObject.SetActive(false);
 			}
 		}
 	}
