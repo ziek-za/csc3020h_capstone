@@ -55,9 +55,15 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 	void EnableKeys(){
 		inVortex = false;
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
+		if (photonView.isMine){
+			UpdateCameraPos();
+		}
+	}
+
+	// Update is called once per frame
+	void FixedUpdate () {
 
 		//Debug.Log(PhotonNetwork.networkingPeer.RoundTripTime);
 		if (photonView.isMine)
@@ -71,7 +77,7 @@ public class Char_BasicMoveScript : Photon.MonoBehaviour {
 
 				MouseView();
 
-				UpdateCameraPos();
+				//UpdateCameraPos();
 			}
 			//SetSynchronizedValues
 		}
