@@ -3550,6 +3550,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &199312
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 499312}
+  - 135: {fileID: 13599312}
+  m_Layer: 2
+  m_Name: SprintCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
 --- !u!1 &199464
 GameObject:
   m_ObjectHideFlags: 1
@@ -5664,6 +5680,7 @@ Transform:
   - {fileID: 409324}
   - {fileID: 478018}
   - {fileID: 411396}
+  - {fileID: 499312}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &424520
@@ -6569,6 +6586,18 @@ Transform:
   - {fileID: 424520}
   m_Father: {fileID: 444892}
   m_RootOrder: 2
+--- !u!4 &499312
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 199312}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 424516}
+  m_RootOrder: 5
 --- !u!4 &499464
 Transform:
   m_ObjectHideFlags: 1
@@ -7890,6 +7919,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eedecbc370699824793e987c531f0be4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SniperTrail: {fileID: 163518, guid: 52941504cef0645499346f6c7c62af7f, type: 2}
   hitCrosshair: {fileID: 0}
   headshotCrosshair: {fileID: 0}
   damage: 65
@@ -7905,7 +7935,6 @@ MonoBehaviour:
   audio: {fileID: 0}
   sniperCrosshair: {fileID: 0}
   actualCameraPosition: {fileID: 109324}
-  SniperTrail: {fileID: 163518, guid: 52941504cef0645499346f6c7c62af7f, type: 2}
   zoomedAccuracy: 100
 --- !u!114 &11476876
 MonoBehaviour:
@@ -7921,6 +7950,7 @@ MonoBehaviour:
   energyCost: 1
   thiefSource: {fileID: 8278134}
   sprintSound: {fileID: 8300000, guid: 0c0a97924c806a0439b24e5330d65833, type: 3}
+  sprintCollider: {fileID: 13599312}
 --- !u!114 &11485642
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7957,6 +7987,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98c885136e314544580f8c69057aee38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SniperTrail: {fileID: 0}
   hitCrosshair: {fileID: 0}
   headshotCrosshair: {fileID: 0}
   damage: 10
@@ -7982,6 +8013,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: .200000003
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!135 &13599312
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 199312}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 5.96046448e-08, y: 0, z: -8.94069672e-08}
 --- !u!136 &13624522
 CapsuleCollider:
   m_ObjectHideFlags: 1
