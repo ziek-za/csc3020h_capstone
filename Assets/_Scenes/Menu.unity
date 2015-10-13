@@ -10745,7 +10745,6 @@ GameObject:
   - 4: {fileID: 142758860}
   - 33: {fileID: 142758863}
   - 23: {fileID: 142758862}
-  - 64: {fileID: 142758861}
   m_Layer: 0
   m_Name: stair_4
   m_TagString: Untagged
@@ -10766,20 +10765,6 @@ Transform:
   - {fileID: 153460408}
   m_Father: {fileID: 2118252220}
   m_RootOrder: 27
---- !u!64 &142758861
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6402538, guid: 3333940f14efab04eac740b53b1aa8a6,
-    type: 2}
-  m_PrefabInternal: {fileID: 460828550}
-  m_GameObject: {fileID: 142758859}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_SmoothSphereCollisions: 0
-  m_Convex: 0
-  m_Mesh: {fileID: 4300056, guid: cdec9da478ea48547a09cb58f5249ba7, type: 3}
 --- !u!23 &142758862
 Renderer:
   m_ObjectHideFlags: 0
@@ -12237,7 +12222,6 @@ GameObject:
   - 4: {fileID: 165820096}
   - 33: {fileID: 165820099}
   - 23: {fileID: 165820098}
-  - 64: {fileID: 165820097}
   m_Layer: 0
   m_Name: stair_2
   m_TagString: Untagged
@@ -12258,20 +12242,6 @@ Transform:
   - {fileID: 254473141}
   m_Father: {fileID: 1768854260}
   m_RootOrder: 25
---- !u!64 &165820097
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6402520, guid: 3333940f14efab04eac740b53b1aa8a6,
-    type: 2}
-  m_PrefabInternal: {fileID: 1705037912}
-  m_GameObject: {fileID: 165820095}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_SmoothSphereCollisions: 0
-  m_Convex: 0
-  m_Mesh: {fileID: 4300106, guid: cdec9da478ea48547a09cb58f5249ba7, type: 3}
 --- !u!23 &165820098
 Renderer:
   m_ObjectHideFlags: 0
@@ -36882,7 +36852,6 @@ GameObject:
   - 4: {fileID: 518496915}
   - 33: {fileID: 518496918}
   - 23: {fileID: 518496917}
-  - 64: {fileID: 518496916}
   m_Layer: 0
   m_Name: stair_1
   m_TagString: Untagged
@@ -36903,20 +36872,6 @@ Transform:
   - {fileID: 213572590}
   m_Father: {fileID: 1363066030}
   m_RootOrder: 24
---- !u!64 &518496916
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6402532, guid: 3333940f14efab04eac740b53b1aa8a6,
-    type: 2}
-  m_PrefabInternal: {fileID: 1875438563}
-  m_GameObject: {fileID: 518496914}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_SmoothSphereCollisions: 0
-  m_Convex: 0
-  m_Mesh: {fileID: 4300104, guid: cdec9da478ea48547a09cb58f5249ba7, type: 3}
 --- !u!23 &518496917
 Renderer:
   m_ObjectHideFlags: 0
@@ -44777,7 +44732,6 @@ GameObject:
   - 4: {fileID: 645239869}
   - 33: {fileID: 645239872}
   - 23: {fileID: 645239871}
-  - 64: {fileID: 645239870}
   m_Layer: 0
   m_Name: stair_3
   m_TagString: Untagged
@@ -44798,20 +44752,6 @@ Transform:
   - {fileID: 2081225740}
   m_Father: {fileID: 1768854260}
   m_RootOrder: 26
---- !u!64 &645239870
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6402522, guid: 3333940f14efab04eac740b53b1aa8a6,
-    type: 2}
-  m_PrefabInternal: {fileID: 1705037912}
-  m_GameObject: {fileID: 645239868}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_SmoothSphereCollisions: 0
-  m_Convex: 0
-  m_Mesh: {fileID: 4300108, guid: cdec9da478ea48547a09cb58f5249ba7, type: 3}
 --- !u!23 &645239871
 Renderer:
   m_ObjectHideFlags: 0
@@ -58987,7 +58927,6 @@ GameObject:
   - 4: {fileID: 822490112}
   - 33: {fileID: 822490115}
   - 23: {fileID: 822490114}
-  - 64: {fileID: 822490113}
   m_Layer: 0
   m_Name: stair_3
   m_TagString: Untagged
@@ -59008,20 +58947,6 @@ Transform:
   - {fileID: 802746148}
   m_Father: {fileID: 1584785566}
   m_RootOrder: 26
---- !u!64 &822490113
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6402522, guid: 3333940f14efab04eac740b53b1aa8a6,
-    type: 2}
-  m_PrefabInternal: {fileID: 584013905}
-  m_GameObject: {fileID: 822490111}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_SmoothSphereCollisions: 0
-  m_Convex: 0
-  m_Mesh: {fileID: 4300108, guid: cdec9da478ea48547a09cb58f5249ba7, type: 3}
 --- !u!23 &822490114
 Renderer:
   m_ObjectHideFlags: 0
@@ -61276,7 +61201,6 @@ GameObject:
   - 4: {fileID: 854306397}
   - 33: {fileID: 854306400}
   - 23: {fileID: 854306399}
-  - 64: {fileID: 854306398}
   m_Layer: 0
   m_Name: stair_4
   m_TagString: Untagged
@@ -61297,20 +61221,6 @@ Transform:
   - {fileID: 2097463698}
   m_Father: {fileID: 1768854260}
   m_RootOrder: 27
---- !u!64 &854306398
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6402538, guid: 3333940f14efab04eac740b53b1aa8a6,
-    type: 2}
-  m_PrefabInternal: {fileID: 1705037912}
-  m_GameObject: {fileID: 854306396}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_SmoothSphereCollisions: 0
-  m_Convex: 0
-  m_Mesh: {fileID: 4300056, guid: cdec9da478ea48547a09cb58f5249ba7, type: 3}
 --- !u!23 &854306399
 Renderer:
   m_ObjectHideFlags: 0
@@ -62798,7 +62708,6 @@ GameObject:
   - 4: {fileID: 865113559}
   - 33: {fileID: 865113562}
   - 23: {fileID: 865113561}
-  - 64: {fileID: 865113560}
   m_Layer: 0
   m_Name: stair_2
   m_TagString: Untagged
@@ -62819,20 +62728,6 @@ Transform:
   - {fileID: 2003924047}
   m_Father: {fileID: 2118252220}
   m_RootOrder: 25
---- !u!64 &865113560
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6402520, guid: 3333940f14efab04eac740b53b1aa8a6,
-    type: 2}
-  m_PrefabInternal: {fileID: 460828550}
-  m_GameObject: {fileID: 865113558}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_SmoothSphereCollisions: 0
-  m_Convex: 0
-  m_Mesh: {fileID: 4300106, guid: cdec9da478ea48547a09cb58f5249ba7, type: 3}
 --- !u!23 &865113561
 Renderer:
   m_ObjectHideFlags: 0
@@ -65874,7 +65769,6 @@ GameObject:
   - 4: {fileID: 906461616}
   - 33: {fileID: 906461619}
   - 23: {fileID: 906461618}
-  - 64: {fileID: 906461617}
   m_Layer: 0
   m_Name: stair_1
   m_TagString: Untagged
@@ -65895,20 +65789,6 @@ Transform:
   - {fileID: 2041403568}
   m_Father: {fileID: 1768854260}
   m_RootOrder: 24
---- !u!64 &906461617
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6402532, guid: 3333940f14efab04eac740b53b1aa8a6,
-    type: 2}
-  m_PrefabInternal: {fileID: 1705037912}
-  m_GameObject: {fileID: 906461615}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_SmoothSphereCollisions: 0
-  m_Convex: 0
-  m_Mesh: {fileID: 4300104, guid: cdec9da478ea48547a09cb58f5249ba7, type: 3}
 --- !u!23 &906461618
 Renderer:
   m_ObjectHideFlags: 0
@@ -71916,7 +71796,6 @@ GameObject:
   - 4: {fileID: 1002788898}
   - 33: {fileID: 1002788901}
   - 23: {fileID: 1002788900}
-  - 64: {fileID: 1002788899}
   m_Layer: 0
   m_Name: stair_2
   m_TagString: Untagged
@@ -71937,20 +71816,6 @@ Transform:
   - {fileID: 1045448372}
   m_Father: {fileID: 1363066030}
   m_RootOrder: 25
---- !u!64 &1002788899
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6402520, guid: 3333940f14efab04eac740b53b1aa8a6,
-    type: 2}
-  m_PrefabInternal: {fileID: 1875438563}
-  m_GameObject: {fileID: 1002788897}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_SmoothSphereCollisions: 0
-  m_Convex: 0
-  m_Mesh: {fileID: 4300106, guid: cdec9da478ea48547a09cb58f5249ba7, type: 3}
 --- !u!23 &1002788900
 Renderer:
   m_ObjectHideFlags: 0
@@ -72120,7 +71985,6 @@ GameObject:
   - 4: {fileID: 1016167400}
   - 33: {fileID: 1016167403}
   - 23: {fileID: 1016167402}
-  - 64: {fileID: 1016167401}
   m_Layer: 0
   m_Name: stair_1
   m_TagString: Untagged
@@ -72141,20 +72005,6 @@ Transform:
   - {fileID: 1241955574}
   m_Father: {fileID: 2118252220}
   m_RootOrder: 24
---- !u!64 &1016167401
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6402532, guid: 3333940f14efab04eac740b53b1aa8a6,
-    type: 2}
-  m_PrefabInternal: {fileID: 460828550}
-  m_GameObject: {fileID: 1016167399}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_SmoothSphereCollisions: 0
-  m_Convex: 0
-  m_Mesh: {fileID: 4300104, guid: cdec9da478ea48547a09cb58f5249ba7, type: 3}
 --- !u!23 &1016167402
 Renderer:
   m_ObjectHideFlags: 0
@@ -76749,7 +76599,6 @@ GameObject:
   - 4: {fileID: 1047810013}
   - 33: {fileID: 1047810016}
   - 23: {fileID: 1047810015}
-  - 64: {fileID: 1047810014}
   m_Layer: 0
   m_Name: stair_3
   m_TagString: Untagged
@@ -76770,20 +76619,6 @@ Transform:
   - {fileID: 1709182349}
   m_Father: {fileID: 2118252220}
   m_RootOrder: 26
---- !u!64 &1047810014
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6402522, guid: 3333940f14efab04eac740b53b1aa8a6,
-    type: 2}
-  m_PrefabInternal: {fileID: 460828550}
-  m_GameObject: {fileID: 1047810012}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_SmoothSphereCollisions: 0
-  m_Convex: 0
-  m_Mesh: {fileID: 4300108, guid: cdec9da478ea48547a09cb58f5249ba7, type: 3}
 --- !u!23 &1047810015
 Renderer:
   m_ObjectHideFlags: 0
@@ -84703,7 +84538,6 @@ GameObject:
   - 4: {fileID: 1179982192}
   - 33: {fileID: 1179982195}
   - 23: {fileID: 1179982194}
-  - 64: {fileID: 1179982193}
   m_Layer: 0
   m_Name: stair_4
   m_TagString: Untagged
@@ -84724,20 +84558,6 @@ Transform:
   - {fileID: 1908671222}
   m_Father: {fileID: 1363066030}
   m_RootOrder: 27
---- !u!64 &1179982193
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6402538, guid: 3333940f14efab04eac740b53b1aa8a6,
-    type: 2}
-  m_PrefabInternal: {fileID: 1875438563}
-  m_GameObject: {fileID: 1179982191}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_SmoothSphereCollisions: 0
-  m_Convex: 0
-  m_Mesh: {fileID: 4300056, guid: cdec9da478ea48547a09cb58f5249ba7, type: 3}
 --- !u!23 &1179982194
 Renderer:
   m_ObjectHideFlags: 0
@@ -91450,7 +91270,6 @@ GameObject:
   - 4: {fileID: 1311527952}
   - 33: {fileID: 1311527955}
   - 23: {fileID: 1311527954}
-  - 64: {fileID: 1311527953}
   m_Layer: 0
   m_Name: stair_1
   m_TagString: Untagged
@@ -91471,20 +91290,6 @@ Transform:
   - {fileID: 291769432}
   m_Father: {fileID: 1584785566}
   m_RootOrder: 24
---- !u!64 &1311527953
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6402532, guid: 3333940f14efab04eac740b53b1aa8a6,
-    type: 2}
-  m_PrefabInternal: {fileID: 584013905}
-  m_GameObject: {fileID: 1311527951}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_SmoothSphereCollisions: 0
-  m_Convex: 0
-  m_Mesh: {fileID: 4300104, guid: cdec9da478ea48547a09cb58f5249ba7, type: 3}
 --- !u!23 &1311527954
 Renderer:
   m_ObjectHideFlags: 0
@@ -92532,7 +92337,6 @@ GameObject:
   - 4: {fileID: 1349700148}
   - 33: {fileID: 1349700151}
   - 23: {fileID: 1349700150}
-  - 64: {fileID: 1349700149}
   m_Layer: 0
   m_Name: stair_4
   m_TagString: Untagged
@@ -92553,20 +92357,6 @@ Transform:
   - {fileID: 1342620797}
   m_Father: {fileID: 1584785566}
   m_RootOrder: 27
---- !u!64 &1349700149
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6402538, guid: 3333940f14efab04eac740b53b1aa8a6,
-    type: 2}
-  m_PrefabInternal: {fileID: 584013905}
-  m_GameObject: {fileID: 1349700147}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_SmoothSphereCollisions: 0
-  m_Convex: 0
-  m_Mesh: {fileID: 4300056, guid: cdec9da478ea48547a09cb58f5249ba7, type: 3}
 --- !u!23 &1349700150
 Renderer:
   m_ObjectHideFlags: 0
@@ -111022,7 +110812,6 @@ GameObject:
   - 4: {fileID: 1603111044}
   - 33: {fileID: 1603111047}
   - 23: {fileID: 1603111046}
-  - 64: {fileID: 1603111045}
   m_Layer: 0
   m_Name: stair_3
   m_TagString: Untagged
@@ -111043,20 +110832,6 @@ Transform:
   - {fileID: 203509780}
   m_Father: {fileID: 1363066030}
   m_RootOrder: 26
---- !u!64 &1603111045
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6402522, guid: 3333940f14efab04eac740b53b1aa8a6,
-    type: 2}
-  m_PrefabInternal: {fileID: 1875438563}
-  m_GameObject: {fileID: 1603111043}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_SmoothSphereCollisions: 0
-  m_Convex: 0
-  m_Mesh: {fileID: 4300108, guid: cdec9da478ea48547a09cb58f5249ba7, type: 3}
 --- !u!23 &1603111046
 Renderer:
   m_ObjectHideFlags: 0
@@ -132289,7 +132064,6 @@ GameObject:
   - 4: {fileID: 1976335788}
   - 33: {fileID: 1976335791}
   - 23: {fileID: 1976335790}
-  - 64: {fileID: 1976335789}
   m_Layer: 0
   m_Name: stair_2
   m_TagString: Untagged
@@ -132310,20 +132084,6 @@ Transform:
   - {fileID: 1867659303}
   m_Father: {fileID: 1584785566}
   m_RootOrder: 25
---- !u!64 &1976335789
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6402520, guid: 3333940f14efab04eac740b53b1aa8a6,
-    type: 2}
-  m_PrefabInternal: {fileID: 584013905}
-  m_GameObject: {fileID: 1976335787}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_SmoothSphereCollisions: 0
-  m_Convex: 0
-  m_Mesh: {fileID: 4300106, guid: cdec9da478ea48547a09cb58f5249ba7, type: 3}
 --- !u!23 &1976335790
 Renderer:
   m_ObjectHideFlags: 0
