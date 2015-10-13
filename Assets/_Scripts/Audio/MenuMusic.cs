@@ -24,10 +24,10 @@ public class MenuMusic : MonoBehaviour {
 
 	void generateNextTrack(){
 		if (!sound1) {
-			audio.clip=track1;
+			audio.clip=track2;
 			sound1= true;
 		}else{
-			audio.clip=track2;
+			audio.clip=track1;
 			sound1=false;
 		}
 	}
