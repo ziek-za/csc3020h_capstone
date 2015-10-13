@@ -4,9 +4,6 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Weapon_RocketExplosion : Photon.MonoBehaviour {
-
-	public RawImage hitCrosshair;
-
 	List<GameObject> alreadyCollided;
 
 	public float pushForce = 10f;
@@ -14,20 +11,20 @@ public class Weapon_RocketExplosion : Photon.MonoBehaviour {
 	public ParticleSystem ps;
 	//public AudioClip explode;
 	AudioSource audio;
+	bool hasCollidedWithTerrain = false;
 
 	public float buildingAffectRadius = 4f;
 	// Use this for initialization
 	void Start () {	
 		audio = GetComponent<AudioSource> ();
 		audio.Play ();
-		//hitCrosshair = GameObject.Find ("EnemyHitCrosshair");
 		alreadyCollided = new List<GameObject>();
 		//particleSystem.Play();
 		//AudioSource.PlayClipAtPoint (explode, transform.position);
 		ps.gameObject.transform.SetParent(null);
 		Destroy (ps.gameObject, 2.5f);
+		Destroy (gameObject, 0.5f);
 		Invoke ("TriggerForce",0.1f);
-		Invoke("DeathMethod",1.0f);
 		// Set particle system parent to null and destroy 2.5 seconds later
 		// set particle system parent to null
 
@@ -37,25 +34,22 @@ public class Weapon_RocketExplosion : Photon.MonoBehaviour {
 	void Update () {
 	}
 
-	void DeathMethod(){
-		Destroy(gameObject);
-	}
-
-
 	//All objects in the area of effect live in alreadyCollided
 	void OnTriggerEnter(Collider other){
-		if (!alreadyCollided.Contains(other.gameObject)){
-			alreadyCollided.Add(other.gameObject);
-		}
+		try {
+			if (!alreadyCollided.Contains(other.gameObject)){
+				alreadyCollided.Add(other.gameObject);
+			}
+		} catch {
+				}
 	}
 	
 	void DisableHitCrosshair(){
-		hitCrosshair.enabled = false;
+		whoFiredMe.HUD.enemyHitCrosshair.enabled = false;
 	}
 	
 	void EnableHitCrosshair(){
-		Debug.Log ("enabling cross hair");
-		hitCrosshair.enabled = true;
+		whoFiredMe.HUD.enemyHitCrosshair.enabled = true;
 	} 
 	// no cross hair for indirect damage
 	//kill message when not dead
@@ -73,7 +67,6 @@ public class Weapon_RocketExplosion : Photon.MonoBehaviour {
 
 						//Hit Player
 						if (alreadyCollided[i].GetComponent<Char_AttributeScript>()){
-
 							//Less damage to self
 							if (alreadyCollided[i].GetComponent<PhotonView>().isMine){
 								DamagePlayer(-5,alreadyCollided[i].GetComponent<PhotonView>().viewID, transform.position);

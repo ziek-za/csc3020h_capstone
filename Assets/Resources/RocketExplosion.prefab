@@ -12,8 +12,8 @@ GameObject:
   - 114: {fileID: 11482314}
   - 135: {fileID: 13531346}
   - 54: {fileID: 5434484}
-  - 114: {fileID: 11425790}
   - 82: {fileID: 8224208}
+  - 114: {fileID: 11425790}
   m_Layer: 0
   m_Name: RocketExplosion
   m_TagString: Untagged
@@ -283,7 +283,7 @@ AudioSource:
     m_PostInfinity: 2
 --- !u!114 &11425790
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 127274}
@@ -342,7 +342,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 343af6fdd13586b4e9b975d2c8f8d585, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitCrosshair: {fileID: 0}
   pushForce: 350
   whoFiredMe: {fileID: 0}
   ps: {fileID: 19859510}

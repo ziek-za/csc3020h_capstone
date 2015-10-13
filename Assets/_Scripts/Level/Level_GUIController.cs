@@ -23,6 +23,8 @@ public class Level_GUIController : MonoBehaviour {
 	public Text redCountText;
 	public Text blueCountText;
 
+	public RawImage enemyHitCrosshair;
+
 	public GameObject shotIndicatorPivot, HUDPivot,
 		// SCOREBOARD
 			playersRed, playersBlue,
@@ -376,6 +378,7 @@ public class Level_GUIController : MonoBehaviour {
 
 	public void onReturnToMenuButtonPress(){
 		Application.LoadLevel("Menu");
+		PhotonNetwork.Disconnect();
 	}
 
 	void LinkSpawn(Vector3 spawnLoc, Char_AttributeScript.Teams team){

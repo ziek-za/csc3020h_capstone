@@ -31,39 +31,32 @@ public class Weapon_Rocket : Photon.MonoBehaviour {
 	}
 
 	public void Explode(GameObject other){
-		//ExplosionAtPoint (transform.position);
-		GameObject expl = PhotonNetwork.Instantiate (explosion.name,transform.position,Quaternion.identity,0) as GameObject;
-		expl.GetComponent<Weapon_RocketExplosion>().whoFiredMe = whoFiredMe;
-
-		if (other.GetComponent<Char_AttributeScript>()) {
-			DamagePlayer(-20,other.gameObject.GetComponent<PhotonView>().viewID);
-			try {
-				if (other.GetComponent<Char_AttributeScript>().health <= 0 && 
-				    whoFiredMe.team != other.gameObject.GetComponent<Char_AttributeScript>().team){
-					whoFiredMe.EnableKillHUD(other.transform.GetComponent<Char_AttributeScript>().playerName);
-				}
-			} catch (System.NullReferenceException e){}
-
-		}
+		//int vID = whoFiredMe.GetComponent<PhotonView>().viewID;
+		//ExplosionAtPoint (transform.position, vID);
 		// set particle system parent to null
-		ps.gameObject.transform.SetParent(null);
-		ps.Stop (true);
-		Destroy (ps.gameObject, 5f);
-		Destroy(gameObject);
+		try {
+			if (whoFiredMe.GetComponent<PhotonView>().isMine) {
+				GameObject expl = PhotonNetwork.Instantiate (explosion.name,transform.position,Quaternion.identity,0) as GameObject;
+				expl.GetComponent<Weapon_RocketExplosion>().whoFiredMe = whoFiredMe;
+
+				if (other.GetComponent<Char_AttributeScript>()) {
+					DamagePlayer(-20,other.gameObject.GetComponent<PhotonView>().viewID);
+					try {
+						if (other.GetComponent<Char_AttributeScript>().health <= 0 && 
+						    whoFiredMe.team != other.gameObject.GetComponent<Char_AttributeScript>().team){
+							whoFiredMe.EnableKillHUD(other.transform.GetComponent<Char_AttributeScript>().playerName);
+						}
+					} catch (System.NullReferenceException e){}
+
+				}
+				DestroyRocket(GetComponent<PhotonView>().viewID);
+			}
+		} catch {
+				}
 	}
 
 	void OnCollisionEnter(Collision other){
 		Explode(other.gameObject);
-	}
-
-	[RPC] void ExplosionAtPoint(Vector3 pos) {
-		GameObject expl = Instantiate (explosion,
-		                               pos,
-		                               Quaternion.identity) as GameObject;
-		Destroy (expl, 1f);
-		
-		if (photonView.isMine)
-			photonView.RPC ("ExplosionAtPoint", PhotonTargets.OthersBuffered, pos);
 	}
 
 	[RPC] void DamagePlayer(int damage, int vID){
@@ -71,6 +64,19 @@ public class Weapon_Rocket : Photon.MonoBehaviour {
 		cas.ChangeHP(damage, Vector3.zero);
 		if (photonView.isMine)
 			photonView.RPC("DamagePlayer", PhotonTargets.OthersBuffered, damage, vID);
+	}
+
+	[RPC] void DestroyRocket(int vID){
+		try {
+		GameObject rocket = PhotonView.Find(vID).gameObject;
+		rocket.GetComponent<Weapon_Rocket>().ps.gameObject.transform.SetParent(null);
+		rocket.GetComponent<Weapon_Rocket>().ps.Stop (true);
+		Destroy (rocket.GetComponent<Weapon_Rocket>().ps.gameObject, 5f);
+		Destroy(rocket);
+		} catch {}
+
+		if (photonView.isMine)
+			photonView.RPC("DestroyRocket", PhotonTargets.OthersBuffered, vID);
 	}
 
 }
