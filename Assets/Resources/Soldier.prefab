@@ -3537,6 +3537,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98c885136e314544580f8c69057aee38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SniperTrail: {fileID: 0}
   hitCrosshair: {fileID: 0}
   headshotCrosshair: {fileID: 0}
   damage: 10
@@ -3704,8 +3705,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grenadePrefab: {fileID: 400502, guid: 84552cdc966f3964c87ea30a0552c768, type: 2}
   grenadePosition: {fileID: 481096}
-  energyCost: 20
-  cooldown: 10
+  energyCost: 30
+  cooldown: 5
 --- !u!114 &11467724
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3802,6 +3803,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9164392a867a4fd4fbf32645b4986ae4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SniperTrail: {fileID: 0}
   hitCrosshair: {fileID: 0}
   headshotCrosshair: {fileID: 0}
   damage: 10
@@ -3828,6 +3830,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98c885136e314544580f8c69057aee38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SniperTrail: {fileID: 0}
   hitCrosshair: {fileID: 0}
   headshotCrosshair: {fileID: 0}
   damage: 10
