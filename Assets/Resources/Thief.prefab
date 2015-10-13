@@ -7922,7 +7922,7 @@ MonoBehaviour:
   SniperTrail: {fileID: 163518, guid: 52941504cef0645499346f6c7c62af7f, type: 2}
   hitCrosshair: {fileID: 0}
   headshotCrosshair: {fileID: 0}
-  damage: 65
+  damage: 50
   bulletHolePrefab: {fileID: 185902, guid: dea55ba2cdbead54ba3497383c460581, type: 2}
   muzzleFlash: {fileID: 19824522}
   tracerEffect: {fileID: 0}
