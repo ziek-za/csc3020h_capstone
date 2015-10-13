@@ -23,6 +23,8 @@ public class Level_GUIController : MonoBehaviour {
 	public Text redCountText;
 	public Text blueCountText;
 
+	public RawImage enemyHitCrosshair;
+
 	public GameObject shotIndicatorPivot, HUDPivot,
 		// SCOREBOARD
 			playersRed, playersBlue,

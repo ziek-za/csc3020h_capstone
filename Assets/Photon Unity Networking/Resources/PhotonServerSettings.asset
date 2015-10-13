@@ -87,4 +87,6 @@ MonoBehaviour:
   - SendFootstepSound
   - SendJumpSound
   - SendShootSound
+  - ExplosionAtPoint
+  - DestroyRocket
   DisableAutoOpenWizard: 0

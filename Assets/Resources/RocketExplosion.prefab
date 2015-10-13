@@ -12,8 +12,8 @@ GameObject:
   - 114: {fileID: 11482314}
   - 135: {fileID: 13531346}
   - 54: {fileID: 5434484}
-  - 114: {fileID: 11425790}
   - 82: {fileID: 8224208}
+  - 114: {fileID: 11425790}
   m_Layer: 0
   m_Name: RocketExplosion
   m_TagString: Untagged
@@ -113,8 +113,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 127274}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.14228344, y: -4.54423666, z: -6.8588295}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 333.910828, y: 185.152283, z: -4.29819965}
+  m_LocalScale: {x: .626666665, y: .626666665, z: .626666665}
   m_Children:
   - {fileID: 459510}
   m_Father: {fileID: 0}
@@ -283,7 +283,7 @@ AudioSource:
     m_PostInfinity: 2
 --- !u!114 &11425790
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 127274}
