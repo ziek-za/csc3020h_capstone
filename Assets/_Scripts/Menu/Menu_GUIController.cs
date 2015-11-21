@@ -32,6 +32,8 @@ public class Menu_GUIController : Photon.MonoBehaviour {
 	void Start () {
 		// Load string lookup object from MainController
 		_MainController.ImportStringLookup ();
+		if (_MainController.playerName != "")
+			playerNameInput.text = _MainController.playerName;
 		listOfLANButtons = new List<LANgameInfo>();
 		listOfOnlineButtons = new List<OnlineGameInfo>();
 	}
