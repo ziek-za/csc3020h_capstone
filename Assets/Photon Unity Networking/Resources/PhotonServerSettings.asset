@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HostType: 4
   Protocol: 0
-  ServerAddress: 196.24.181.107
+  ServerAddress: 192.168.1.100
   ServerPort: 5055
   PreferredRegion: 4
   AppID: c2b9b548-0d03-4732-b4f6-afd2691390b4
@@ -89,4 +89,9 @@ MonoBehaviour:
   - SendShootSound
   - ExplosionAtPoint
   - DestroyRocket
+  - JoinRedLobby
+  - JoinBlueLobby
+  - ToggleReady
+  - LeaveGame
+  - StartGame
   DisableAutoOpenWizard: 0

@@ -11,6 +11,7 @@ public class _MainController {
 	public static bool ImportedStringLookupBool = false;
 	public static string playerName = "", gameName, gameStats;
 	public static bool playedSpawnMessage = false;
+	public static Char_AttributeScript.Teams playerTeam;
 
 	public static string ExampleLookupMethod(){
 		return "some info";
@@ -23,8 +24,8 @@ public class _MainController {
 			PhotonNetwork.CreateRoom(gameName+"|"+playerName, true, true, 8);
 			Level_NetworkController.firstPlayer = true;
 		}
-		Application.LoadLevel("Level");
-		ImportMapObject("2");
+		//Application.LoadLevel("Level");
+		//ImportMapObject("2");
 	}
 
 
@@ -32,6 +33,13 @@ public class _MainController {
 		//Application.LoadLevel("Level");
 		//ImportMapObject("1");
 		PhotonNetwork.JoinRoom(serverName);
+		gameName = serverName.Substring(0,serverName.IndexOf("|"));
+		//Application.LoadLevel("Level");
+		//ImportMapObject("2");
+	}
+
+	public static void LoadLevel(GameObject ls){
+		ls.SetActive(true);
 		Application.LoadLevel("Level");
 		ImportMapObject("2");
 	}

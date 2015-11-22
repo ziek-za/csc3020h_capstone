@@ -35,9 +35,25 @@ public struct OnlineGameInfo {
 	
 }
 
+public class LobbyPlayer {
+	public bool ready;
+	public string playerName;
+	public Char_AttributeScript.Teams team;
+	public LobbyPlayer(bool r, string s, Char_AttributeScript.Teams t){
+		ready = r;
+		playerName = s;
+		team = t;
+	}
+	public void FlipReadyValue(bool v){
+		ready = v;
+		//Debug.Log(ready);
+	}
+}
+
 public class Menu_NetworkController : MonoBehaviour {
 	
 	public RoomInfo[] roomsList;
+	public List<LobbyPlayer> redTeam, blueTeam;
 
 	public Menu_GUIController GUIController;
 	List<string> localNetworkAddresses;

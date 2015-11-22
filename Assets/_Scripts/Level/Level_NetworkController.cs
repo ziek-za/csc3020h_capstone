@@ -43,6 +43,7 @@ public class Level_NetworkController : Photon.MonoBehaviour {
 		if (neutPlayers == null) {
 			neutPlayers = new List<PlayerInfo>();
 		}
+		JoinedRoom();
 	}
 	
 	// Update is called once per frame
@@ -58,7 +59,7 @@ public class Level_NetworkController : Photon.MonoBehaviour {
 		Debug.Log("Player Left " + other.ToString());
 	}
 
-	void OnJoinedRoom()
+	void JoinedRoom()
 	{
 		Debug.Log("Connected to Room");
 		PhotonNetwork.Instantiate(respawner.name,Vector3.zero,Quaternion.identity,0);

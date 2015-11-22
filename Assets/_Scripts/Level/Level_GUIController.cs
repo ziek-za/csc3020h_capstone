@@ -65,6 +65,10 @@ public class Level_GUIController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		localPlayerTeam = _MainController.playerTeam;
+		GameObject.Find("CharacterSelectionGUI").transform.localScale=new Vector3(10,5,5);
+		spawnPreviewCamera.gameObject.SetActive(true);
+		GameObject.Find("PickATeam").gameObject.SetActive(false);
 		SetUpLinkButtons();
 
 		for (int i = 0; i < 4; i++){
