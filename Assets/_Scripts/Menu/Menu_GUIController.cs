@@ -142,7 +142,14 @@ public class Menu_GUIController : Photon.MonoBehaviour {
 		LANButton.gameObject.SetActive(x);
 		ExitButton.gameObject.SetActive(x);
 		JoinGamePanel.gameObject.SetActive(x);
-		NetworkScreen.SetActive(!x);
+		NetworkScreen.SetActive(true);
+		if (!x){
+			NetworkScreen.GetComponent<Animator>().Play("MoveMenuDown");
+			NetworkScreen.transform.localPosition = Vector3.zero;
+		} else {
+			NetworkScreen.GetComponent<Animator>().Play("MoveMenuUp");
+			NetworkScreen.transform.localPosition = new Vector3(0,500,0);
+		}
 	}
 
 	public void InternetGameButtonClick(){
